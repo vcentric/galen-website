@@ -1,4 +1,4 @@
-# GalenAI - Builds Confidence in Medicine
+# GalenAI
 
 GalenAI is a medical learning companion designed to help medical students and professionals build confidence through personalized learning, competency-based tracking, and a verified curriculum. Unlike generic AI tools, GalenAI is specifically trained on medical data to provide accurate and reliable assistance.
 
