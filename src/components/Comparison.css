@@ -1,0 +1,285 @@
+/* Comparison Section */
+.comparison-section {
+    padding: 5rem 2rem;
+    background: #f6f4f1;
+}
+
+.comp-container {
+    max-width: 1150px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 1.5rem;
+}
+
+/* Headings */
+.comp-heading {
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.03em;
+}
+
+.comp-subheading {
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    font-size: 1.15rem;
+    color: #eb602d;
+    font-style: normal;
+    margin-bottom: 3.5rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+/* Column Labels Row */
+.column-labels-row {
+    display: none;
+    /* Hide old text labels since we have logos now */
+}
+
+.column-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+/* Table Wrapper */
+.comparison-table-wrapper {
+    background: #ffffff;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.06), 0 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Table */
+.comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Header Row */
+.header-row th {
+    padding: 2rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    vertical-align: middle;
+    background: #fff;
+}
+
+.feature-header {
+    width: 35%;
+    text-align: left;
+}
+
+.competitor-header,
+.galen-header {
+    width: 16.25%;
+    text-align: center;
+}
+
+/* Logo Placeholder */
+.logo-placeholder {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.03);
+    border: 2px dashed rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    color: #999;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0 1rem;
+}
+
+/* Logo Images */
+.header-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+}
+
+.competitor-logo,
+.galen-logo {
+    height: auto;
+    width: auto;
+    max-height: 60px;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.competitor-logo:hover,
+.galen-logo:hover {
+    transform: scale(1.05);
+}
+
+.competitor-logo {
+    opacity: 0.9;
+}
+
+.galen-logo {
+    max-height: 70px;
+}
+
+/* Feature Rows */
+/* Feature Rows */
+.feature-row td {
+    padding: 1.35rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    vertical-align: middle;
+    transition: background 0.2s ease;
+}
+
+.feature-row:hover td {
+    background: rgba(0, 0, 0, 0.005);
+}
+
+.feature-row:last-child td {
+    border-bottom: none;
+}
+
+.feature-name {
+    text-align: left;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 1rem;
+    padding-left: 2rem;
+    letter-spacing: -0.01em;
+}
+
+.feature-value {
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* GalenAI Column Highlight */
+.galen-col {
+    background: rgba(235, 96, 45, 0.03);
+    font-weight: 600;
+}
+
+.galen-header {
+    background: rgba(235, 96, 45, 0.03);
+}
+
+/* Icons */
+.icon-check {
+    color: #34A853;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+.icon-cross {
+    color: #EA4335;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+.icon-limited {
+    color: #eb602d;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .feature-name {
+        font-size: 0.9rem;
+        padding-left: 1.25rem;
+    }
+
+    .feature-value {
+        font-size: 0.85rem;
+    }
+
+    .competitor-logo {
+        height: 28px;
+        max-width: 100px;
+    }
+
+    .galen-logo {
+        height: 36px;
+    }
+}
+
+@media (max-width: 900px) {
+    .comp-heading {
+        font-size: 2rem;
+    }
+
+    .header-row th {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .feature-row td {
+        padding: 1rem 0.75rem;
+    }
+
+    .feature-name {
+        font-size: 0.85rem;
+        padding-left: 1rem;
+    }
+
+    .column-label {
+        font-size: 0.7rem;
+    }
+
+    .competitor-logo {
+        height: 24px;
+    }
+
+    .galen-logo {
+        height: 32px;
+    }
+
+    .icon-check,
+    .icon-cross {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .comparison-section {
+        padding: 3.5rem 1.5rem;
+    }
+
+    .comp-heading {
+        font-size: 1.75rem;
+    }
+
+    .comp-subheading {
+        font-size: 1rem;
+    }
+
+    .comparison-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .comparison-table {
+        min-width: 600px;
+    }
+
+    .feature-name {
+        font-size: 0.8rem;
+        padding-left: 0.75rem;
+    }
+
+    .header-row th {
+        padding: 1rem 0.5rem;
+    }
+
+    .feature-row td {
+        padding: 0.875rem 0.5rem;
+    }
+}

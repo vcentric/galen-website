@@ -1,0 +1,107 @@
+/* Search Bar Styles */
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #999;
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    color: #2e2e2e;
+    background: #ffffff;
+    border: 2px solid #e5e5e5;
+    border-radius: 3rem;
+    padding: 1rem 3.5rem 1rem 3.5rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: #999;
+}
+
+.search-input:focus {
+    border-color: #eb602d;
+    box-shadow: 0 0 0 4px rgba(235, 96, 45, 0.1);
+}
+
+.search-clear {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f6f4f1;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-clear:hover {
+    background: #eb602d;
+}
+
+.search-clear svg {
+    width: 16px;
+    height: 16px;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.search-clear:hover svg {
+    color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-input {
+        font-size: 0.95rem;
+        padding: 0.875rem 3rem 0.875rem 3rem;
+    }
+
+    .search-icon {
+        width: 18px;
+        height: 18px;
+        left: 1rem;
+    }
+
+    .search-clear {
+        width: 28px;
+        height: 28px;
+        right: 0.875rem;
+    }
+
+    .search-clear svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .search-input,
+    .search-clear,
+    .search-clear svg {
+        transition: none;
+    }
+}

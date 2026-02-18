@@ -1,0 +1,582 @@
+/* Team Page Styles - With Advanced Animations */
+.team-page {
+    min-height: 100vh;
+    background: #ffffff;
+}
+
+/* Hero Section */
+.team-hero {
+    background: linear-gradient(135deg, #fff5ed 0%, #ffe8d6 100%);
+    padding: 6rem 2rem 4rem;
+    text-align: left;
+}
+
+.team-hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-hero-title {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #2e2e2e;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.team-hero-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #eb602d;
+    border-radius: 2px;
+}
+
+.team-hero-subtitle {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 700px;
+}
+
+/* Founders Section */
+.founders-section {
+    padding: 3rem 1rem;
+    background: #ffffff;
+}
+
+.founders-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+/* 3D Tilt Effect for Cards */
+.founder-card,
+.advisor-card {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.founder-card:hover,
+.advisor-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    background: #ffffff;
+}
+
+/* 3D Tilt on Hover */
+.founder-card[data-tilt]:hover,
+.advisor-card[data-tilt]:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+}
+
+/* Floating Animation for Photo Bubbles */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.founder-photo-wrapper,
+.advisor-photo-wrapper {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #ffffff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease-in-out;
+}
+
+.founder-photo-wrapper.floating,
+.advisor-photo-wrapper.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+.founder-photo-wrapper:hover,
+.advisor-photo-wrapper:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 25px -5px rgba(235, 96, 45, 0.3);
+}
+
+.founder-photo,
+.advisor-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.founder-name {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.5rem 0;
+}
+
+.founder-title {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #f97316;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1.5rem 0;
+}
+
+.founder-quote {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+}
+
+/* Magnetic Button Effect */
+.linkedin-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    text-decoration: none;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+
+.linkedin-button.magnetic {
+    will-change: transform;
+}
+
+.linkedin-button:hover {
+    background: #f9fafb;
+    border-color: #0077b5;
+    box-shadow: 0 4px 12px rgba(0, 119, 181, 0.2);
+}
+
+.linkedin-icon {
+    width: 20px;
+    height: 20px;
+    color: #0077b5;
+    transition: all 0.3s ease;
+}
+
+.linkedin-button:hover .linkedin-icon {
+    transform: scale(1.1);
+}
+
+/* Advisors Section - Now before timeline */
+.advisors-section {
+    padding: 3rem 1rem;
+    background: #ffffff;
+}
+
+.advisors-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.advisors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.advisor-name {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.5rem 0;
+}
+
+.advisor-title {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #f97316;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1rem 0;
+}
+
+.advisor-bio {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 0.875rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+}
+
+/* Timeline Section */
+.timeline-section {
+    padding: 6rem 1rem;
+    background: #f9fafb;
+    position: relative;
+}
+
+.timeline-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2e2e2e;
+    text-align: left;
+    margin: 0 0 3rem 0;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.75rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #eb602d;
+    border-radius: 2px;
+}
+
+.timeline {
+    position: relative;
+    padding: 0;
+}
+
+/* Progressive Timeline Line Drawing */
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    background-image: linear-gradient(to bottom, #f97316 50%, transparent 50%);
+    background-size: 2px 20px;
+    transform: translateX(-50%);
+    z-index: 0;
+    transition: height 0.3s ease-out;
+    transform-origin: top;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 6rem;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Enhanced Slide-in Animations */
+.timeline-right {
+    justify-content: flex-end;
+    transform: translateX(50px);
+}
+
+.timeline-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-left {
+    justify-content: flex-start;
+    transform: translateX(-50px);
+}
+
+.timeline-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-right .timeline-content {
+    margin-left: 4rem;
+}
+
+.timeline-left .timeline-content {
+    margin-right: 4rem;
+}
+
+.timeline-icon {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 48px;
+    background: #ffffff;
+    border: 4px solid #f97316;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f97316;
+    z-index: 10;
+    transition: all 0.5s ease-in-out;
+}
+
+.timeline-icon:hover {
+    transform: translateX(-50%) scale(1.15);
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
+}
+
+.timeline-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Heartbeat Pulse Animation */
+@keyframes heartbeat {
+    0% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+    }
+
+    70% {
+        transform: translateX(-50%) scale(1.1);
+        box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+    }
+}
+
+.icon-pulse {
+    animation: heartbeat 2s infinite;
+}
+
+.timeline-content {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    max-width: 45%;
+    transition: all 0.5s ease-in-out;
+}
+
+.timeline-content:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-content-orange {
+    border-left: 4px solid #f97316;
+}
+
+.timeline-content-dark {
+    border-left: 4px solid #0f172a;
+}
+
+.timeline-title {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.25rem 0;
+}
+
+.timeline-date {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin: 0 0 0.5rem 0;
+}
+
+.timeline-description {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 0.875rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .founders-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .advisors-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-line {
+        display: none;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        margin-bottom: 3rem;
+    }
+
+    .timeline-right,
+    .timeline-left {
+        justify-content: center;
+        transform: translateY(30px);
+    }
+
+    .timeline-right.visible,
+    .timeline-left.visible {
+        transform: translateY(0);
+    }
+
+    .timeline-right .timeline-content,
+    .timeline-left .timeline-content {
+        margin: 4rem 0 0 0;
+        max-width: 100%;
+    }
+
+    .timeline-icon {
+        position: relative;
+        left: auto;
+        transform: none;
+        margin: 0 auto;
+    }
+
+    .timeline-icon:hover {
+        transform: scale(1.15);
+    }
+
+    .icon-pulse {
+        animation: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-hero {
+        padding: 6rem 1.5rem 3rem;
+    }
+
+    .team-hero-title {
+        font-size: 2.5rem;
+    }
+
+    .team-hero-subtitle {
+        font-size: 1.125rem;
+    }
+
+    .founders-section,
+    .advisors-section,
+    .timeline-section {
+        padding: 4rem 1.5rem;
+    }
+
+    .founder-card,
+    .advisor-card {
+        padding: 2rem;
+    }
+
+    .founder-photo-wrapper,
+    .advisor-photo-wrapper {
+        width: 140px;
+        height: 140px;
+    }
+
+    .founder-name {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-hero-title {
+        font-size: 2rem;
+    }
+
+    .team-hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .founder-card,
+    .advisor-card {
+        padding: 1.5rem;
+    }
+
+    .founder-photo-wrapper,
+    .advisor-photo-wrapper {
+        width: 120px;
+        height: 120px;
+    }
+
+    .timeline-content {
+        padding: 1.25rem;
+    }
+}
+
+/* Reduced motion - Accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    .founder-card,
+    .advisor-card,
+    .timeline-item,
+    .linkedin-button,
+    .timeline-content {
+        transition: none;
+    }
+
+    .founder-card:hover,
+    .advisor-card:hover {
+        transform: none;
+    }
+
+    .icon-pulse,
+    .floating {
+        animation: none;
+    }
+
+    .timeline-item {
+        opacity: 1;
+        transform: none;
+    }
+
+    .timeline-right,
+    .timeline-left {
+        transform: none;
+    }
+}
