@@ -135,7 +135,7 @@ const Hero = () => {
 
   return (
     <section
-      className="min-h-screen pt-32 pb-12 px-8 bg-transparent flex justify-center items-center overflow-visible relative"
+      className="min-h-screen pt-28 pb-12 px-8 bg-transparent flex justify-center items-center overflow-visible relative"
     >
       <div className="max-w-[1400px] w-full flex flex-col items-center gap-16 relative z-[2] py-12">
         {/* Centered Text Content */}
@@ -221,6 +221,24 @@ const Hero = () => {
             />
           </div>
         </div>
+      </div>
+
+      {/* Decorative Image (Mid Right) */}
+      <div className="absolute right-0 bottom-1/2 translate-y-[12vw] translate-x-[30vw] w-[1000px] h-auto pointer-events-none z-0 max-[1024px]:w-[400px] max-[768px]:hidden">
+        <img
+          src="/2.png"
+          alt=""
+          className="w-full h-auto opacity-80"
+        />
+      </div>
+
+      {/* Decorative Image (Mid Left - Mirrored) */}
+      <div className="absolute left-0 bottom-1/2 translate-y-[12vw] -translate-x-[30vw] w-[1000px] h-auto pointer-events-none z-0 max-[1024px]:w-[400px] max-[768px]:hidden">
+        <img
+          src="/2.png"
+          alt=""
+          className="w-full h-auto opacity-80"
+        />
       </div>
     </section>
   );

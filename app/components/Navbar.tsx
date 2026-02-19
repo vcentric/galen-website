@@ -2,32 +2,145 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+
+interface AnimatedNavLinkProps {
+  href: string;
+  children: React.ReactNode;
+}
+
+const AnimatedNavLink = ({ href, children }: AnimatedNavLinkProps) => {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
+  const { contextSafe } = useGSAP({ scope: linkRef });
+
+  const handleMouseEnter = contextSafe(() => {
+    gsap.to(pathRef.current, {
+      strokeDashoffset: 0,
+      duration: 0.25,
+      ease: "power3.out",
+      overwrite: "auto",
+    });
+  });
+
+  const handleMouseLeave = contextSafe(() => {
+    gsap.to(pathRef.current, {
+      strokeDashoffset: 1,
+      duration: 0.25,
+      ease: "power3.in",
+      overwrite: "auto",
+    });
+  });
+
+  const content = (
+    <>
+      {children}
+      {/* Pen Stroke Underline */}
+      <svg
+        viewBox="0 0 100 10"
+        className="absolute left-0 bottom-[-4px] w-full h-[8px] pointer-events-none"
+        preserveAspectRatio="none"
+      >
+        <path
+          ref={pathRef}
+          d="M2 5 Q 50 10 98 5"
+          stroke="#eb602d"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+          pathLength={1}
+          style={{
+            strokeDasharray: 1,
+            strokeDashoffset: 1, // Start hidden
+          }}
+        />
+      </svg>
+    </>
+  );
+
+  const className = "relative no-underline text-[#2e2e2e] text-[15px] font-primary font-medium tracking-[0.01em] transition-opacity duration-200 hover:opacity-100 opacity-90 inline-block";
+
+  if (href.startsWith("/")) {
+    return (
+      <Link 
+        href={href} 
+        ref={linkRef}
+        onMouseEnter={handleMouseEnter} 
+        onMouseLeave={handleMouseLeave}
+        className={className}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <a 
+      href={href} 
+      ref={linkRef}
+      onMouseEnter={handleMouseEnter} 
+      onMouseLeave={handleMouseLeave}
+      className={className}
+    >
+      {content}
+    </a>
+  );
+};
 
 const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Trigger the pill shape after scrolling down 50px
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+
   return (
-    <div className="fixed top-0 left-0 right-0 flex justify-center pt-6 w-full z-[100] pointer-events-none">
-      <nav className="flex items-center justify-between bg-[rgba(246,244,241,0.8)] backdrop-blur-[20px] border border-[rgba(46,46,46,0.08)] rounded-full py-2 pr-2 pl-6 w-auto min-w-[600px] max-w-[90%] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.02)] pointer-events-auto">
-        <div className="mr-8">
-          <a href="/" className="text-xl font-bold text-[#2e2e2e] no-underline tracking-[-0.03em] flex items-center">
-            <Image src="/galenai-logo.png" alt="GalenAI" width={152} height={38} className="h-[38px] w-auto transition-opacity duration-200 hover:opacity-80" />
-          </a>
+    // Outer wrapper stays fixed at the top, handling the width constraint
+    <div className={`fixed top-0 left-0 right-0 z-[100] flex justify-center transition-all duration-300 pointer-events-none ${
+      isScrolled ? "pt-2" : "pt-2"
+    }`}>
+      
+      {/* Inner container morphs based on scroll state */}
+      <div 
+        className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isScrolled 
+            ? "w-[calc(100%-5px)] max-w-[1400px] px-6 py-3 bg-[rgba(255,255,255,0.01)] backdrop-blur-xl border border-white/10 rounded-full shadow-sm " 
+            : "w-full max-w-[1400px] px-0 py-2 bg-transparent border-transparent"
+        }`}
+      >
+        {/* Left: Logo */}
+        <div className="flex-1 flex justify-start ">
+          <Link href="/" className="flex items-center no-underline transition-opacity duration-200 hover:opacity-80">
+            <Image src="/galenai-logo.png" alt="GalenAI" width={140} height={35} className="h-[35px] w-auto" />
+          </Link>
         </div>
 
-        <div className="flex-grow flex justify-center mr-8">
+        {/* Center: Nav Links */}
+        <div className="flex-shrink-0">
           <ul className="flex list-none gap-8 m-0 p-0">
-            <li><a href="#features" className="no-underline text-[#2e2e2e] text-[0.95rem] font-medium tracking-[0.01em] transition-opacity duration-200 hover:opacity-70">Features</a></li>
-            <li><Link href="/team" className="no-underline text-[#2e2e2e] text-[0.95rem] font-medium tracking-[0.01em] transition-opacity duration-200 hover:opacity-70">Team</Link></li>
-            <li><Link href="/blog" className="no-underline text-[#2e2e2e] text-[0.95rem] font-medium tracking-[0.01em] transition-opacity duration-200 hover:opacity-70">Blog</Link></li>
-            <li><a href="#login" className="no-underline text-[#2e2e2e] text-[0.95rem] font-medium tracking-[0.01em] transition-opacity duration-200 hover:opacity-70">Login</a></li>
+            <li><AnimatedNavLink href="#features">Features</AnimatedNavLink></li>
+            <li><AnimatedNavLink href="/team">Team</AnimatedNavLink></li>
+            <li><AnimatedNavLink href="/blog">Blog</AnimatedNavLink></li>
+            <li><AnimatedNavLink href="#login">Login</AnimatedNavLink></li>
           </ul>
         </div>
 
-        <div className="flex items-center">
-          <a href="#ask" className="bg-[#eb602d] text-white no-underline py-[0.6rem] px-[1.4rem] rounded-full text-[0.95rem] font-medium transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] whitespace-nowrap animate-[subtle-pulse_4s_ease-in-out_infinite] hover:scale-105 active:scale-[0.98]">
+        {/* Right: CTA Button */}
+        <div className="flex-1 flex justify-end ">
+          <a href="#ask" className="bg-[#eb602d] text-[#ffffff] font-primary no-underline py-[0.8rem] px-[1.6rem] rounded-full text-[0.95rem] font-medium transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] whitespace-nowrap hover:scale-105 active:scale-[0.98] shadow-[inset_2px_2px_6px_rgba(255,255,255,0.2),0_-2px_10px_rgba(0,0,0,0.1)]" style={{ color: '#ffffff' }}>
             Ask GalenAI
           </a>
         </div>
-      </nav>
+      </div>
     </div>
   );
 };
