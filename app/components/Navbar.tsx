@@ -6,7 +6,7 @@ import Image from "next/image";
 const Navbar = () => {
   return (
     <div className="fixed top-0 left-0 right-0 flex justify-center pt-6 w-full z-[100] pointer-events-none">
-      <nav className="flex items-center justify-between bg-[rgba(246,244,241,0.8)] backdrop-blur-[20px] border border-[rgba(46,46,46,0.08)] rounded-full py-2 pr-2 pl-6 w-auto min-w-[600px] max-w-[90%] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.02)] font-[Inter,system-ui,-apple-system,sans-serif] pointer-events-auto">
+      <nav className="flex items-center justify-between bg-[rgba(246,244,241,0.8)] backdrop-blur-[20px] border border-[rgba(46,46,46,0.08)] rounded-full py-2 pr-2 pl-6 w-auto min-w-[600px] max-w-[90%] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.02)] pointer-events-auto">
         <div className="mr-8">
           <a href="/" className="text-xl font-bold text-[#2e2e2e] no-underline tracking-[-0.03em] flex items-center">
             <Image src="/galenai-logo.png" alt="GalenAI" width={152} height={38} className="h-[38px] w-auto transition-opacity duration-200 hover:opacity-80" />

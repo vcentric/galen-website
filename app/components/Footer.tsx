@@ -11,12 +11,12 @@ const Footer = () => {
             alt="GalenAI"
             className="h-8 w-auto mb-4"
           />
-          <p className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.9rem] text-[#555] leading-[1.6] mb-7">
+          <p className="text-[0.9rem] text-[#555] leading-[1.6] mb-7">
             GalenAI is your daily medical learning companion — helping you
             understand, revise, and apply medicine better.
           </p>
 
-          <h4 className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
+          <h4 className="text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
             Download the App
           </h4>
           <div className="flex flex-col gap-3 mb-7">
@@ -34,10 +34,10 @@ const Footer = () => {
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
               </svg>
               <div className="flex flex-col items-start">
-                <span className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.65rem] text-[#777] font-normal">
+                <span className="text-[0.65rem] text-[#777] font-normal">
                   Download on the
                 </span>
-                <span className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.875rem] text-[#2e2e2e] font-semibold">
+                <span className="text-[0.875rem] text-[#2e2e2e] font-semibold">
                   App Store
                 </span>
               </div>
@@ -56,17 +56,17 @@ const Footer = () => {
                 <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
               </svg>
               <div className="flex flex-col items-start">
-                <span className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.65rem] text-[#777] font-normal">
+                <span className="text-[0.65rem] text-[#777] font-normal">
                   Get it on
                 </span>
-                <span className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.875rem] text-[#2e2e2e] font-semibold">
+                <span className="text-[0.875rem] text-[#2e2e2e] font-semibold">
                   Google Play
                 </span>
               </div>
             </a>
           </div>
 
-          <h4 className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
+          <h4 className="text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
             Follow us
           </h4>
           <div className="flex gap-[0.875rem] max-[480px]:gap-[0.625rem]">
@@ -114,7 +114,7 @@ const Footer = () => {
 
         {/* Column 2 - Company */}
         <div>
-          <h4 className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
+          <h4 className="text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
             Company
           </h4>
           <ul className="list-none p-0 m-0 flex flex-col gap-3">
@@ -129,7 +129,7 @@ const Footer = () => {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.9rem] text-[#555] no-underline transition-colors duration-200 inline-block hover:text-[#eb602d]"
+                  className="text-[0.9rem] text-[#555] no-underline transition-colors duration-200 inline-block hover:text-[#eb602d]"
                 >
                   {link.label}
                 </a>
@@ -140,7 +140,7 @@ const Footer = () => {
 
         {/* Column 3 - Study Resources */}
         <div>
-          <h4 className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
+          <h4 className="text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
             Study Resources
           </h4>
           <ul className="list-none p-0 m-0 flex flex-col gap-3">
@@ -156,7 +156,7 @@ const Footer = () => {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.9rem] text-[#555] no-underline transition-colors duration-200 inline-block hover:text-[#eb602d]"
+                  className="text-[0.9rem] text-[#555] no-underline transition-colors duration-200 inline-block hover:text-[#eb602d]"
                 >
                   {link.label}
                 </a>
@@ -167,41 +167,41 @@ const Footer = () => {
 
         {/* Column 4 - Contact & Support */}
         <div>
-          <h4 className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
+          <h4 className="text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
             Contact & Support
           </h4>
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-1">
-              <span className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.8rem] text-[#777] font-medium">
+              <span className="text-[0.8rem] text-[#777] font-medium">
                 General Queries:
               </span>
               <a
                 href="mailto:support@galenai.io"
-                className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.9rem] text-[#eb602d] no-underline transition-colors duration-200 hover:text-[#d14d1f] hover:underline"
+                className="text-[0.9rem] text-[#eb602d] no-underline transition-colors duration-200 hover:text-[#d14d1f] hover:underline"
               >
                 support@galenai.io
               </a>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.8rem] text-[#777] font-medium">
+              <span className="text-[0.8rem] text-[#777] font-medium">
                 WhatsApp Support:
               </span>
               <a
                 href="https://wa.me/918848542046"
-                className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.9rem] text-[#eb602d] no-underline transition-colors duration-200 hover:text-[#d14d1f] hover:underline"
+                className="text-[0.9rem] text-[#eb602d] no-underline transition-colors duration-200 hover:text-[#d14d1f] hover:underline"
               >
                 +91 88485 42046
               </a>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.8rem] text-[#777] font-medium">
+              <span className="text-[0.8rem] text-[#777] font-medium">
                 Office Location:
               </span>
-              <span className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.9rem] text-[#555]">
+              <span className="text-[0.9rem] text-[#555]">
                 India
               </span>
             </div>
-            <p className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.8rem] text-[#999] italic mt-2">
+            <p className="text-[0.8rem] text-[#999] italic mt-2">
               Response within 24 hours
             </p>
           </div>
@@ -211,27 +211,27 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="border-t border-[rgba(0,0,0,0.08)] py-6">
         <div className="max-w-[1200px] mx-auto flex justify-between items-center max-[768px]:flex-col max-[768px]:gap-4 max-[768px]:text-center">
-          <p className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.85rem] text-[#777] m-0">
+          <p className="text-[0.85rem] text-[#777] m-0">
             © 2025 GalenAI Pvt. Ltd.
           </p>
           <div className="flex items-center gap-3 max-[768px]:flex-wrap max-[768px]:justify-center">
             <a
               href="/terms"
-              className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-[#eb602d]"
+              className="text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-[#eb602d]"
             >
               Terms of Service
             </a>
             <span className="text-[#ccc] text-[0.85rem]">|</span>
             <a
               href="/privacy"
-              className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-[#eb602d]"
+              className="text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-[#eb602d]"
             >
               Privacy Policy
             </a>
             <span className="text-[#ccc] text-[0.85rem]">|</span>
             <a
               href="/refund"
-              className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-[#eb602d]"
+              className="text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-[#eb602d]"
             >
               Refund Policy
             </a>

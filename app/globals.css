@@ -1,27 +1,75 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM TOKENS
+   ═══════════════════════════════════════════ */
+
 @theme inline {
-  --font-sans: var(--font-inter);
-  --font-caveat: var(--font-caveat-var);
-  --font-outfit: var(--font-outfit-var);
-  --font-jakarta: var(--font-jakarta-var);
+  /* ── Typography ── */
+  --font-sans: var(--font-raleway-var);      /* Default body — Raleway              */
+  --font-primary: var(--font-space-var);     /* Headings, buttons, nav — Space Grotesk */
+  --font-secondary: var(--font-raleway-var); /* Body copy, subtext — Raleway        */
+
+  /* ── Brand Colors ── */
+  --color-accent: #eb602d;
+  --color-accent-hover: #d14d1f;
+  --color-accent-light: #fff0e4;
+  --color-accent-muted: rgba(235, 96, 45, 0.15);
+
+  /* ── Text Colors ── */
+  --color-text-primary: #2e2e2e;
+  --color-text-secondary: #555555;
+  --color-text-muted: #777777;
+  --color-text-faint: #999999;
+  --color-text-inverse: #ffffff;
+
+  /* ── Surfaces ── */
+  --color-bg-primary: #f6f4f1;
+  --color-bg-secondary: #fff0e4;
+  --color-bg-card: #ffffff;
+  --color-bg-dark: #2e2e2e;
+  --color-bg-darker: #1a1a1a;
+
+  /* ── Borders ── */
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.12);
 }
 
 :root {
   line-height: 1.5;
   font-weight: 400;
-  color: #2e2e2e;
-  background-color: #fafafa;
+  color: var(--color-text-primary);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Notebook paper background — applied globally */
+  background:
+    repeating-linear-gradient(
+      transparent, transparent 31px,
+      rgba(173, 216, 230, 0.18) 31px,
+      rgba(173, 216, 230, 0.18) 32px
+    ),
+    #f6f4f1 !important;
 }
 
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  font-family: var(--font-raleway-var), sans-serif;
+  background: transparent !important;
+}
+
+/* ── Global Page Container ── */
+.page-container {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
 }
 
 *,
@@ -34,6 +82,28 @@ a {
   color: inherit;
 }
 
+/* ── Global Typography Hierarchy ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-space-var), sans-serif;  /* Space Grotesk */
+}
+
+button,
+a[class*="btn"],
+input[type="submit"] {
+  font-family: var(--font-space-var), sans-serif;  /* Space Grotesk */
+}
+
+nav, nav a, nav button {
+  font-family: var(--font-space-var), sans-serif;  /* Space Grotesk */
+}
+
+@layer base {
+  html,
+  body {
+    overscroll-behavior-y: none;
+    min-height: 100%;
+  }
+}
 /* Keyframes used by components */
 @keyframes blink {
   0%, 100% { opacity: 1; }

@@ -1,14 +1,14 @@
 const WhatsAppContact = () => {
   return (
-    <section className="py-12 px-8 bg-[#f6f4f1] max-[480px]:py-10 max-[480px]:px-6">
+    <section className="py-12 px-8 bg-transparent max-[480px]:py-10 max-[480px]:px-6">
       <div className="max-w-[1200px] mx-auto">
         <div className="bg-gradient-to-br from-[#d4f4dd] to-[#e8f8ed] rounded-[1.25rem] py-8 px-12 flex items-center justify-between gap-16 shadow-[0_4px_20px_rgba(0,0,0,0.06)] relative overflow-hidden max-[768px]:flex-col max-[768px]:py-10 max-[768px]:px-8 max-[768px]:gap-8 max-[768px]:text-center max-[480px]:py-8 max-[480px]:px-6">
           {/* Content */}
           <div className="flex-1 max-w-[700px] max-[768px]:max-w-full">
-            <h3 className="font-[Inter,system-ui,-apple-system,sans-serif] text-[1.75rem] font-bold text-[#1a5d3a] mb-2 tracking-[-0.02em] max-[768px]:text-2xl max-[480px]:text-[1.35rem]">
+            <h3 className="text-[1.75rem] font-bold text-[#1a5d3a] mb-2 tracking-[-0.02em] max-[768px]:text-2xl max-[480px]:text-[1.35rem]">
               Have questions? We&apos;re here to help
             </h3>
-            <p className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.95rem] text-[#2d6a4f] leading-[1.5] mb-5 flex items-center flex-wrap gap-[0.35rem] max-[768px]:justify-center max-[480px]:text-[0.9rem]">
+            <p className="text-[0.95rem] text-[#2d6a4f] leading-[1.5] mb-5 flex items-center flex-wrap gap-[0.35rem] max-[768px]:justify-center max-[480px]:text-[0.9rem]">
               Connect with our team on WhatsApp
               <svg
                 className="w-[18px] h-[18px] text-[#25D366] shrink-0"
@@ -20,7 +20,7 @@ const WhatsAppContact = () => {
               for personalized guidance on how GalenAI can support your medical
               education journey
             </p>
-            <button className="bg-[#25D366] text-white border-none py-[0.875rem] px-7 rounded-[0.625rem] font-[Inter,system-ui,-apple-system,sans-serif] text-[0.95rem] font-semibold cursor-pointer inline-flex items-center gap-2 transition-all duration-300 shadow-[0_4px_12px_rgba(37,211,102,0.3)] hover:bg-[#20bd5a] hover:-translate-y-[2px] hover:shadow-[0_6px_16px_rgba(37,211,102,0.4)] active:translate-y-0 max-[480px]:w-full max-[480px]:justify-center">
+            <button className="bg-[#25D366] text-white border-none py-[0.875rem] px-7 rounded-[0.625rem] text-[0.95rem] font-semibold cursor-pointer inline-flex items-center gap-2 transition-all duration-300 shadow-[0_4px_12px_rgba(37,211,102,0.3)] hover:bg-[#20bd5a] hover:-translate-y-[2px] hover:shadow-[0_6px_16px_rgba(37,211,102,0.4)] active:translate-y-0 max-[480px]:w-full max-[480px]:justify-center">
               <svg
                 className="w-5 h-5"
                 viewBox="0 0 24 24"

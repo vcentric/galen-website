@@ -1,32 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Caveat, Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import { Space_Grotesk, Raleway } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 
-const inter = Inter({
-  variable: "--font-inter",
+const space = Space_Grotesk({
+  variable: "--font-space-var",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const caveat = Caveat({
-  variable: "--font-caveat-var",
+const raleway = Raleway({
+  variable: "--font-raleway-var",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit-var",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta-var",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -43,10 +31,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${caveat.variable} ${outfit.variable} ${jakarta.variable} font-sans antialiased`}
+        className={`${space.variable} ${raleway.variable} antialiased`}
       >
         <ScrollToTop />
-        <div className="min-h-screen w-full">
+        <div className="min-h-screen w-full ">
           <Navbar />
           {children}
           <Footer />

@@ -51,10 +51,10 @@ const Testimonials = () => {
       id="testimonials"
     >
       <div className="max-w-[1200px] mx-auto text-center">
-        <div className="uppercase text-[0.75rem] font-semibold tracking-[0.15em] text-[#eb602d] mb-3 font-[Inter,system-ui,-apple-system,sans-serif]">
+        <div className="uppercase text-[0.75rem] font-semibold tracking-[0.15em] text-[#eb602d] mb-3">
           TESTIMONIALS
         </div>
-        <h2 className="font-[Inter,system-ui,-apple-system,sans-serif] text-[2.5rem] font-bold text-[#2e2e2e] mb-12 tracking-[-0.02em] max-[900px]:text-[2rem] max-[600px]:text-[1.75rem]">
+        <h2 className="text-[2.5rem] font-bold text-[#2e2e2e] mb-12 tracking-[-0.02em] max-[900px]:text-[2rem] max-[600px]:text-[1.75rem]">
           What our students say
         </h2>
 
@@ -64,10 +64,10 @@ const Testimonials = () => {
               key={testimonial.id}
               className="relative bg-white rounded-[1.25rem] p-8 shadow-[0_8px_24px_rgba(0,0,0,0.06)] flex flex-col justify-between text-left min-w-[380px] max-w-[380px] shrink-0 transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.1)] max-[900px]:min-w-[320px] max-[900px]:max-w-[320px] max-[600px]:p-6 max-[600px]:min-w-[280px] max-[600px]:max-w-[280px]"
             >
-              <span className="text-[4rem] text-[rgba(235,96,45,0.08)] absolute top-2 left-5 leading-none font-[Georgia,serif] max-[600px]:text-[3rem]">
+              <span className="text-[4rem] text-[rgba(235,96,45,0.08)] absolute top-2 left-5 leading-none max-[600px]:text-[3rem]">
                 &ldquo;
               </span>
-              <p className="mt-10 mb-7 text-[#444] font-[Inter,system-ui,-apple-system,sans-serif] text-base leading-[1.65] max-[600px]:text-[0.95rem] max-[600px]:mt-8">
+              <p className="mt-10 mb-7 text-[#444] text-base leading-[1.65] max-[600px]:text-[0.95rem] max-[600px]:mt-8">
                 {highlightAccent(testimonial.text, testimonial.accent)}
               </p>
               <div className="flex items-center gap-[0.875rem] mt-auto">
@@ -77,10 +77,10 @@ const Testimonials = () => {
                   alt={testimonial.name}
                 />
                 <div className="flex flex-col gap-[0.15rem]">
-                  <span className="font-[Inter,system-ui,-apple-system,sans-serif] font-semibold text-[0.95rem] text-[#2e2e2e]">
+                  <span className="font-semibold text-[0.95rem] text-[#2e2e2e]">
                     {testimonial.name}
                   </span>
-                  <span className="font-[Inter,system-ui,-apple-system,sans-serif] text-[0.8rem] text-[#777]">
+                  <span className="text-[0.8rem] text-[#777]">
                     {testimonial.meta}
                   </span>
                 </div>

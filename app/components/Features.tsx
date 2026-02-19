@@ -135,7 +135,7 @@ const Features = () => {
     <section
       ref={sectionRef}
       id="features"
-      className={`w-full bg-[#f6f4f1] py-16 px-8 max-[600px]:py-12 max-[600px]:px-6 ${
+      className={`w-full bg-transparent py-16 px-8 max-[600px]:py-12 max-[600px]:px-6 ${
         isInView ? "is-inview" : ""
       } ${isBobbing ? "is-bobbing" : ""}`}
     >
@@ -149,7 +149,7 @@ const Features = () => {
               {features.map((f, i) => (
                 <button
                   key={f.title}
-                  className={`rounded-full py-[0.85rem] px-7 border-[1.5px] text-white flex items-center cursor-pointer font-[Inter,system-ui,-apple-system,sans-serif] text-[1.05rem] font-medium transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  className={`rounded-full py-[0.85rem] px-7 border-[1.5px] text-white flex items-center cursor-pointer text-[1.05rem] font-medium transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     activeIndex === i
                       ? "border-[#eb602d] bg-[rgba(235,96,45,0.15)] shadow-[0_14px_40px_rgba(235,96,45,0.25)]"
                       : "border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.25)] hover:-translate-y-[2px] hover:scale-[1.02] hover:shadow-[0_10px_28px_rgba(0,0,0,0.35)] hover:border-[rgba(255,255,255,0.35)]"
@@ -159,7 +159,7 @@ const Features = () => {
                   {f.title}
                 </button>
               ))}
-              <button className="rounded-full py-[0.85rem] px-7 border-[1.5px] border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.25)] text-white flex items-center font-[Inter,system-ui,-apple-system,sans-serif] text-[1.05rem] font-medium opacity-50 cursor-not-allowed">
+              <button className="rounded-full py-[0.85rem] px-7 border-[1.5px] border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.25)] text-white flex items-center text-[1.05rem] font-medium opacity-50 cursor-not-allowed">
                 Coming Soon ✦
               </button>
             </div>
@@ -172,13 +172,13 @@ const Features = () => {
                   : ""
               }`}
             >
-              <h3 className="font-[Inter,system-ui,-apple-system,sans-serif] text-[clamp(2rem,3vw,3rem)] leading-[1.1] tracking-[-0.02em] text-white m-0 mb-4 font-bold whitespace-pre-line max-[900px]:text-[2rem]">
+              <h3 className="text-[clamp(2rem,3vw,3rem)] leading-[1.1] tracking-[-0.02em] text-white m-0 mb-4 font-bold whitespace-pre-line max-[900px]:text-[2rem]">
                 {currentFeature.featureTitle}
               </h3>
-              <p className="m-0 mb-6 font-[Inter,system-ui,-apple-system,sans-serif] text-[1.05rem] leading-[1.6] text-[rgba(255,255,255,0.78)] max-w-[46ch] max-[900px]:text-base">
+              <p className="m-0 mb-6 text-[1.05rem] leading-[1.6] text-[rgba(255,255,255,0.78)] max-w-[46ch] max-[900px]:text-base">
                 {currentFeature.description}
               </p>
-              <button className="self-start rounded-full py-[0.85rem] px-7 border-none font-[Inter,system-ui,-apple-system,sans-serif] font-semibold text-base cursor-pointer bg-[#eb602d] text-white transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[2px] hover:brightness-110">
+              <button className="self-start rounded-full py-[0.85rem] px-7 border-none font-semibold text-base cursor-pointer bg-[#eb602d] text-white transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[2px] hover:brightness-110">
                 {currentFeature.cta}
               </button>
             </div>
@@ -228,7 +228,7 @@ const Features = () => {
                     }`}
                   >
                     <div className="flex flex-col items-center justify-center gap-4 text-[rgba(255,255,255,0.6)]">
-                      <span className="font-[Inter,system-ui,-apple-system,sans-serif] text-[1.1rem] font-medium">
+                      <span className="text-[1.1rem] font-medium">
                         {f.title}
                       </span>
                     </div>
@@ -237,7 +237,7 @@ const Features = () => {
 
                 {/* Coming Soon Content */}
                 {isComingSoon && (
-                  <div className="absolute inset-0 text-left py-8 px-6 text-[rgba(255,255,255,0.85)] font-[Inter,system-ui,-apple-system,sans-serif] flex flex-col gap-6 opacity-100">
+                  <div className="absolute inset-0 text-left py-8 px-6 text-[rgba(255,255,255,0.85)] flex flex-col gap-6 opacity-100">
                     {comingSoonItems.map((item, i) => (
                       <div key={i} className="flex flex-col gap-1">
                         <span className="text-[0.95rem] font-bold text-[rgba(255,255,255,0.95)]">

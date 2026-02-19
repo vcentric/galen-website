@@ -29,12 +29,12 @@ const Comparison = () => {
   };
 
   return (
-    <section className="py-20 px-8 bg-[#f6f4f1] max-[700px]:py-14 max-[700px]:px-6" id="comparison">
+    <section className="py-20 px-8 bg-transparent max-[700px]:py-14 max-[700px]:px-6" id="comparison">
       <div className="max-w-[1150px] mx-auto text-center px-6">
-        <h2 className="font-[Outfit,system-ui,-apple-system,sans-serif] text-[2.75rem] font-bold text-[#1a1a1a] mb-2 tracking-[-0.03em] max-[900px]:text-[2rem] max-[700px]:text-[1.75rem]">
+        <h2 className="text-[2.75rem] font-bold text-[#1a1a1a] mb-2 tracking-[-0.03em] max-[900px]:text-[2rem] max-[700px]:text-[1.75rem]">
           GalenAI builds confidence in medicine
         </h2>
-        <p className="font-[Outfit,system-ui,-apple-system,sans-serif] text-[1.15rem] text-[#eb602d] font-medium mb-14 tracking-[0.01em] max-[700px]:text-base">
+        <p className="text-[1.15rem] text-[#eb602d] font-medium mb-14 tracking-[0.01em] max-[700px]:text-base">
           unlike Legacy Apps or Generic AI Tools
         </p>
 
@@ -48,7 +48,7 @@ const Comparison = () => {
         </div>
 
         <div className="bg-white rounded-[1.5rem] overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.06),0_0_1px_0_rgba(0,0,0,0.1)] max-[700px]:overflow-x-auto">
-          <table className="w-full border-collapse border-separate border-spacing-0 font-[Plus_Jakarta_Sans,Inter,system-ui,-apple-system,sans-serif] max-[700px]:min-w-[600px]">
+          <table className="w-full border-collapse border-separate border-spacing-0 max-[700px]:min-w-[600px]">
             <thead>
               <tr>
                 <th className="w-[35%] text-left p-8 border-b border-[rgba(0,0,0,0.08)] align-middle bg-white max-[900px]:p-5 max-[700px]:p-4"></th>

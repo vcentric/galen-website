@@ -8,34 +8,12 @@ const PHRASES = [
   "that saves time for you",
 ];
 
-const keywordPhrases = [
-  "Clarity over chaos",
-  "Avoid cognitive overload",
-  "Mentoring, not more videos",
-  "Know where you stand",
-  "Know what to study next",
-  "Think like a doctor",
-  "Assess. Apply.",
-  "Make time for yourself",
-];
-
-interface SpawnedKeyword {
-  id: number;
-  text: string;
-  x: number;
-  y: number;
-  rotation: number;
-}
-
 const Hero = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const [delta, setDelta] = useState(100);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [spawnedKeywords, setSpawnedKeywords] = useState<SpawnedKeyword[]>([]);
-  const [hoverTimer, setHoverTimer] = useState<NodeJS.Timeout | null>(null);
-  const [keywordIndex, setKeywordIndex] = useState(0);
 
   const tick = useCallback(() => {
     const i = textIndex % PHRASES.length;
@@ -69,100 +47,19 @@ const Hero = () => {
     return () => clearInterval(ticker);
   }, [tick, delta]);
 
-  const spawnKeyword = useCallback(
-    (x: number, y: number) => {
-      const phrase = keywordPhrases[keywordIndex % keywordPhrases.length];
-      const rotation = Math.random() * 10 - 5;
-
-      const newKeyword: SpawnedKeyword = {
-        id: Date.now(),
-        text: phrase,
-        x,
-        y,
-        rotation,
-      };
-
-      setSpawnedKeywords((prev) => [...prev, newKeyword]);
-      setKeywordIndex((prev) => prev + 1);
-
-      setTimeout(() => {
-        setSpawnedKeywords((prev) =>
-          prev.filter((k) => k.id !== newKeyword.id)
-        );
-      }, 8000);
-    },
-    [keywordIndex]
-  );
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    if (hoverTimer) clearTimeout(hoverTimer);
-
-    const timer = setTimeout(() => {
-      spawnKeyword(x, y);
-    }, 2500);
-
-    setHoverTimer(timer);
-  };
-
-  const handleMouseLeave = () => {
-    if (hoverTimer) {
-      clearTimeout(hoverTimer);
-      setHoverTimer(null);
-    }
-  };
-
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    spawnKeyword(x, y);
-  };
-
   const handlePlayClick = () => {
     setIsExpanded(!isExpanded);
   };
 
   return (
     <section
-      className="pt-32 pb-12 px-8 bg-[#f6f4f1] flex justify-center overflow-visible relative"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
+      className="pt-32 pb-12 px-8 bg-transparent flex justify-center overflow-visible relative"
     >
-      {/* Notebook Paper Background */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          background: `repeating-linear-gradient(transparent, transparent 31px, rgba(173,216,230,0.15) 31px, rgba(173,216,230,0.15) 32px), linear-gradient(to bottom, #faf8f5 0%, #f8f6f3 100%)`,
-        }}
-      />
-
-      {/* Pencil Keywords */}
-      <div className="absolute inset-0 z-[1] pointer-events-none">
-        {spawnedKeywords.map((keyword) => (
-          <div
-            key={keyword.id}
-            className="absolute font-[Caveat,Kalam,cursive] text-[1.1rem] text-[#4a4a4a] opacity-0 whitespace-nowrap font-medium tracking-[0.02em] animate-[writeInFadeOut_8s_ease-out_forwards]"
-            style={{
-              left: `${keyword.x}px`,
-              top: `${keyword.y}px`,
-              transform: `translate(-50%, -50%) rotate(${keyword.rotation}deg)`,
-            }}
-          >
-            {keyword.text}
-          </div>
-        ))}
-      </div>
-
-      <div className="max-w-[1200px] w-full grid grid-cols-[1.2fr_0.8fr] gap-12 items-center relative z-[2] max-[900px]:grid-cols-1 max-[900px]:text-center">
+      <div className="max-w-[1200px] w-full grid grid-cols-[1.4fr_0.8fr] gap-12 items-center relative z-[2] max-[900px]:grid-cols-1 max-[900px]:text-center">
         {/* Left Column: Text */}
         <div className="flex flex-col max-[900px]:items-center">
           {/* Audience Toggle */}
-          <div className="inline-flex gap-8 mb-7 font-[Inter,system-ui,-apple-system,sans-serif]">
+          <div className="inline-flex gap-8 mb-7">
             <button className="p-0 pb-1 rounded-none text-[1.1rem] font-medium border-none bg-transparent text-[#2e2e2e] cursor-pointer opacity-100 border-b-2 border-b-[#eb602d]">
               Students
             </button>
@@ -172,7 +69,7 @@ const Hero = () => {
           </div>
 
           {/* Exam Keywords */}
-          <div className="flex gap-6 mb-8 font-[Inter,system-ui,-apple-system,sans-serif]">
+          <div className="flex gap-6 mb-8">
             {["NEET PG", "NEET SS", "EMREE", "FMGE"].map((exam) => (
               <span
                 key={exam}
@@ -185,7 +82,7 @@ const Hero = () => {
 
           <h1 className="text-[3.5rem] font-medium leading-[1.1] text-[#2e2e2e] mb-8 tracking-[-0.03em]">
             Your personal AI companion <br />
-            <span className="text-[#eb602d] italic font-[Georgia,serif]">
+            <span className="text-[#eb602d] italic">
               &gt; {displayText}
             </span>
             <span className="font-thin text-[#eb602d] animate-[blink_1s_step-end_infinite] ml-1">
