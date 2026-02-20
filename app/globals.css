@@ -48,10 +48,10 @@
   background:
     repeating-linear-gradient(
       transparent, transparent 31px,
-      rgba(173, 216, 230, 0.18) 31px,
-      rgba(173, 216, 230, 0.18) 32px
+      rgba(173, 216, 230, 0.25) 31px,
+      rgba(173, 216, 230, 0.25) 32px
     ),
-    #f6f4f1 !important;
+    #ffffff !important;
 }
 
 body {
@@ -235,3 +235,83 @@ nav, nav a, nav button {
 .blog-content th { font-weight: 700; text-align: left; padding: 1rem; color: #2e2e2e; border-bottom: 2px solid #e5e5e5; }
 .blog-content td { padding: 1rem; border-bottom: 1px solid #f0f0f0; }
 .blog-content tbody tr:last-child td { border-bottom: none; }
+
+/* ── Custom Navbar Liquid Glass ── */
+.nav-glass-container {
+  position: relative;
+}
+
+/* Background wrapper so we can fade it in cleanly */
+.nav-glass-wrapper {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  /* Base background color and highlight for the glass */
+  --bg-color: rgba(255, 255, 255, 0.45);
+  --highlight: rgba(255, 255, 255, 0.9);
+}
+
+.nav-glass-container.is-scrolled .nav-glass-wrapper {
+  opacity: 1;
+}
+
+.nav-glass-filter,
+.nav-glass-overlay,
+.nav-glass-specular {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* 
+  Negative inset on filter and overlay ensures the turbulence 
+  distortion doesn't pull the edges inward and tear the bounding box.
+*/
+.nav-glass-filter,
+.nav-glass-overlay {
+  inset: -20px; 
+}
+
+.nav-glass-specular {
+  inset: 0; /* Keep highlight exactly on the edge border */
+  border-radius: inherit;
+}
+
+.nav-glass-filter {
+  z-index: 1;
+  backdrop-filter: blur(12px);
+  /* Use the ID defined in Navbar.tsx */
+  filter: url(#nav-glass-distortion) saturate(120%) brightness(1.15);
+}
+
+.nav-glass-distortion-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 0%, transparent 80%),
+              radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 80%);
+  background-size: 300% 300%;
+  animation: navFloatDistort 10s infinite ease-in-out;
+  mix-blend-mode: overlay;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes navFloatDistort {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.nav-glass-overlay {
+  z-index: 3;
+  background: var(--bg-color);
+}
+
+.nav-glass-specular {
+  z-index: 4;
+  box-shadow: inset 1px 1px 2px var(--highlight);
+  border-radius: inherit;
+}

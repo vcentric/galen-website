@@ -111,21 +111,37 @@ const Navbar = () => {
       
       {/* Inner container morphs based on scroll state */}
       <div 
-        className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] nav-glass-container ${
           isScrolled 
-            ? "w-[calc(100%-5px)] max-w-[1400px] px-6 py-3 bg-[rgba(255,255,255,0.01)] backdrop-blur-xl border border-white/10 rounded-full shadow-sm " 
-            : "w-full max-w-[1400px] px-0 py-2 bg-transparent border-transparent"
+            ? "is-scrolled w-[calc(100%-5px)] max-w-[1400px] px-6 py-3 border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)]" 
+            : "w-full max-w-[1400px] px-0 py-2 border-transparent"
         }`}
       >
+        {/* SVG filter embedded locally for the distortion layer */}
+        <svg style={{ display: 'none' }}>
+          <filter id="nav-glass-distortion" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="turbulence" baseFrequency="0.008" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="40" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </svg>
+
+        {/* Dynamic Glass Background Layers */}
+        <div className="nav-glass-wrapper">
+          <div className="nav-glass-filter"></div>
+          <div className="nav-glass-distortion-overlay"></div>
+          <div className="nav-glass-overlay"></div>
+          <div className="nav-glass-specular"></div>
+        </div>
+
         {/* Left: Logo */}
-        <div className="flex-1 flex justify-start ">
+        <div className="relative z-10 flex-1 flex justify-start ">
           <Link href="/" className="flex items-center no-underline transition-opacity duration-200 hover:opacity-80">
             <Image src="/galenai-logo.png" alt="GalenAI" width={140} height={35} className="h-[35px] w-auto" />
           </Link>
         </div>
 
         {/* Center: Nav Links */}
-        <div className="flex-shrink-0">
+        <div className="relative z-10 flex-shrink-0">
           <ul className="flex list-none gap-8 m-0 p-0">
             <li><AnimatedNavLink href="#features">Features</AnimatedNavLink></li>
             <li><AnimatedNavLink href="/team">Team</AnimatedNavLink></li>
@@ -135,7 +151,7 @@ const Navbar = () => {
         </div>
 
         {/* Right: CTA Button */}
-        <div className="flex-1 flex justify-end ">
+        <div className="relative z-10 flex-1 flex justify-end ">
           <a href="#ask" className="bg-[#eb602d] text-[#ffffff] font-primary no-underline py-[0.8rem] px-[1.6rem] rounded-full text-[0.95rem] font-medium transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] whitespace-nowrap hover:scale-105 active:scale-[0.98] shadow-[inset_2px_2px_6px_rgba(255,255,255,0.2),0_-2px_10px_rgba(0,0,0,0.1)]" style={{ color: '#ffffff' }}>
             Ask GalenAI
           </a>
