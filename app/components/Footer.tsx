@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#fff0e4] pt-16 px-8 border-t border-[rgba(0,0,0,0.08)] max-[768px]:pt-12 max-[768px]:px-6 max-[480px]:pt-10 max-[480px]:px-5">
+    <footer className="bg-light pt-16 px-8 border-t border-[rgba(0,0,0,0.08)] max-[768px]:pt-12 max-[768px]:px-6 max-[480px]:pt-10 max-[480px]:px-5">
       <div className="max-w-[1200px] mx-auto grid grid-cols-[1.5fr_1fr_1fr_1fr] gap-12 pb-12 max-[1024px]:grid-cols-2 max-[1024px]:gap-10 max-[768px]:grid-cols-1 max-[768px]:gap-10">
         {/* Column 1 - Brand & App */}
         <div className="max-w-[320px] max-[1024px]:max-w-full">
@@ -16,7 +16,7 @@ const Footer = () => {
             understand, revise, and apply medicine better.
           </p>
 
-          <h4 className="text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
+          <h4 className="text-[0.875rem] font-bold text-dark uppercase tracking-[0.05em] mb-4 mt-6">
             Download the App
           </h4>
           <div className="flex flex-col gap-3 mb-7">
@@ -24,10 +24,10 @@ const Footer = () => {
               href="https://apps.apple.com/in/app/galenai/id6755653561"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white border border-[rgba(0,0,0,0.12)] rounded-[0.625rem] py-[0.625rem] px-4 flex items-center gap-3 no-underline transition-all duration-200 hover:border-[#eb602d] hover:bg-[rgba(235,96,45,0.02)] hover:-translate-y-[1px]"
+              className="bg-white border border-[rgba(0,0,0,0.12)] rounded-[0.625rem] py-[0.625rem] px-4 flex items-center gap-3 no-underline transition-all duration-200 hover:border-orange hover:bg-[rgba(235,96,45,0.02)] hover:-translate-y-[1px]"
             >
               <svg
-                className="w-6 h-6 text-[#2e2e2e] shrink-0"
+                className="w-6 h-6 text-dark shrink-0"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -37,7 +37,7 @@ const Footer = () => {
                 <span className="text-[0.65rem] text-[#777] font-normal">
                   Download on the
                 </span>
-                <span className="text-[0.875rem] text-[#2e2e2e] font-semibold">
+                <span className="text-[0.875rem] text-dark font-semibold">
                   App Store
                 </span>
               </div>
@@ -46,10 +46,10 @@ const Footer = () => {
               href="https://play.google.com/store/apps/details?id=com.galenai.galenai"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white border border-[rgba(0,0,0,0.12)] rounded-[0.625rem] py-[0.625rem] px-4 flex items-center gap-3 no-underline transition-all duration-200 hover:border-[#eb602d] hover:bg-[rgba(235,96,45,0.02)] hover:-translate-y-[1px]"
+              className="bg-white border border-[rgba(0,0,0,0.12)] rounded-[0.625rem] py-[0.625rem] px-4 flex items-center gap-3 no-underline transition-all duration-200 hover:border-orange hover:bg-[rgba(235,96,45,0.02)] hover:-translate-y-[1px]"
             >
               <svg
-                className="w-6 h-6 text-[#2e2e2e] shrink-0"
+                className="w-6 h-6 text-dark shrink-0"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -59,14 +59,14 @@ const Footer = () => {
                 <span className="text-[0.65rem] text-[#777] font-normal">
                   Get it on
                 </span>
-                <span className="text-[0.875rem] text-[#2e2e2e] font-semibold">
+                <span className="text-[0.875rem] text-dark font-semibold">
                   Google Play
                 </span>
               </div>
             </a>
           </div>
 
-          <h4 className="text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
+          <h4 className="text-[0.875rem] font-bold text-dark uppercase tracking-[0.05em] mb-4 mt-6">
             Follow us
           </h4>
           <div className="flex gap-[0.875rem] max-[480px]:gap-[0.625rem]">
@@ -97,7 +97,7 @@ const Footer = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 flex items-center justify-center bg-white border border-[rgba(0,0,0,0.1)] rounded-full transition-all duration-200 text-[#555] hover:bg-[#eb602d] hover:border-[#eb602d] hover:text-white hover:-translate-y-[2px] max-[480px]:w-8 max-[480px]:h-8"
+                className="w-9 h-9 flex items-center justify-center bg-white border border-[rgba(0,0,0,0.1)] rounded-full transition-all duration-200 text-[#555] hover:bg-orange hover:border-orange hover:text-white hover:-translate-y-[2px] max-[480px]:w-8 max-[480px]:h-8"
                 aria-label={social.label}
               >
                 <svg
@@ -114,7 +114,7 @@ const Footer = () => {
 
         {/* Column 2 - Company */}
         <div>
-          <h4 className="text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
+          <h4 className="text-[0.875rem] font-bold text-dark uppercase tracking-[0.05em] mb-4 mt-6">
             Company
           </h4>
           <ul className="list-none p-0 m-0 flex flex-col gap-3">
@@ -129,7 +129,7 @@ const Footer = () => {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="text-[0.9rem] text-[#555] no-underline transition-colors duration-200 inline-block hover:text-[#eb602d]"
+                  className="text-[0.9rem] text-[#555] no-underline transition-colors duration-200 inline-block hover:text-orange"
                 >
                   {link.label}
                 </a>
@@ -140,7 +140,7 @@ const Footer = () => {
 
         {/* Column 3 - Study Resources */}
         <div>
-          <h4 className="text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
+          <h4 className="text-[0.875rem] font-bold text-dark uppercase tracking-[0.05em] mb-4 mt-6">
             Study Resources
           </h4>
           <ul className="list-none p-0 m-0 flex flex-col gap-3">
@@ -156,7 +156,7 @@ const Footer = () => {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="text-[0.9rem] text-[#555] no-underline transition-colors duration-200 inline-block hover:text-[#eb602d]"
+                  className="text-[0.9rem] text-[#555] no-underline transition-colors duration-200 inline-block hover:text-orange"
                 >
                   {link.label}
                 </a>
@@ -167,7 +167,7 @@ const Footer = () => {
 
         {/* Column 4 - Contact & Support */}
         <div>
-          <h4 className="text-[0.875rem] font-bold text-[#2e2e2e] uppercase tracking-[0.05em] mb-4 mt-6">
+          <h4 className="text-[0.875rem] font-bold text-dark uppercase tracking-[0.05em] mb-4 mt-6">
             Contact & Support
           </h4>
           <div className="flex flex-col gap-5">
@@ -177,7 +177,7 @@ const Footer = () => {
               </span>
               <a
                 href="mailto:support@galenai.io"
-                className="text-[0.9rem] text-[#eb602d] no-underline transition-colors duration-200 hover:text-[#d14d1f] hover:underline"
+                className="text-[0.9rem] text-orange no-underline transition-colors duration-200 hover:text-[#d14d1f] hover:underline"
               >
                 support@galenai.io
               </a>
@@ -188,7 +188,7 @@ const Footer = () => {
               </span>
               <a
                 href="https://wa.me/918848542046"
-                className="text-[0.9rem] text-[#eb602d] no-underline transition-colors duration-200 hover:text-[#d14d1f] hover:underline"
+                className="text-[0.9rem] text-orange no-underline transition-colors duration-200 hover:text-[#d14d1f] hover:underline"
               >
                 +91 88485 42046
               </a>
@@ -217,21 +217,21 @@ const Footer = () => {
           <div className="flex items-center gap-3 max-[768px]:flex-wrap max-[768px]:justify-center">
             <a
               href="/terms"
-              className="text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-[#eb602d]"
+              className="text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-orange"
             >
               Terms of Service
             </a>
             <span className="text-[#ccc] text-[0.85rem]">|</span>
             <a
               href="/privacy"
-              className="text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-[#eb602d]"
+              className="text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-orange"
             >
               Privacy Policy
             </a>
             <span className="text-[#ccc] text-[0.85rem]">|</span>
             <a
               href="/refund"
-              className="text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-[#eb602d]"
+              className="text-[0.85rem] text-[#555] no-underline transition-colors duration-200 hover:text-orange"
             >
               Refund Policy
             </a>

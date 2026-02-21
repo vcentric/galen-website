@@ -141,7 +141,7 @@ const Features = () => {
     >
       <div className="max-w-[1200px] mx-auto">
         {/* Dark Card Container */}
-        <div className="bg-[#2e2e2e] rounded-[36px] p-12 grid grid-cols-[1.05fr_0.95fr] gap-12 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)] max-[900px]:grid-cols-1 max-[900px]:p-8 max-[900px]:gap-10">
+        <div className="bg-dark rounded-[36px] p-12 grid grid-cols-[1.05fr_0.95fr] gap-12 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)] max-[900px]:grid-cols-1 max-[900px]:p-8 max-[900px]:gap-10">
           {/* Left Column */}
           <div className="flex flex-col gap-8">
             {/* Feature Pills */}
@@ -151,7 +151,7 @@ const Features = () => {
                   key={f.title}
                   className={`rounded-full py-[0.85rem] px-7 border-[1.5px] text-white flex items-center cursor-pointer text-[1.05rem] font-medium transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     activeIndex === i
-                      ? "border-[#eb602d] bg-[rgba(235,96,45,0.15)] shadow-[0_14px_40px_rgba(235,96,45,0.25)]"
+                      ? "border-orange bg-[rgba(235,96,45,0.15)] shadow-[0_14px_40px_rgba(235,96,45,0.25)]"
                       : "border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.25)] hover:-translate-y-[2px] hover:scale-[1.02] hover:shadow-[0_10px_28px_rgba(0,0,0,0.35)] hover:border-[rgba(255,255,255,0.35)]"
                   }`}
                   onClick={() => goToFeature(i)}
@@ -178,7 +178,7 @@ const Features = () => {
               <p className="m-0 mb-6 text-[1.05rem] leading-[1.6] text-[rgba(255,255,255,0.78)] max-w-[46ch] max-[900px]:text-base">
                 {currentFeature.description}
               </p>
-              <button className="self-start rounded-full py-[0.85rem] px-7 border-none font-semibold text-base cursor-pointer bg-[#eb602d] text-white transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[2px] hover:brightness-110">
+              <button className="self-start rounded-full py-[0.85rem] px-7 border-none font-semibold text-base cursor-pointer bg-orange text-white transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[2px] hover:brightness-110">
                 {currentFeature.cta}
               </button>
             </div>

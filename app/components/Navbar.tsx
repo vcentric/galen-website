@@ -47,7 +47,7 @@ const AnimatedNavLink = ({ href, children }: AnimatedNavLinkProps) => {
         <path
           ref={pathRef}
           d="M2 5 Q 50 10 98 5"
-          stroke="#eb602d"
+          stroke="var(--color-orange)"
           strokeWidth="3"
           fill="none"
           strokeLinecap="round"
@@ -61,7 +61,7 @@ const AnimatedNavLink = ({ href, children }: AnimatedNavLinkProps) => {
     </>
   );
 
-  const className = "relative no-underline text-[#2e2e2e] text-[15px] font-primary font-medium tracking-[0.01em] transition-opacity duration-200 hover:opacity-100 opacity-90 inline-block";
+  const className = "relative no-underline text-dark text-[15px] font-primary font-medium tracking-[0.01em] transition-opacity duration-200 hover:opacity-100 opacity-90 inline-block";
 
   if (href.startsWith("/")) {
     return (
@@ -147,7 +147,8 @@ const Navbar = () => {
             <li><AnimatedNavLink href="#features">Features</AnimatedNavLink></li>
             <li><AnimatedNavLink href="/team">Team</AnimatedNavLink></li>
             <li><AnimatedNavLink href="/blog">Blog</AnimatedNavLink></li>
-            <li><AnimatedNavLink href="#login">Login</AnimatedNavLink></li>
+             <li><AnimatedNavLink href="#faq">FAQ's</AnimatedNavLink></li>
+              <li><AnimatedNavLink href="#contact">Contact</AnimatedNavLink></li>
           </ul>
         </div>
 
@@ -155,12 +156,12 @@ const Navbar = () => {
         <div className="relative z-10 flex-1 flex justify-end ">
           <a
             href="#ask"
-            className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md h-11 text-[0.95rem] font-primary font-medium pl-6 pr-[3.5rem] bg-[#eb602d] text-white no-underline"
+            className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md h-11 text-[0.95rem] font-primary font-medium pl-6 pr-[3.5rem] bg-orange text-white no-underline"
           >
-            <span className="relative z-10 transition-colors text-white duration-300 group-hover:text-transparent">Ask GalenAI</span>
+            <span className="relative z-10 transition-colors text-white duration-300 group-hover:text-transparent">Try GalenAI</span>
             
             <div
-              className="absolute right-0 top-0 mt-1 mr-1 bg-white text-[#eb602d] flex items-center justify-center group-hover:w-[calc(100%-0.5rem)] transition-all rounded-full duration-300 h-9 w-9 z-20 shadow-sm"
+              className="absolute right-0 top-0 mt-1 mr-1 bg-white text-orange flex items-center justify-center group-hover:w-[calc(100%-0.5rem)] transition-all rounded-full duration-300 h-9 w-9 z-20 shadow-sm"
             >
               <ArrowUpRightIcon className="w-4 h-4 flex-shrink-0 transition-transform duration-300 group-hover:rotate-45" strokeWidth={2.5} />
             </div>

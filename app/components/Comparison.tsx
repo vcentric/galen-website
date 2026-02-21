@@ -23,7 +23,7 @@ const Comparison = () => {
     if (hasFeature === true) {
       return <span className="text-[#34A853] font-bold text-[1.75rem] leading-none">✓</span>;
     } else if (hasFeature === "limited") {
-      return <span className="text-[#eb602d] font-semibold text-[0.8rem] uppercase tracking-[0.05em]">Limited</span>;
+      return <span className="text-orange font-semibold text-[0.8rem] uppercase tracking-[0.05em]">Limited</span>;
     }
     return <span className="text-[#EA4335] font-bold text-[1.75rem] leading-none">✗</span>;
   };
@@ -34,7 +34,7 @@ const Comparison = () => {
         <h2 className="text-[2.75rem] font-bold text-[#1a1a1a] mb-2 tracking-[-0.03em] max-[900px]:text-[2rem] max-[700px]:text-[1.75rem]">
           GalenAI builds confidence in medicine
         </h2>
-        <p className="text-[1.15rem] text-[#eb602d] font-medium mb-14 tracking-[0.01em] max-[700px]:text-base">
+        <p className="text-[1.15rem] text-orange font-medium mb-14 tracking-[0.01em] max-[700px]:text-base">
           unlike Legacy Apps or Generic AI Tools
         </p>
 

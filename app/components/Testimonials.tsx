@@ -39,7 +39,7 @@ const Testimonials = () => {
     return (
       <>
         {parts[0]}
-        <span className="text-[#eb602d] font-semibold">{accent}</span>
+        <span className="text-orange font-semibold">{accent}</span>
         {parts[1]}
       </>
     );
@@ -47,14 +47,14 @@ const Testimonials = () => {
 
   return (
     <section
-      className="bg-gradient-to-br from-[#fef9f5] to-[#fff0e4] py-20 px-8 max-[600px]:py-14 max-[600px]:px-6"
+      className="bg-gradient-to-br from-[#fef9f5] to-light py-20 px-8 max-[600px]:py-14 max-[600px]:px-6"
       id="testimonials"
     >
       <div className="max-w-[1200px] mx-auto text-center">
-        <div className="uppercase text-[0.75rem] font-semibold tracking-[0.15em] text-[#eb602d] mb-3">
+        <div className="uppercase text-[0.75rem] font-semibold tracking-[0.15em] text-orange mb-3">
           TESTIMONIALS
         </div>
-        <h2 className="text-[2.5rem] font-bold text-[#2e2e2e] mb-12 tracking-[-0.02em] max-[900px]:text-[2rem] max-[600px]:text-[1.75rem]">
+        <h2 className="text-[2.5rem] font-bold text-dark mb-12 tracking-[-0.02em] max-[900px]:text-[2rem] max-[600px]:text-[1.75rem]">
           What our students say
         </h2>
 
@@ -72,12 +72,12 @@ const Testimonials = () => {
               </p>
               <div className="flex items-center gap-[0.875rem] mt-auto">
                 <img
-                  className="w-12 h-12 rounded-full shrink-0 bg-[#f6f4f1]"
+                  className="w-12 h-12 rounded-full shrink-0 bg-beige"
                   src={testimonial.avatar}
                   alt={testimonial.name}
                 />
                 <div className="flex flex-col gap-[0.15rem]">
-                  <span className="font-semibold text-[0.95rem] text-[#2e2e2e]">
+                  <span className="font-semibold text-[0.95rem] text-dark">
                     {testimonial.name}
                   </span>
                   <span className="text-[0.8rem] text-[#777]">

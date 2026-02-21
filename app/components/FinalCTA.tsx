@@ -15,7 +15,7 @@ const FinalCTA = () => {
 
   return (
     <section className="py-20 px-8 bg-transparent max-[768px]:py-20 max-[768px]:px-6 max-[480px]:py-16 max-[480px]:px-5">
-      <div className="max-w-[1100px] mx-auto bg-[#2e2e2e] rounded-[2rem] py-16 px-12 text-center relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.12)] max-[768px]:py-12 max-[768px]:px-8 max-[768px]:rounded-[1.5rem] max-[480px]:py-10 max-[480px]:px-6 max-[480px]:rounded-[1.25rem]">
+      <div className="max-w-[1100px] mx-auto bg-dark rounded-[2rem] py-16 px-12 text-center relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.12)] max-[768px]:py-12 max-[768px]:px-8 max-[768px]:rounded-[1.5rem] max-[480px]:py-10 max-[480px]:px-6 max-[480px]:rounded-[1.25rem]">
         {/* AI Icon with Breathing Animation */}
         <div className="mb-10 flex justify-center">
           <div className="w-[60px] h-[60px] bg-[rgba(235,96,45,0.1)] rounded-full flex items-center justify-center animate-[breathe_4s_ease-in-out_infinite] overflow-hidden border-[3px] border-[rgba(235,96,45,0.2)] max-[480px]:w-[50px] max-[480px]:h-[50px]">
@@ -31,7 +31,7 @@ const FinalCTA = () => {
         <div className="mb-12">
           <h2 className="text-[2.75rem] font-bold text-white mb-4 tracking-[-0.02em] leading-[1.2] max-[768px]:text-[2.25rem] max-[480px]:text-[1.875rem]">
             Learn medicine better.{" "}
-            <span className="text-[#eb602d] relative">Every single day.</span>
+            <span className="text-orange relative">Every single day.</span>
           </h2>
           <p className="text-[1.15rem] text-[rgba(255,255,255,0.7)] font-normal leading-[1.6] max-w-[600px] mx-auto max-[768px]:text-[1.05rem] max-[480px]:text-base">
             Ask GalenAI anything — concepts, cases, revisions, or what to study
@@ -44,7 +44,7 @@ const FinalCTA = () => {
           <div
             className={`bg-[rgba(255,255,255,0.08)] border-2 rounded-[1rem] py-2 pr-2 pl-6 flex items-center gap-3 transition-all duration-300 backdrop-blur-[10px] max-[768px]:pl-5 max-[480px]:p-2 ${
               isFocused
-                ? "border-[#eb602d] shadow-[0_0_0_4px_rgba(235,96,45,0.15)] bg-[rgba(255,255,255,0.1)]"
+                ? "border-orange shadow-[0_0_0_4px_rgba(235,96,45,0.15)] bg-[rgba(255,255,255,0.1)]"
                 : "border-[rgba(255,255,255,0.12)]"
             }`}
           >
@@ -59,7 +59,7 @@ const FinalCTA = () => {
             />
             <button
               type="submit"
-              className="w-12 h-12 bg-[#eb602d] border-none rounded-[0.75rem] flex items-center justify-center cursor-pointer transition-all duration-300 shrink-0 hover:bg-[#d14d1f] hover:translate-x-[2px] max-[480px]:w-11 max-[480px]:h-11"
+              className="w-12 h-12 bg-orange border-none rounded-[0.75rem] flex items-center justify-center cursor-pointer transition-all duration-300 shrink-0 hover:bg-[#d14d1f] hover:translate-x-[2px] max-[480px]:w-11 max-[480px]:h-11"
               aria-label="Send question"
             >
               <svg

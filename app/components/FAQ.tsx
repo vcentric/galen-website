@@ -83,7 +83,7 @@ const FAQ = () => {
     <section className="py-20 px-8 bg-transparent max-[768px]:py-16 max-[768px]:px-6 max-[480px]:py-14 max-[480px]:px-5">
       <div className="max-w-[900px] mx-auto">
         <div className="text-center mb-14 max-[768px]:mb-10">
-          <h2 className="text-[2.5rem] font-bold text-[#2e2e2e] mb-3 tracking-[-0.02em] max-[768px]:text-[2rem] max-[480px]:text-[1.75rem]">
+          <h2 className="text-[2.5rem] font-bold text-dark mb-3 tracking-[-0.02em] max-[768px]:text-[2rem] max-[480px]:text-[1.75rem]">
             Frequently Asked Questions
           </h2>
           <p className="text-[1.1rem] text-[#666] font-normal max-[768px]:text-base">
@@ -104,11 +104,11 @@ const FAQ = () => {
                 onClick={() => toggleFAQ(index)}
                 aria-expanded={openIndex === index}
               >
-                <span className="text-[1.05rem] font-semibold text-[#2e2e2e] leading-[1.5] flex-1 max-[768px]:text-base max-[480px]:text-[0.95rem]">
+                <span className="text-[1.05rem] font-semibold text-dark leading-[1.5] flex-1 max-[768px]:text-base max-[480px]:text-[0.95rem]">
                   {faq.question}
                 </span>
                 <svg
-                  className={`faq-icon w-6 h-6 text-[#eb602d] shrink-0 transition-transform duration-300 max-[768px]:w-5 max-[768px]:h-5`}
+                  className={`faq-icon w-6 h-6 text-orange shrink-0 transition-transform duration-300 max-[768px]:w-5 max-[768px]:h-5`}
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -130,7 +130,7 @@ const FAQ = () => {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-[0.95rem] font-medium text-[#eb602d] no-underline transition-all duration-200 w-fit hover:text-[#d14d1f] hover:gap-[0.625rem] group"
+                          className="inline-flex items-center gap-2 text-[0.95rem] font-medium text-orange no-underline transition-all duration-200 w-fit hover:text-[#d14d1f] hover:gap-[0.625rem] group"
                         >
                           {link.label}
                           <svg
