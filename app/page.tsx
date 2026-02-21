@@ -1,6 +1,5 @@
 import Hero from "./components/Hero";
 import TrustedBy from "./components/TrustedBy";
-import Metrics from "./components/Metrics";
 import Features from "./components/Features";
 import Testimonials from "./components/Testimonials";
 import Comparison from "./components/Comparison";
@@ -13,7 +12,6 @@ export default function Home() {
     <>
       <Hero />
       <TrustedBy />
-      <Metrics />
       <Features />
       <Testimonials />
       <Comparison />

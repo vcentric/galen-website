@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ArrowRightIcon, ArrowDownTrayIcon } from "@heroicons/react/24/outline";
+import { QrCodeIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
 
 const PHRASES = [
   "for daily medical learning.",
@@ -131,18 +131,122 @@ const Hero = () => {
     };
   }, { dependencies: [textIndex], scope: textContainerRef });
 
+  const downloadBtnRef = useRef<HTMLAnchorElement>(null);
+  const downloadIconRef = useRef<SVGSVGElement>(null);
+  const downloadUnderlineRef = useRef<HTMLSpanElement>(null);
+
+  const { contextSafe: contextSafeDownload } = useGSAP({ scope: downloadBtnRef });
+
+  useGSAP(() => {
+    gsap.set(downloadUnderlineRef.current, { scaleX: 0, transformOrigin: "left center" });
+    gsap.set(downloadIconRef.current, { y: 20, opacity: 0 });
+  }, { scope: downloadBtnRef });
+
+  const handleDownloadEnter = contextSafeDownload(() => {
+    gsap.set(downloadUnderlineRef.current, { transformOrigin: "left center" });
+    gsap.to(downloadUnderlineRef.current, {
+      scaleX: 1,
+      duration: 0.4,
+      ease: "power3.out",
+      overwrite: "auto"
+    });
+    gsap.to(downloadIconRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 0.4,
+      ease: "back.out(2)",
+      overwrite: "auto"
+    });
+  });
+
+  const handleDownloadLeave = contextSafeDownload(() => {
+    gsap.set(downloadUnderlineRef.current, { transformOrigin: "right center" });
+    gsap.to(downloadUnderlineRef.current, {
+      scaleX: 0,
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: "auto"
+    });
+    gsap.to(downloadIconRef.current, {
+      y: 20,
+      opacity: 0,
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: "auto"
+    });
+  });
+
+  const tryBtnRef = useRef<HTMLAnchorElement>(null);
+  const tryBgRef = useRef<HTMLDivElement>(null);
+  const tryTextRef = useRef<HTMLSpanElement>(null);
+  const tryIconRef = useRef<SVGSVGElement>(null);
+
+  const { contextSafe: contextSafeTry } = useGSAP({ scope: tryBtnRef });
+
+  useGSAP(() => {
+    gsap.set(tryBgRef.current, { scaleY: 0, transformOrigin: "bottom center" });
+    gsap.set(tryTextRef.current, { x: 0 }); // Initially centered
+    gsap.set(tryIconRef.current, { x: 0, y: 15, opacity: 0 }); // Starts below, no x offset
+  }, { scope: tryBtnRef });
+
+  const handleTryEnter = contextSafeTry(() => {
+    gsap.to(tryBgRef.current, {
+      scaleY: 1,
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryTextRef.current, {
+      x: -12, // Slide text to the left to make room
+      color: "#eb602d",
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryIconRef.current, {
+      y: 0, // Pop up
+      opacity: 1,
+      duration: 0.3,
+      ease: "back.out(1.5)",
+      overwrite: "auto",
+      delay: 0.03 // Slight delay to let text start sliding
+    });
+  });
+
+  const handleTryLeave = contextSafeTry(() => {
+    gsap.to(tryBgRef.current, {
+      scaleY: 0,
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryTextRef.current, {
+      x: 0, // Slide text back to exact center
+      color: "#ffffff",
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryIconRef.current, {
+      y: 15, // Drop back down
+      opacity: 0,
+      duration: 0.2,
+      ease: "power3.in",
+      overwrite: "auto"
+    });
+  });
 
   const [selectedAudience, setSelectedAudience] = useState<'students' | 'institutions'>('students');
 
   return (
     <section
-      className="min-h-screen pt-20 pb-12 px-8 bg-transparent flex justify-center items-center overflow-visible relative"
+      className="min-h-screen pt-20  px-8 bg-transparent flex justify-center items-center overflow-visible relative"
     >
       <div className="max-w-[1400px] w-full flex flex-col items-center gap-16 relative z-[2] py-12">
         {/* Centered Text Content */}
         <div className="flex flex-col items-center text-center max-w-[900px] mx-auto">
           {/* Audience Toggle */}
-          <div className="inline-flex gap-12 mb-7 relative">
+          <div className="inline-flex gap-12 mb-6 relative">
             {(['students', 'institutions'] as const).map((audience) => (
               <AudienceButton
                 key={audience}
@@ -152,18 +256,20 @@ const Hero = () => {
               />
             ))}
           </div>
-
-          {/* Exam Keywords (Hidden but kept in memory) */}
-          {/* <div className="flex flex-wrap justify-center gap-6 mb-8">
+          {/* Exam Context Tags */}
+          <div className="flex flex-wrap justify-center items-center gap-2 mb-6 animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
             {["NEET PG", "NEET SS", "EMREE", "FMGE"].map((exam) => (
-              <span
+              <div
                 key={exam}
-                className="text-[0.875rem] font-medium text-[#2e2e2e] opacity-40 tracking-[0.05em] uppercase"
+                className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/40 border border-[#eb602d]/40 backdrop-blur-sm cursor-default"
               >
-                {exam}
-              </span>
+                <div className="w-1.5 h-1.5 rounded-full bg-[#eb602d]/80" />
+                <span className="text-[0.68rem] font-semibold text-[#eb602d] tracking-wider uppercase">
+                  {exam}
+                </span>
+              </div>
             ))}
-          </div> */}
+          </div>
 
           <h1 className="text-[4.25rem] font-medium leading-[1.1] text-[#2e2e2e] mb-8 tracking-[-0.03em] max-[768px]:text-[2.5rem]">
             Your personal AI companion <br />
@@ -184,30 +290,49 @@ const Hero = () => {
 
           <p className="text-[1.15rem] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-12 mx-auto">
             GalenAI is your AI medical mentor that explains, tests, and guides
-            you, so you spend less time planning and more time understanding.
+            you, so you spend less time planning and more time understanding.<br/>
           </p>
 
           <div className="flex flex-wrap justify-center items-center gap-5 mb-12">
             <a
               href="#ask"
-              className="group relative flex items-center justify-center gap-2 py-[0.85rem] px-8 rounded-full text-[1rem] font-primary font-medium text-white bg-[#eb602d] no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] shadow-[inset_2px_2px_6px_rgba(255,255,255,0.2),0_-2px_10px_rgba(0,0,0,0.1)]"
+              ref={tryBtnRef}
+              onMouseEnter={handleTryEnter}
+              onMouseLeave={handleTryLeave}
+              className="group relative flex items-center justify-center py-[0.85rem] px-8 rounded-full text-[1rem] font-primary font-medium text-white bg-[#eb602d] no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[180px]"
             >
-              <span className="text-white">Ask GalenAI</span>
-              <ArrowRightIcon className="text-white w-[1.1rem] h-[1.1rem] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1" strokeWidth={2.5} />
+              <div ref={tryBgRef} className="absolute inset-0 bg-white z-0 rounded-full"></div>
+              {/* Text centered exactly when no icon is visible */}
+              <div className="relative z-10 flex items-center justify-center w-full">
+                <span ref={tryTextRef} className="text-white transition-colors block">Try GalenAI</span>
+                
+                {/* Icon positioned absolute relative to the center cluster, invisible normally */}
+                <div className="absolute right-0 w-[1rem] h-[1rem] overflow-hidden flex items-center justify-center">
+                  <ArrowUpRightIcon ref={tryIconRef} className="absolute w-[1rem] h-[1rem] text-[#eb602d]" strokeWidth={3} />
+                </div>
+              </div>
             </a>
             <a
               href="#download"
-              className="group relative flex items-center justify-center gap-2 py-[0.85rem] px-8 rounded-full text-[1rem] font-primary font-medium text-[#2e2e2e] bg-white border border-[#2e2e2e]/15 no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[#2e2e2e]/40 hover:bg-[#2e2e2e]/[0.03] active:scale-[0.98]"
+              ref={downloadBtnRef}
+              onMouseEnter={handleDownloadEnter}
+              onMouseLeave={handleDownloadLeave}
+              className="relative flex items-center justify-center gap-2 py-[0.85rem] px-8 rounded-full text-[1rem] font-primary font-medium text-[#2e2e2e] no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] "
             >
-              <span>Download Now</span>
-              <ArrowDownTrayIcon className="w-[1.1rem] h-[1.1rem] opacity-60 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:-translate-y-0.5" strokeWidth={2.5} />
+              <span className="relative pb-[2px]">
+                Download Now For Free
+                <span ref={downloadUnderlineRef} className="absolute left-0 bottom-0 w-full h-[2px] bg-[#eb602d]"></span>
+              </span>
+              <div className="relative w-[1.3rem] h-[1.3rem] overflow-hidden flex items-center justify-center">
+                <QrCodeIcon ref={downloadIconRef} className="absolute w-[1.3rem] h-[1.3rem] text-[#eb602d]" strokeWidth={2.5} />
+              </div>
             </a>
           </div>
 
           <div className="flex flex-wrap justify-center items-center text-[0.875rem] text-[rgba(46,46,46,0.6)]">
             
             <div className="flex  items-center gap-5">
-              <span className="text-[0.8rem] opacity-50 uppercase tracking-[0.05em]">
+              <span className="text-[0.8rem] opacity-80 uppercase tracking-[0.05em]">
                 Backed by
               </span>
            
@@ -227,16 +352,12 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Video Container Below */}
-        <div className="w-full aspect-video relative max-w-[1300px] z-10 group">
-          {/* Subtle glow effect behind the player */}
-          <div className="absolute inset-0 bg-[#eb602d]/10 blur-[100px] opacity-0 transition-opacity duration-700 group-hover:opacity-100 rounded-full pointer-events-none"></div>
-          
-          {/* Container explicitly crops the top/bottom bits of YouTube to hide the forced title overlay */}
-          <div className="relative w-full h-full rounded-[0.5rem] overflow-hidden bg-transparent border border-black/5 shadow-sm transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.01] flex items-center justify-center">
+        {/* Huge Video Below */}
+        <div className="w-full aspect-video rounded-[0.5rem] overflow-hidden max-w-[1200px]">
+          <div className="relative w-full h-full flex items-center justify-center">
             <iframe
-              src="https://www.youtube.com/embed/1l0-dJic1dE?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=1l0-dJic1dE&modestbranding=1&showinfo=0&fs=0&disablekb=1&playsinline=1"
-              className="absolute w-[120%] h-[120%] border-none pointer-events-none opacity-90 transition-opacity duration-500 group-hover:opacity-100" 
+              src="https://www.youtube.com/embed/1l0-dJic1dE?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=1l0-dJic1dE"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full min-w-full min-h-full border-none pointer-events-none object-cover" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />

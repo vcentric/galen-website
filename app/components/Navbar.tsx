@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 
 interface AnimatedNavLinkProps {
   href: string;
@@ -152,8 +153,19 @@ const Navbar = () => {
 
         {/* Right: CTA Button */}
         <div className="relative z-10 flex-1 flex justify-end ">
-          <a href="#ask" className="bg-[#eb602d] text-[#ffffff] font-primary no-underline py-[0.8rem] px-[1.6rem] rounded-full text-[0.95rem] font-medium transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] whitespace-nowrap hover:scale-105 active:scale-[0.98] shadow-[inset_2px_2px_6px_rgba(255,255,255,0.2),0_-2px_10px_rgba(0,0,0,0.1)]" style={{ color: '#ffffff' }}>
-            Ask GalenAI
+          <a
+            href="#ask"
+            className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md h-11 text-[0.95rem] font-primary font-medium pl-6 pr-[3.5rem] bg-[#eb602d] text-white no-underline"
+          >
+            <span className="relative z-10 transition-colors text-white duration-300 group-hover:text-transparent">Ask GalenAI</span>
+            
+            <div
+              className="absolute right-0 top-0 mt-1 mr-1 bg-white text-[#eb602d] flex items-center justify-center group-hover:w-[calc(100%-0.5rem)] transition-all rounded-full duration-300 h-9 w-9 z-20 shadow-sm"
+            >
+              <ArrowUpRightIcon className="w-4 h-4 flex-shrink-0 transition-transform duration-300 group-hover:rotate-45" strokeWidth={2.5} />
+            </div>
+
+           
           </a>
         </div>
       </div>
