@@ -80,76 +80,95 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-20 px-8 bg-transparent max-[768px]:py-16 max-[768px]:px-6 max-[480px]:py-14 max-[480px]:px-5">
-      <div className="max-w-[900px] mx-auto">
-        <div className="text-center mb-14 max-[768px]:mb-10">
-          <h2 className="text-[2.5rem] font-bold text-dark mb-3 tracking-[-0.02em] max-[768px]:text-[2rem] max-[480px]:text-[1.75rem]">
-            Frequently Asked Questions
+    <section className="w-full bg-[#fcfaf8] py-16 px-8 max-[768px]:py-16 max-[600px]:px-6 font-sans">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12">
+        
+        {/* Left Column: Heading & CTA */}
+        <div className="lg:col-span-6 flex flex-col items-start lg:pr-8">
+          <span className="text-[0.95rem] text-[#555] font-medium tracking-wide uppercase mb-6">
+            FAQ
+          </span>
+          <h2 className="text-[3.25rem] leading-[1.1] font-serif font-medium text-[#222] tracking-[-0.03em] mb-12 max-[900px]:text-[2.75rem]">
+            Frequently asked<br/>questions about us.
           </h2>
-          <p className="text-[1.1rem] text-[#666] font-normal max-[768px]:text-base">
-            Everything you need to know about GalenAI
-          </p>
+
+          {/* Call to Action Box */}
+          <div className="w-full bg-[#303030] rounded-md rounded-br-4xl p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-md">
+            <p className="text-[1.15rem] leading-snug text-white font-medium max-w-[200px]">
+              Have a question? Let's discuss it now!
+            </p>
+            <button className="whitespace-nowrap rounded-full bg-white text-[#303030] py-3.5 px-6 font-semibold text-[0.95rem] transition-transform hover:scale-105 active:scale-95 shadow-sm">
+              Browse Help Center
+            </button>
+          </div>
         </div>
 
-        <div className="flex flex-col">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`faq-item border-b border-[rgba(0,0,0,0.08)] transition-all duration-300 hover:bg-[rgba(235,96,45,0.02)] ${
-                index === 0 ? "border-t border-t-[rgba(0,0,0,0.08)]" : ""
-              } ${openIndex === index ? "active" : ""}`}
-            >
-              <button
-                className="w-full bg-none border-none py-7 px-0 flex items-center justify-between gap-8 cursor-pointer text-left transition-all duration-300 max-[768px]:py-6 max-[768px]:gap-5 max-[480px]:py-5"
-                onClick={() => toggleFAQ(index)}
-                aria-expanded={openIndex === index}
+        {/* Right Column: FAQ Accordions */}
+        <div className="lg:col-span-6 flex flex-col gap-3">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div
+                key={index}
+                className={`w-full rounded-md overflow-hidden transition-all duration-300 ${
+                  isOpen 
+                    ? "bg-[#303030] border-2 border-[#303030] shadow-md" 
+                    : "bg-[#383838] border-2 border-transparent hover:bg-[#404040]"
+                }`}
               >
-                <span className="text-[1.05rem] font-semibold text-dark leading-[1.5] flex-1 max-[768px]:text-base max-[480px]:text-[0.95rem]">
-                  {faq.question}
-                </span>
-                <svg
-                  className={`faq-icon w-6 h-6 text-orange shrink-0 transition-transform duration-300 max-[768px]:w-5 max-[768px]:h-5`}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
+                <button
+                  className="w-full text-left py-3 px-6 flex items-center justify-between gap-4 cursor-pointer outline-none border-none bg-transparent"
+                  onClick={() => toggleFAQ(index)}
+                  aria-expanded={isOpen}
                 >
-                  <path d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <div className="faq-answer-wrapper max-h-0 overflow-hidden transition-[max-height] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]">
-                <div className="faq-answer pb-7 max-[768px]:pb-6">
-                  <p className="text-[0.975rem] text-[#555] leading-[1.7] m-0 max-[768px]:text-[0.925rem] max-[480px]:text-[0.9rem]">
-                    {faq.answer}
-                  </p>
-                  {faq.links && (
-                    <div className="flex flex-col gap-3 mt-5">
-                      {faq.links.map((link, linkIndex) => (
-                        <a
-                          key={linkIndex}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-[0.95rem] font-medium text-orange no-underline transition-all duration-200 w-fit hover:text-[#d14d1f] hover:gap-[0.625rem] group"
-                        >
-                          {link.label}
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
-                          >
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
-                          </svg>
-                        </a>
-                      ))}
+                  <span className={`text-[1.05rem] font-medium leading-[1.4] transition-colors ${isOpen ? "text-white" : "text-gray-200"}`}>
+                    {faq.question}
+                  </span>
+                  <span className={`text-xl font-light text-gray-300 transition-transform duration-300 ${isOpen ? "rotate-45" : "rotate-0"}`}>
+                    +
+                  </span>
+                </button>
+                
+                <div 
+                  className={`grid transition-all duration-300 ease-in-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-6 pb-5 pt-0">
+                      <p className="text-[0.95rem] text-gray-300 leading-[1.6]">
+                        {faq.answer}
+                      </p>
+                      {faq.links && (
+                        <div className="flex flex-col gap-2 mt-3 mb-1">
+                          {faq.links.map((link, linkIndex) => (
+                            <a
+                              key={linkIndex}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-[0.9rem] font-semibold text-[#66a0ff] no-underline transition-all hover:text-[#88b6ff] group w-fit"
+                            >
+                              {link.label}
+                              <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                              >
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                              </svg>
+                            </a>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

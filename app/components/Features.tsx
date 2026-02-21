@@ -1,262 +1,191 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
-
+import React from "react";
 const Features = () => {
-  const features = [
-    {
-      title: "AI Tutor",
-      featureTitle: "Learn anything.\nClearly.",
-      description:
-        "Ask doubts, learn concepts, and get instant clarity — like having a senior always by your side.",
-      cta: "Try the AI Tutor",
-    },
-    {
-      title: "Flashcards",
-      featureTitle: "Revise smart.\nRetain more.",
-      description:
-        "Active recall + spaced repetition flashcards built from your syllabus. Study less, remember more.",
-      cta: "Start Revising",
-    },
-    {
-      title: "MCQs",
-      featureTitle: "Practice with\npurpose.",
-      description:
-        "Adaptive MCQs that match your level, track your weak areas, and get harder as you improve.",
-      cta: "Start Practicing",
-    },
-  ];
-
-  const comingSoonItems = [
-    {
-      title: "Clinical Cases",
-      subtitle: "Coming soon",
-      desc: "Practice diagnosis on realistic clinical scenarios.",
-    },
-    {
-      title: "Study Planner",
-      subtitle: "Coming soon",
-      desc: "Smart daily plans that adapt to your progress.",
-    },
-    {
-      title: "Performance Dashboard",
-      subtitle: "Coming soon",
-      desc: "Track strengths, gaps, and growth over time.",
-    },
-  ];
-
-  const ribbonEmojis = [
-    "🧠",
-    "💊",
-    "🩺",
-    "📖",
-    "🧬",
-    "🫀",
-    "💉",
-    "🔬",
-    "📋",
-    "🏥",
-    "🧠",
-    "💊",
-    "🩺",
-    "📖",
-    "🧬",
-    "🫀",
-  ];
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [isSwapping, setIsSwapping] = useState(false);
-  const [isInView, setIsInView] = useState(false);
-  const [isBobbing, setIsBobbing] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const intervalRef = useRef<number | null>(null);
-
-  // Intersection Observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsInView(true);
-            setTimeout(() => setIsBobbing(true), 1000);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const DURATION = 8000;
-
-  const goToFeature = useCallback(
-    (index: number) => {
-      if (index === activeIndex) return;
-      setIsSwapping(true);
-      setTimeout(() => {
-        setActiveIndex(index);
-        setProgress(0);
-        setIsSwapping(false);
-      }, 200);
-    },
-    [activeIndex]
-  );
-
-  // Auto-rotate
-  useEffect(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-
-    const start = Date.now();
-    intervalRef.current = window.setInterval(() => {
-      const elapsed = Date.now() - start;
-      const pct = Math.min((elapsed / DURATION) * 100, 100);
-      setProgress(pct);
-
-      if (pct >= 100) {
-        goToFeature((activeIndex + 1) % features.length);
-      }
-    }, 16);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [activeIndex, features.length, goToFeature]);
-
-  const currentFeature = features[activeIndex];
-  const isComingSoon = activeIndex >= features.length;
-
   return (
-    <section
-      ref={sectionRef}
-      id="features"
-      className={`w-full bg-transparent py-16 px-8 max-[600px]:py-12 max-[600px]:px-6 ${
-        isInView ? "is-inview" : ""
-      } ${isBobbing ? "is-bobbing" : ""}`}
-    >
-      <div className="max-w-[1200px] mx-auto">
-        {/* Dark Card Container */}
-        <div className="bg-dark rounded-[36px] p-12 grid grid-cols-[1.05fr_0.95fr] gap-12 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)] max-[900px]:grid-cols-1 max-[900px]:p-8 max-[900px]:gap-10">
-          {/* Left Column */}
-          <div className="flex flex-col gap-8">
-            {/* Feature Pills */}
-            <div className="flex gap-3 flex-wrap items-center max-[900px]:flex-nowrap max-[900px]:overflow-x-auto max-[900px]:pb-2 max-[900px]:[scrollbar-width:none]">
-              {features.map((f, i) => (
-                <button
-                  key={f.title}
-                  className={`rounded-full py-[0.85rem] px-7 border-[1.5px] text-white flex items-center cursor-pointer text-[1.05rem] font-medium transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    activeIndex === i
-                      ? "border-orange bg-[rgba(235,96,45,0.15)] shadow-[0_14px_40px_rgba(235,96,45,0.25)]"
-                      : "border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.25)] hover:-translate-y-[2px] hover:scale-[1.02] hover:shadow-[0_10px_28px_rgba(0,0,0,0.35)] hover:border-[rgba(255,255,255,0.35)]"
-                  }`}
-                  onClick={() => goToFeature(i)}
-                >
-                  {f.title}
-                </button>
-              ))}
-              <button className="rounded-full py-[0.85rem] px-7 border-[1.5px] border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.25)] text-white flex items-center text-[1.05rem] font-medium opacity-50 cursor-not-allowed">
-                Coming Soon ✦
-              </button>
-            </div>
+    <section className="w-full bg-[#f8f8f8] py-20 px-6 font-sans">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[340px]">
+        
+        {/* 1. AI Tutor (Col 1, Spans 2 Rows) */}
+        <div className="md:col-span-1 md:row-span-2 bg-[#b9a5e8] rounded-[32px] p-8 flex flex-col relative overflow-hidden shadow-sm">
+          <h2 className="text-3xl font-serif font-bold text-[#351a5e] tracking-tight mb-8">
+            AI Tutor
+          </h2>
 
-            {/* Content Area */}
-            <div
-              className={`flex flex-col ${
-                isSwapping
-                  ? "animate-[contentSwapIn_520ms_cubic-bezier(0.16,1,0.3,1)]"
-                  : ""
-              }`}
-            >
-              <h3 className="text-[clamp(2rem,3vw,3rem)] leading-[1.1] tracking-[-0.02em] text-white m-0 mb-4 font-bold whitespace-pre-line max-[900px]:text-[2rem]">
-                {currentFeature.featureTitle}
-              </h3>
-              <p className="m-0 mb-6 text-[1.05rem] leading-[1.6] text-[rgba(255,255,255,0.78)] max-w-[46ch] max-[900px]:text-base">
-                {currentFeature.description}
-              </p>
-              <button className="self-start rounded-full py-[0.85rem] px-7 border-none font-semibold text-base cursor-pointer bg-orange text-white transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[2px] hover:brightness-110">
-                {currentFeature.cta}
-              </button>
+          {/* Mock Floating Cards */}
+          <div className="relative w-full flex-1 flex items-center justify-center min-h-[200px]">
+            <div className="absolute w-[180px] h-[240px] bg-blue-400 rounded-xl transform rotate-[15deg] translate-x-4 border-4 border-white shadow-lg overflow-hidden">
+                <div className="w-full h-full bg-[#5b8cdd] p-4 flex flex-col items-center justify-center">
+                    <span className="text-6xl">🧠</span>
+                </div>
             </div>
-
-            {/* Progress Bar */}
-            <div className="mt-6 h-1 w-full max-w-[420px] bg-[rgba(255,255,255,0.12)] rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full bg-[rgba(255,255,255,0.7)] origin-left transition-[width] duration-[16ms] linear"
-                style={{ width: `${progress}%` }}
-              />
+            <div className="absolute w-[180px] h-[240px] bg-white rounded-xl transform -rotate-6 -translate-x-4 shadow-xl border border-purple-200 overflow-hidden flex flex-col p-3">
+              <div className="bg-slate-200 h-2/3 rounded-lg w-full mb-3 flex items-center justify-center text-4xl">🩺</div>
+              <div className="font-bold text-slate-800 text-sm mb-1">Clinical Skills</div>
+              <div className="text-[8px] text-slate-400 leading-tight">Patient presents with acute chest pain radiating to the left arm. What is your immediate next step in management...</div>
             </div>
           </div>
 
-          {/* Right Column */}
-          <div className="relative min-h-[520px] flex items-center justify-center max-[900px]:min-h-[460px]">
-            {/* Floating Ribbon */}
-            <div className="absolute inset-[-30%_-20%] pointer-events-none z-[1] opacity-30">
-              <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 -rotate-12 flex gap-5 items-center animate-[ribbonFloat_20s_linear_infinite]">
-                {ribbonEmojis.map((emoji, i) => (
-                  <div
-                    key={i}
-                    className="w-[54px] h-[54px] rounded-2xl flex items-center justify-center bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.18)] backdrop-blur-[6px] text-2xl max-[600px]:w-11 max-[600px]:h-11 max-[600px]:text-xl"
-                  >
-                    {emoji}
-                  </div>
-                ))}
+          {/* Mock Toolbar */}
+          <div className="bg-white rounded-2xl p-4 shadow-xl flex justify-between items-center mb-6 relative z-10 w-[110%] -ml-[5%]">
+            {["�", "📝", "💡", "🧠", "�", "🩺"].map((icon, i) => (
+              <div key={i} className="flex flex-col items-center gap-1">
+                <div className="text-xl text-slate-600">{icon}</div>
+                <div className="text-[9px] text-slate-400 font-medium">Tool</div>
               </div>
-            </div>
+            ))}
+          </div>
 
-            {/* Phone Mockup */}
-            <div className="relative z-[2]">
-              <div
-                className={`phone-notch w-[240px] h-[520px] rounded-[55px] border-[12px] border-[#1d1d1f] overflow-hidden bg-black shadow-[0_30px_80px_rgba(0,0,0,0.55),inset_0_0_0_1px_rgba(255,255,255,0.1)] relative will-change-[transform,opacity] transition-[transform,box-shadow] duration-[260ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[6px] hover:scale-[1.02] hover:shadow-[0_40px_110px_rgba(0,0,0,0.62)] max-[900px]:w-[300px] max-[900px]:h-[480px] max-[600px]:w-[260px] max-[600px]:h-[420px] ${
-                  isInView
-                    ? "opacity-100 translate-y-0 scale-100 transition-[opacity,transform,box-shadow] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    : "opacity-0 translate-y-[26px] scale-[0.995]"
-                } ${
-                  isBobbing ? "animate-[phoneBob_4.8s_cubic-bezier(0.16,1,0.3,1)_infinite] hover:[animation-play-state:paused]" : ""
-                }`}
-              >
-                {/* Active feature media */}
-                {features.map((f, i) => (
-                  <div
-                    key={i}
-                    className={`absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                      activeIndex === i ? "opacity-100" : "opacity-0"
-                    }`}
-                  >
-                    <div className="flex flex-col items-center justify-center gap-4 text-[rgba(255,255,255,0.6)]">
-                      <span className="text-[1.1rem] font-medium">
-                        {f.title}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+          <p className="text-[1.05rem] text-[#351a5e] font-medium leading-snug">
+            Learn anything clearly. Ask doubts, master concepts, and get instant clarity.
+          </p>
+        </div>
 
-                {/* Coming Soon Content */}
-                {isComingSoon && (
-                  <div className="absolute inset-0 text-left py-8 px-6 text-[rgba(255,255,255,0.85)] flex flex-col gap-6 opacity-100">
-                    {comingSoonItems.map((item, i) => (
-                      <div key={i} className="flex flex-col gap-1">
-                        <span className="text-[0.95rem] font-bold text-[rgba(255,255,255,0.95)]">
-                          {item.title}
-                        </span>
-                        <span className="text-[0.8rem] font-semibold text-[rgba(255,255,255,0.7)] italic">
-                          {item.subtitle}
-                        </span>
-                        <span className="text-[0.75rem] leading-[1.4] text-[rgba(255,255,255,0.6)]">
-                          {item.desc}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+        {/* 2. Flashcards (Col 2 & 3, Spans 1 Row) */}
+        <div className="md:col-span-2 md:row-span-1 bg-[#df8ba9] rounded-[32px] p-8 flex items-center relative overflow-hidden shadow-sm">
+          <div className="w-1/2 z-10">
+            <h2 className="text-4xl font-serif font-bold text-[#4a1c31] tracking-tight mb-4">
+              Flashcards
+            </h2>
+            <p className="text-[1.15rem] text-[#5c213c] font-medium leading-snug max-w-[80%]">
+              Active recall + spaced repetition built directly from your syllabus.
+            </p>
+          </div>
+          
+          {/* Mock Interval Picker Area */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-center">
+             {/* Background tilted card */}
+             <div className="absolute w-[200px] h-[280px] bg-[#fca5a5] border-8 border-white rounded-xl rotate-[15deg] shadow-lg translate-x-12">
+                <div className="w-full h-full bg-gradient-to-b from-orange-300 to-pink-400 flex flex-col pt-8 items-center">
+                    <span className="font-serif font-bold text-2xl text-white tracking-widest rotate-[-15deg]">PHARMACOLOGY</span>
+                </div>
+             </div>
+             {/* Foreground Review Picker */}
+             <div className="relative bg-white rounded-3xl p-6 shadow-2xl w-[260px] transform rotate-[-5deg] z-10 translate-x-4">
+                <div className="text-center text-xs font-bold text-slate-800 mb-4">When should we show this again?</div>
+                <div className="flex justify-between text-xs text-slate-300 mb-2">
+                    <div className="text-slate-200">Again</div><div>&lt;1m</div><div>🔴</div>
+                </div>
+                <div className="flex justify-between text-sm font-bold text-slate-800 bg-slate-100 py-2 px-3 rounded-lg mb-2">
+                    <div>Good</div><div>1d</div><div>🟢</div>
+                </div>
+                <div className="flex justify-between text-xs text-slate-300 mb-6">
+                    <div>Easy</div><div>4d</div><div>🔵</div>
+                </div>
+                <button className="w-full bg-[#1c1c1e] text-white rounded-full py-3 text-sm font-bold">
+                    Review Answer
+                </button>
+             </div>
           </div>
         </div>
+
+        {/* 3. Adaptive MCQs (Col 2, Spans 1 Row) */}
+        <div className="md:col-span-1 md:row-span-1 bg-[#b4d69a] rounded-[32px] p-8 flex flex-col justify-end relative overflow-hidden shadow-sm">
+           {/* Stacked Cards Mock */}
+           <div className="absolute top-8 left-0 right-0 flex justify-center flex-col items-center">
+               <div className="w-[85%] h-12 bg-white rounded-t-2xl border-t border-x border-slate-200" />
+               <div className="w-[90%] h-12 bg-[#ff8a65] rounded-t-2xl -mt-8 border-t border-x border-orange-200" />
+               <div className="w-[95%] h-[140px] bg-[#2a2a2a] rounded-2xl -mt-8 p-5 text-white shadow-xl flex flex-col justify-between z-10">
+                   <div className="flex justify-between text-sm font-medium text-slate-300">
+                       Overall Mastery <span className="w-5 h-5 rounded-full border border-slate-500 flex items-center justify-center text-[10px]">✔</span>
+                   </div>
+                   <div className="flex items-end justify-between">
+                       <div className="text-4xl font-bold tracking-tight">85<span className="text-2xl ml-1 text-slate-400">%</span></div>
+                       <button className="text-[10px] font-bold uppercase tracking-wider bg-white/10 px-3 py-1.5 rounded-full">Review</button>
+                   </div>
+               </div>
+           </div>
+
+           <div className="relative z-20 mt-auto">
+              <h2 className="text-3xl font-serif font-bold text-[#2a4115] tracking-tight mb-2">Adaptive MCQs</h2>
+              <p className="text-[1.05rem] text-[#38561c] font-medium leading-snug">
+                Questions that match your level, tracking your weak areas as you improve.
+              </p>
+           </div>
+        </div>
+
+        {/* 4. Clinical Cases (Col 3, Spans 1 Row) */}
+        <div className="md:col-span-1 md:row-span-1 bg-[#f5dc83] rounded-[32px] p-8 flex flex-col relative overflow-hidden shadow-sm">
+          <h2 className="text-3xl font-serif font-bold text-[#5c4912] tracking-tight mb-2">Clinical Cases</h2>
+          <p className="text-[1.05rem] text-[#6b5617] font-medium leading-snug mb-6 w-5/6">
+            Practice diagnosis on realistic clinical scenarios.
+          </p>
+          
+          {/* Mock Inbox List */}
+          <div className="bg-white rounded-2xl p-4 shadow-lg flex-1 flex flex-col gap-4">
+             {[
+                { name: "54yo M with Chest Pain", text: "Case 12 • Cardiology", initial: "12", color: "bg-green-200" },
+                { name: "22yo F with Fatigue", text: "Case 18 • Hematology", initial: "18", color: "bg-purple-200" },
+                { name: "68yo M with SOB", text: "Case 05 • Pulmonology", initial: "05", color: "bg-yellow-200" }
+             ].map((msg, i) => (
+                <div key={i} className="flex items-center gap-3">
+                   <div className={`w-9 h-9 rounded-full ${msg.color} flex items-center justify-center text-xs font-bold text-slate-700`}>{msg.initial}</div>
+                   <div className="flex-1">
+                      <div className="text-[13px] font-bold text-slate-800 line-clamp-1">{msg.name}</div>
+                      <div className="text-[10px] text-slate-400">{msg.text}</div>
+                   </div>
+                   <div className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200" />
+                </div>
+             ))}
+          </div>
+        </div>
+
+        {/* 5. Study Planner (Col 1 & 2, Spans 1 Row) */}
+        <div className="md:col-span-2 md:row-span-1 bg-[#e79e6f] rounded-[32px] p-8 flex relative overflow-hidden shadow-sm">
+           <div className="w-[40%] flex flex-col justify-end z-20">
+              <h2 className="text-4xl font-serif font-bold text-[#5c2d12] tracking-tight mb-3">Study Planner</h2>
+              <p className="text-[1.15rem] text-[#783c18] font-medium leading-snug max-w-[90%]">
+                Smart daily plans that adapt to your progress.
+              </p>
+           </div>
+
+           {/* Mock Plan Modules Background */}
+           <div className="absolute right-0 top-0 bottom-0 w-[60%] z-10">
+               <div className="relative w-full h-full">
+                  {/* Mod 1 */}
+                  <div className="absolute top-10 left-0 w-32 h-20 bg-[#0f3d87] rounded-xl transform rotate-[-8deg] shadow-md flex items-center justify-center p-2 text-white font-serif text-sm leading-tight text-center border-4 border-white/20">Anatomy &<br/>Physiology</div>
+                  {/* Mod 2 */}
+                  <div className="absolute top-16 left-36 w-32 h-20 bg-pink-200 rounded-xl transform rotate-[5deg] shadow-md flex items-center justify-center text-[10px] font-bold border-2 border-black tracking-widest text-center text-black">PHARMACOLOGY</div>
+                  {/* Mod 3 */}
+                  <div className="absolute bottom-10 left-10 w-32 h-20 bg-[#232f3e] rounded-xl transform rotate-[6deg] shadow-md flex items-center justify-center text-white font-bold text-lg border-2 border-white/10 uppercase">pathology</div>
+                  {/* Mod 4 */}
+                  <div className="absolute top-28 right-8 w-32 h-20 bg-black rounded-xl transform rotate-[-12deg] shadow-md flex items-center justify-center border border-white/20">
+                     <div className="w-full h-4 bg-white flex items-center justify-center text-[8px] font-bold tracking-widest text-black">BIOCHEMISTRY</div>
+                  </div>
+                  {/* Mod 5 */}
+                  <div className="absolute bottom-6 left-44 w-32 h-20 bg-[#ff6600] rounded-xl transform rotate-[-4deg] shadow-md flex items-center justify-center text-white text-sm font-bold border-2 border-white/20">Microbiology</div>
+                  {/* Mod 6 */}
+                  <div className="absolute bottom-4 right-12 w-32 h-20 bg-white rounded-xl transform rotate-[8deg] shadow-md flex items-center justify-center text-[#cc0000] text-sm font-black border border-slate-200">Immunology</div>
+               </div>
+           </div>
+        </div>
+
+        {/* 6. Performance Dashboard (Col 3, Spans 1 Row) */}
+        <div className="md:col-span-1 md:row-span-1 bg-[#b4cade] rounded-[32px] p-8 pb-0 flex flex-col relative overflow-hidden shadow-sm">
+          <h2 className="text-3xl font-serif font-bold text-[#243c53] tracking-tight mb-2">Performance</h2>
+          <p className="text-[1.05rem] text-[#335372] font-medium leading-snug mb-8 w-[90%]">
+            Track strengths, gaps, and growth over time
+          </p>
+
+          {/* Mock Phone / Notification */}
+          <div className="flex-1 bg-[#1a1c1e] w-[90%] mx-auto rounded-t-3xl border-8 border-b-0 border-[#1a1c1e] relative mt-auto overflow-hidden">
+             {/* Phone Screen bg */}
+             <div className="w-full h-full bg-[#f4f4f4] rounded-t-2xl p-4">
+                {/* Dynamic Island / Notch */}
+                <div className="w-[100px] h-[30px] bg-black rounded-full mx-auto mb-6"></div>
+                
+                {/* Notification Bubble */}
+                <div className="bg-white rounded-2xl p-3 shadow-sm border border-slate-100 flex gap-3 items-start">
+                   <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs mt-1 text-xl">🏆</div>
+                   <div>
+                      <div className="text-xs font-bold text-slate-800">Goal Reached! �</div>
+                      <div className="text-[10px] text-slate-500 leading-tight">You've mastered the Pharmacology module! +50 XP �</div>
+                   </div>
+                </div>
+             </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );
