@@ -3,7 +3,12 @@
 import React from "react";
 const Features = () => {
   return (
-    <section className="w-full bg-[#f8f8f8] py-20 px-6 font-sans">
+    <section className="w-full py-20 px-6 font-sans">
+      <div className="max-w-[1200px] mx-auto flex flex-col items-start mb-6">
+        <span className="text-[0.85rem] text-[#666] font-semibold tracking-widest uppercase">
+          FEATURES
+        </span>
+      </div>
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[340px]">
         
         {/* 1. AI Tutor (Col 1, Spans 2 Rows) */}

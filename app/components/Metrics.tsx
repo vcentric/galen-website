@@ -16,6 +16,11 @@ const Metrics = () => {
 
   return (
     <section className="bg-light py-2 px-8 pb-8 max-[768px]:py-4 max-[768px]:px-6 max-[768px]:pb-6">
+      <div className="max-w-[1200px] mx-auto flex flex-col items-start mb-6">
+        <span className="text-[0.85rem] text-[#666] font-semibold tracking-widest uppercase">
+          METRICS
+        </span>
+      </div>
       <div className="max-w-[900px] mx-auto flex flex-col items-center">
         {/* Pencil-Style Title */}
         <h2 className="metrics-title text-[2.25rem] font-semibold text-dark text-center mb-6 relative inline-block pb-2 max-[768px]:text-[2.5rem] max-[768px]:mb-5">

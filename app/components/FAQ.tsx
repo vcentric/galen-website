@@ -1,6 +1,8 @@
 "use client";
 
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { SiWhatsapp } from "react-icons/si";
 
 interface FAQItem {
   question: string;
@@ -85,7 +87,7 @@ const FAQ = () => {
         
         {/* Left Column: Heading & CTA */}
         <div className="lg:col-span-6 flex flex-col items-start lg:pr-8">
-          <span className="text-[0.95rem] text-[#555] font-medium tracking-wide uppercase mb-6">
+          <span className="text-[0.85rem] text-[#666] font-semibold tracking-widest uppercase mb-6">
             FAQ
           </span>
           <h2 className="text-[3.25rem] leading-[1.1] font-serif font-medium text-[#222] tracking-[-0.03em] mb-12 max-[900px]:text-[2.75rem]">
@@ -97,9 +99,16 @@ const FAQ = () => {
             <p className="text-[1.15rem] leading-snug text-white font-medium max-w-[200px]">
               Have a question? Let's discuss it now!
             </p>
-            <button className="whitespace-nowrap rounded-full bg-white text-orange py-3.5 px-6 font-semibold text-[0.95rem] transition-transform hover:scale-105 active:scale-95 shadow-sm">
-              Browse Help Center
-            </button>
+            <a 
+              href="https://wa.me/918848542046" 
+              className="group relative overflow-hidden flex items-center gap-2.5 whitespace-nowrap rounded-[2rem] bg-white text-orange py-4 px-8 font-bold text-[1rem] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] no-underline"
+            >
+              {/* Shine effect that sweeps across on hover */}
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-orange/10 to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-full" />
+              
+              <SiWhatsapp className="relative z-10 w-5 h-5 transition-transform duration-500 ease-out group-hover:rotate-12 group-hover:scale-[1.15]" />
+              <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">Chat on WhatsApp</span>
+            </a>
           </div>
         </div>
 
@@ -150,15 +159,7 @@ const FAQ = () => {
                               className="inline-flex items-center gap-2 text-[0.9rem] font-semibold text-[#66a0ff] no-underline transition-all hover:text-[#88b6ff] group w-fit"
                             >
                               {link.label}
-                              <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                              >
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                              </svg>
+                              <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </a>
                           ))}
                         </div>

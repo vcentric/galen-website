@@ -30,6 +30,11 @@ const Comparison = () => {
 
   return (
     <section className="py-20 px-8 bg-transparent max-[700px]:py-14 max-[700px]:px-6" id="comparison">
+      <div className="max-w-[1150px] mx-auto flex flex-col items-start mb-6">
+        <span className="text-[0.85rem] text-[#666] font-semibold tracking-widest uppercase">
+          COMPARISON
+        </span>
+      </div>
       <div className="max-w-[1150px] mx-auto text-center px-6">
         <h2 className="text-[2.75rem] font-bold text-[#1a1a1a] mb-2 tracking-[-0.03em] max-[900px]:text-[2rem] max-[700px]:text-[1.75rem]">
           GalenAI builds confidence in medicine
