@@ -1,70 +1,36 @@
 # GalenAI
 
-GalenAI is a medical learning companion designed to help medical students and professionals build confidence through personalized learning, competency-based tracking, and a verified curriculum. Unlike generic AI tools, GalenAI is specifically trained on medical data to provide accurate and reliable assistance.
+## Getting Started
 
-## 🚀 Features
+First, run the development server:
 
-- **Daily Personalized Learning Companion**: Tailored content to match your daily learning needs.
-- **Competency-Based Continuous Learning**: Track your progress and master key medical concepts.
-- **Verified Sources & Curriculum Alignment**: Content aligned with standard medical curricula and verified for accuracy.
-- **Medical-Only Trained AI**: AI models trained exclusively on medical literature, minimizing hallucinations common in generic AI.
-- **Adaptive Practice**: Includes MCQs, flashcards, and clinical cases that adapt to your performance.
-- **Ecosystem-Friendly**: Supports integration with faculty and classroom environments.
-- **Affordable**: Premium medical education at an accessible price point.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## 🛠️ Tech Stack
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- **Frontend Framework**: [React](https://react.dev/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
-- **Styling**: Standard CSS with a custom design system.
-- **Routing**: [React Router](https://reactrouter.com/)
-- **Icons**: Custom assets and standard icon sets.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## 📂 Project Structure
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- `src/components`: Reusable UI components (Navbar, Hero, Features, Comparison, etc.).
-- `src/pages`: Page layouts including Home (`LandingPage`), Team, and Blog sections.
-- `src/assets`: Images and icons used throughout the application.
+## Learn More
 
-## 🏁 Getting Started
+To learn more about Next.js, take a look at the following resources:
 
-To get a local copy up and running, follow these simple steps.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Prerequisites
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+## Deploy on Vercel
 
-### Installation
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-1.  Clone the repo
-    ```sh
-    git clone https://github.com/your_username/galen-website.git
-    ```
-2.  Install NPM packages
-    ```sh
-    npm install
-    ```
-
-### Usage
-
-1.  Start the development server:
-    ```sh
-    npm run dev
-    ```
-2.  Open your browser and navigate to `http://localhost:5173`.
-
-## 📜 Scripts
-
-- `npm run dev`: Starts the development server.
-- `npm run build`: Builds the app for production.
-- `npm run lint`: Lints the codebase using ESLint.
-- `npm run preview`: Locally preview the production build.
-
-## 🤝 Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
