@@ -93,11 +93,11 @@ const FAQ = () => {
           </h2>
 
           {/* Call to Action Box */}
-          <div className="w-full bg-[#303030] rounded-md rounded-br-4xl p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-md">
+          <div className="w-full bg-orange rounded-md rounded-br-4xl p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-md">
             <p className="text-[1.15rem] leading-snug text-white font-medium max-w-[200px]">
               Have a question? Let's discuss it now!
             </p>
-            <button className="whitespace-nowrap rounded-full bg-white text-[#303030] py-3.5 px-6 font-semibold text-[0.95rem] transition-transform hover:scale-105 active:scale-95 shadow-sm">
+            <button className="whitespace-nowrap rounded-full bg-white text-orange py-3.5 px-6 font-semibold text-[0.95rem] transition-transform hover:scale-105 active:scale-95 shadow-sm">
               Browse Help Center
             </button>
           </div>
