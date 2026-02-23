@@ -3,17 +3,17 @@
 import React from "react";
 const Features = () => {
   return (
-    <section className="w-full py-20 px-6 font-sans">
-      <div className="max-w-[1200px] mx-auto flex flex-col items-start mb-6">
-        <span className="text-[0.85rem] text-[#666] font-semibold tracking-widest uppercase">
+    <section className="w-full py-[clamp(3rem,8vw,5rem)] px-[clamp(1rem,5vw,2rem)] font-sans">
+      <div className="max-w-[1200px] mx-auto flex flex-col items-start mb-[clamp(1rem,3vw,1.5rem)]">
+        <span className="text-[clamp(0.7rem,1vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase">
           FEATURES
         </span>
       </div>
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[340px]">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-[clamp(1rem,3vw,1.5rem)] auto-rows-[clamp(280px,30vw,340px)]">
         
         {/* 1. AI Tutor (Col 1, Spans 2 Rows) */}
-        <div className="md:col-span-1 md:row-span-2 bg-[#b9a5e8] rounded-[32px] p-8 flex flex-col relative overflow-hidden shadow-sm">
-          <h2 className="text-3xl font-serif font-bold text-[#351a5e] tracking-tight mb-8">
+        <div className="md:col-span-1 md:row-span-2 bg-[#b9a5e8] rounded-[32px] p-[clamp(1.5rem,3vw,2rem)] flex flex-col relative overflow-hidden shadow-sm">
+          <h2 className="text-[clamp(1.5rem,4vw,1.875rem)] leading-tight font-serif font-bold text-[#351a5e] tracking-tight mb-[clamp(1.5rem,4vw,2rem)]">
             AI Tutor
           </h2>
 
@@ -41,18 +41,18 @@ const Features = () => {
             ))}
           </div>
 
-          <p className="text-[1.05rem] text-[#351a5e] font-medium leading-snug">
+          <p className="text-[clamp(0.95rem,2vw,1.05rem)] text-[#351a5e] font-medium leading-snug">
             Learn anything clearly. Ask doubts, master concepts, and get instant clarity.
           </p>
         </div>
 
         {/* 2. Flashcards (Col 2 & 3, Spans 1 Row) */}
-        <div className="md:col-span-2 md:row-span-1 bg-[#df8ba9] rounded-[32px] p-8 flex items-center relative overflow-hidden shadow-sm">
+        <div className="md:col-span-2 md:row-span-1 bg-[#df8ba9] rounded-[32px] p-[clamp(1.5rem,3vw,2rem)] flex items-center relative overflow-hidden shadow-sm">
           <div className="w-1/2 z-10">
-            <h2 className="text-4xl font-serif font-bold text-[#4a1c31] tracking-tight mb-4">
+            <h2 className="text-[clamp(1.875rem,5vw,2.25rem)] leading-tight font-serif font-bold text-[#4a1c31] tracking-tight mb-[clamp(0.75rem,2vw,1rem)]">
               Flashcards
             </h2>
-            <p className="text-[1.15rem] text-[#5c213c] font-medium leading-snug max-w-[80%]">
+            <p className="text-[clamp(1rem,2vw,1.15rem)] text-[#5c213c] font-medium leading-snug max-w-[80%]">
               Active recall + spaced repetition built directly from your syllabus.
             </p>
           </div>
@@ -85,7 +85,7 @@ const Features = () => {
         </div>
 
         {/* 3. Adaptive MCQs (Col 2, Spans 1 Row) */}
-        <div className="md:col-span-1 md:row-span-1 bg-[#b4d69a] rounded-[32px] p-8 flex flex-col justify-end relative overflow-hidden shadow-sm">
+        <div className="md:col-span-1 md:row-span-1 bg-[#b4d69a] rounded-[32px] p-[clamp(1.5rem,3vw,2rem)] flex flex-col justify-end relative overflow-hidden shadow-sm">
            {/* Stacked Cards Mock */}
            <div className="absolute top-8 left-0 right-0 flex justify-center flex-col items-center">
                <div className="w-[85%] h-12 bg-white rounded-t-2xl border-t border-x border-slate-200" />
@@ -102,17 +102,17 @@ const Features = () => {
            </div>
 
            <div className="relative z-20 mt-auto">
-              <h2 className="text-3xl font-serif font-bold text-[#2a4115] tracking-tight mb-2">Adaptive MCQs</h2>
-              <p className="text-[1.05rem] text-[#38561c] font-medium leading-snug">
+              <h2 className="text-[clamp(1.5rem,4vw,1.875rem)] leading-tight font-serif font-bold text-[#2a4115] tracking-tight mb-[clamp(0.5rem,1vw,0.5rem)]">Adaptive MCQs</h2>
+              <p className="text-[clamp(0.95rem,2vw,1.05rem)] text-[#38561c] font-medium leading-snug">
                 Questions that match your level, tracking your weak areas as you improve.
               </p>
            </div>
         </div>
 
         {/* 4. Clinical Cases (Col 3, Spans 1 Row) */}
-        <div className="md:col-span-1 md:row-span-1 bg-[#f5dc83] rounded-[32px] p-8 flex flex-col relative overflow-hidden shadow-sm">
-          <h2 className="text-3xl font-serif font-bold text-[#5c4912] tracking-tight mb-2">Clinical Cases</h2>
-          <p className="text-[1.05rem] text-[#6b5617] font-medium leading-snug mb-6 w-5/6">
+        <div className="md:col-span-1 md:row-span-1 bg-[#f5dc83] rounded-[32px] p-[clamp(1.5rem,3vw,2rem)] flex flex-col relative overflow-hidden shadow-sm">
+          <h2 className="text-[clamp(1.5rem,4vw,1.875rem)] leading-tight font-serif font-bold text-[#5c4912] tracking-tight mb-[clamp(0.5rem,1vw,0.5rem)]">Clinical Cases</h2>
+          <p className="text-[clamp(0.95rem,2vw,1.05rem)] text-[#6b5617] font-medium leading-snug mb-[clamp(1rem,3vw,1.5rem)] w-5/6">
             Practice diagnosis on realistic clinical scenarios.
           </p>
           
@@ -136,10 +136,10 @@ const Features = () => {
         </div>
 
         {/* 5. Study Planner (Col 1 & 2, Spans 1 Row) */}
-        <div className="md:col-span-2 md:row-span-1 bg-[#e79e6f] rounded-[32px] p-8 flex relative overflow-hidden shadow-sm">
+        <div className="md:col-span-2 md:row-span-1 bg-[#e79e6f] rounded-[32px] p-[clamp(1.5rem,3vw,2rem)] flex relative overflow-hidden shadow-sm">
            <div className="w-[40%] flex flex-col justify-end z-20">
-              <h2 className="text-4xl font-serif font-bold text-[#5c2d12] tracking-tight mb-3">Study Planner</h2>
-              <p className="text-[1.15rem] text-[#783c18] font-medium leading-snug max-w-[90%]">
+              <h2 className="text-[clamp(1.875rem,5vw,2.25rem)] leading-tight font-serif font-bold text-[#5c2d12] tracking-tight mb-[clamp(0.5rem,1vw,0.75rem)]">Study Planner</h2>
+              <p className="text-[clamp(1rem,2vw,1.15rem)] text-[#783c18] font-medium leading-snug max-w-[90%]">
                 Smart daily plans that adapt to your progress.
               </p>
            </div>
@@ -166,9 +166,9 @@ const Features = () => {
         </div>
 
         {/* 6. Performance Dashboard (Col 3, Spans 1 Row) */}
-        <div className="md:col-span-1 md:row-span-1 bg-[#b4cade] rounded-[32px] p-8 pb-0 flex flex-col relative overflow-hidden shadow-sm">
-          <h2 className="text-3xl font-serif font-bold text-[#243c53] tracking-tight mb-2">Performance</h2>
-          <p className="text-[1.05rem] text-[#335372] font-medium leading-snug mb-8 w-[90%]">
+        <div className="md:col-span-1 md:row-span-1 bg-[#b4cade] rounded-[32px] p-[clamp(1.5rem,3vw,2rem)] pb-0 flex flex-col relative overflow-hidden shadow-sm">
+          <h2 className="text-[clamp(1.5rem,4vw,1.875rem)] leading-tight font-serif font-bold text-[#243c53] tracking-tight mb-[clamp(0.5rem,1vw,0.5rem)]">Performance</h2>
+          <p className="text-[clamp(0.95rem,2vw,1.05rem)] text-[#335372] font-medium leading-snug mb-[clamp(1.5rem,4vw,2rem)] w-[90%]">
             Track strengths, gaps, and growth over time
           </p>
 

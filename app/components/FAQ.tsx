@@ -142,21 +142,21 @@ const FAQ = () => {
   };
 
   return (
-    <section className="w-full bg-[#fcfaf8] py-16 px-8 max-[768px]:py-16 max-[600px]:px-6 font-sans">
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12">
+    <section className="w-full bg-[#fcfaf8] py-[clamp(4rem,10vw,6rem)] px-[clamp(1.5rem,5vw,2rem)] font-sans">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-[clamp(3rem,8vw,4rem)]">
         
         {/* Left Column: Heading & CTA */}
         <div className="lg:col-span-6 flex flex-col items-start lg:pr-8">
-          <span className="text-[0.85rem] text-[#666] font-semibold tracking-widest uppercase mb-6">
+          <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)]">
             FAQ
           </span>
-          <h2 className="text-[3.25rem] leading-[1.1] font-serif font-medium text-[#222] tracking-[-0.03em] mb-12 max-[900px]:text-[2.75rem]">
+          <h2 className="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.1] font-serif font-medium text-[#222] tracking-[-0.03em] mb-[clamp(2rem,6vw,3rem)]">
             Frequently asked<br/>questions about us.
           </h2>
 
           {/* Call to Action Box */}
-          <div className="w-full bg-orange rounded-md rounded-br-4xl p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-md">
-            <p className="text-[1.15rem] leading-snug text-white font-medium max-w-[200px]">
+          <div className="w-full bg-orange rounded-md rounded-br-4xl p-[clamp(1.5rem,4vw,2rem)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-[clamp(1rem,3vw,1.5rem)] shadow-md">
+            <p className="text-[clamp(1.05rem,2vw,1.15rem)] leading-snug text-white font-medium max-w-[200px]">
               Have a question? Let's discuss it now!
             </p>
             <a 
@@ -164,7 +164,7 @@ const FAQ = () => {
               ref={tryBtnRef}
               onMouseEnter={handleTryEnter}
               onMouseLeave={handleTryLeave}
-              className="group relative flex items-center justify-center py-[0.85rem] px-8 rounded-full text-[14px] font-primary font-medium text-orange bg-white no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[200px]"
+              className="group relative flex items-center justify-center py-[clamp(0.75rem,2vw,0.85rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.85rem,1.5vw,1rem)] font-primary font-medium text-orange bg-white no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[200px]"
             >
               <div ref={tryBgRef} className="absolute inset-0 bg-[#303030] z-0 rounded-full"></div>
               {/* Text centered exactly when no icon is visible */}
@@ -181,7 +181,7 @@ const FAQ = () => {
         </div>
 
         {/* Right Column: FAQ Accordions */}
-        <div className="lg:col-span-6 flex flex-col gap-3">
+        <div className="lg:col-span-6 flex flex-col gap-[clamp(0.5rem,1.5vw,0.75rem)]">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
@@ -194,11 +194,11 @@ const FAQ = () => {
                 }`}
               >
                 <button
-                  className="w-full text-left py-3 px-6 flex items-center justify-between gap-4 cursor-pointer outline-none border-none bg-transparent"
+                  className="w-full text-left py-[clamp(0.75rem,2vw,1rem)] px-[clamp(1.25rem,3vw,1.5rem)] flex items-center justify-between gap-[clamp(0.5rem,2vw,1rem)] cursor-pointer outline-none border-none bg-transparent"
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={isOpen}
                 >
-                  <span className={`text-[1.05rem] font-medium leading-[1.4] transition-colors ${isOpen ? "text-white" : "text-gray-200"}`}>
+                  <span className={`text-[clamp(0.95rem,2vw,1.05rem)] font-medium leading-[1.4] transition-colors ${isOpen ? "text-white" : "text-gray-200"}`}>
                     {faq.question}
                   </span>
                   <span className={`text-xl font-light text-gray-300 transition-transform duration-300 ${isOpen ? "rotate-45" : "rotate-0"}`}>
@@ -212,19 +212,19 @@ const FAQ = () => {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-6 pb-5 pt-0">
-                      <p className="text-[0.95rem] text-gray-300 leading-[1.6]">
+                    <div className="px-[clamp(1.25rem,3vw,1.5rem)] pb-[clamp(1rem,2.5vw,1.25rem)] pt-0">
+                      <p className="text-[clamp(0.85rem,1.5vw,0.95rem)] text-gray-300 leading-[1.6]">
                         {faq.answer}
                       </p>
                       {faq.links && (
-                        <div className="flex flex-col gap-2 mt-3 mb-1">
+                        <div className="flex flex-col gap-[clamp(0.25rem,1vw,0.5rem)] mt-[clamp(0.5rem,1.5vw,0.75rem)] mb-[clamp(0.25rem,1vw,0.25rem)]">
                           {faq.links.map((link, linkIndex) => (
                             <a
                               key={linkIndex}
                               href={link.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 text-[0.9rem] font-semibold text-[#66a0ff] no-underline transition-all hover:text-[#88b6ff] group w-fit"
+                              className="inline-flex items-center gap-2 text-[clamp(0.85rem,1.5vw,0.9rem)] font-semibold text-[#66a0ff] no-underline transition-all hover:text-[#88b6ff] group w-fit"
                             >
                               {link.label}
                               <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />

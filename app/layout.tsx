@@ -31,14 +31,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${space.variable} ${raleway.variable} antialiased`}
+        className={`${space.variable} ${raleway.variable} antialiased overflow-x-hidden bg-white`}
       >
-        <ScrollToTop />
-        <div className="min-h-screen w-full ">
-          <Navbar />
+        <Navbar />
+        <main className="relative w-full min-h-screen">
+          <ScrollToTop />
           {children}
           <Footer />
-        </div>
+        </main>
       </body>
     </html>
   );

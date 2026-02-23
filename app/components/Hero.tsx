@@ -62,7 +62,7 @@ const AudienceButton = ({ audience, isActive, onClick }: AudienceButtonProps) =>
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative pb-2 text-[1.1rem] font-medium border-none bg-transparent cursor-pointer transition-opacity duration-200 capitalize ${
+      className={`relative pb-2 text-[clamp(1rem,2vw,1.1rem)] font-medium border-none bg-transparent cursor-pointer transition-opacity duration-200 capitalize ${
         isActive
           ? "text-dark opacity-100"
           : "text-dark opacity-50 hover:opacity-100"
@@ -95,7 +95,7 @@ const AudienceButton = ({ audience, isActive, onClick }: AudienceButtonProps) =>
 
 const Hero = () => {
   const [textIndex, setTextIndex] = useState(0);
-  const textContainerRef = useRef<HTMLSpanElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const container = textContainerRef.current;
@@ -246,13 +246,13 @@ const Hero = () => {
 
   return (
     <section
-      className="min-h-screen pt-20  px-8 bg-transparent flex justify-center items-center overflow-visible relative"
+      className="min-h-screen pt-[clamp(3.5rem,8vh,5rem)] px-[clamp(1rem,5vw,2rem)] bg-transparent flex justify-center items-center overflow-visible relative"
     >
-      <div className="max-w-[1400px] w-full flex flex-col items-center gap-16 relative z-[2] py-8">
+      <div className="max-w-[1400px] w-full flex flex-col items-center gap-[clamp(2rem,6vw,4rem)] relative z-[2] py-[clamp(1rem,4vw,2rem)]">
         {/* Centered Text Content */}
         <div className="flex flex-col items-center text-center max-w-[900px] mx-auto">
           {/* Audience Toggle */}
-          <div className="inline-flex gap-12 mb-6 relative">
+          <div className="inline-flex gap-[clamp(1.5rem,4vw,3rem)] mb-[clamp(1rem,3vw,1.5rem)] relative">
             {(['students', 'institutions'] as const).map((audience) => (
               <AudienceButton
                 key={audience}
@@ -263,49 +263,75 @@ const Hero = () => {
             ))}
           </div>
           {/* Exam Context Tags */}
-          <div className="flex flex-wrap justify-center items-center gap-2 mb-6 animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
+          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.25rem,1vw,0.5rem)] mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
             {["NEET PG", "NEET SS", "EMREE", "FMGE"].map((exam) => (
               <div
                 key={exam}
-                className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/40 border border-orange/40 backdrop-blur-sm cursor-default"
+                className="flex items-center gap-[clamp(0.2rem,0.5vw,0.375rem)] px-[clamp(0.5rem,1.5vw,0.75rem)] py-[clamp(0.15rem,0.5vw,0.25rem)] rounded-full bg-white/40 border border-orange/40 backdrop-blur-sm cursor-default"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-orange/80" />
-                <span className="text-[0.68rem] font-semibold text-orange tracking-wider uppercase">
+                <span className="text-[clamp(0.55rem,1vw,0.68rem)] font-semibold text-orange tracking-wider uppercase">
                   {exam}
                 </span>
               </div>
             ))}
           </div>
 
-          <h1 className="text-[4.25rem] font-medium leading-[1.1] text-dark mb-8 tracking-[-0.03em] max-[768px]:text-[2.5rem]">
+          <h1 className="text-[clamp(1.8rem,5vw+0.5rem,4.25rem)] font-medium leading-[1.1] text-dark mb-[clamp(1.5rem,4vw,2rem)] tracking-[-0.03em]">
             Your personal AI companion <br />
             <div className="flex items-center justify-center text-orange italic">
-              <span className="mr-3 whitespace-nowrap">&gt;</span>
-              <span className="inline-block text-left min-w-[300px]" ref={textContainerRef}>
-                {PHRASES[textIndex].split("").map((char, index) => (
-                  <span key={`${textIndex}-${index}`} className="char-span whitespace-pre">
-                    {char}
-                  </span>
-                ))}
-                <span className="font-thin text-orange animate-[blink_1s_step-end_infinite] ml-1 not-italic">
-                  |
-                </span>
-              </span>
+              <div 
+                className="flex flex-col md:flex-row items-center md:items-baseline min-w-[300px]" 
+                ref={textContainerRef}
+              >
+                {(() => {
+                  const words = PHRASES[textIndex].split(" ");
+                  const lastWord = words[words.length - 1];
+                  const basePart = words.slice(0, -1).join(" ") + " ";
+                  
+                  return (
+                    <>
+                      <div className="flex items-center">
+                        <span className="mr-3 whitespace-nowrap">&gt;</span>
+                        <span className="whitespace-pre">
+                          {basePart.split("").map((char, index) => (
+                            <span key={`base-${textIndex}-${index}`} className="char-span whitespace-pre">
+                              {char}
+                            </span>
+                          ))}
+                        </span>
+                      </div>
+                      <div className="flex justify-center w-full md:w-auto">
+                        <span className="whitespace-nowrap">
+                          {lastWord.split("").map((char, index) => (
+                            <span key={`last-${textIndex}-${index}`} className="char-span whitespace-pre">
+                              {char}
+                            </span>
+                          ))}
+                          <span className="font-thin text-orange animate-[blink_1s_step-end_infinite] ml-1 not-italic">
+                            |
+                          </span>
+                        </span>
+                      </div>
+                    </>
+                  );
+                })()}
+              </div>
             </div>
           </h1>
 
-          <p className="text-[1.15rem] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-12 mx-auto">
+          <p className="text-[clamp(0.75rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2rem,5vw,3rem)] mx-auto">
             GalenAI is your AI medical mentor that explains, tests, and guides
             you, so you spend less time planning and more time understanding.<br/>
           </p>
 
-          <div className="flex flex-wrap justify-center items-center gap-5 mb-6">
+          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)]">
             <a
               href="#ask"
               ref={tryBtnRef}
               onMouseEnter={handleTryEnter}
               onMouseLeave={handleTryLeave}
-              className="group relative flex items-center justify-center py-[0.85rem] px-8 rounded-full text-[1rem] font-primary font-medium text-white bg-orange no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[180px]"
+              className="group relative flex items-center justify-center py-[clamp(0.65rem,1.5vw,0.85rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-white bg-orange no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[180px]"
             >
               <div ref={tryBgRef} className="absolute inset-0 bg-white z-0 rounded-full"></div>
               {/* Text centered exactly when no icon is visible */}
@@ -323,7 +349,7 @@ const Hero = () => {
               ref={downloadBtnRef}
               onMouseEnter={handleDownloadEnter}
               onMouseLeave={handleDownloadLeave}
-              className="relative border border-black/10 shadow-sm flex items-center justify-center gap-2 py-[0.7rem] px-8 rounded-full text-[1rem] font-primary font-medium text-dark no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] "
+              className="relative border border-black/10 shadow-sm flex items-center justify-center gap-[clamp(0.3rem,1vw,0.5rem)] py-[clamp(0.5rem,1.5vw,0.7rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-dark no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] "
             >
               <span className="relative pb-[2px]">
                 Download Now For Free
@@ -333,7 +359,7 @@ const Hero = () => {
             </a>
           </div>
 
-          <div className="flex items-center justify-center text-[0.95rem] text-dark/70 mb-6 animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.3s' }}>
+          <div className="flex items-center justify-center text-[clamp(0.85rem,1.5vw,0.95rem)] text-dark/70 mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.3s' }}>
             <span>Already using GalenAI?</span>
             <span className="mx-3 text-black/20">|</span>
             <a 
@@ -371,10 +397,10 @@ const Hero = () => {
             </a>
           </div>
 
-          <div className="flex flex-wrap justify-center items-center text-[0.875rem] text-[rgba(46,46,46,0.6)]">
+          <div className="flex flex-wrap justify-center items-center text-[clamp(0.75rem,1.5vw,0.875rem)] text-[rgba(46,46,46,0.6)]">
             
             <div className="flex  items-center gap-5">
-              <span className="text-[0.8rem] opacity-80 uppercase tracking-[0.05em]">
+              <span className="text-[clamp(0.7rem,1.2vw,0.8rem)] opacity-80 uppercase tracking-[0.05em]">
                 Backed by
               </span>
            

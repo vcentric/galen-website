@@ -40,24 +40,24 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="bg-[#f7f8f8] py-16 px-0 max-[600px]:py-16 overflow-hidden" id="testimonials">
-      <div className="max-w-[1200px] mx-auto px-8 max-[600px]:px-6 mb-12 flex flex-col items-start">
-        <span className="text-[0.85rem] text-[#666] font-semibold tracking-widest uppercase mb-6">
+    <section className="bg-[#f7f8f8] py-[clamp(4rem,10vw,6rem)] px-0 overflow-hidden" id="testimonials">
+      <div className="max-w-[1200px] mx-auto px-[clamp(1.5rem,5vw,2rem)] mb-[clamp(2rem,5vw,3rem)] flex flex-col items-start">
+        <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)]">
           TESTIMONIALS
         </span>
-        <h2 className="text-[3.5rem] leading-[1.1] font-sans font-medium text-[#222] tracking-[-0.03em] max-[900px]:text-[2.75rem] max-[600px]:text-[2.25rem] max-w-[1200px]">
+        <h2 className="text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] font-sans font-medium text-[#222] tracking-[-0.03em] max-w-[1200px]">
           Don't take our word for it!<br/>Hear it from our students.
         </h2>
       </div>
 
-      <div className="pl-6 md:pl-[calc((100vw-1200px)/2+2rem)]">
-        <div className="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth pb-12 pr-8 snap-x snap-mandatory [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div className="pl-[clamp(1.5rem,5vw,2rem)] md:pl-[calc((100vw-1200px)/2+2rem)]">
+        <div className="flex gap-[clamp(1rem,3vw,1.5rem)] overflow-x-auto overflow-y-hidden scroll-smooth pb-[clamp(2rem,5vw,3rem)] pr-[clamp(1.5rem,5vw,2rem)] snap-x snap-mandatory [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {testimonials.map((testimonial) => {
             if (testimonial.type === 'video') {
               return (
                 <div 
                   key={testimonial.id}
-                  className="relative shrink-0 w-[400px] h-[520px] rounded-[1.5rem] overflow-hidden snap-center shadow-[0_8px_30px_rgba(0,0,0,0.06)] group cursor-pointer max-[600px]:w-[320px] max-[600px]:h-[450px]"
+                  className="relative shrink-0 w-[clamp(320px,80vw,400px)] h-[clamp(450px,70vh,520px)] rounded-[1.5rem] overflow-hidden snap-center shadow-[0_8px_30px_rgba(0,0,0,0.06)] group cursor-pointer"
                 >
                   {/* Video Thumbnail Full Bleed */}
                   <div className="absolute inset-0 w-full h-full">
@@ -70,11 +70,11 @@ const Testimonials = () => {
                   </div>
                   
                   {/* Name Overlay (Bottom Left) */}
-                  <div className="absolute bottom-8 left-8 right-8 z-10 flex flex-col gap-1">
-                    <span className={`${caveat.className} text-[3rem] text-white leading-none tracking-wide -mb-1`}>
+                  <div className="absolute bottom-[clamp(1.5rem,5vw,2rem)] left-[clamp(1.5rem,5vw,2rem)] right-[clamp(1.5rem,5vw,2rem)] z-10 flex flex-col gap-1">
+                    <span className={`${caveat.className} text-[clamp(2rem,6vw,3rem)] text-white leading-none tracking-wide -mb-1`}>
                       {testimonial.name}
                     </span>
-                    <span className="text-[0.85rem] text-white/70 font-sans tracking-wide">
+                    <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-white/70 font-sans tracking-wide">
                       {testimonial.meta}
                     </span>
                   </div>
@@ -85,20 +85,20 @@ const Testimonials = () => {
             return (
               <div 
                 key={testimonial.id}
-                className="relative shrink-0 w-[400px] h-[520px] bg-white rounded-[1.5rem] p-10 flex flex-col justify-between snap-center shadow-[0_4px_24px_rgba(0,0,0,0.04)] transition-shadow duration-300 max-[600px]:w-[320px] max-[600px]:h-[450px] max-[600px]:p-8"
+                className="relative shrink-0 w-[clamp(320px,80vw,400px)] h-[clamp(450px,70vh,520px)] bg-white rounded-[1.5rem] p-[clamp(2rem,5vw,2.5rem)] flex flex-col justify-between snap-center shadow-[0_4px_24px_rgba(0,0,0,0.04)] transition-shadow duration-300"
               >
                 <div>
-                  <img src={testimonial.avatar} alt={testimonial.name} className="w-12 h-12 rounded-full mb-8 bg-[#f5f5f5]" />
-                  <p className="text-[#333] text-[1.05rem] leading-[1.65] tracking-[-0.01em] max-[600px]:text-[0.95rem]">
+                  <img src={testimonial.avatar} alt={testimonial.name} className="w-[clamp(2.5rem,5vw,3rem)] h-[clamp(2.5rem,5vw,3rem)] rounded-full mb-[clamp(1.5rem,4vw,2rem)] bg-[#f5f5f5]" />
+                  <p className="text-[#333] text-[clamp(0.95rem,2vw,1.05rem)] leading-[1.65] tracking-[-0.01em]">
                     {testimonial.text}
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-1 mt-6">
-                  <span className={`${caveat.className} text-[3rem] text-[#222] leading-none tracking-wide -mb-1`}>
+                  <span className={`${caveat.className} text-[clamp(2rem,6vw,3rem)] text-[#222] leading-none tracking-wide -mb-1`}>
                     {testimonial.name}
                   </span>
-                  <span className="text-[0.85rem] text-[#888] font-sans tracking-wide">
+                  <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#888] font-sans tracking-wide">
                     {testimonial.meta}
                   </span>
                 </div>
