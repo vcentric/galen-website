@@ -193,7 +193,6 @@ const Hero = () => {
       duration: 0.3,
       ease: "back.out(1.5)",
       overwrite: "auto",
-      delay: 0.03 // Slight delay to let text start sliding
     });
   });
 

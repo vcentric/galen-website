@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { SiInstagram, SiLinkedin, SiX, SiYoutube } from "react-icons/si";
+import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 
 const Footer = () => {
   return (
     <footer className="w-full pt-12 pb-6 px-4 font-sans">
       <div className="max-w-[1240px] mx-auto bg-[#303030] rounded-[40px] px-8 pt-12 pb-8 text-white relative overflow-hidden shadow-sm">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-12 md:gap-8 lg:gap-12 mb-20 md:mb-16">
+        <div className="flex flex-col md:block relative mb-20  md:mb-16">
           
           {/* Col 1 - Icon */}
-          <div className="col-span-2 md:col-span-1">
+          <div className="md:absolute md:left-0 md:top-0 mb-8 md:mb-0">
             <img 
               src="/galenai-icon.png" 
               alt="GalenAI" 
@@ -16,8 +17,12 @@ const Footer = () => {
             />
           </div>
 
-          {/* Col 2 - Company */}
-          <div className="flex flex-col gap-4">
+          {/* Links Grid */}
+          <div className="w-full">
+            <div className="grid grid-cols-2 md:flex md:flex-row md:flex-wrap md:justify-center gap-24 w-full mx-auto">
+
+              {/* Col 2 - Company */}
+              <div className="flex flex-col gap-4 min-w-[120px]">
             <h4 className="text-[1.25rem] font-semibold text-white tracking-tight">
               Company
             </h4>
@@ -33,9 +38,12 @@ const Footer = () => {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
+                  className="group flex items-center w-fit text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
                 >
                   {link.label}
+                  <div className="overflow-hidden ml-1.5 flex items-center justify-center">
+                    <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
+                  </div>
                 </a>
               ))}
             </div>
@@ -59,9 +67,12 @@ const Footer = () => {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
+                  className="group flex items-center w-fit text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
                 >
                   {link.label}
+                  <div className="overflow-hidden ml-1.5 flex items-center justify-center">
+                    <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
+                  </div>
                 </a>
               ))}
             </div>
@@ -79,9 +90,12 @@ const Footer = () => {
                 </span>
                 <a
                   href="mailto:support@galenai.io"
-                  className="text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
+                  className="group flex items-center w-fit text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
                 >
                   support@galenai.io
+                  <div className="overflow-hidden ml-1.5 flex items-center justify-center">
+                    <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
+                  </div>
                 </a>
               </div>
               
@@ -91,9 +105,12 @@ const Footer = () => {
                 </span>
                 <a
                   href="https://wa.me/918848542046"
-                  className="text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
+                  className="group flex items-center w-fit text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
                 >
                   +91 88485 42046
+                  <div className="overflow-hidden ml-1.5 flex items-center justify-center">
+                    <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
+                  </div>
                 </a>
               </div>
 
@@ -123,12 +140,18 @@ const Footer = () => {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="flex items-center gap-3 text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
+                  className="group flex items-center w-fit gap-3 text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
                 >
                   {social.icon}
                   {social.label}
+                  <div className="overflow-hidden ml-[-0.25rem] flex items-center justify-center">
+                    <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
+                  </div>
                 </a>
               ))}
+            </div>
+          </div>
+
             </div>
           </div>
         </div>
@@ -136,7 +159,7 @@ const Footer = () => {
         {/* Big Text */}
         <div className="w-full flex justify-center items-center select-none cursor-default overflow-hidden mb-4 md:mb-4">
           <h1 
-            className="text-white font-serif font-light tracking-[-0.05em] leading-[0.8] m-0"
+            className="text-white font-serif font-light tracking-[-0.05em] leading-[0.8] m-0 -ml-5"
             style={{ fontSize: "clamp(6rem, 25vw, 22rem)" }}
           >
             Galen<span className="font-black">AI</span>

@@ -1,8 +1,9 @@
 "use client";
 
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-import { SiWhatsapp } from "react-icons/si";
+import { ArrowRightIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { useState, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 interface FAQItem {
   question: string;
@@ -12,6 +13,65 @@ interface FAQItem {
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const tryBtnRef = useRef<HTMLAnchorElement>(null);
+  const tryBgRef = useRef<HTMLDivElement>(null);
+  const tryTextRef = useRef<HTMLSpanElement>(null);
+  const tryIconRef = useRef<SVGSVGElement>(null);
+
+  const { contextSafe: contextSafeTry } = useGSAP({ scope: tryBtnRef });
+
+  useGSAP(() => {
+    gsap.set(tryBgRef.current, { scaleY: 0, transformOrigin: "bottom center" });
+    gsap.set(tryTextRef.current, { x: 0 }); // Initially centered
+    gsap.set(tryIconRef.current, { x: 0, y: 15, opacity: 0 }); // Starts below, no x offset
+  }, { scope: tryBtnRef });
+
+  const handleTryEnter = contextSafeTry(() => {
+    gsap.to(tryBgRef.current, {
+      scaleY: 1,
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryTextRef.current, {
+      x: -12, // Slide text to the left to make room
+      color: "#ffffff",
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryIconRef.current, {
+      y: 0, // Pop up
+      opacity: 1,
+      duration: 0.3,
+      ease: "back.out(1.5)",
+      overwrite: "auto",
+    });
+  });
+
+  const handleTryLeave = contextSafeTry(() => {
+    gsap.to(tryBgRef.current, {
+      scaleY: 0,
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryTextRef.current, {
+      x: 0, // Slide text back to exact center
+      color: "var(--color-orange)",
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryIconRef.current, {
+      y: 15, // Drop back down
+      opacity: 0,
+      duration: 0.2,
+      ease: "power3.in",
+      overwrite: "auto"
+    });
+  });
 
   const faqs: FAQItem[] = [
     {
@@ -101,13 +161,21 @@ const FAQ = () => {
             </p>
             <a 
               href="https://wa.me/918848542046" 
-              className="group relative overflow-hidden flex items-center gap-2.5 whitespace-nowrap rounded-[2rem] bg-white text-orange py-4 px-8 font-bold text-[1rem] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] no-underline"
+              ref={tryBtnRef}
+              onMouseEnter={handleTryEnter}
+              onMouseLeave={handleTryLeave}
+              className="group relative flex items-center justify-center py-[0.85rem] px-8 rounded-full text-[14px] font-primary font-medium text-orange bg-white no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[200px]"
             >
-              {/* Shine effect that sweeps across on hover */}
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-orange/10 to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-full" />
-              
-              <SiWhatsapp className="relative z-10 w-5 h-5 transition-transform duration-500 ease-out group-hover:rotate-12 group-hover:scale-[1.15]" />
-              <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">Chat on WhatsApp</span>
+              <div ref={tryBgRef} className="absolute inset-0 bg-[#303030] z-0 rounded-full"></div>
+              {/* Text centered exactly when no icon is visible */}
+              <div className="relative z-10 flex items-center justify-center w-full">
+                <span ref={tryTextRef} className="text-orange transition-colors block" style={{ color: "var(--color-orange)" }}>Chat on WhatsApp</span>
+                
+                {/* Icon positioned absolute relative to the center cluster, invisible normally */}
+                <div className="absolute -right-[0.25rem] w-[1.25rem] h-[1.25rem] overflow-hidden flex items-center justify-center">
+                  <ArrowUpRightIcon ref={tryIconRef} className="absolute w-[12px] h-[12px] text-white" strokeWidth={3} />
+                </div>
+              </div>
             </a>
           </div>
         </div>
