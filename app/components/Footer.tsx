@@ -121,6 +121,7 @@ const Footer = () => {
                 <span className="text-[clamp(0.85rem,1.5vw,0.95rem)] text-white">
                   India
                 </span>
+                
               </div>
             </div>
           </div>
@@ -157,10 +158,10 @@ const Footer = () => {
         </div>
 
         {/* Big Text */}
-        <div className="w-full flex justify-center items-center select-none cursor-default overflow-hidden mb-4 md:mb-4">
+        <div className="w-full flex justify-center items-center select-none cursor-default overflow-hidden">
           <h1 
-            className="text-white font-serif font-light tracking-[-0.05em] leading-[0.8] m-0 -ml-5"
-            style={{ fontSize: "clamp(6rem, 25vw, 22rem)" }}
+            className="text-white font-serif font-light tracking-[-0.05em] leading-[0.8] m-0"
+            style={{ fontSize: "clamp(5.5rem, 24vw, 23rem)" }}
           >
             Galen<span className="font-black">AI</span>
           </h1>

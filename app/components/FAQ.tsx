@@ -143,45 +143,20 @@ const FAQ = () => {
 
   return (
     <section className="w-full bg-[#fcfaf8] py-[clamp(4rem,10vw,6rem)] px-[clamp(1.5rem,5vw,2rem)] font-sans">
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-[clamp(3rem,8vw,4rem)]">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-x-[clamp(3rem,8vw,4rem)] grid-rows-none lg:grid-rows-[auto_1fr]">
         
-        {/* Left Column: Heading & CTA */}
-        <div className="lg:col-span-6 flex flex-col items-start lg:pr-8">
+        {/* 1. Heading Column (Top-left on desktop, Top on mobile) */}
+        <div className="lg:col-span-6 lg:row-start-1 flex flex-col items-start lg:pr-8 mb-8 lg:mb-0 lg:self-start">
           <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)]">
             FAQ
           </span>
           <h2 className="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.1] font-serif font-medium text-[#222] tracking-[-0.03em] mb-[clamp(2rem,6vw,3rem)]">
             Frequently asked<br/>questions about us.
           </h2>
-
-          {/* Call to Action Box */}
-          <div className="w-full bg-orange rounded-md rounded-br-4xl p-[clamp(1.5rem,4vw,2rem)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-[clamp(1rem,3vw,1.5rem)] shadow-md">
-            <p className="text-[clamp(1.05rem,2vw,1.15rem)] leading-snug text-white font-medium max-w-[200px]">
-              Have a question? Let's discuss it now!
-            </p>
-            <a 
-              href="https://wa.me/918848542046" 
-              ref={tryBtnRef}
-              onMouseEnter={handleTryEnter}
-              onMouseLeave={handleTryLeave}
-              className="group relative flex items-center justify-center py-[clamp(0.75rem,2vw,0.85rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.85rem,1.5vw,1rem)] font-primary font-medium text-orange bg-white no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[200px]"
-            >
-              <div ref={tryBgRef} className="absolute inset-0 bg-[#303030] z-0 rounded-full"></div>
-              {/* Text centered exactly when no icon is visible */}
-              <div className="relative z-10 flex items-center justify-center w-full">
-                <span ref={tryTextRef} className="text-orange transition-colors block" style={{ color: "var(--color-orange)" }}>Chat on WhatsApp</span>
-                
-                {/* Icon positioned absolute relative to the center cluster, invisible normally */}
-                <div className="absolute -right-[0.25rem] w-[1.25rem] h-[1.25rem] overflow-hidden flex items-center justify-center">
-                  <ArrowUpRightIcon ref={tryIconRef} className="absolute w-[12px] h-[12px] text-white" strokeWidth={3} />
-                </div>
-              </div>
-            </a>
-          </div>
         </div>
 
-        {/* Right Column: FAQ Accordions */}
-        <div className="lg:col-span-6 flex flex-col gap-[clamp(0.5rem,1.5vw,0.75rem)]">
+        {/* 2. Right Column: FAQ Accordions (Right on desktop, Middle on mobile) */}
+        <div className="lg:col-span-6 lg:row-span-2 flex flex-col gap-[clamp(0.5rem,1.5vw,0.75rem)] mb-[clamp(3rem,8vw,4rem)] lg:mb-0">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
@@ -239,6 +214,31 @@ const FAQ = () => {
             );
           })}
         </div>
+
+        {/* 3. CTA Column (Bottom-left on desktop, Bottom on mobile) */}
+        <div className="lg:col-span-6 lg:row-start-2 flex flex-col items-start lg:pr-8 lg:self-start">
+          <div className="w-full bg-orange rounded-md rounded-br-4xl p-[clamp(1.5rem,4vw,2rem)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-[clamp(1rem,3vw,1.5rem)] shadow-md">
+            <p className="text-[clamp(1.05rem,2vw,1.15rem)] leading-snug text-white font-medium max-w-[200px]">
+              Have a question? Let's discuss it now!
+            </p>
+            <a 
+              href="https://wa.me/918848542046" 
+              ref={tryBtnRef}
+              onMouseEnter={handleTryEnter}
+              onMouseLeave={handleTryLeave}
+              className="group relative flex items-center justify-center py-[clamp(0.75rem,2vw,0.85rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.85rem,1.5vw,0.85rem)] font-primary font-medium text-orange bg-white no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[200px]"
+            >
+              <div ref={tryBgRef} className="absolute inset-0 bg-[#303030] z-0 rounded-full"></div>
+              <div className="relative z-10 flex items-center justify-center w-full">
+                <span ref={tryTextRef} className="text-orange transition-colors block" style={{ color: "var(--color-orange)" }}>Chat on WhatsApp</span>
+                <div className="absolute -right-[0.25rem] w-[1.25rem] h-[1.25rem] overflow-hidden flex items-center justify-center">
+                  <ArrowUpRightIcon ref={tryIconRef} className="absolute w-[12px] h-[12px] text-white" strokeWidth={3} />
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
   );
