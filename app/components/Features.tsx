@@ -1,124 +1,214 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
 
-// Simple, crisp SVGs matching the reference minimalist style
-const CommentIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" fill="currentColor"/>
-  </svg>
-);
+const DURATION = 3; // seconds per card
+
+const features = [
+  {
+    id: 0,
+    tag: "AI Tutor",
+    title: "Your Personal Medical Tutor, On Demand",
+    desc: "Ask questions the way you actually think. GalenAI explains concepts step-by-step, aligned with standard textbooks — so you stop guessing and start understanding.",
+    screen: "/mobile.png",
+  },
+  {
+    id: 1,
+    tag: "Question Banks",
+    title: "Practice Questions That Tell You Why, Not Just What",
+    desc: "Every question becomes a learning moment. Get explanations that connect concepts, highlight traps, and show how examiners think — not just the right option.",
+    screen: "/qbanks.png",
+  },
+  {
+    id: 2,
+    tag: "Flashcards",
+    title: "Remember What Actually Matters",
+    desc: "High-yield flashcards built from concepts — not random facts. Perfect for quick revisions, spaced recall, and busy days.",
+    screen: "/Flashcards.png",
+  },
+  {
+    id: 3,
+    tag: "Clinical Cases",
+    title: "Learn Medicine the Way It's Practiced",
+    desc: "Work through real-world clinical scenarios. Build diagnostic thinking, connect theory to patients, and prepare for viva and ward discussions — not just MCQs.",
+    screen: "/clinicalcases.png",
+  },
+  {
+    id: 4,
+    tag: "Coming Soon",
+    title: "More Powerful Features on the Way",
+    desc: "We're constantly building. AI-powered study plans, peer collaboration tools, and faculty dashboards are headed your way.",
+    screen: "/mobile.png",
+  },
+];
 
 const Features = () => {
-  const cards = [
-    {
-      title: "Question Banks",
-      desc: "Practice questions that tell you why, not just what. Every question becomes a learning moment — get explanations that connect concepts, highlight traps, and show how examiners think.",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-          <polyline points="22 4 12 14.01 9 11.01"></polyline>
-        </svg>
-      )
-    },
-    {
-      title: "Flashcards",
-      desc: "Remember what actually matters. High-yield flashcards built from concepts — not random facts. Perfect for quick revisions, spaced recall, and busy days.",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-        </svg>
-      )
-    },
-    {
-      title: "Clinical Cases",
-      desc: "Learn medicine the way it's practiced. Work through real-world clinical scenarios. Build diagnostic thinking, connect theory to patients, and prepare for viva and ward discussions.",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-          <polyline points="14 2 14 8 20 8"></polyline>
-          <line x1="16" y1="13" x2="8" y2="13"></line>
-          <line x1="16" y1="17" x2="8" y2="17"></line>
-          <polyline points="10 9 9 9 8 9"></polyline>
-        </svg>
-      )
+  const [active, setActive] = useState(0);
+  const screenRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
+  const isFirstRender = useRef(true);
+
+  const goTo = useCallback((idx: number) => {
+    setActive(idx);
+  }, []);
+
+  // Start/restart the progress bar whenever active changes
+  useEffect(() => {
+    const target = `[data-bar-id="${active}"]`;
+
+    tweenRef.current?.kill();
+    gsap.set(target, { width: "0%" });
+
+    tweenRef.current = gsap.to(target, {
+      width: "100%",
+      duration: DURATION,
+      ease: "none",
+      onComplete: () => {
+        setActive((prev) => (prev + 1) % features.length);
+      },
+    });
+
+    return () => { tweenRef.current?.kill(); };
+  }, [active]);
+
+  // GSAP slide-from-right on phone screen
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
     }
-  ];
+    if (!screenRef.current) return;
+    gsap.fromTo(
+      screenRef.current,
+      { x: "100%", opacity: 0.4 },
+      { x: "0%", opacity: 1, duration: 0.45, ease: "power3.out" }
+    );
+  }, [active]);
+
+  const current = features[active];
 
   return (
-    <section className="w-full py-[clamp(4rem,10vw,8rem)] px-[clamp(1rem,5vw,2rem)] font-sans relative z-10">
+    <section className="w-full py-[clamp(4rem,10vw,4rem)] px-[clamp(1rem,5vw,2rem)] font-sans relative z-10">
       <div className="max-w-[1100px] mx-auto">
-        
-        {/* Top Feature: Split into 3/4 + 1/4 */}
-        <div className="flex flex-col lg:flex-row gap-6 mb-6">
 
-          {/* 3/4 Card — AI Tutor content */}
-          <div className="relative group bg-[var(--color-bg-primary)] rounded-[32px] sm:rounded-[40px] border border-[var(--color-border)] overflow-hidden flex items-center transition-all duration-300 hover:bg-[#ffffff] hover:border-[var(--color-border-strong)] lg:w-3/4">
-            
-            {/* Huge AI TUTOR watermark */}
-            <div className="absolute bottom-[-6.5rem] left-0 pointer-events-none z-10 select-none overflow-hidden h-[45%]">
-              <span className="block text-[clamp(3.5rem,9vw,7rem)] font-black font-[var(--font-space-var)] uppercase text-[var(--color-orange)]/20 group-hover:text-[var(--color-dark)]/20 transition-colors duration-500 whitespace-nowrap leading-none tracking-tighter">
-                AI TUTOR
-              </span>
-            </div>
+        {/* Section label */}
+        <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)] block">
+          FEATURES
+        </span>
 
-            <div className="flex flex-col items-start justify-center p-8 sm:p-12 lg:p-16 z-20">
-              <div className="mb-6 hidden lg:block text-[var(--color-orange)]">
-                <CommentIcon />
-              </div>
-              <h2 className="text-[clamp(1.75rem,2.5vw,2.25rem)] leading-[1.25] font-semibold font-[var(--font-space-var)] text-[var(--color-dark)] tracking-tight mb-5 uppercase">
-                Your Personal Medical Tutor, On Demand
-              </h2>
-              <p className="text-[clamp(0.95rem,1.2vw,1.05rem)] text-[var(--color-text-secondary)] leading-[1.6]">
-                Ask questions the way you actually think. GalenAI explains concepts step-by-step, aligned with standard textbooks — so you stop guessing and start understanding.
-              </p>
-            </div>
+        {/* Section headline */}
+        <h2 className="text-[clamp(2.25rem,4.5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-[var(--color-dark)] tracking-[-0.03em] leading-[1.1] mb-[clamp(2.5rem,6vw,1rem)] max-w-[600px]">
+          Everything you need to{" "}
+          <span className="text-[var(--color-orange)]">ace medicine</span>
+        </h2>
+
+        {/* Main layout */}
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
+
+          {/* Left — Feature list */}
+          <div className="w-full lg:w-[60%] flex flex-col">
+            {features.map((f, i) => {
+              const isActive = f.id === active;
+              const isComingSoon = f.tag === "Coming Soon";
+              return (
+                <button
+                  key={f.id}
+                  onClick={() => goTo(f.id)}
+                  className="w-full text-left group cursor-pointer"
+                >
+                  <div className={`flex gap-5 py-5 border-b border-[var(--color-border)]`}>
+
+                    {/* Left accent bar + number */}
+                    <div className="flex flex-col items-center gap-1.5 pt-0.5 shrink-0">
+                      <div className={`w-[2px] h-5 rounded-full transition-colors duration-300 ${isActive ? "bg-[var(--color-orange)]" : "bg-[var(--color-border-strong)]"}`} />
+                      <span className={`text-[10px] font-semibold tabular-nums transition-colors duration-300 ${isActive ? "text-[var(--color-orange)]" : "text-[var(--color-text-secondary)]"}`}>
+                        0{i + 1}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className={`text-[12px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 ${isActive ? "text-[var(--color-orange)]" : "text-[var(--color-text-secondary)]"}`}>
+                          {f.tag}
+                        </span>
+                        {isComingSoon && (
+                          <span className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-[var(--color-orange)]/10 text-[var(--color-orange)] border border-[var(--color-orange)]/25">
+                            Coming Soon
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className={`font-[var(--font-space-var)] font-semibold leading-snug tracking-tight transition-all duration-300 ${
+                        isActive
+                          ? "text-[var(--color-dark)] text-[1.75rem]"
+                          : "text-[var(--color-text-secondary)] text-[1.3rem] group-hover:text-[var(--color-dark)]"
+                      }`}>
+                        {f.title}
+                      </h3>
+
+                      {/* Expandable description + progress bar */}
+                      <div className={`overflow-hidden transition-all duration-400 ${isActive ? "max-h-40 opacity-100 mt-2.5" : "max-h-0 opacity-0"}`}>
+                        <p className="text-[1.1rem] text-[var(--color-text-secondary)] leading-[1.65]">
+                          {f.desc}
+                        </p>
+
+                        {/* GSAP progress bar */}
+                        <div className="mt-4 h-[2px] w-full bg-[var(--color-border)] rounded-full overflow-hidden">
+                          <div
+                            data-bar-id={f.id}
+                            className="h-full bg-[var(--color-orange)] rounded-full"
+                            style={{ width: "0%" }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
-          {/* 1/4 Card — Phone Mockup */}
-          <div className="group bg-[var(--color-bg-primary)] rounded-[32px] sm:rounded-[40px] border border-[var(--color-border)] overflow-hidden flex flex-col items-center justify-end transition-all duration-300 hover:bg-[#ffffff] hover:border-[var(--color-border-strong)] lg:w-1/4 min-h-[350px] sm:min-h-[420px] pt-8 px-4 relative">
-            <p className="absolute top-7 left-0 right-0 text-center text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-secondary)] z-20">
-              Try the App
-            </p>
-            {/* Phone Mockup */}
-            <div className="bg-[#151516] rounded-t-[24px] sm:rounded-t-[36px] p-1 pb-0 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.15)] w-full max-w-[140px] sm:max-w-[170px] aspect-[9/16] border-[2px] border-b-0 border-[#2a2a2c] relative translate-y-[20%] group-hover:translate-y-[15%] transition-transform duration-500 ease-out">
-              <div className="relative w-full h-full rounded-t-[20px] sm:rounded-t-[30px] overflow-hidden bg-white">
-                <Image 
-                  src="/mobile.png" 
-                  alt="AI Tutor Mobile Interface" 
-                  fill 
-                  className="object-cover object-top"
-                  sizes="200px"
-                  priority
-                />
+          {/* Right — Phone mockup */}
+          <div className="w-full lg:w-[50%] flex justify-center items-start sticky top-8">
+            <div className="relative w-full max-w-[300px] mx-auto">
+              {/* Phone shell */}
+              <div className="bg-[#151516] rounded-[36px] p-[5px] shadow-sm border border-[#2a2a2c] aspect-[9/19.5] relative overflow-hidden">
+                <div className="relative w-full h-full rounded-[30px] overflow-hidden bg-black">
+                  <div ref={screenRef} className="absolute inset-0">
+                    <Image
+                      src={current.screen}
+                      alt={current.title}
+                      fill
+                      className="object-cover object-top scale-[0.97]"
+                      sizes="1500px"
+                    />
+                  </div>
+                </div>
+                {/* Notch */}
+                <div className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-[5px] rounded-full bg-[#2a2a2c] z-10" />
+              </div>
+
+              {/* Dot indicators */}
+              <div className="flex justify-center gap-2 mt-5">
+                {features.map((f) => (
+                  <button
+                    key={f.id}
+                    onClick={() => goTo(f.id)}
+                    className={`rounded-full transition-all duration-300 cursor-pointer ${
+                      f.id === active
+                        ? "w-5 h-1.5 bg-[var(--color-orange)]"
+                        : "w-1.5 h-1.5 bg-[var(--color-border-strong)]"
+                    }`}
+                  />
+                ))}
               </div>
             </div>
           </div>
 
         </div>
-
-        {/* Bottom Minimal Grid for the remaining 5 features */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-          {cards.map((card, idx) => (
-            <div 
-              key={idx} 
-              className="group bg-[var(--color-orange)] rounded-[24px] p-8 flex flex-col items-start transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(235,96,45,0.3)] border border-transparent hover:border-[#ff8c61]"
-            >
-              <div className="mb-6 text-[#ffffff] transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
-                 {card.icon}
-              </div>
-              <h3 className="text-lg font-semibold text-[#ffffff] tracking-tight mb-2 uppercase group-hover:text-[#fff0e4] transition-colors">
-                {card.title}
-              </h3>
-              <p className="text-[var(--color-beige)] text-[14px] sm:text-[15px] leading-relaxed font-medium opacity-90 group-hover:opacity-100 transition-opacity">
-                {card.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-
       </div>
     </section>
   );
