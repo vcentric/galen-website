@@ -40,12 +40,12 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="bg-[#f7f8f8] py-[clamp(4rem,10vw,6rem)] px-0 overflow-hidden" id="testimonials">
+    <section className="bg-[#f7f8f8] py-[clamp(4rem,10vw,4rem)] px-0 overflow-hidden" id="testimonials">
       <div className="max-w-[1200px] mx-auto px-[clamp(1.5rem,5vw,2rem)] mb-[clamp(2rem,5vw,3rem)] flex flex-col items-start">
         <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)]">
           TESTIMONIALS
         </span>
-        <h2 className="text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] font-sans font-medium text-[#222] tracking-[-0.03em] max-w-[1200px]">
+        <h2 className="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.1] font-sans font-medium text-[#222] tracking-[-0.03em] max-w-[1200px]">
           Don't take our word for it!<br/>Hear it from our students.
         </h2>
       </div>
