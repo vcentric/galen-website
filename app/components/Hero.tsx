@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { QrCodeIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { QrCodeIcon, ArrowUpRightIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 const PHRASES = [
   "for daily medical learning.",
@@ -62,10 +62,10 @@ const AudienceButton = ({ audience, isActive, onClick }: AudienceButtonProps) =>
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative pb-2 text-[1.1rem] font-medium border-none bg-transparent cursor-pointer transition-opacity duration-200 capitalize ${
+      className={`relative pb-2 text-[clamp(1rem,2vw,1.1rem)] font-medium border-none bg-transparent cursor-pointer transition-opacity duration-200 capitalize ${
         isActive
-          ? "text-[#2e2e2e] opacity-100"
-          : "text-[#2e2e2e] opacity-50 hover:opacity-100"
+          ? "text-dark opacity-100"
+          : "text-dark opacity-50 hover:opacity-100"
       }`}
     >
       {audience}
@@ -78,7 +78,7 @@ const AudienceButton = ({ audience, isActive, onClick }: AudienceButtonProps) =>
         <path
           ref={pathRef}
           d="M2 5 Q 50 10 98 5"
-          stroke="#eb602d"
+          stroke="var(--color-orange)"
           strokeWidth="3"
           fill="none"
           strokeLinecap="round"
@@ -95,7 +95,7 @@ const AudienceButton = ({ audience, isActive, onClick }: AudienceButtonProps) =>
 
 const Hero = () => {
   const [textIndex, setTextIndex] = useState(0);
-  const textContainerRef = useRef<HTMLSpanElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const container = textContainerRef.current;
@@ -132,14 +132,20 @@ const Hero = () => {
   }, { dependencies: [textIndex], scope: textContainerRef });
 
   const downloadBtnRef = useRef<HTMLAnchorElement>(null);
-  const downloadIconRef = useRef<SVGSVGElement>(null);
   const downloadUnderlineRef = useRef<HTMLSpanElement>(null);
+  const qrPopoverRef = useRef<HTMLDivElement>(null);
 
   const { contextSafe: contextSafeDownload } = useGSAP({ scope: downloadBtnRef });
 
   useGSAP(() => {
     gsap.set(downloadUnderlineRef.current, { scaleX: 0, transformOrigin: "left center" });
-    gsap.set(downloadIconRef.current, { y: 20, opacity: 0 });
+    gsap.set(qrPopoverRef.current, { 
+      opacity: 0, 
+      scale: 0.9, 
+      y: 10, 
+      pointerEvents: "none",
+      visibility: "hidden"
+    });
   }, { scope: downloadBtnRef });
 
   const handleDownloadEnter = contextSafeDownload(() => {
@@ -150,11 +156,15 @@ const Hero = () => {
       ease: "power3.out",
       overwrite: "auto"
     });
-    gsap.to(downloadIconRef.current, {
-      y: 0,
+    
+    // QR Popover Animation
+    gsap.to(qrPopoverRef.current, {
       opacity: 1,
+      scale: 1,
+      y: 0,
+      visibility: "visible",
       duration: 0.4,
-      ease: "back.out(2)",
+      ease: "back.out(1.7)",
       overwrite: "auto"
     });
   });
@@ -167,12 +177,18 @@ const Hero = () => {
       ease: "power3.in",
       overwrite: "auto"
     });
-    gsap.to(downloadIconRef.current, {
-      y: 20,
+
+    // QR Popover Animation
+    gsap.to(qrPopoverRef.current, {
       opacity: 0,
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: "auto"
+      scale: 0.9,
+      y: 10,
+      duration: 0.25,
+      ease: "power2.in",
+      overwrite: "auto",
+      onComplete: () => {
+        gsap.set(qrPopoverRef.current, { visibility: "hidden" });
+      }
     });
   });
 
@@ -198,7 +214,7 @@ const Hero = () => {
     });
     gsap.to(tryTextRef.current, {
       x: -12, // Slide text to the left to make room
-      color: "#eb602d",
+      color: "var(--color-orange)",
       duration: 0.25,
       ease: "power4.out",
       overwrite: "auto"
@@ -209,7 +225,6 @@ const Hero = () => {
       duration: 0.3,
       ease: "back.out(1.5)",
       overwrite: "auto",
-      delay: 0.03 // Slight delay to let text start sliding
     });
   });
 
@@ -236,17 +251,40 @@ const Hero = () => {
     });
   });
 
+  const loginLinkRef = useRef<HTMLAnchorElement>(null);
+  const loginPathRef = useRef<SVGPathElement>(null);
+
+  const { contextSafe: contextSafeLogin } = useGSAP({ scope: loginLinkRef });
+
+  const handleLoginEnter = contextSafeLogin(() => {
+    gsap.to(loginPathRef.current, {
+      strokeDashoffset: 0,
+      duration: 0.25,
+      ease: "power3.out",
+      overwrite: "auto",
+    });
+  });
+
+  const handleLoginLeave = contextSafeLogin(() => {
+    gsap.to(loginPathRef.current, {
+      strokeDashoffset: 1,
+      duration: 0.25,
+      ease: "power3.in",
+      overwrite: "auto",
+    });
+  });
+
   const [selectedAudience, setSelectedAudience] = useState<'students' | 'institutions'>('students');
 
   return (
     <section
-      className="min-h-screen pt-20  px-8 bg-transparent flex justify-center items-center overflow-visible relative"
+      className="min-h-screen pt-[clamp(3.5rem,8vh,5rem)] px-[clamp(1rem,5vw,2rem)] bg-transparent flex justify-center items-center overflow-visible relative"
     >
-      <div className="max-w-[1400px] w-full flex flex-col items-center gap-16 relative z-[2] py-12">
+      <div className="max-w-[1400px] w-full flex flex-col items-center gap-[clamp(2rem,6vw,4rem)] relative z-[2] py-[clamp(1rem,4vw,2rem)]">
         {/* Centered Text Content */}
         <div className="flex flex-col items-center text-center max-w-[900px] mx-auto">
           {/* Audience Toggle */}
-          <div className="inline-flex gap-12 mb-6 relative">
+          <div className="inline-flex gap-[clamp(1.5rem,4vw,3rem)] mb-[clamp(1rem,3vw,1.5rem)] relative">
             {(['students', 'institutions'] as const).map((audience) => (
               <AudienceButton
                 key={audience}
@@ -257,58 +295,84 @@ const Hero = () => {
             ))}
           </div>
           {/* Exam Context Tags */}
-          <div className="flex flex-wrap justify-center items-center gap-2 mb-6 animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
+          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.25rem,1vw,0.5rem)] mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
             {["NEET PG", "NEET SS", "EMREE", "FMGE"].map((exam) => (
               <div
                 key={exam}
-                className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/40 border border-[#eb602d]/40 backdrop-blur-sm cursor-default"
+                className="flex items-center gap-[clamp(0.2rem,0.5vw,0.375rem)] px-[clamp(0.5rem,1.5vw,0.75rem)] py-[clamp(0.15rem,0.5vw,0.25rem)] rounded-full bg-white/40 border border-orange/40 backdrop-blur-sm cursor-default"
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-[#eb602d]/80" />
-                <span className="text-[0.68rem] font-semibold text-[#eb602d] tracking-wider uppercase">
+                <div className="w-1.5 h-1.5 rounded-full bg-orange/80" />
+                <span className="text-[clamp(0.55rem,1vw,0.68rem)] font-semibold text-orange tracking-wider uppercase">
                   {exam}
                 </span>
               </div>
             ))}
           </div>
 
-          <h1 className="text-[4.25rem] font-medium leading-[1.1] text-[#2e2e2e] mb-8 tracking-[-0.03em] max-[768px]:text-[2.5rem]">
+          <h1 className="text-[clamp(1.8rem,5vw+0.5rem,4.25rem)] font-medium leading-[1.1] text-dark mb-[clamp(1.5rem,4vw,2rem)] tracking-[-0.03em]">
             Your personal AI companion <br />
-            <div className="flex items-center justify-center text-[#eb602d] italic">
-              <span className="mr-3 whitespace-nowrap">&gt;</span>
-              <span className="inline-block text-left min-w-[300px]" ref={textContainerRef}>
-                {PHRASES[textIndex].split("").map((char, index) => (
-                  <span key={`${textIndex}-${index}`} className="char-span whitespace-pre">
-                    {char}
-                  </span>
-                ))}
-                <span className="font-thin text-[#eb602d] animate-[blink_1s_step-end_infinite] ml-1 not-italic">
-                  |
-                </span>
-              </span>
+            <div className="flex items-center justify-center text-orange italic">
+              <div 
+                className="flex flex-col md:flex-row items-center md:items-baseline min-w-[300px]" 
+                ref={textContainerRef}
+              >
+                {(() => {
+                  const words = PHRASES[textIndex].split(" ");
+                  const lastWord = words[words.length - 1];
+                  const basePart = words.slice(0, -1).join(" ") + " ";
+                  
+                  return (
+                    <>
+                      <div className="flex items-center">
+                        <span className="mr-3 whitespace-nowrap">&gt;</span>
+                        <span className="whitespace-pre">
+                          {basePart.split("").map((char, index) => (
+                            <span key={`base-${textIndex}-${index}`} className="char-span whitespace-pre">
+                              {char}
+                            </span>
+                          ))}
+                        </span>
+                      </div>
+                      <div className="flex justify-center w-full md:w-auto">
+                        <span className="whitespace-nowrap">
+                          {lastWord.split("").map((char, index) => (
+                            <span key={`last-${textIndex}-${index}`} className="char-span whitespace-pre">
+                              {char}
+                            </span>
+                          ))}
+                          <span className="font-thin text-orange animate-[blink_1s_step-end_infinite] ml-1 not-italic">
+                            |
+                          </span>
+                        </span>
+                      </div>
+                    </>
+                  );
+                })()}
+              </div>
             </div>
           </h1>
 
-          <p className="text-[1.15rem] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-12 mx-auto">
+          <p className="text-[clamp(0.75rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2rem,5vw,3rem)] mx-auto">
             GalenAI is your AI medical mentor that explains, tests, and guides
             you, so you spend less time planning and more time understanding.<br/>
           </p>
 
-          <div className="flex flex-wrap justify-center items-center gap-5 mb-12">
+          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)]">
             <a
               href="#ask"
               ref={tryBtnRef}
               onMouseEnter={handleTryEnter}
               onMouseLeave={handleTryLeave}
-              className="group relative flex items-center justify-center py-[0.85rem] px-8 rounded-full text-[1rem] font-primary font-medium text-white bg-[#eb602d] no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[180px]"
+              className="group relative flex items-center justify-center py-[clamp(0.65rem,1.5vw,0.85rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-white bg-orange no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[180px]"
             >
               <div ref={tryBgRef} className="absolute inset-0 bg-white z-0 rounded-full"></div>
               {/* Text centered exactly when no icon is visible */}
               <div className="relative z-10 flex items-center justify-center w-full">
-                <span ref={tryTextRef} className="text-white transition-colors block">Try GalenAI</span>
+                <span ref={tryTextRef} className="text-white transition-colors block font-semibold">Try GalenAI</span>
                 
                 {/* Icon positioned absolute relative to the center cluster, invisible normally */}
                 <div className="absolute right-0 w-[1rem] h-[1rem] overflow-hidden flex items-center justify-center">
-                  <ArrowUpRightIcon ref={tryIconRef} className="absolute w-[1rem] h-[1rem] text-[#eb602d]" strokeWidth={3} />
+                  <ArrowUpRightIcon ref={tryIconRef} className="absolute w-[1rem] h-[1rem] text-orange" strokeWidth={3} />
                 </div>
               </div>
             </a>
@@ -317,22 +381,78 @@ const Hero = () => {
               ref={downloadBtnRef}
               onMouseEnter={handleDownloadEnter}
               onMouseLeave={handleDownloadLeave}
-              className="relative flex items-center justify-center gap-2 py-[0.85rem] px-8 rounded-full text-[1rem] font-primary font-medium text-[#2e2e2e] no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] "
+              className="relative border border-black/10 shadow-sm flex items-center justify-center gap-[clamp(0.3rem,1vw,0.5rem)] py-[clamp(0.5rem,1.5vw,0.7rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-dark no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] "
             >
-              <span className="relative pb-[2px]">
+              <span className="relative pb-[2px] font-semibold">
                 Download Now For Free
-                <span ref={downloadUnderlineRef} className="absolute left-0 bottom-0 w-full h-[2px] bg-[#eb602d]"></span>
+                <span ref={downloadUnderlineRef} className="absolute left-0 bottom-0 w-full h-[2px] bg-orange"></span>
               </span>
-              <div className="relative w-[1.3rem] h-[1.3rem] overflow-hidden flex items-center justify-center">
-                <QrCodeIcon ref={downloadIconRef} className="absolute w-[1.3rem] h-[1.3rem] text-[#eb602d]" strokeWidth={2.5} />
+              <QrCodeIcon className="w-[1.3rem] h-[1.3rem] text-orange" strokeWidth={2.5} />
+
+              {/* QR Popover - Visible only on Desktop */}
+              <div 
+                ref={qrPopoverRef}
+                className="hidden md:flex absolute bottom-[calc(100%-10rem)] left-[25rem] -translate-x-1/2 w-[220px] p-4 bg-white rounded-2xl border border-black/5 flex-col items-center gap-3 z-50 pointer-events-none shadow-sm"
+              >
+                <div className="w-full aspect-square rounded-xl overflow-hidden bg-orange/5 p-2 border border-orange/10">
+                  <img 
+                    src="/qr.png" 
+                    alt="Scan to Download" 
+                    className="w-full h-full object-contain mix-blend-multiply"
+                  />
+                </div>
+                <div className="flex flex-col items-center gap-1">
+                  <span className="text-[14px] font-bold text-dark">Scan to download</span>
+                  <span className="text-[11px] text-dark/60 font-medium whitespace-nowrap">Available on iOS & Android</span>
+                </div>
+                {/* Arrow */}
+                <div className="absolute right-full top-1/2 -translate-y-1/2 translate-x-1/2 w-4 h-4 bg-white border-l border-b border-black/5 rotate-45 shadow-[-5px_5px_10px_rgba(0,0,0,0.03)]" />
               </div>
             </a>
           </div>
 
-          <div className="flex flex-wrap justify-center items-center text-[0.875rem] text-[rgba(46,46,46,0.6)]">
+          <div className="flex items-center justify-center text-[clamp(0.85rem,1.5vw,0.95rem)] text-dark/70 mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.3s' }}>
+            <span>Already using GalenAI?</span>
+            <span className="mx-3 text-black/20">|</span>
+            <a 
+              href="#login" 
+              ref={loginLinkRef}
+              onMouseEnter={handleLoginEnter}
+              onMouseLeave={handleLoginLeave}
+              className="group relative flex items-center gap-2 text-orange font-medium transition-colors no-underline"
+            >
+              <span className="relative pb-0.5 font-semibold">
+                Login here
+                <svg
+                  viewBox="0 0 100 10"
+                  className="absolute left-0 bottom-[-2px] w-full h-[8px] pointer-events-none"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    ref={loginPathRef}
+                    d="M2 5 Q 50 10 98 5"
+                    stroke="var(--color-orange)"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinecap="round"
+                    pathLength={1}
+                    style={{
+                      strokeDasharray: 1,
+                      strokeDashoffset: 1,
+                    }}
+                  />
+                </svg>
+              </span>
+              <div className="flex items-center justify-center w-[1.3rem] h-[1.3rem] rounded-full bg-orange/10 transition-colors group-hover:bg-orange/20">
+                <ArrowRightIcon className="w-3 h-3 text-orange" strokeWidth={2.5} />
+              </div>
+            </a>
+          </div>
+
+          <div className="flex flex-wrap justify-center items-center text-[clamp(0.75rem,1.5vw,0.875rem)] text-[rgba(46,46,46,0.6)]">
             
             <div className="flex  items-center gap-5">
-              <span className="text-[0.8rem] opacity-80 uppercase tracking-[0.05em]">
+              <span className="text-[clamp(0.7rem,1.2vw,0.8rem)] opacity-80 uppercase tracking-[0.05em]">
                 Backed by
               </span>
            

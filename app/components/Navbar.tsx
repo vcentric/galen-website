@@ -5,14 +5,16 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { ArrowUpRightIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 interface AnimatedNavLinkProps {
   href: string;
   children: React.ReactNode;
+  onClick?: () => void;
+  className?: string; // Added optional className
 }
 
-const AnimatedNavLink = ({ href, children }: AnimatedNavLinkProps) => {
+const AnimatedNavLink = ({ href, children, onClick, className }: AnimatedNavLinkProps) => {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const { contextSafe } = useGSAP({ scope: linkRef });
@@ -38,7 +40,6 @@ const AnimatedNavLink = ({ href, children }: AnimatedNavLinkProps) => {
   const content = (
     <>
       {children}
-      {/* Pen Stroke Underline */}
       <svg
         viewBox="0 0 100 10"
         className="absolute left-0 bottom-[-4px] w-full h-[8px] pointer-events-none"
@@ -47,21 +48,22 @@ const AnimatedNavLink = ({ href, children }: AnimatedNavLinkProps) => {
         <path
           ref={pathRef}
           d="M2 5 Q 50 10 98 5"
-          stroke="#eb602d"
+          stroke="var(--color-orange)"
           strokeWidth="3"
           fill="none"
           strokeLinecap="round"
           pathLength={1}
           style={{
             strokeDasharray: 1,
-            strokeDashoffset: 1, // Start hidden
+            strokeDashoffset: 1,
           }}
         />
       </svg>
     </>
   );
 
-  const className = "relative no-underline text-[#2e2e2e] text-[15px] font-primary font-medium tracking-[0.01em] transition-opacity duration-200 hover:opacity-100 opacity-90 inline-block";
+  // Use provided className or fall back to default
+  const finalClassName = className || "relative no-underline text-dark text-[15px] font-primary font-medium tracking-[0.01em] transition-opacity duration-200 hover:opacity-100 opacity-90 inline-block";
 
   if (href.startsWith("/")) {
     return (
@@ -70,7 +72,8 @@ const AnimatedNavLink = ({ href, children }: AnimatedNavLinkProps) => {
         ref={linkRef}
         onMouseEnter={handleMouseEnter} 
         onMouseLeave={handleMouseLeave}
-        className={className}
+        className={finalClassName}
+        onClick={onClick}
       >
         {content}
       </Link>
@@ -83,7 +86,8 @@ const AnimatedNavLink = ({ href, children }: AnimatedNavLinkProps) => {
       ref={linkRef}
       onMouseEnter={handleMouseEnter} 
       onMouseLeave={handleMouseLeave}
-      className={className}
+      className={finalClassName}
+      onClick={onClick}
     >
       {content}
     </a>
@@ -92,10 +96,14 @@ const AnimatedNavLink = ({ href, children }: AnimatedNavLinkProps) => {
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isActuallyOpen, setIsActuallyOpen] = useState(false); // Controls overlay and pointer events
+  const menuRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const { contextSafe } = useGSAP({ scope: menuRef });
 
   useEffect(() => {
     const handleScroll = () => {
-      // Trigger the pill shape after scrolling down 50px
       setIsScrolled(window.scrollY > 50);
     };
 
@@ -103,73 +111,170 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleMenu = contextSafe(() => {
+    const nextState = !isMenuOpen;
+    setIsMenuOpen(nextState);
+
+    const menu = menuRef.current;
+    
+    if (nextState) {
+      // OPENING
+      setIsActuallyOpen(true);
+      const tl = gsap.timeline({ defaults: { ease: "expo.out", duration: 0.3 } });
+      
+      tl.to(menu, { x: 0, opacity: 1, visibility: "visible", force3D: true })
+        .fromTo(".mobile-nav-item", 
+          { x: -15, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.25, stagger: 0.04, ease: "power2.out" },
+          0.05
+        );
+      
+      if (overlayRef.current) {
+        gsap.to(overlayRef.current, { opacity: 1, duration: 0.25, ease: "power2.out" });
+      }
+
+      document.body.style.overflow = "hidden";
+    } else {
+      // CLOSING
+      const tl = gsap.timeline({ 
+        defaults: { ease: "expo.inOut", duration: 0.25 },
+        onComplete: () => {
+          setIsActuallyOpen(false);
+          document.body.style.overflow = "auto";
+        }
+      });
+
+      tl.to(".mobile-nav-item", { 
+          x: -15, 
+          opacity: 0, 
+          duration: 0.15, 
+          stagger: { each: 0.03, from: "end" } 
+        })
+        .to(menu, { x: "-100%", duration: 0.25 }, "-=0.1");
+
+      if (overlayRef.current) {
+        gsap.to(overlayRef.current, { opacity: 0, duration: 0.15, ease: "power2.in" });
+      }
+    }
+  });
+
+  const closeMenu = () => {
+    if (isMenuOpen) toggleMenu();
+  };
+
+  const navLinks = [
+    { label: "Features", href: "#features" },
+    { label: "Team", href: "/team" },
+    { label: "Blog", href: "/blog" },
+    { label: "FAQ's", href: "#faq" },
+    { label: "Contact", href: "#contact" },
+  ];
 
   return (
-    // Outer wrapper stays fixed at the top, handling the width constraint
-    <div className={`fixed top-0 left-0 right-0 z-[100] flex justify-center transition-all duration-300 pointer-events-none ${
-      isScrolled ? "pt-2" : "pt-2"
-    }`}>
-      
-      {/* Inner container morphs based on scroll state */}
-      <div 
-        className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] nav-glass-container ${
-          isScrolled 
-            ? "is-scrolled w-[calc(100%-5px)] max-w-[1400px] px-6 py-3 border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)]" 
-            : "w-full max-w-[1400px] px-0 py-2 border-transparent"
-        }`}
-      >
-        {/* SVG filter embedded locally for the distortion layer */}
-        <svg style={{ display: 'none' }}>
-          <filter id="nav-glass-distortion" x="-20%" y="-20%" width="140%" height="140%">
-            <feTurbulence type="turbulence" baseFrequency="0.008" numOctaves="2" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="40" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-        </svg>
+    <>
+      {/* Level 1: Standard Stationary Navbar (Top Bar) */}
+      <div className="fixed top-0 left-0 right-0 z-[120] flex justify-center pointer-events-none">
+        <div 
+          className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] nav-glass-container z-10 ${
+            isScrolled 
+              ? "is-scrolled w-[calc(100%-10px)] max-w-[1400px] px-6 py-3 border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)]" 
+              : "w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent"
+          }`}
+        >
+          <svg style={{ display: 'none' }}>
+            <filter id="nav-glass-distortion" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="turbulence" baseFrequency="0.008" numOctaves="2" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="40" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+          </svg>
 
-        {/* Dynamic Glass Background Layers */}
-        <div className="nav-glass-wrapper">
-          <div className="nav-glass-filter"></div>
-          <div className="nav-glass-distortion-overlay"></div>
-          <div className="nav-glass-overlay"></div>
-          <div className="nav-glass-specular"></div>
-        </div>
+          <div className="nav-glass-wrapper">
+            <div className="nav-glass-filter"></div>
+            <div className="nav-glass-distortion-overlay"></div>
+            <div className="nav-glass-overlay"></div>
+            <div className="nav-glass-specular"></div>
+          </div>
 
-        {/* Left: Logo */}
-        <div className="relative z-10 flex-1 flex justify-start ">
-          <Link href="/" className="flex items-center no-underline transition-opacity duration-200 hover:opacity-80">
-            <Image src="/galenai-logo.png" alt="GalenAI" width={140} height={35} className="h-[35px] w-auto" />
-          </Link>
-        </div>
-
-        {/* Center: Nav Links */}
-        <div className="relative z-10 flex-shrink-0">
-          <ul className="flex list-none gap-8 m-0 p-0">
-            <li><AnimatedNavLink href="#features">Features</AnimatedNavLink></li>
-            <li><AnimatedNavLink href="/team">Team</AnimatedNavLink></li>
-            <li><AnimatedNavLink href="/blog">Blog</AnimatedNavLink></li>
-            <li><AnimatedNavLink href="#login">Login</AnimatedNavLink></li>
-          </ul>
-        </div>
-
-        {/* Right: CTA Button */}
-        <div className="relative z-10 flex-1 flex justify-end ">
-          <a
-            href="#ask"
-            className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md h-11 text-[0.95rem] font-primary font-medium pl-6 pr-[3.5rem] bg-[#eb602d] text-white no-underline"
-          >
-            <span className="relative z-10 transition-colors text-white duration-300 group-hover:text-transparent">Ask GalenAI</span>
-            
-            <div
-              className="absolute right-0 top-0 mt-1 mr-1 bg-white text-[#eb602d] flex items-center justify-center group-hover:w-[calc(100%-0.5rem)] transition-all rounded-full duration-300 h-9 w-9 z-20 shadow-sm"
+          <div className="relative z-[40] flex-1 flex justify-start items-center">
+            <Link href="/" className="hidden md:flex items-center no-underline transition-opacity duration-200 hover:opacity-80">
+              <Image src="/galenai-logo.png" alt="GalenAI" width={140} height={35} className="h-[35px] w-auto" />
+            </Link>
+            <button 
+              onClick={toggleMenu}
+              className={`md:hidden p-1.5 text-dark hover:opacity-70 transition-all duration-300 ${isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+              aria-label="Open Menu"
             >
-              <ArrowUpRightIcon className="w-4 h-4 flex-shrink-0 transition-transform duration-300 group-hover:rotate-45" strokeWidth={2.5} />
-            </div>
+              <Bars3Icon className="w-6 h-6" />
+            </button>
+          </div>
 
-           
-          </a>
+          <div className="relative z-10 flex-shrink-0 hidden md:block">
+            <ul className="flex list-none gap-8 m-0 p-0">
+              {navLinks.map((link) => (
+                <li key={link.label}><AnimatedNavLink href={link.href}>{link.label}</AnimatedNavLink></li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="relative z-10 flex-1 flex justify-end">
+            <a
+              href="#ask"
+              className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md h-[clamp(2.5rem,5vw,2.75rem)] text-[clamp(0.85rem,2vw,0.95rem)] font-primary font-medium pl-[clamp(1rem,3vw,1.5rem)] pr-[clamp(3rem,6vw,3.5rem)] bg-orange text-white no-underline"
+            >
+              <span className="relative z-10 transition-colors text-white duration-300 group-hover:text-transparent font-semibold">Try GalenAI</span>
+              <div className="absolute right-0 top-0 mt-1 mr-1 bg-white text-orange flex items-center justify-center group-hover:w-[calc(100%-0.5rem)] transition-all rounded-full duration-300 h-[clamp(2rem,4vw,2.25rem)] w-[clamp(2rem,4vw,2.25rem)] z-20 shadow-sm">
+                <ArrowUpRightIcon className="w-4 h-4 flex-shrink-0 transition-transform duration-300 group-hover:rotate-45" strokeWidth={2.5} />
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Level 2: Overlay Backdrop (High Z for peak prominence) */}
+      {isActuallyOpen && (
+        <div 
+          ref={overlayRef}
+          onClick={closeMenu}
+          className="fixed inset-0 z-[999] bg-black/10 md:hidden cursor-pointer pointer-events-auto"
+          style={{ opacity: 0 }}
+        />
+      )}
+
+      {/* Level 3: Off-Canvas Menu (Drawer) (Highest Z for clear hierarchy) */}
+      <div 
+        ref={menuRef}
+        className="fixed top-0 left-0 w-[60vw] h-full bg-[#fcfaf8] z-[1000] p-[clamp(1.5rem,5vw,2.25rem)] flex flex-col pt-[clamp(2rem,6vw,3rem)] md:hidden shadow-[10px_0_30px_rgba(0,0,0,0.05)] pointer-events-auto"
+        style={{ transform: 'translateX(-100%)', visibility: 'hidden' }}
+      >
+        <div className="mb-10 mobile-nav-item">
+          <button 
+            onClick={closeMenu}
+            className="flex items-center gap-2 text-dark/60 hover:text-orange transition-colors font-primary font-medium text-[14px] uppercase tracking-[0.05em]"
+          >
+            <svg 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.5" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Go Back
+          </button>
+        </div>
+        <nav className="flex flex-col gap-[clamp(1.25rem,2.5vw,1.75rem)]">
+          {navLinks.map((link) => (
+            <div key={link.label} className="mobile-nav-item" onClick={closeMenu}>
+              <AnimatedNavLink href={link.href} className="text-[17px] font-medium tracking-[0.02em]">{link.label}</AnimatedNavLink>
+            </div>
+          ))}
+        </nav>
+      </div>
+    </>
   );
 };
 

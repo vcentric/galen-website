@@ -1,262 +1,124 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import React from "react";
+import Image from "next/image";
+
+// Simple, crisp SVGs matching the reference minimalist style
+const CommentIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" fill="currentColor"/>
+  </svg>
+);
 
 const Features = () => {
-  const features = [
+  const cards = [
     {
-      title: "AI Tutor",
-      featureTitle: "Learn anything.\nClearly.",
-      description:
-        "Ask doubts, learn concepts, and get instant clarity — like having a senior always by your side.",
-      cta: "Try the AI Tutor",
+      title: "Question Banks",
+      desc: "Practice questions that tell you why, not just what. Every question becomes a learning moment — get explanations that connect concepts, highlight traps, and show how examiners think.",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      )
     },
     {
       title: "Flashcards",
-      featureTitle: "Revise smart.\nRetain more.",
-      description:
-        "Active recall + spaced repetition flashcards built from your syllabus. Study less, remember more.",
-      cta: "Start Revising",
+      desc: "Remember what actually matters. High-yield flashcards built from concepts — not random facts. Perfect for quick revisions, spaced recall, and busy days.",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      )
     },
-    {
-      title: "MCQs",
-      featureTitle: "Practice with\npurpose.",
-      description:
-        "Adaptive MCQs that match your level, track your weak areas, and get harder as you improve.",
-      cta: "Start Practicing",
-    },
-  ];
-
-  const comingSoonItems = [
     {
       title: "Clinical Cases",
-      subtitle: "Coming soon",
-      desc: "Practice diagnosis on realistic clinical scenarios.",
-    },
-    {
-      title: "Study Planner",
-      subtitle: "Coming soon",
-      desc: "Smart daily plans that adapt to your progress.",
-    },
-    {
-      title: "Performance Dashboard",
-      subtitle: "Coming soon",
-      desc: "Track strengths, gaps, and growth over time.",
-    },
-  ];
-
-  const ribbonEmojis = [
-    "🧠",
-    "💊",
-    "🩺",
-    "📖",
-    "🧬",
-    "🫀",
-    "💉",
-    "🔬",
-    "📋",
-    "🏥",
-    "🧠",
-    "💊",
-    "🩺",
-    "📖",
-    "🧬",
-    "🫀",
-  ];
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [isSwapping, setIsSwapping] = useState(false);
-  const [isInView, setIsInView] = useState(false);
-  const [isBobbing, setIsBobbing] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const intervalRef = useRef<number | null>(null);
-
-  // Intersection Observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsInView(true);
-            setTimeout(() => setIsBobbing(true), 1000);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+      desc: "Learn medicine the way it's practiced. Work through real-world clinical scenarios. Build diagnostic thinking, connect theory to patients, and prepare for viva and ward discussions.",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      )
     }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const DURATION = 8000;
-
-  const goToFeature = useCallback(
-    (index: number) => {
-      if (index === activeIndex) return;
-      setIsSwapping(true);
-      setTimeout(() => {
-        setActiveIndex(index);
-        setProgress(0);
-        setIsSwapping(false);
-      }, 200);
-    },
-    [activeIndex]
-  );
-
-  // Auto-rotate
-  useEffect(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-
-    const start = Date.now();
-    intervalRef.current = window.setInterval(() => {
-      const elapsed = Date.now() - start;
-      const pct = Math.min((elapsed / DURATION) * 100, 100);
-      setProgress(pct);
-
-      if (pct >= 100) {
-        goToFeature((activeIndex + 1) % features.length);
-      }
-    }, 16);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [activeIndex, features.length, goToFeature]);
-
-  const currentFeature = features[activeIndex];
-  const isComingSoon = activeIndex >= features.length;
+  ];
 
   return (
-    <section
-      ref={sectionRef}
-      id="features"
-      className={`w-full bg-transparent py-16 px-8 max-[600px]:py-12 max-[600px]:px-6 ${
-        isInView ? "is-inview" : ""
-      } ${isBobbing ? "is-bobbing" : ""}`}
-    >
-      <div className="max-w-[1200px] mx-auto">
-        {/* Dark Card Container */}
-        <div className="bg-[#2e2e2e] rounded-[36px] p-12 grid grid-cols-[1.05fr_0.95fr] gap-12 relative overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)] max-[900px]:grid-cols-1 max-[900px]:p-8 max-[900px]:gap-10">
-          {/* Left Column */}
-          <div className="flex flex-col gap-8">
-            {/* Feature Pills */}
-            <div className="flex gap-3 flex-wrap items-center max-[900px]:flex-nowrap max-[900px]:overflow-x-auto max-[900px]:pb-2 max-[900px]:[scrollbar-width:none]">
-              {features.map((f, i) => (
-                <button
-                  key={f.title}
-                  className={`rounded-full py-[0.85rem] px-7 border-[1.5px] text-white flex items-center cursor-pointer text-[1.05rem] font-medium transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    activeIndex === i
-                      ? "border-[#eb602d] bg-[rgba(235,96,45,0.15)] shadow-[0_14px_40px_rgba(235,96,45,0.25)]"
-                      : "border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.25)] hover:-translate-y-[2px] hover:scale-[1.02] hover:shadow-[0_10px_28px_rgba(0,0,0,0.35)] hover:border-[rgba(255,255,255,0.35)]"
-                  }`}
-                  onClick={() => goToFeature(i)}
-                >
-                  {f.title}
-                </button>
-              ))}
-              <button className="rounded-full py-[0.85rem] px-7 border-[1.5px] border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.25)] text-white flex items-center text-[1.05rem] font-medium opacity-50 cursor-not-allowed">
-                Coming Soon ✦
-              </button>
+    <section className="w-full py-[clamp(4rem,10vw,8rem)] px-[clamp(1rem,5vw,2rem)] font-sans relative z-10">
+      <div className="max-w-[1100px] mx-auto">
+        
+        {/* Top Feature: Split into 3/4 + 1/4 */}
+        <div className="flex flex-col lg:flex-row gap-6 mb-6">
+
+          {/* 3/4 Card — AI Tutor content */}
+          <div className="relative group bg-[var(--color-bg-primary)] rounded-[32px] sm:rounded-[40px] border border-[var(--color-border)] overflow-hidden flex items-center transition-all duration-300 hover:bg-[#ffffff] hover:border-[var(--color-border-strong)] lg:w-3/4">
+            
+            {/* Huge AI TUTOR watermark */}
+            <div className="absolute bottom-[-6.5rem] left-0 pointer-events-none z-10 select-none overflow-hidden h-[45%]">
+              <span className="block text-[clamp(3.5rem,9vw,7rem)] font-black font-[var(--font-space-var)] uppercase text-[var(--color-orange)]/20 group-hover:text-[var(--color-dark)]/20 transition-colors duration-500 whitespace-nowrap leading-none tracking-tighter">
+                AI TUTOR
+              </span>
             </div>
 
-            {/* Content Area */}
-            <div
-              className={`flex flex-col ${
-                isSwapping
-                  ? "animate-[contentSwapIn_520ms_cubic-bezier(0.16,1,0.3,1)]"
-                  : ""
-              }`}
-            >
-              <h3 className="text-[clamp(2rem,3vw,3rem)] leading-[1.1] tracking-[-0.02em] text-white m-0 mb-4 font-bold whitespace-pre-line max-[900px]:text-[2rem]">
-                {currentFeature.featureTitle}
-              </h3>
-              <p className="m-0 mb-6 text-[1.05rem] leading-[1.6] text-[rgba(255,255,255,0.78)] max-w-[46ch] max-[900px]:text-base">
-                {currentFeature.description}
+            <div className="flex flex-col items-start justify-center p-8 sm:p-12 lg:p-16 z-20">
+              <div className="mb-6 hidden lg:block text-[var(--color-orange)]">
+                <CommentIcon />
+              </div>
+              <h2 className="text-[clamp(1.75rem,2.5vw,2.25rem)] leading-[1.25] font-semibold font-[var(--font-space-var)] text-[var(--color-dark)] tracking-tight mb-5 uppercase">
+                Your Personal Medical Tutor, On Demand
+              </h2>
+              <p className="text-[clamp(0.95rem,1.2vw,1.05rem)] text-[var(--color-text-secondary)] leading-[1.6]">
+                Ask questions the way you actually think. GalenAI explains concepts step-by-step, aligned with standard textbooks — so you stop guessing and start understanding.
               </p>
-              <button className="self-start rounded-full py-[0.85rem] px-7 border-none font-semibold text-base cursor-pointer bg-[#eb602d] text-white transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[2px] hover:brightness-110">
-                {currentFeature.cta}
-              </button>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="mt-6 h-1 w-full max-w-[420px] bg-[rgba(255,255,255,0.12)] rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full bg-[rgba(255,255,255,0.7)] origin-left transition-[width] duration-[16ms] linear"
-                style={{ width: `${progress}%` }}
-              />
             </div>
           </div>
 
-          {/* Right Column */}
-          <div className="relative min-h-[520px] flex items-center justify-center max-[900px]:min-h-[460px]">
-            {/* Floating Ribbon */}
-            <div className="absolute inset-[-30%_-20%] pointer-events-none z-[1] opacity-30">
-              <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 -rotate-12 flex gap-5 items-center animate-[ribbonFloat_20s_linear_infinite]">
-                {ribbonEmojis.map((emoji, i) => (
-                  <div
-                    key={i}
-                    className="w-[54px] h-[54px] rounded-2xl flex items-center justify-center bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.18)] backdrop-blur-[6px] text-2xl max-[600px]:w-11 max-[600px]:h-11 max-[600px]:text-xl"
-                  >
-                    {emoji}
-                  </div>
-                ))}
-              </div>
-            </div>
-
+          {/* 1/4 Card — Phone Mockup */}
+          <div className="group bg-[var(--color-bg-primary)] rounded-[32px] sm:rounded-[40px] border border-[var(--color-border)] overflow-hidden flex flex-col items-center justify-end transition-all duration-300 hover:bg-[#ffffff] hover:border-[var(--color-border-strong)] lg:w-1/4 min-h-[350px] sm:min-h-[420px] pt-8 px-4 relative">
+            <p className="absolute top-7 left-0 right-0 text-center text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-secondary)] z-20">
+              Try the App
+            </p>
             {/* Phone Mockup */}
-            <div className="relative z-[2]">
-              <div
-                className={`phone-notch w-[240px] h-[520px] rounded-[55px] border-[12px] border-[#1d1d1f] overflow-hidden bg-black shadow-[0_30px_80px_rgba(0,0,0,0.55),inset_0_0_0_1px_rgba(255,255,255,0.1)] relative will-change-[transform,opacity] transition-[transform,box-shadow] duration-[260ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[6px] hover:scale-[1.02] hover:shadow-[0_40px_110px_rgba(0,0,0,0.62)] max-[900px]:w-[300px] max-[900px]:h-[480px] max-[600px]:w-[260px] max-[600px]:h-[420px] ${
-                  isInView
-                    ? "opacity-100 translate-y-0 scale-100 transition-[opacity,transform,box-shadow] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    : "opacity-0 translate-y-[26px] scale-[0.995]"
-                } ${
-                  isBobbing ? "animate-[phoneBob_4.8s_cubic-bezier(0.16,1,0.3,1)_infinite] hover:[animation-play-state:paused]" : ""
-                }`}
-              >
-                {/* Active feature media */}
-                {features.map((f, i) => (
-                  <div
-                    key={i}
-                    className={`absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                      activeIndex === i ? "opacity-100" : "opacity-0"
-                    }`}
-                  >
-                    <div className="flex flex-col items-center justify-center gap-4 text-[rgba(255,255,255,0.6)]">
-                      <span className="text-[1.1rem] font-medium">
-                        {f.title}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-
-                {/* Coming Soon Content */}
-                {isComingSoon && (
-                  <div className="absolute inset-0 text-left py-8 px-6 text-[rgba(255,255,255,0.85)] flex flex-col gap-6 opacity-100">
-                    {comingSoonItems.map((item, i) => (
-                      <div key={i} className="flex flex-col gap-1">
-                        <span className="text-[0.95rem] font-bold text-[rgba(255,255,255,0.95)]">
-                          {item.title}
-                        </span>
-                        <span className="text-[0.8rem] font-semibold text-[rgba(255,255,255,0.7)] italic">
-                          {item.subtitle}
-                        </span>
-                        <span className="text-[0.75rem] leading-[1.4] text-[rgba(255,255,255,0.6)]">
-                          {item.desc}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+            <div className="bg-[#151516] rounded-t-[24px] sm:rounded-t-[36px] p-1 pb-0 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.15)] w-full max-w-[140px] sm:max-w-[170px] aspect-[9/16] border-[2px] border-b-0 border-[#2a2a2c] relative translate-y-[20%] group-hover:translate-y-[15%] transition-transform duration-500 ease-out">
+              <div className="relative w-full h-full rounded-t-[20px] sm:rounded-t-[30px] overflow-hidden bg-white">
+                <Image 
+                  src="/mobile.png" 
+                  alt="AI Tutor Mobile Interface" 
+                  fill 
+                  className="object-cover object-top"
+                  sizes="200px"
+                  priority
+                />
               </div>
             </div>
           </div>
+
         </div>
+
+        {/* Bottom Minimal Grid for the remaining 5 features */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+          {cards.map((card, idx) => (
+            <div 
+              key={idx} 
+              className="group bg-[var(--color-orange)] rounded-[24px] p-8 flex flex-col items-start transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(235,96,45,0.3)] border border-transparent hover:border-[#ff8c61]"
+            >
+              <div className="mb-6 text-[#ffffff] transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                 {card.icon}
+              </div>
+              <h3 className="text-lg font-semibold text-[#ffffff] tracking-tight mb-2 uppercase group-hover:text-[#fff0e4] transition-colors">
+                {card.title}
+              </h3>
+              <p className="text-[var(--color-beige)] text-[14px] sm:text-[15px] leading-relaxed font-medium opacity-90 group-hover:opacity-100 transition-opacity">
+                {card.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   );

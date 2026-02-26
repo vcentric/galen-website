@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { ArrowRightIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { useState, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 interface FAQItem {
   question: string;
@@ -10,6 +13,65 @@ interface FAQItem {
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const tryBtnRef = useRef<HTMLAnchorElement>(null);
+  const tryBgRef = useRef<HTMLDivElement>(null);
+  const tryTextRef = useRef<HTMLSpanElement>(null);
+  const tryIconRef = useRef<SVGSVGElement>(null);
+
+  const { contextSafe: contextSafeTry } = useGSAP({ scope: tryBtnRef });
+
+  useGSAP(() => {
+    gsap.set(tryBgRef.current, { scaleY: 0, transformOrigin: "bottom center" });
+    gsap.set(tryTextRef.current, { x: 0 }); // Initially centered
+    gsap.set(tryIconRef.current, { x: 0, y: 15, opacity: 0 }); // Starts below, no x offset
+  }, { scope: tryBtnRef });
+
+  const handleTryEnter = contextSafeTry(() => {
+    gsap.to(tryBgRef.current, {
+      scaleY: 1,
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryTextRef.current, {
+      x: -12, // Slide text to the left to make room
+      color: "#ffffff",
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryIconRef.current, {
+      y: 0, // Pop up
+      opacity: 1,
+      duration: 0.3,
+      ease: "back.out(1.5)",
+      overwrite: "auto",
+    });
+  });
+
+  const handleTryLeave = contextSafeTry(() => {
+    gsap.to(tryBgRef.current, {
+      scaleY: 0,
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryTextRef.current, {
+      x: 0, // Slide text back to exact center
+      color: "var(--color-orange)",
+      duration: 0.25,
+      ease: "power4.out",
+      overwrite: "auto"
+    });
+    gsap.to(tryIconRef.current, {
+      y: 15, // Drop back down
+      opacity: 0,
+      duration: 0.2,
+      ease: "power3.in",
+      overwrite: "auto"
+    });
+  });
 
   const faqs: FAQItem[] = [
     {
@@ -80,77 +142,103 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-20 px-8 bg-transparent max-[768px]:py-16 max-[768px]:px-6 max-[480px]:py-14 max-[480px]:px-5">
-      <div className="max-w-[900px] mx-auto">
-        <div className="text-center mb-14 max-[768px]:mb-10">
-          <h2 className="text-[2.5rem] font-bold text-[#2e2e2e] mb-3 tracking-[-0.02em] max-[768px]:text-[2rem] max-[480px]:text-[1.75rem]">
-            Frequently Asked Questions
+    <section className="w-full bg-[#fcfaf8] py-[clamp(4rem,10vw,6rem)] px-[clamp(1.5rem,5vw,2rem)] font-sans">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-x-[clamp(3rem,8vw,4rem)] grid-rows-none lg:grid-rows-[auto_1fr]">
+        
+        {/* 1. Heading Column (Top-left on desktop, Top on mobile) */}
+        <div className="lg:col-span-6 lg:row-start-1 flex flex-col items-start lg:pr-8 mb-8 lg:mb-0 lg:self-start">
+          <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)]">
+            FAQ
+          </span>
+          <h2 className="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.1] font-serif font-medium text-[#222] tracking-[-0.03em] mb-[clamp(2rem,6vw,3rem)]">
+            Frequently asked<br/>questions about us.
           </h2>
-          <p className="text-[1.1rem] text-[#666] font-normal max-[768px]:text-base">
-            Everything you need to know about GalenAI
-          </p>
         </div>
 
-        <div className="flex flex-col">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`faq-item border-b border-[rgba(0,0,0,0.08)] transition-all duration-300 hover:bg-[rgba(235,96,45,0.02)] ${
-                index === 0 ? "border-t border-t-[rgba(0,0,0,0.08)]" : ""
-              } ${openIndex === index ? "active" : ""}`}
-            >
-              <button
-                className="w-full bg-none border-none py-7 px-0 flex items-center justify-between gap-8 cursor-pointer text-left transition-all duration-300 max-[768px]:py-6 max-[768px]:gap-5 max-[480px]:py-5"
-                onClick={() => toggleFAQ(index)}
-                aria-expanded={openIndex === index}
+        {/* 2. Right Column: FAQ Accordions (Right on desktop, Middle on mobile) */}
+        <div className="lg:col-span-6 lg:row-span-2 flex flex-col gap-[clamp(0.5rem,1.5vw,0.75rem)] mb-[clamp(3rem,8vw,4rem)] lg:mb-0">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div
+                key={index}
+                className={`w-full rounded-md overflow-hidden transition-all duration-300 ${
+                  isOpen 
+                    ? "bg-[#303030] border-2 border-[#303030] shadow-md" 
+                    : "bg-[#383838] border-2 border-transparent hover:bg-[#404040]"
+                }`}
               >
-                <span className="text-[1.05rem] font-semibold text-[#2e2e2e] leading-[1.5] flex-1 max-[768px]:text-base max-[480px]:text-[0.95rem]">
-                  {faq.question}
-                </span>
-                <svg
-                  className={`faq-icon w-6 h-6 text-[#eb602d] shrink-0 transition-transform duration-300 max-[768px]:w-5 max-[768px]:h-5`}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
+                <button
+                  className="w-full text-left py-[clamp(0.75rem,2vw,1rem)] px-[clamp(1.25rem,3vw,1.5rem)] flex items-center justify-between gap-[clamp(0.5rem,2vw,1rem)] cursor-pointer outline-none border-none bg-transparent"
+                  onClick={() => toggleFAQ(index)}
+                  aria-expanded={isOpen}
                 >
-                  <path d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <div className="faq-answer-wrapper max-h-0 overflow-hidden transition-[max-height] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]">
-                <div className="faq-answer pb-7 max-[768px]:pb-6">
-                  <p className="text-[0.975rem] text-[#555] leading-[1.7] m-0 max-[768px]:text-[0.925rem] max-[480px]:text-[0.9rem]">
-                    {faq.answer}
-                  </p>
-                  {faq.links && (
-                    <div className="flex flex-col gap-3 mt-5">
-                      {faq.links.map((link, linkIndex) => (
-                        <a
-                          key={linkIndex}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-[0.95rem] font-medium text-[#eb602d] no-underline transition-all duration-200 w-fit hover:text-[#d14d1f] hover:gap-[0.625rem] group"
-                        >
-                          {link.label}
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
-                          >
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
-                          </svg>
-                        </a>
-                      ))}
+                  <span className={`text-[clamp(0.95rem,2vw,1.05rem)] font-medium leading-[1.4] transition-colors ${isOpen ? "text-white" : "text-gray-200"}`}>
+                    {faq.question}
+                  </span>
+                  <span className={`text-xl font-light text-gray-300 transition-transform duration-300 ${isOpen ? "rotate-45" : "rotate-0"}`}>
+                    +
+                  </span>
+                </button>
+                
+                <div 
+                  className={`grid transition-all duration-300 ease-in-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-[clamp(1.25rem,3vw,1.5rem)] pb-[clamp(1rem,2.5vw,1.25rem)] pt-0">
+                      <p className="text-[clamp(0.85rem,1.5vw,0.95rem)] text-gray-300 leading-[1.6]">
+                        {faq.answer}
+                      </p>
+                      {faq.links && (
+                        <div className="flex flex-col gap-[clamp(0.25rem,1vw,0.5rem)] mt-[clamp(0.5rem,1.5vw,0.75rem)] mb-[clamp(0.25rem,1vw,0.25rem)]">
+                          {faq.links.map((link, linkIndex) => (
+                            <a
+                              key={linkIndex}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-[clamp(0.85rem,1.5vw,0.9rem)] font-semibold text-[#66a0ff] no-underline transition-all hover:text-[#88b6ff] group w-fit"
+                            >
+                              {link.label}
+                              <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </a>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+
+        {/* 3. CTA Column (Bottom-left on desktop, Bottom on mobile) */}
+        <div className="lg:col-span-6 lg:row-start-2 flex flex-col items-start lg:pr-8 lg:self-start">
+          <div className="w-full bg-orange rounded-md rounded-br-4xl p-[clamp(1.5rem,4vw,2rem)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-[clamp(1rem,3vw,1.5rem)] shadow-md">
+            <p className="text-[clamp(1.05rem,2vw,1.15rem)] leading-snug text-white font-medium max-w-[200px]">
+              Have a question? Let's discuss it now!
+            </p>
+            <a 
+              href="https://wa.me/918848542046" 
+              ref={tryBtnRef}
+              onMouseEnter={handleTryEnter}
+              onMouseLeave={handleTryLeave}
+              className="group relative flex items-center justify-center py-[clamp(0.75rem,2vw,0.85rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.85rem,1.5vw,0.85rem)] font-primary font-medium text-orange bg-white no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[200px]"
+            >
+              <div ref={tryBgRef} className="absolute inset-0 bg-[#303030] z-0 rounded-full"></div>
+              <div className="relative z-10 flex items-center justify-center w-full">
+                <span ref={tryTextRef} className="text-orange transition-colors block" style={{ color: "var(--color-orange)" }}>Chat on WhatsApp</span>
+                <div className="absolute -right-[0.25rem] w-[1.25rem] h-[1.25rem] overflow-hidden flex items-center justify-center">
+                  <ArrowUpRightIcon ref={tryIconRef} className="absolute w-[12px] h-[12px] text-white" strokeWidth={3} />
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
   );
