@@ -99,16 +99,16 @@ const Features = () => {
         </span>
 
         {/* Section headline */}
-        <h2 className="text-[clamp(2.25rem,4.5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-[var(--color-dark)] tracking-[-0.03em] leading-[1.1] mb-[clamp(2.5rem,6vw,1rem)] max-w-[600px]">
+        <h2 className="text-[clamp(2.25rem,4.5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(2.5rem,6vw,1rem)] max-w-[600px]">
           Everything you need to{" "}
-          <span className="text-[var(--color-orange)]">ace medicine</span>
+          <span className="text-orange">ace medicine</span>
         </h2>
 
         {/* Main layout */}
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
 
           {/* Left — Feature list */}
-          <div className="w-full lg:w-[60%] flex flex-col">
+          <div className="w-full lg:w-[60%] flex flex-col h-[750px] lg:h-[650px]">
             {features.map((f, i) => {
               const isActive = f.id === active;
               const isComingSoon = f.tag === "Coming Soon";
@@ -118,12 +118,12 @@ const Features = () => {
                   onClick={() => goTo(f.id)}
                   className="w-full text-left group cursor-pointer"
                 >
-                  <div className={`flex gap-5 py-5 border-b border-[var(--color-border)]`}>
+                  <div className={`flex gap-5 py-5 border-b border-border`}>
 
                     {/* Left accent bar + number */}
                     <div className="flex flex-col items-center gap-1.5 pt-0.5 shrink-0">
-                      <div className={`w-[2px] h-5 rounded-full transition-colors duration-300 ${isActive ? "bg-[var(--color-orange)]" : "bg-[var(--color-border-strong)]"}`} />
-                      <span className={`text-[10px] font-semibold tabular-nums transition-colors duration-300 ${isActive ? "text-[var(--color-orange)]" : "text-[var(--color-text-secondary)]"}`}>
+                      <div className={`w-[2px] h-5 rounded-full transition-colors duration-300 ${isActive ? "bg-orange" : "bg-border-strong"}`} />
+                      <span className={`text-[10px] font-semibold tabular-nums transition-colors duration-300 ${isActive ? "text-orange" : "text-text-secondary"}`}>
                         0{i + 1}
                       </span>
                     </div>
@@ -131,11 +131,11 @@ const Features = () => {
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className={`text-[12px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 ${isActive ? "text-[var(--color-orange)]" : "text-[var(--color-text-secondary)]"}`}>
+                        <span className={`text-[12px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 ${isActive ? "text-orange" : "text-text-secondary"}`}>
                           {f.tag}
                         </span>
                         {isComingSoon && (
-                          <span className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-[var(--color-orange)]/10 text-[var(--color-orange)] border border-[var(--color-orange)]/25">
+                          <span className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-orange/10 text-orange border border-orange/25">
                             Coming Soon
                           </span>
                         )}
@@ -143,23 +143,23 @@ const Features = () => {
 
                       <h3 className={`font-[var(--font-space-var)] font-semibold leading-snug tracking-tight transition-all duration-300 ${
                         isActive
-                          ? "text-[var(--color-dark)] text-[1.75rem]"
-                          : "text-[var(--color-text-secondary)] text-[1.3rem] group-hover:text-[var(--color-dark)]"
+                          ? "text-dark text-[1.75rem]"
+                          : "text-text-secondary text-[1.3rem] group-hover:text-dark"
                       }`}>
                         {f.title}
                       </h3>
 
                       {/* Expandable description + progress bar */}
                       <div className={`overflow-hidden transition-all duration-400 ${isActive ? "max-h-40 opacity-100 mt-2.5" : "max-h-0 opacity-0"}`}>
-                        <p className="text-[1.1rem] text-[var(--color-text-secondary)] leading-[1.65]">
+                        <p className="text-[1.1rem] text-text-secondary leading-[1.65]">
                           {f.desc}
                         </p>
 
                         {/* GSAP progress bar */}
-                        <div className="mt-4 h-[2px] w-full bg-[var(--color-border)] rounded-full overflow-hidden">
+                        <div className="mt-4 h-[2px] w-full bg-border rounded-full overflow-hidden">
                           <div
                             data-bar-id={f.id}
-                            className="h-full bg-[var(--color-orange)] rounded-full"
+                            className="h-full bg-orange rounded-full"
                             style={{ width: "0%" }}
                           />
                         </div>
@@ -199,8 +199,8 @@ const Features = () => {
                     onClick={() => goTo(f.id)}
                     className={`rounded-full transition-all duration-300 cursor-pointer ${
                       f.id === active
-                        ? "w-5 h-1.5 bg-[var(--color-orange)]"
-                        : "w-1.5 h-1.5 bg-[var(--color-border-strong)]"
+                        ? "w-5 h-1.5 bg-orange"
+                        : "w-1.5 h-1.5 bg-border-strong"
                     }`}
                   />
                 ))}
