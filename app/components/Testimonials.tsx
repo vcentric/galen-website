@@ -50,7 +50,7 @@ const Testimonials = () => {
         </h2>
       </div>
 
-      <div className="pl-[clamp(1.5rem,5vw,2rem)] md:pl-[calc((100vw-1200px)/2+2rem)]">
+      <div className="pl-[clamp(1.5rem,5vw,2rem)] md:pl-[calc((100vw-1200px)/2+clamp(1.5rem,5vw,2rem))]">
         <div className="flex gap-[clamp(1rem,3vw,1.5rem)] overflow-x-auto overflow-y-hidden scroll-smooth pb-[clamp(2rem,5vw,3rem)] pr-[clamp(1.5rem,5vw,2rem)] snap-x snap-mandatory [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {testimonials.map((testimonial) => {
             if (testimonial.type === 'video') {

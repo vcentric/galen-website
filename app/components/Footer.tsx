@@ -4,7 +4,7 @@ import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 
 const Footer = () => {
   return (
-    <footer className="w-full pt-[clamp(2rem,5vw,3rem)] pb-[clamp(1rem,3vw,1.5rem)] px-[clamp(1rem,3vw,1.5rem)] font-sans">
+    <footer className="w-full pt-[clamp(2rem,5vw,3rem)] pb-[clamp(1rem,3vw,1.5rem)] px-[clamp(2rem,6vw,4rem)] font-sans">
       <div className="max-w-[1240px] mx-auto bg-[#303030] rounded-[40px] px-[clamp(1.5rem,5vw,2.5rem)] pt-[clamp(2.5rem,6vw,3rem)] pb-[clamp(2rem,5vw,2.5rem)] text-white relative overflow-hidden shadow-sm">
         <div className="flex flex-col md:block relative mb-[clamp(4rem,10vw,5rem)]">
           

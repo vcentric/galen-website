@@ -15,8 +15,8 @@ const Metrics = () => {
   ];
 
   return (
-    <section className="bg-light pt-[clamp(1rem,2vw,2rem)] px-[clamp(1.5rem,5vw,2rem)] pb-[clamp(1.5rem,5vw,2rem)]">
-      <div className="max-w-[1200px] mx-auto flex flex-col items-start mb-[clamp(1rem,3vw,1.5rem)]">
+    <section className="bg-light pt-[clamp(1rem,2vw,2rem)] px-[clamp(2rem,6vw,4rem)] pb-[clamp(1.5rem,5vw,2rem)]">
+      <div className="max-w-[1100px] mx-auto flex flex-col items-start mb-[clamp(1rem,3vw,1.5rem)]">
         <span className="text-[clamp(0.75rem,1vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase">
           METRICS
         </span>

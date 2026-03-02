@@ -10,8 +10,8 @@ const TrustedBy = () => {
   ];
 
   return (
-    <section className="bg-light pt-[clamp(2rem,6vw,4rem)] px-[clamp(1rem,5vw,2rem)] pb-[clamp(3.5rem,8vw,5rem)] overflow-hidden">
-      <div className="max-w-[1200px] mx-auto">
+    <section className="bg-light pt-[clamp(2rem,6vw,4rem)] px-[clamp(2rem,6vw,4rem)] pb-[clamp(3.5rem,8vw,5rem)] overflow-hidden">
+      <div className="max-w-[1100px] mx-auto">
         <h2 className="text-[clamp(1rem,2vw,1.1rem)] font-medium text-dark text-center mb-[clamp(2rem,5vw,3rem)] tracking-[-0.01em]">
           Trusted by students from the top colleges in India
         </h2>
