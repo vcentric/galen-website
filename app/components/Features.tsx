@@ -143,8 +143,8 @@ const Features = () => {
 
                       <h3 className={`font-[var(--font-space-var)] font-semibold leading-snug tracking-tight transition-all duration-300 ${
                         isActive
-                          ? "text-dark text-[1.75rem]"
-                          : "text-text-secondary text-[1.3rem] group-hover:text-dark"
+                          ? "text-dark text-[2rem]"
+                          : "text-text-secondary text-[1.5rem] group-hover:text-dark"
                       }`}>
                         {f.title}
                       </h3>
