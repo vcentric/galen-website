@@ -142,7 +142,7 @@ const FAQ = () => {
   };
 
   return (
-    <section className="w-full bg-[#fcfaf8] py-[clamp(4rem,10vw,4rem)] px-[clamp(2rem,6vw,4rem)] font-sans">
+    <section id="faq" className="w-full bg-[#fcfaf8] py-[clamp(4rem,10vw,4rem)] px-[clamp(2rem,6vw,4rem)] font-sans">
       <div className="max-w-[1125px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-x-[clamp(3rem,8vw,4rem)] grid-rows-none lg:grid-rows-[auto_1fr]">
         
         {/* 1. Heading Column (Top-left on desktop, Top on mobile) */}

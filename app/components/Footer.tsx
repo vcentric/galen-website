@@ -1,10 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SiInstagram, SiLinkedin, SiX, SiYoutube } from "react-icons/si";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 
 const Footer = () => {
   return (
-    <footer className="w-full pt-[clamp(2rem,5vw,3rem)] pb-[clamp(1rem,3vw,1.5rem)] px-[clamp(2rem,6vw,4rem)] font-sans">
+    <footer id="contact" className="w-full pt-[clamp(2rem,5vw,3rem)] pb-[clamp(1rem,3vw,1.5rem)] px-[clamp(2rem,6vw,4rem)] font-sans">
       <div className="max-w-[1240px] mx-auto bg-[#303030] rounded-[40px] px-[clamp(1.5rem,5vw,2.5rem)] pt-[clamp(2.5rem,6vw,3rem)] pb-[clamp(2rem,5vw,2.5rem)] text-white relative overflow-hidden shadow-sm">
         <div className="flex flex-col md:block relative mb-[clamp(4rem,10vw,5rem)]">
           
@@ -157,14 +158,15 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Big Text */}
-        <div className="w-full flex justify-center items-center select-none cursor-default overflow-hidden">
-          <h1 
-            className="text-white font-serif font-light tracking-[-0.05em] leading-[0.8] m-0"
-            style={{ fontSize: "clamp(5.5rem, 24vw, 23rem)" }}
-          >
-            Galen<span className="font-black">AI</span>
-          </h1>
+        <div className="w-full flex justify-center items-center select-none overflow-hidden px-2">
+          <Image
+            src="/footerlogo.png"
+            alt="GalenAI"
+            width={1200}
+            height={200}
+            className="w-full max-w-[min(95%,1100px)] h-auto object-contain"
+            priority={false}
+          />
         </div>
       </div>
 

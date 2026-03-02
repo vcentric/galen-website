@@ -90,7 +90,7 @@ const Features = () => {
   const current = features[active];
 
   return (
-    <section className="w-full py-[clamp(4rem,10vw,4rem)] px-[clamp(2rem,6vw,4rem)] font-sans relative z-10">
+    <section id="features" className="w-full py-[clamp(4rem,10vw,4rem)] px-[clamp(2rem,6vw,4rem)] font-sans relative z-10">
       <div className="max-w-[1100px] mx-auto">
 
         {/* Section label */}
@@ -99,16 +99,16 @@ const Features = () => {
         </span>
 
         {/* Section headline */}
-        <h2 className="text-[clamp(2.25rem,4.5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(2.5rem,6vw,1rem)] whitespace-nowrap">
+        <h2 className="text-[clamp(2.25rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(1.5rem,6vw,1rem)]">
           Everything you need to{" "}
           <span className="text-orange">ace medicine</span>
         </h2>
 
         {/* Main layout */}
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 items-start lg:items-center">
 
           {/* Left — Feature list */}
-          <div className="w-full lg:w-[62%] flex flex-col h-[750px] lg:h-[650px]">
+          <div className="w-full lg:w-[62%] flex flex-col h-auto lg:h-[650px]">
             {features.map((f, i) => {
               const isActive = f.id === active;
               const isComingSoon = f.tag === "Coming Soon";
@@ -143,15 +143,15 @@ const Features = () => {
 
                       <h3 className={`font-[var(--font-space-var)] font-semibold leading-snug tracking-tight transition-all duration-300 ${
                         isActive
-                          ? "text-dark text-[2rem]"
-                          : "text-text-secondary text-[1.5rem] group-hover:text-dark"
+                          ? "text-dark text-[1.5rem] md:text-[2rem]"
+                          : "text-text-secondary text-[1.15rem] md:text-[1.5rem] group-hover:text-dark"
                       }`}>
                         {f.title}
                       </h3>
 
                       {/* Expandable description + progress bar */}
                       <div className={`overflow-hidden transition-all duration-400 ${isActive ? "max-h-40 opacity-100 mt-2.5" : "max-h-0 opacity-0"}`}>
-                        <p className="text-[1.1rem] text-text-secondary leading-[1.65]">
+                        <p className="text-[0.95rem] md:text-[1.1rem] text-text-secondary leading-[1.65]">
                           {f.desc}
                         </p>
 
@@ -173,7 +173,7 @@ const Features = () => {
 
           {/* Right — Phone mockup */}
           <div className="w-full lg:w-[38%] flex justify-center items-center">
-            <div className="relative w-full max-w-[280px] mx-auto p-4 bg-[#f4f4f4] rounded-[48px]">
+            <div className="relative w-full max-w-[240px] sm:max-w-[280px] mx-auto p-3 sm:p-4 bg-[#f4f4f4] rounded-[40px] sm:rounded-[48px]">
               {/* Phone shell */}
               <div className="bg-[#151516] rounded-[36px] p-[5px] shadow-sm border border-[#2a2a2c] aspect-[9/19.5] relative overflow-hidden">
                 <div className="relative w-full h-full rounded-[30px] overflow-hidden bg-black">
