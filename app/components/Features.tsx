@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
+import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 
 const DURATION = 3; // seconds per card
 
@@ -208,6 +209,54 @@ const Features = () => {
             </div>
           </div>
 
+        </div>
+
+        {/* CTA */}
+        <div className="mt-[clamp(3rem,8vw,5rem)] flex justify-center">
+          <a
+            href="#ask"
+            className="group inline-flex items-center text-[clamp(1.75rem,4vw,3rem)] font-semibold font-[var(--font-space-var)] text-dark tracking-tight no-underline"
+            onMouseEnter={(e) => {
+              const path = e.currentTarget.querySelector("path");
+              if (path) gsap.to(path, { strokeDashoffset: 0, duration: 0.3, ease: "power3.out" });
+            }}
+            onMouseLeave={(e) => {
+              const path = e.currentTarget.querySelector("path");
+              if (path) gsap.to(path, { strokeDashoffset: 1, duration: 0.25, ease: "power3.in" });
+            }}
+          >
+            {/* Text — underline SVG only covers this span */}
+            <span className="relative">
+              Start Learning Today!
+              <svg
+                viewBox="0 0 100 10"
+                className="absolute left-0 bottom-[-5px] w-full h-[9px] pointer-events-none"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M2 5 Q 50 10 98 5"
+                  stroke="var(--color-orange)"
+                  strokeWidth="3"
+                  fill="none"
+                  strokeLinecap="butt"
+                  pathLength={1}
+                  style={{ strokeDasharray: 1, strokeDashoffset: 1 }}
+                />
+              </svg>
+            </span>
+
+            {/* Arrow — clip-slides in from right, then rotates */}
+            <span
+              className="overflow-hidden flex items-center w-0 group-hover:w-[clamp(3.25rem,6vw,4.25rem)] ml-0 group-hover:ml-4 transition-[width,margin] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] self-center"
+            >
+              <span className="flex-shrink-0 flex items-center justify-center w-[clamp(2.5rem,5vw,3.5rem)] h-[clamp(2.5rem,5vw,3.5rem)] rounded-full bg-orange text-white">
+                <ArrowUpRightIcon
+                  className="w-[45%] h-[45%] flex-shrink-0 rotate-45 group-hover:rotate-0 transition-transform duration-400 delay-150 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                  strokeWidth={2.5}
+                />
+              </span>
+            </span>
+          </a>
         </div>
 
       </div>
