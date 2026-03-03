@@ -1,13 +1,16 @@
-"use client";
-
-import { useParams } from "next/navigation";
-import { getCategoryFromSlug } from "@/lib/blogUtils";
+import { getAllCategories, getCategorySlug, getCategoryFromSlug } from "@/lib/blogUtils";
 import BlogIndexContent from "../../BlogIndexContent";
 
-export default function BlogCategoryPage() {
-  const params = useParams();
-  const categorySlug = params.category as string;
-  const categoryName = getCategoryFromSlug(categorySlug);
+export function generateStaticParams() {
+  const categories = getAllCategories();
+  return categories.map((cat) => ({ category: getCategorySlug(cat) }));
+}
 
+export default function BlogCategoryPage({
+  params,
+}: {
+  params: { category: string };
+}) {
+  const categoryName = getCategoryFromSlug(params.category);
   return <BlogIndexContent initialCategory={categoryName || "All"} />;
 }
