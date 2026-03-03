@@ -45,11 +45,71 @@ const features = [
   },
 ];
 
+const COMING_SOON_DATA = [
+  {
+    title: "Analytics",
+    subtitle: "Your learning, mapped and measured",
+    desc: "Track what you've mastered, spot weak areas early, and follow a clear competency path—topic by topic.",
+    icon: (
+      <svg className="w-4 h-4 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Viva Agent",
+    subtitle: "Practice viva like a real exam",
+    desc: "Rapid-fire questioning, instant feedback, and model answers—so you speak with clarity in clinics and exams.",
+    icon: (
+      <svg className="w-4 h-4 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Productivity Agent",
+    subtitle: "Turn your day into a study plan",
+    desc: "Convert your syllabus + time into a realistic daily routine—revision, Qs, flashcards, and reminders done for you.",
+    icon: (
+      <svg className="w-4 h-4 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+];
+
 const Features = () => {
   const [active, setActive] = useState(0);
   const screenRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
   const isFirstRender = useRef(true);
+
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      setActive((prev) => (prev + 1) % features.length);
+    } else if (isRightSwipe) {
+      setActive((prev) => (prev - 1 + features.length) % features.length);
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
 
   const goTo = useCallback((idx: number) => {
     setActive(idx);
@@ -174,18 +234,48 @@ const Features = () => {
 
           {/* Right — Phone mockup */}
           <div className="w-full lg:w-[38%] flex justify-center items-center">
-            <div className="relative w-full max-w-[240px] sm:max-w-[280px] mx-auto p-3 sm:p-4 bg-[#f4f4f4] rounded-[40px] sm:rounded-[48px]">
+            <div 
+              className="relative w-full max-w-[240px] sm:max-w-[280px] mx-auto p-3 sm:p-4 bg-[#f4f4f4] rounded-[40px] sm:rounded-[48px] touch-pan-y pointer-events-auto"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
               {/* Phone shell */}
-              <div className="bg-[#151516] rounded-[36px] p-[5px] shadow-sm border border-[#2a2a2c] aspect-[9/19.5] relative overflow-hidden">
+              <div className="bg-[#151516] rounded-[36px] p-[5px] shadow-sm border border-[#2a2a2c] aspect-[9/19.5] relative overflow-hidden pointer-events-none">
                 <div className="relative w-full h-full rounded-[30px] overflow-hidden bg-black">
-                  <div ref={screenRef} className="absolute inset-0">
-                    <Image
-                      src={current.screen}
-                      alt={current.title}
-                      fill
-                      className="object-cover object-top scale-[0.97]"
-                      sizes="1500px"
-                    />
+                  <div ref={screenRef} className="absolute inset-0 w-full h-full">
+                    {current.tag === "Coming Soon" ? (
+                      <div className="w-full h-full bg-[#151516] text-white p-3.5 overflow-y-auto pt-7 pb-10 flex flex-col gap-2.5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                        <div className="text-center mb-1">
+                          <h4 className="text-[14px] font-[var(--font-space-var)] font-bold text-white tracking-tight">Coming Soon</h4>
+                          <p className="text-[9px] text-gray-400">Future updates for you</p>
+                        </div>
+                        {COMING_SOON_DATA.map((item, idx) => (
+                          <div key={idx} className="bg-[#212123] rounded-2xl p-3 border border-[#333] shadow-md flex flex-col gap-1.5 shrink-0">
+                            <div className="flex items-center gap-2">
+                              <div className="w-7 h-7 rounded-full bg-orange/15 flex items-center justify-center shrink-0">
+                                {item.icon}
+                              </div>
+                              <div className="min-w-0">
+                                <h5 className="text-[12px] font-bold text-white leading-tight truncate">{item.title}</h5>
+                                <p className="text-[8px] text-orange font-medium leading-tight truncate">{item.subtitle}</p>
+                              </div>
+                            </div>
+                            <p className="text-[9px] text-[#A0A0A0] leading-[1.4]">
+                              {item.desc}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <Image
+                        src={current.screen}
+                        alt={current.title}
+                        fill
+                        className="object-cover object-top scale-[0.97]"
+                        sizes="1500px"
+                      />
+                    )}
                   </div>
                 </div>
                 {/* Notch */}

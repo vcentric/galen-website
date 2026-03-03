@@ -230,11 +230,17 @@ const Navbar = () => {
           <div className="relative z-10 flex-1 flex justify-end">
             <a
               href="#ask"
-              className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md h-[clamp(2.5rem,5vw,2.75rem)] text-[clamp(0.85rem,2vw,0.95rem)] font-primary font-medium pl-[clamp(1rem,3vw,1.5rem)] pr-[clamp(3rem,6vw,3.5rem)] bg-orange text-white no-underline"
+              className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md
+                         h-8 text-xs pl-3 pr-9
+                         md:h-[clamp(2.5rem,5vw,2.75rem)] md:text-[clamp(0.85rem,2vw,0.95rem)] md:pl-[clamp(1rem,3vw,1.5rem)] md:pr-[clamp(3rem,6vw,3.5rem)]
+                         bg-orange text-white no-underline font-primary font-medium"
             >
               <span className="relative z-10 transition-colors text-white duration-300 group-hover:text-transparent font-semibold">Try GalenAI</span>
-              <div className="absolute right-0 top-0 mt-1 mr-1 bg-white text-orange flex items-center justify-center group-hover:w-[calc(100%-0.5rem)] transition-all rounded-full duration-300 h-[clamp(2rem,4vw,2.25rem)] w-[clamp(2rem,4vw,2.25rem)] z-20 shadow-sm">
-                <ArrowUpRightIcon className="w-4 h-4 flex-shrink-0 transition-transform duration-300 group-hover:rotate-45" strokeWidth={2.5} />
+              <div className="absolute right-0 top-0 mt-0.5 mr-0.5 md:mt-1 md:mr-1 bg-white text-orange flex items-center justify-center group-hover:w-[calc(100%-0.5rem)] transition-all rounded-full duration-300
+                              h-7 w-7
+                              md:h-[clamp(2rem,4vw,2.25rem)] md:w-[clamp(2rem,4vw,2.25rem)]
+                              z-20 shadow-sm">
+                <ArrowUpRightIcon className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 transition-transform duration-300 group-hover:rotate-45" strokeWidth={2.5} />
               </div>
             </a>
           </div>

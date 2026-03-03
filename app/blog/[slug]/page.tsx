@@ -1,3 +1,4 @@
+//"use client";
 import { getAllPosts } from "@/lib/blogUtils";
 import BlogPostClient from "./BlogPostClient";
 
