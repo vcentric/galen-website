@@ -41,7 +41,7 @@ const Testimonials = () => {
 
   return (
     <section className="bg-[#f7f8f8] py-[clamp(4rem,10vw,4rem)] px-0 overflow-hidden" id="testimonials">
-      <div className="max-w-[1200px] mx-auto px-[clamp(1.5rem,5vw,2rem)] mb-[clamp(2rem,5vw,3rem)] flex flex-col items-start">
+      <div className="max-w-[1200px] mx-auto px-[clamp(1.5rem,5vw,2.5rem)] mb-[clamp(2rem,5vw,3rem)] flex flex-col items-start">
         <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)]">
           TESTIMONIALS
         </span>
@@ -50,7 +50,7 @@ const Testimonials = () => {
         </h2>
       </div>
 
-      <div className="pl-[clamp(1.5rem,5vw,2rem)] md:pl-[calc((100vw-1200px)/2+2rem)]">
+      <div className="pl-[clamp(1.5rem,5vw,2rem)] md:pl-[calc((100vw-1200px)/2+clamp(1.5rem,5vw,2.25rem))]">
         <div className="flex gap-[clamp(1rem,3vw,1.5rem)] overflow-x-auto overflow-y-hidden scroll-smooth pb-[clamp(2rem,5vw,3rem)] pr-[clamp(1.5rem,5vw,2rem)] snap-x snap-mandatory [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {testimonials.map((testimonial) => {
             if (testimonial.type === 'video') {

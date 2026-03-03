@@ -278,7 +278,7 @@ const Hero = () => {
 
   return (
     <section
-      className="min-h-screen pt-[clamp(3.5rem,8vh,5rem)] px-[clamp(1rem,5vw,2rem)] bg-transparent flex justify-center items-center overflow-visible relative"
+      className="min-h-screen pt-[clamp(3.5rem,8vh,5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative"
     >
       <div className="max-w-[1400px] w-full flex flex-col items-center gap-[clamp(2rem,6vw,4rem)] relative z-[2] py-[clamp(1rem,4vw,2rem)]">
         {/* Centered Text Content */}

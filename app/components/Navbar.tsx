@@ -62,6 +62,17 @@ const AnimatedNavLink = ({ href, children, onClick, className }: AnimatedNavLink
     </>
   );
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+    onClick?.();
+  };
+
   // Use provided className or fall back to default
   const finalClassName = className || "relative no-underline text-dark text-[15px] font-primary font-medium tracking-[0.01em] transition-opacity duration-200 hover:opacity-100 opacity-90 inline-block";
 
@@ -87,7 +98,7 @@ const AnimatedNavLink = ({ href, children, onClick, className }: AnimatedNavLink
       onMouseEnter={handleMouseEnter} 
       onMouseLeave={handleMouseLeave}
       className={finalClassName}
-      onClick={onClick}
+      onClick={handleClick}
     >
       {content}
     </a>

@@ -3,7 +3,6 @@ import { Space_Grotesk, Raleway } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import ScrollToTop from "./components/ScrollToTop";
 
 const space = Space_Grotesk({
   variable: "--font-space-var",
@@ -35,7 +34,6 @@ export default function RootLayout({
       >
         <Navbar />
         <main className="relative w-full min-h-screen">
-          <ScrollToTop />
           {children}
           <Footer />
         </main>
