@@ -51,6 +51,33 @@ const Features = () => {
   const tweenRef = useRef<gsap.core.Tween | null>(null);
   const isFirstRender = useRef(true);
 
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      setActive((prev) => (prev + 1) % features.length);
+    } else if (isRightSwipe) {
+      setActive((prev) => (prev - 1 + features.length) % features.length);
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   const goTo = useCallback((idx: number) => {
     setActive(idx);
   }, []);
@@ -174,9 +201,14 @@ const Features = () => {
 
           {/* Right — Phone mockup */}
           <div className="w-full lg:w-[38%] flex justify-center items-center">
-            <div className="relative w-full max-w-[240px] sm:max-w-[280px] mx-auto p-3 sm:p-4 bg-[#f4f4f4] rounded-[40px] sm:rounded-[48px]">
+            <div 
+              className="relative w-full max-w-[240px] sm:max-w-[280px] mx-auto p-3 sm:p-4 bg-[#f4f4f4] rounded-[40px] sm:rounded-[48px] touch-pan-y pointer-events-auto"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
               {/* Phone shell */}
-              <div className="bg-[#151516] rounded-[36px] p-[5px] shadow-sm border border-[#2a2a2c] aspect-[9/19.5] relative overflow-hidden">
+              <div className="bg-[#151516] rounded-[36px] p-[5px] shadow-sm border border-[#2a2a2c] aspect-[9/19.5] relative overflow-hidden pointer-events-none">
                 <div className="relative w-full h-full rounded-[30px] overflow-hidden bg-black">
                   <div ref={screenRef} className="absolute inset-0">
                     <Image
