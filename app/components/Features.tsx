@@ -109,7 +109,7 @@ const Features = () => {
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 items-start lg:items-center">
 
           {/* Left — Feature list */}
-          <div className="w-full lg:w-[62%] flex flex-col h-auto lg:h-[650px]">
+          <div className="w-full lg:w-[62%] flex flex-col min-h-[520px] lg:h-[650px]">
             {features.map((f, i) => {
               const isActive = f.id === active;
               const isComingSoon = f.tag === "Coming Soon";
