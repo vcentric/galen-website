@@ -50,11 +50,11 @@ const Comparison = () => {
   return (
     <section className="py-[clamp(3.5rem,8vw,4rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent" id="comparison">
       <div className="max-w-[1125px] mx-auto text-center">
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-center">
           <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)]">
             COMPARISON
           </span>
-          <h2 className="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.1] text-left font-sans font-medium text-[#222] tracking-[-0.03em] max-w-[900px]">
+          <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] leading-[1.1] text-center font-sans font-medium text-[#222] tracking-[-0.03em] max-w-[1200px]">
             GalenAI &ndash; <span className="text-[#EB602D]">Your Best Choice</span> for<br className="hidden md:block" /> Medical Excellence &amp; Affordability
           </h2>
         </div>

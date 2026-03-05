@@ -286,7 +286,7 @@ const Navbar = () => {
         <nav className="flex flex-col gap-[clamp(1.25rem,2.5vw,1.75rem)]">
           {navLinks.map((link) => (
             <div key={link.label} className="mobile-nav-item" onClick={closeMenu}>
-              <AnimatedNavLink href={link.href} className="text-[17px] font-medium tracking-[0.02em]">{link.label}</AnimatedNavLink>
+              <AnimatedNavLink href={link.href} className="relative inline-block text-dark no-underline text-[17px] font-medium tracking-[0.02em] opacity-90 hover:opacity-100 transition-opacity duration-200">{link.label}</AnimatedNavLink>
             </div>
           ))}
         </nav>

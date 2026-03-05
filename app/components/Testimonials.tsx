@@ -1,5 +1,4 @@
 import { Caveat } from 'next/font/google';
-import { PlayIcon } from "@heroicons/react/24/solid";
 
 const caveat = Caveat({ subsets: ['latin'], weight: ['400', '700'], display: 'swap' });
 
@@ -45,7 +44,7 @@ const Testimonials = () => {
         <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)]">
           TESTIMONIALS
         </span>
-        <h2 className="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.1] font-sans font-medium text-[#222] tracking-[-0.03em] max-w-[1200px]">
+        <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] leading-[1.1] font-sans font-medium text-[#222] tracking-[-0.03em] max-w-[1200px]">
           Don't take our word for it!<br/>Hear it from our students.
         </h2>
       </div>
