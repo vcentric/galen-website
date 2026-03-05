@@ -86,6 +86,7 @@ const Features = () => {
 
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+  const swipeDirection = useRef<number>(1); // 1 = forward, -1 = backward
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX;
@@ -102,8 +103,10 @@ const Features = () => {
     const isRightSwipe = distance < -50;
 
     if (isLeftSwipe) {
+      swipeDirection.current = 1;
       setActive((prev) => (prev + 1) % features.length);
     } else if (isRightSwipe) {
+      swipeDirection.current = -1;
       setActive((prev) => (prev - 1 + features.length) % features.length);
     }
 
@@ -127,6 +130,7 @@ const Features = () => {
       duration: DURATION,
       ease: "none",
       onComplete: () => {
+        swipeDirection.current = 1; // auto-advance is always forward
         setActive((prev) => (prev + 1) % features.length);
       },
     });
@@ -141,9 +145,10 @@ const Features = () => {
       return;
     }
     if (!screenRef.current) return;
+    const startX = swipeDirection.current > 0 ? "100%" : "-100%";
     gsap.fromTo(
       screenRef.current,
-      { x: "100%", opacity: 0.4 },
+      { x: startX, opacity: 0.4 },
       { x: "0%", opacity: 1, duration: 0.45, ease: "power3.out" }
     );
   }, [active]);
@@ -160,7 +165,7 @@ const Features = () => {
         </span>
 
         {/* Section headline */}
-        <h2 className="text-[clamp(2.25rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(1.5rem,6vw,1rem)]">
+        <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(1.5rem,6vw,1rem)]">
           Everything you need to{" "}
           <span className="text-orange">ace medicine</span>
         </h2>

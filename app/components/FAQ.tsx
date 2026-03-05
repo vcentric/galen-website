@@ -142,7 +142,7 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="w-full bg-[#fcfaf8] py-[clamp(4rem,10vw,4rem)] px-[clamp(2rem,6vw,4rem)] font-sans">
+    <section id="faq" className="w-full bg-[linear-gradient(to_bottom,#ffffff,#fcfaf8_20%,#fcfaf8_80%,#ffffff)] py-[clamp(4rem,10vw,4rem)] px-[clamp(2rem,6vw,4rem)] font-sans">
       <div className="max-w-[1125px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-x-[clamp(3rem,8vw,4rem)] grid-rows-none lg:grid-rows-[auto_1fr]">
         
         {/* 1. Heading Column (Top-left on desktop, Top on mobile) */}
@@ -150,7 +150,7 @@ const FAQ = () => {
           <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)]">
             FAQ
           </span>
-          <h2 className="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.1] font-serif font-medium text-[#222] tracking-[-0.03em] mb-[clamp(2rem,6vw,3rem)]">
+          <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] leading-[1.1] font-serif font-medium text-[#222] tracking-[-0.03em] mb-[clamp(2rem,6vw,3rem)]">
             Frequently asked<br/>questions about us.
           </h2>
         </div>

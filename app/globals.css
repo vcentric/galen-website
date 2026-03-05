@@ -135,6 +135,68 @@ nav, nav a, nav button {
   to   { transform: translateX(-50%); }
 }
 
+/* TrustedBy infinite marquee — track is absolute, two copies, so -50% = one copy */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── TrustedBy Marquee ── */
+:root {
+  --mq-h: 3rem;
+}
+@media (min-width: 640px)  { :root { --mq-h: 3.75rem; } }
+@media (min-width: 1024px) { :root { --mq-h: 4.5rem;  } }
+
+.trusted-marquee {
+  position: relative;
+  width: 100%;
+  height: var(--mq-h);
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%, black 12%, black 88%, transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%, black 12%, black 88%, transparent 100%
+  );
+}
+
+.trusted-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  height: var(--mq-h);
+  will-change: transform;
+  animation: marquee 20s linear infinite;
+}
+
+.trusted-track:hover {
+  animation-play-state: paused;
+}
+
+.trusted-item {
+  display: inline-flex;
+  align-items: center;
+  height: var(--mq-h);
+  padding-right: clamp(1.25rem, 3vw, 2rem);
+}
+
+.trusted-item img {
+  height: var(--mq-h) !important;
+  width: auto !important;
+  max-width: none !important;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.trusted-item:hover img {
+  filter: grayscale(0%);
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }

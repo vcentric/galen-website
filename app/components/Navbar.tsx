@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowUpRightIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -173,8 +174,13 @@ const Navbar = () => {
     if (isMenuOpen) toggleMenu();
   };
 
+  const pathname = usePathname();
+  const isSecondaryPage = pathname === "/team" || pathname === "/blog" || pathname.startsWith("/blog/");
+
   const navLinks = [
-    { label: "Features", href: "#features" },
+    isSecondaryPage
+      ? { label: "Home", href: "/" }
+      : { label: "Features", href: "#features" },
     { label: "Team", href: "/team" },
     { label: "Blog", href: "/blog" },
     { label: "FAQ's", href: "#faq" },
@@ -286,7 +292,7 @@ const Navbar = () => {
         <nav className="flex flex-col gap-[clamp(1.25rem,2.5vw,1.75rem)]">
           {navLinks.map((link) => (
             <div key={link.label} className="mobile-nav-item" onClick={closeMenu}>
-              <AnimatedNavLink href={link.href} className="text-[17px] font-medium tracking-[0.02em]">{link.label}</AnimatedNavLink>
+              <AnimatedNavLink href={link.href} className="relative inline-block text-dark no-underline text-[17px] font-medium tracking-[0.02em] opacity-90 hover:opacity-100 transition-opacity duration-200">{link.label}</AnimatedNavLink>
             </div>
           ))}
         </nav>

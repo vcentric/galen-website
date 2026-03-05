@@ -1,5 +1,4 @@
 import { Caveat } from 'next/font/google';
-import { PlayIcon } from "@heroicons/react/24/solid";
 
 const caveat = Caveat({ subsets: ['latin'], weight: ['400', '700'], display: 'swap' });
 
@@ -40,12 +39,12 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="bg-[#f7f8f8] py-[clamp(4rem,10vw,4rem)] px-0 overflow-hidden" id="testimonials">
+    <section className="bg-[linear-gradient(to_bottom,#ffffff,#f7f8f8_20%,#f7f8f8_80%,#ffffff)] py-[clamp(4rem,10vw,4rem)] px-0 overflow-hidden" id="testimonials">
       <div className="max-w-[1200px] mx-auto px-[clamp(1.5rem,5vw,2.5rem)] mb-[clamp(2rem,5vw,3rem)] flex flex-col items-start">
         <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)]">
           TESTIMONIALS
         </span>
-        <h2 className="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.1] font-sans font-medium text-[#222] tracking-[-0.03em] max-w-[1200px]">
+        <h2 className="text-[clamp(1.8rem,5vw,3.25rem)] leading-[1.1] font-sans font-medium text-[#222] tracking-[-0.03em] max-w-[1200px]">
           Don't take our word for it!<br/>Hear it from our students.
         </h2>
       </div>
