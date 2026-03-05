@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowUpRightIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -173,8 +174,13 @@ const Navbar = () => {
     if (isMenuOpen) toggleMenu();
   };
 
+  const pathname = usePathname();
+  const isSecondaryPage = pathname === "/team" || pathname === "/blog" || pathname.startsWith("/blog/");
+
   const navLinks = [
-    { label: "Features", href: "#features" },
+    isSecondaryPage
+      ? { label: "Home", href: "/" }
+      : { label: "Features", href: "#features" },
     { label: "Team", href: "/team" },
     { label: "Blog", href: "/blog" },
     { label: "FAQ's", href: "#faq" },

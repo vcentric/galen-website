@@ -12,7 +12,7 @@ const logos = [
 
 export default function TrustedBy() {
   return (
-    <section className="bg-light pt-[clamp(2rem,6vw,4rem)] pb-[clamp(3.5rem,8vw,5rem)]">
+    <section className="bg-[linear-gradient(to_bottom,#ffffff,#fff0e4_20%,#fff0e4_80%,#ffffff)] pt-[clamp(2rem,6vw,4rem)] pb-[clamp(3.5rem,8vw,5rem)]">
       <div className="max-w-[1400px] mx-auto">
         <h2 className="text-[clamp(0.9rem,2vw,1.1rem)] font-medium text-dark text-center mb-[clamp(2rem,5vw,3rem)] tracking-[-0.01em] px-[clamp(1rem,4vw,3rem)]">
           Trusted by students from the top colleges in India
