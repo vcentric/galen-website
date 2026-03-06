@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowUpRightIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import NMCBanner from "./institutions/NMCBanner";
 
 interface AnimatedNavLinkProps {
   href: string;
@@ -189,13 +190,18 @@ const Navbar = () => {
 
   return (
     <>
+      {pathname === "/institutions" && (
+        <div className="absolute top-0 left-0 right-0 w-full z-[130] pointer-events-auto">
+          <NMCBanner />
+        </div>
+      )}
       {/* Level 1: Standard Stationary Navbar (Top Bar) */}
-      <div className="fixed top-0 left-0 right-0 z-[120] flex justify-center pointer-events-none">
+      <div className="fixed top-0 left-0 right-0 z-[120] flex flex-col items-center pointer-events-none">
         <div 
           className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] nav-glass-container z-10 ${
             isScrolled 
-              ? "is-scrolled w-[calc(100%-10px)] max-w-[1400px] px-6 py-3 border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)]" 
-              : "w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent"
+              ? "is-scrolled w-[calc(100%-10px)] max-w-[1400px] px-6 py-3 border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)] mt-2" 
+              : `w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent ${pathname === "/institutions" ? "mt-[44px] md:mt-[32px]" : "mt-0"}`
           }`}
         >
           <svg style={{ display: 'none' }}>
