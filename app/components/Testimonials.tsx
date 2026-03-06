@@ -1,42 +1,9 @@
 import { Caveat } from 'next/font/google';
+import { testimonials } from '../data/testimonials';
 
 const caveat = Caveat({ subsets: ['latin'], weight: ['400', '700'], display: 'swap' });
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      id: 1,
-      type: "text",
-      text: `"The lovely team at GalenAI has provided my studies with significant leverage. Their work is exceptionally professional, and they take the time to understand where I'm weakest. Additionally, my learning efficiency is impressively fast!"`,
-      name: "Priya Iyer",
-      meta: "2nd Year, CMC Vellore",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya",
-    },
-    {
-      id: 2,
-      type: "video",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop",
-      name: "Arjun Sharma",
-      meta: "3rd Year, AIIMS Delhi",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Arjun",
-    },
-    {
-      id: 3,
-      type: "text",
-      text: `"GalenAI has greatly exceeded our expectations. The communication is always excellent, the turnaround is extremely quick, and the insights are fresh, innovative, and spot on!"`,
-      name: "Rahul Patel",
-      meta: "Final Year, MAMC Delhi",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul",
-    },
-    {
-      id: 4,
-      type: "text",
-      text: `"I was overwhelmed by the syllabus until GalenAI. The clinical cases helped me apply theory to real patients. It feels like I'm preparing for internship already. My confidence skyrocketed."`,
-      name: "Sneha Reddy",
-      meta: "1st Year, St. John's Med College",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sneha",
-    }
-  ];
 
   return (
     <section className="bg-[linear-gradient(to_bottom,#ffffff,#f7f8f8_20%,#f7f8f8_80%,#ffffff)] py-[clamp(4rem,10vw,4rem)] px-0 overflow-hidden" id="testimonials">
