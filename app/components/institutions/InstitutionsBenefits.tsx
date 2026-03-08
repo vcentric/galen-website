@@ -1,7 +1,7 @@
 import React from 'react';
 
 const InstitutionsBenefits = () => (
-    <section className="py-16 sm:py-24 bg-[#f6f4f1]">
+    <section className="py-16 sm:py-24 bg-transparent">
         <div className="max-w-[1160px] mx-auto px-5 sm:px-8">
             <div className="text-[0.78rem] font-semibold tracking-widest uppercase text-[#eb602d] mb-4">Institution Benefits</div>
             <h2 className="text-[2rem] sm:text-[2.6rem] font-medium leading-[1.15] tracking-[-0.03em] text-[#2e2e2e] mb-5">What institutions gain</h2>

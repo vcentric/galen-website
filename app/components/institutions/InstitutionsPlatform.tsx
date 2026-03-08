@@ -23,7 +23,7 @@ const platformLayers = [
 ];
 
 const InstitutionsPlatform = () => (
-    <section className="py-16 sm:py-24 bg-[#f6f4f1]" id="overview">
+    <section className="py-16 sm:py-24 bg-transparent" id="overview">
         <div className="max-w-[1160px] mx-auto px-5 sm:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-[1.1fr,0.9fr] gap-12 lg:gap-16 items-center">
                 <div className="flex flex-col">

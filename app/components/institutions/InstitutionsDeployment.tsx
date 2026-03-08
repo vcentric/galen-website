@@ -9,7 +9,7 @@ const deploymentSteps = [
 ];
 
 const InstitutionsDeployment = () => (
-    <section className="py-16 sm:py-24 bg-white">
+    <section className="py-16 sm:py-24 bg-transparent">
         <div className="max-w-[1160px] mx-auto px-5 sm:px-8 flex flex-col items-center">
             <div className="text-[0.78rem] self-start sm:self-auto sm:text-center w-full font-semibold tracking-widest uppercase text-[#eb602d] mb-4">Deployment</div>
             <h2 className="text-[2rem] self-start sm:self-auto sm:text-center w-full sm:text-[2.6rem] font-medium leading-[1.15] tracking-[-0.03em] text-[#2e2e2e] mb-5">Designed for medical colleges</h2>
