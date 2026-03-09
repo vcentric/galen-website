@@ -83,7 +83,7 @@ const InstitutionsProblem = () => {
                         </span>
                     </h2>
                     
-                    <p className="text-[0.95rem] sm:text-[1.05rem] leading-[1.6] text-gray-500 max-w-[700px] m-0">
+                    <p className="text-[1rem] sm:text-[1.15rem] leading-[1.65] text-gray-500 max-w-[700px] m-0">
                         Faculty members balance multiple critical responsibilities — treating patients, teaching students, and monitoring training. Administrative tasks should not reduce their valuable teaching time.
                     </p>
                 </div>

@@ -41,7 +41,7 @@ const modules = [
 
 const InstitutionsModules = () => {
     return (
-        <section className="bg-[linear-gradient(to_bottom,#ffffff,#f7f8f8_20%,#f7f8f8_80%,#ffffff)] min-h-[100vh] flex flex-col justify-center py-12 sm:py-16 overflow-hidden border-t border-gray-100" id="modules">
+        <section className="bg-[linear-gradient(to_bottom,#ffffff,#f7f8f8_20%,#f7f8f8_80%,#ffffff)] min-h-[100vh] flex flex-col justify-center py-12 sm:py-16 overflow-hidden" id="modules">
             <div className="max-w-[1160px] mx-auto px-5 sm:px-8 w-full">
                 
                 {/* Header Area Matched with Solution Section */}
@@ -100,7 +100,7 @@ const InstitutionsModules = () => {
                 </div>
 
                 {/* Bottom CTA Area - Centered and Compact */}
-                <div className="mt-8 sm:mt-12 text-center">
+                <div className="mt-8 sm:mt-16 text-center">
                     <PrimaryButton 
                         href="#contact" 
                         text="Request Institutional Demo" 

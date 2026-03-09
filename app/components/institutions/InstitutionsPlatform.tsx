@@ -31,7 +31,7 @@ const InstitutionsPlatform = () => (
             <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-5">
                 One Connected Medical Education LMS
             </h2>
-            <p className="text-[1.15rem] leading-[1.65] text-[#2e2e2e]/65 max-w-[640px] mb-8">
+            <p className="text-[1rem] sm:text-[1.15rem] leading-[1.65] text-gray-500 max-w-[640px] mb-8">
                 GalenAI connects students, faculty, and institutions through a single
                 intelligent learning infrastructure.
             </p>

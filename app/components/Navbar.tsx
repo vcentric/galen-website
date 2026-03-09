@@ -178,15 +178,25 @@ const Navbar = () => {
   const pathname = usePathname();
   const isSecondaryPage = pathname === "/team" || pathname === "/blog" || pathname.startsWith("/blog/");
 
-  const navLinks = [
-    isSecondaryPage
-      ? { label: "Home", href: "/" }
-      : { label: "Features", href: "#features" },
-    { label: "Team", href: "/team" },
-    { label: "Blog", href: "/blog" },
-    { label: "FAQ's", href: "#faq" },
-    { label: "Contact", href: "#contact" },
-  ];
+  const isInstitutions = pathname === "/institutions";
+
+  const navLinks = isInstitutions
+    ? [
+        { label: "Solution", href: "#overview" },
+        { label: "Team", href: "/team" },
+        { label: "Blog", href: "/blog" },
+        { label: "Outcomes", href: "#outcomes" },
+        { label: "Contact", href: "#contact" },
+      ]
+    : [
+        isSecondaryPage
+          ? { label: "Home", href: "/" }
+          : { label: "Features", href: "#features" },
+        { label: "Team", href: "/team" },
+        { label: "Blog", href: "/blog" },
+        { label: "FAQ's", href: "#faq" },
+        { label: "Contact", href: "#contact" },
+      ];
 
   return (
     <>

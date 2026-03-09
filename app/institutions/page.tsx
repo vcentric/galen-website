@@ -7,8 +7,7 @@ import InstitutionsProblem from '../components/institutions/InstitutionsProblem'
 import InstitutionsPlatform from '../components/institutions/InstitutionsPlatform';
 import InstitutionsModules from '../components/institutions/InstitutionsModules';
 import InstitutionsDataFlow from '../components/institutions/InstitutionsDataFlow';
-import InstitutionsBenefits from '../components/institutions/InstitutionsBenefits';
-import InstitutionsDeployment from '../components/institutions/InstitutionsDeployment';
+import InstitutionsOutcomes from '../components/institutions/InstitutionsOutcomes';
 
 const InstitutionsPage = () => (
     <>
@@ -18,8 +17,7 @@ const InstitutionsPage = () => (
             <InstitutionsPlatform />
             <InstitutionsModules />
             <InstitutionsDataFlow />
-            <InstitutionsBenefits />
-            <InstitutionsDeployment />
+            <InstitutionsOutcomes />
  
         </main>
     </>
