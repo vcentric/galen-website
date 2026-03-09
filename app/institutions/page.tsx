@@ -9,7 +9,6 @@ import InstitutionsModules from '../components/institutions/InstitutionsModules'
 import InstitutionsDataFlow from '../components/institutions/InstitutionsDataFlow';
 import InstitutionsBenefits from '../components/institutions/InstitutionsBenefits';
 import InstitutionsDeployment from '../components/institutions/InstitutionsDeployment';
-import InstitutionsCTA from '../components/institutions/InstitutionsCTA';
 
 const InstitutionsPage = () => (
     <>
@@ -21,7 +20,7 @@ const InstitutionsPage = () => (
             <InstitutionsDataFlow />
             <InstitutionsBenefits />
             <InstitutionsDeployment />
-            <InstitutionsCTA />
+ 
         </main>
     </>
 );

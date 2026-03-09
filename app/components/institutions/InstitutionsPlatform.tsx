@@ -37,11 +37,11 @@ const InstitutionsPlatform = () => (
             </p>
 
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 w-full">
-                <div className="flex flex-col w-full lg:w-[60%] rounded-[24px] overflow-hidden border border-[#2e2e2e]/[0.08] bg-white max-w-[650px] shrink-0">
+                <div className="flex flex-col w-full lg:w-[60%] rounded-md overflow-hidden border border-[#2e2e2e]/[0.08] bg-white max-w-[650px] shrink-0">
                     {platformLayers.map(({ layer, title, desc, color }, index) => (
                         <div
                             key={layer}
-                            className={`group flex items-center gap-8 py-8 px-10 relative overflow-hidden transition-colors ${index !== platformLayers.length - 1 ? 'border-b border-[#2e2e2e]/[0.06]' : ''}`}
+                            className={`group flex items-center gap-8 py-8.75 px-10 relative overflow-hidden transition-colors ${index !== platformLayers.length - 1 ? 'border-b border-[#2e2e2e]/[0.06]' : ''}`}
                         >
                             <div 
                                 className="absolute inset-0 z-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"
