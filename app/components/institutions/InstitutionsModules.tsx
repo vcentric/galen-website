@@ -64,8 +64,12 @@ const modules = [
 const InstitutionsModules = () => (
     <section className="py-16 sm:py-24 bg-transparent" id="features">
         <div className="max-w-[1160px] mx-auto px-5 sm:px-8">
-            <div className="text-[0.78rem] font-semibold tracking-widest uppercase text-[#eb602d] mb-4">System Modules</div>
-            <h2 className="text-[2rem] sm:text-[2.6rem] font-medium leading-[1.15] tracking-[-0.03em] text-[#2e2e2e] mb-12">Everything your institution needs</h2>
+            <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)] block">
+                SYSTEM MODULES
+            </span>
+            <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(3rem,6vw,4rem)]">
+                Everything your institution needs
+            </h2>
             {modules.map(({ title, desc, features, label, flip }, index) => (
                 <div key={title} className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center py-12 lg:py-16 ${index !== modules.length - 1 ? 'border-b border-[#2e2e2e]/[0.06]' : ''}`}>
                     <div className={`${flip ? 'lg:order-2' : ''}`}>

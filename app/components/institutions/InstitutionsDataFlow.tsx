@@ -10,10 +10,12 @@ const dataFlowSteps = [
 ];
 
 const InstitutionsDataFlow = () => (
-    <section className="py-16 sm:py-24 bg-[#2e2e2e] text-white">
-        <div className="max-w-[1160px] mx-auto px-5 sm:px-8">
-            <div className="text-[0.78rem] font-semibold tracking-widest uppercase text-[#eb602d]/85 mb-4">How It Works</div>
-            <h2 className="text-[2rem] sm:text-[2.6rem] font-medium leading-[1.15] tracking-[-0.03em] text-white mb-12">
+    <section className="py-16 sm:py-24 bg-transparent text-white">
+        <div className="max-w-[1160px] mx-auto px-5 sm:px-8 bg-[#2e2e2e] rounded-3xl p-10 sm:p-16">
+            <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-white/50 font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)] block text-center">
+                HOW IT WORKS
+            </span>
+            <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-white tracking-[-0.03em] leading-[1.1] mb-[clamp(1.5rem,6vw,1rem)] text-center">
                 A connected learning intelligence system
             </h2>
             <div className="flex flex-col items-center mt-12 w-full">

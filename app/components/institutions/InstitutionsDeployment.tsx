@@ -11,8 +11,12 @@ const deploymentSteps = [
 const InstitutionsDeployment = () => (
     <section className="py-16 sm:py-24 bg-transparent">
         <div className="max-w-[1160px] mx-auto px-5 sm:px-8 flex flex-col items-center">
-            <div className="text-[0.78rem] self-start sm:self-auto sm:text-center w-full font-semibold tracking-widest uppercase text-[#eb602d] mb-4">Deployment</div>
-            <h2 className="text-[2rem] self-start sm:self-auto sm:text-center w-full sm:text-[2.6rem] font-medium leading-[1.15] tracking-[-0.03em] text-[#2e2e2e] mb-5">Designed for medical colleges</h2>
+            <span className="text-[clamp(0.75rem,2vw,0.85rem)] self-start sm:self-auto sm:text-center w-full text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)] block">
+                DEPLOYMENT
+            </span>
+            <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] self-start sm:self-auto sm:text-center w-full font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(1.5rem,6vw,1rem)]">
+                Designed for medical colleges
+            </h2>
             <div className="flex flex-wrap justify-center items-start gap-4 sm:gap-0 mt-12">
                 {deploymentSteps.map(({ n, label }, i) => (
                     <React.Fragment key={n}>

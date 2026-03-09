@@ -17,11 +17,11 @@ const DashboardPlaceholder = ({ label, accent = false }: { label: string; accent
                 <div className="h-[26px] md:h-[32px] w-[80px] md:w-[120px] rounded-[6px] bg-[#2e2e2e]/[0.07]" />
             </div>
             <div className="grid grid-cols-5 md:grid-cols-10 gap-[8px] md:gap-[12px] mt-6 flex-1">
-                {Array.from({ length: 40 }).map((_, i) => (
+                {Array.from({ length: 10 }).map((_, i) => (
                     <div
                         key={i}
                         className="h-full min-h-[28px] md:min-h-[40px] rounded-[5px] md:rounded-[8px] bg-[#eb602d]"
-                        style={{ opacity: 0.2 + Math.random() * 0.8 }}
+                        style={{ opacity: 0.2 + ((i * 37) % 80) / 100 }}
                     />
                 ))}
             </div>

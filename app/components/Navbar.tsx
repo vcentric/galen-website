@@ -201,7 +201,7 @@ const Navbar = () => {
           className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] nav-glass-container z-10 ${
             isScrolled 
               ? "is-scrolled w-[calc(100%-10px)] max-w-[1400px] px-6 py-3 border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)] mt-2" 
-              : `w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent ${pathname === "/institutions" ? "mt-[44px] md:mt-[32px]" : "mt-0"}`
+              : `w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent ${pathname === "/institutions" ? "mt-[44px] md:mt-[26px]" : "mt-0"}`
           }`}
         >
           <svg style={{ display: 'none' }}>

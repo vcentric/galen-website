@@ -294,14 +294,17 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             )}
           </h1>
 
-          <p className={audience === "institutions" ? "text-[clamp(0.85rem,1.5vw,1rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[850px] mb-[clamp(2rem,5vw,3rem)] mx-auto" : "text-[clamp(0.75rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2rem,5vw,3rem)] mx-auto"}>
-            {descriptionText}<br/>
-            {audience === "institutions" && (
-              <span className="block mt-4 text-[0.8rem] font-medium text-dark/50 tracking-[0.02em]">
-                Built for Competency-Based Medical Education (CBME).
-              </span>
-            )}
+          <p className={audience === "institutions" ? "text-[clamp(0.85rem,1.5vw,1rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[850px] mb-[clamp(1.5rem,3.5vw,2rem)] mx-auto" : "text-[clamp(0.75rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2rem,5vw,3rem)] mx-auto"}>
+            {descriptionText}
           </p>
+
+          {audience === "institutions" && (
+            <div className="flex justify-center mb-[clamp(2rem,1vw,2rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
+              <span className="relative flex items-center justify-center text-[12px] sm:text-[13px] text-dark/60 font-medium tracking-[0.02em] leading-none before:content-[''] before:block before:w-6 before:h-[1px] before:bg-orange/40 before:mr-3 after:content-[''] after:block after:w-6 after:h-[1px] after:bg-orange/40 after:ml-3">
+                Built for Competency-Based Medical Education (CBME)
+              </span>
+            </div>
+          )}
 
           <div className="flex flex-wrap justify-center items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)]">
             {audience === "students" ? (
@@ -311,8 +314,8 @@ const Hero = ({ audience = "students" }: HeroProps) => {
               </>
             ) : (
               <>
-                <PrimaryButton href="#contact" text="Request Institutional Demo" icon={ArrowUpRightIcon} />
-                <SecondaryButton href="#overview" text="View System Overview" icon={ArrowRightIcon} showQrMobile={false} />
+                <PrimaryButton href="#contact" text="Request Institutional Demo" icon={ArrowUpRightIcon} className="!min-w-[180px] !px-[clamp(1.2rem,3vw,2rem)]" />
+                <SecondaryButton href="#overview" text="View System Overview" icon={ArrowRightIcon} showQrMobile={false} className="!min-w-[180px] !px-[clamp(1.2rem,3vw,2rem)]" />
               </>
             )}
           </div>

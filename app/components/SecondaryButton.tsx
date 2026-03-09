@@ -10,9 +10,10 @@ interface SecondaryButtonProps {
   text: string;
   icon?: ElementType;
   showQrMobile?: boolean;
+  className?: string;
 }
 
-export const SecondaryButton = ({ href, text, icon: Icon = QrCodeIcon, showQrMobile = false }: SecondaryButtonProps) => {
+export const SecondaryButton = ({ href, text, icon: Icon = QrCodeIcon, showQrMobile = false, className = "" }: SecondaryButtonProps) => {
   const btnRef = useRef<HTMLAnchorElement>(null);
   const underlineRef = useRef<HTMLSpanElement>(null);
   const qrPopoverRef = useRef<HTMLDivElement>(null);
@@ -54,7 +55,7 @@ export const SecondaryButton = ({ href, text, icon: Icon = QrCodeIcon, showQrMob
       ref={btnRef}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
-      className="relative border border-black/10 shadow-sm flex items-center justify-center gap-[clamp(0.75rem,2vw,1.2rem)] py-[clamp(0.5rem,1.5vw,0.7rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-dark no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+      className={`relative border border-black/10 shadow-sm flex items-center justify-center gap-[clamp(0.75rem,2vw,1.2rem)] py-[clamp(0.5rem,1.5vw,0.7rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-dark no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${className}`}
     >
       <span className="relative pb-[2px] font-semibold">
         {text}
