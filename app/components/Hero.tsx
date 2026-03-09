@@ -1,11 +1,15 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { QrCodeIcon, ArrowUpRightIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import DashboardPlaceholder from "./institutions/DashboardPlaceholder";
+import { PrimaryButton } from "./PrimaryButton";
+import { SecondaryButton } from "./SecondaryButton";
 
-const PHRASES = [
+const STUDENT_PHRASES = [
   "for daily medical learning.",
   "to crack medical exams.",
   "that saves time for you.",
@@ -14,16 +18,16 @@ const PHRASES = [
 interface AudienceButtonProps {
   audience: "students" | "institutions";
   isActive: boolean;
-  onClick: () => void;
+  href?: string;
+  onClick?: () => void;
 }
 
-const AudienceButton = ({ audience, isActive, onClick }: AudienceButtonProps) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+const AudienceButton = ({ audience, isActive, href, onClick }: AudienceButtonProps) => {
+  const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
 
   const { contextSafe } = useGSAP({ scope: buttonRef });
 
-  // Animate based on active state changes
   useGSAP(() => {
     gsap.to(pathRef.current, {
       strokeDashoffset: isActive ? 0 : 1,
@@ -33,7 +37,6 @@ const AudienceButton = ({ audience, isActive, onClick }: AudienceButtonProps) =>
     });
   }, { scope: buttonRef, dependencies: [isActive] });
 
-  // Hover animations
   const handleMouseEnter = contextSafe(() => {
     if (!isActive) {
       gsap.to(pathRef.current, {
@@ -56,20 +59,9 @@ const AudienceButton = ({ audience, isActive, onClick }: AudienceButtonProps) =>
     }
   });
 
-  return (
-    <button
-      ref={buttonRef}
-      onClick={onClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={`relative pb-2 text-[clamp(1rem,2vw,1.1rem)] font-medium border-none bg-transparent cursor-pointer transition-opacity duration-200 capitalize ${
-        isActive
-          ? "text-dark opacity-100"
-          : "text-dark opacity-50 hover:opacity-100"
-      }`}
-    >
+  const content = (
+    <>
       {audience}
-      {/* Pen Stroke Underline - Animated by GSAP */}
       <svg
         viewBox="0 0 100 10"
         className="absolute left-0 bottom-0 w-full h-[8px] pointer-events-none"
@@ -85,34 +77,76 @@ const AudienceButton = ({ audience, isActive, onClick }: AudienceButtonProps) =>
           pathLength={1}
           style={{
             strokeDasharray: 1,
-            strokeDashoffset: 1, // Start hidden
+            strokeDashoffset: 1,
           }}
         />
       </svg>
+    </>
+  );
+
+  const className = `relative pb-2 text-[clamp(1rem,2vw,1.1rem)] font-medium border-none bg-transparent cursor-pointer transition-opacity duration-200 capitalize ${
+    isActive
+      ? "text-dark opacity-100"
+      : "text-dark opacity-50 hover:opacity-100"
+  }`;
+
+  if (href && !isActive) {
+    return (
+      <Link
+        href={href}
+        ref={buttonRef as any}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={className}
+        style={{ textDecoration: 'none' }}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      ref={buttonRef as any}
+      onClick={onClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={className}
+    >
+      {content}
     </button>
   );
 };
 
-const Hero = () => {
+
+
+
+interface HeroProps {
+  audience?: "students" | "institutions";
+}
+
+const Hero = ({ audience = "students" }: HeroProps) => {
   const [textIndex, setTextIndex] = useState(0);
   const textContainerRef = useRef<HTMLDivElement>(null);
 
+  const phrases = STUDENT_PHRASES;
+
   useGSAP(() => {
+    if (audience === "institutions") return;
+
     const container = textContainerRef.current;
     if (!container) return;
 
-    // Select all the character spans we rendered
     const chars = gsap.utils.toArray(container.querySelectorAll('.char-span'));
     
-    // Hide all characters initially
     gsap.set(chars, { display: "none" });
 
-    // Animate them appearing sequentially to mimic typing
     const tl = gsap.timeline({
       onComplete: () => {
-        // Wait 1.5s after finishing typing, then move to next phrase (which instantly clears)
         setTimeout(() => {
-          setTextIndex((prev) => (prev + 1) % PHRASES.length);
+          if (phrases.length > 1) {
+            setTextIndex((prev) => (prev + 1) % phrases.length);
+          }
         }, 1500);
       }
     });
@@ -120,8 +154,8 @@ const Hero = () => {
     if (chars.length > 0) {
       tl.to(chars, {
         display: "inline-block",
-        duration: 0.001, // Instant appearance per char
-        stagger: 0.04,   // Fast typing speed
+        duration: 0.001,
+        stagger: 0.04,
         ease: "none"
       });
     }
@@ -129,127 +163,8 @@ const Hero = () => {
     return () => {
       tl.kill();
     };
-  }, { dependencies: [textIndex], scope: textContainerRef });
+  }, { dependencies: [textIndex, audience, phrases.length], scope: textContainerRef });
 
-  const downloadBtnRef = useRef<HTMLAnchorElement>(null);
-  const downloadUnderlineRef = useRef<HTMLSpanElement>(null);
-  const qrPopoverRef = useRef<HTMLDivElement>(null);
-
-  const { contextSafe: contextSafeDownload } = useGSAP({ scope: downloadBtnRef });
-
-  useGSAP(() => {
-    gsap.set(downloadUnderlineRef.current, { scaleX: 0, transformOrigin: "left center" });
-    gsap.set(qrPopoverRef.current, { 
-      opacity: 0, 
-      scale: 0.9, 
-      y: 10, 
-      pointerEvents: "none",
-      visibility: "hidden"
-    });
-  }, { scope: downloadBtnRef });
-
-  const handleDownloadEnter = contextSafeDownload(() => {
-    gsap.set(downloadUnderlineRef.current, { transformOrigin: "left center" });
-    gsap.to(downloadUnderlineRef.current, {
-      scaleX: 1,
-      duration: 0.4,
-      ease: "power3.out",
-      overwrite: "auto"
-    });
-    
-    // QR Popover Animation
-    gsap.to(qrPopoverRef.current, {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      visibility: "visible",
-      duration: 0.4,
-      ease: "back.out(1.7)",
-      overwrite: "auto"
-    });
-  });
-
-  const handleDownloadLeave = contextSafeDownload(() => {
-    gsap.set(downloadUnderlineRef.current, { transformOrigin: "right center" });
-    gsap.to(downloadUnderlineRef.current, {
-      scaleX: 0,
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: "auto"
-    });
-
-    // QR Popover Animation
-    gsap.to(qrPopoverRef.current, {
-      opacity: 0,
-      scale: 0.9,
-      y: 10,
-      duration: 0.25,
-      ease: "power2.in",
-      overwrite: "auto",
-      onComplete: () => {
-        gsap.set(qrPopoverRef.current, { visibility: "hidden" });
-      }
-    });
-  });
-
-  const tryBtnRef = useRef<HTMLAnchorElement>(null);
-  const tryBgRef = useRef<HTMLDivElement>(null);
-  const tryTextRef = useRef<HTMLSpanElement>(null);
-  const tryIconRef = useRef<SVGSVGElement>(null);
-
-  const { contextSafe: contextSafeTry } = useGSAP({ scope: tryBtnRef });
-
-  useGSAP(() => {
-    gsap.set(tryBgRef.current, { scaleY: 0, transformOrigin: "bottom center" });
-    gsap.set(tryTextRef.current, { x: 0 }); // Initially centered
-    gsap.set(tryIconRef.current, { x: 0, y: 15, opacity: 0 }); // Starts below, no x offset
-  }, { scope: tryBtnRef });
-
-  const handleTryEnter = contextSafeTry(() => {
-    gsap.to(tryBgRef.current, {
-      scaleY: 1,
-      duration: 0.25,
-      ease: "power4.out",
-      overwrite: "auto"
-    });
-    gsap.to(tryTextRef.current, {
-      x: -12, // Slide text to the left to make room
-      color: "var(--color-orange)",
-      duration: 0.25,
-      ease: "power4.out",
-      overwrite: "auto"
-    });
-    gsap.to(tryIconRef.current, {
-      y: 0, // Pop up
-      opacity: 1,
-      duration: 0.3,
-      ease: "back.out(1.5)",
-      overwrite: "auto",
-    });
-  });
-
-  const handleTryLeave = contextSafeTry(() => {
-    gsap.to(tryBgRef.current, {
-      scaleY: 0,
-      duration: 0.25,
-      ease: "power4.out",
-      overwrite: "auto"
-    });
-    gsap.to(tryTextRef.current, {
-      x: 0, // Slide text back to exact center
-      color: "#ffffff",
-      duration: 0.25,
-      ease: "power4.out",
-      overwrite: "auto"
-    });
-    gsap.to(tryIconRef.current, {
-      y: 15, // Drop back down
-      opacity: 0,
-      duration: 0.2,
-      ease: "power3.in",
-      overwrite: "auto"
-    });
-  });
 
   const loginLinkRef = useRef<HTMLAnchorElement>(null);
   const loginPathRef = useRef<SVGPathElement>(null);
@@ -257,7 +172,7 @@ const Hero = () => {
   const { contextSafe: contextSafeLogin } = useGSAP({ scope: loginLinkRef });
 
   const handleLoginEnter = contextSafeLogin(() => {
-    gsap.to(loginPathRef.current, {
+    if (loginPathRef.current) gsap.to(loginPathRef.current, {
       strokeDashoffset: 0,
       duration: 0.25,
       ease: "power3.out",
@@ -266,7 +181,7 @@ const Hero = () => {
   });
 
   const handleLoginLeave = contextSafeLogin(() => {
-    gsap.to(loginPathRef.current, {
+    if (loginPathRef.current) gsap.to(loginPathRef.current, {
       strokeDashoffset: 1,
       duration: 0.25,
       ease: "power3.in",
@@ -274,141 +189,135 @@ const Hero = () => {
     });
   });
 
-  const [selectedAudience, setSelectedAudience] = useState<'students' | 'institutions'>('students');
+  const tags = audience === "students" 
+    ? ["NEET PG", "NEET SS", "EMREE", "FMGE"] 
+    : ["For Medical Institutions"];
+  
+  const headingLeft = audience === "students"
+    ? "Your personal AI companion"
+    : "The Medical Education Operating System for";
+  
+  const descriptionText = audience === "students"
+    ? "GalenAI is your AI medical mentor that explains, tests, and guides you, so you spend less time planning and more time understanding."
+    : "A modern AI-powered Medical Education LMS designed for Competency-Based Medical Education (CBME). GalenAI connects student learning intelligence, faculty teaching workflows, and institutional analytics into one unified platform.";
+
+    const sectionClass = audience === "institutions" 
+    ? "min-h-screen pt-[clamp(5.5rem,11vh,7.5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative"
+    : "min-h-screen pt-[clamp(3.5rem,8vh,5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative";
+
 
   return (
-    <section
-      className="min-h-screen pt-[clamp(3.5rem,8vh,5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative"
-    >
-      <div className="max-w-[1400px] w-full flex flex-col items-center gap-[clamp(2rem,6vw,4rem)] relative z-[2] py-[clamp(1rem,4vw,2rem)]">
+    <section className={sectionClass}>
+      <div className={`w-full flex flex-col items-center gap-[clamp(2rem,6vw,4rem)] relative z-[2] py-[clamp(1rem,4vw,2rem)] ${audience === 'institutions' ? 'max-w-[1500px]' : 'max-w-[1400px]'}`}>
         {/* Centered Text Content */}
-        <div className="flex flex-col items-center text-center max-w-[900px] mx-auto">
+        <div className={`flex flex-col items-center text-center mx-auto ${audience === 'institutions' ? 'max-w-[1100px]' : 'max-w-[900px]'}`}>
           {/* Audience Toggle */}
           <div className="inline-flex gap-[clamp(1.5rem,4vw,3rem)] mb-[clamp(1rem,3vw,1.5rem)] relative">
-            {(['students', 'institutions'] as const).map((audience) => (
-              <AudienceButton
-                key={audience}
-                audience={audience}
-                isActive={selectedAudience === audience}
-                onClick={() => setSelectedAudience(audience)}
-              />
+            {(['students', 'institutions'] as const).map((aud) => (
+              aud === audience ? (
+                <AudienceButton
+                  key={aud}
+                  audience={aud}
+                  isActive={true}
+                />
+              ) : (
+                <AudienceButton
+                  key={aud}
+                  audience={aud}
+                  isActive={false}
+                  href={aud === 'students' ? '/' : '/institutions'}
+                />
+              )
             ))}
           </div>
-          {/* Exam Context Tags */}
+          {/* Context Tags */}
           <div className="flex flex-wrap justify-center items-center gap-[clamp(0.25rem,1vw,0.5rem)] mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
-            {["NEET PG", "NEET SS", "EMREE", "FMGE"].map((exam) => (
+            {tags.map((tag) => (
               <div
-                key={exam}
-                className="flex items-center gap-[clamp(0.2rem,0.5vw,0.375rem)] px-[clamp(0.5rem,1.5vw,0.75rem)] py-[clamp(0.15rem,0.5vw,0.25rem)] rounded-full bg-white/40 border border-orange/40 backdrop-blur-sm cursor-default"
+                key={tag}
+                className="flex items-center gap-[clamp(0.2rem,0.5vw,0.375rem)] px-[clamp(0.5rem,1.5vw,0.75rem)] py-[clamp(0.15rem,0.5vw,0.25rem)] rounded-full bg-white/40 border-orange/40 border backdrop-blur-sm cursor-default"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-orange/80" />
                 <span className="text-[clamp(0.55rem,1vw,0.68rem)] font-semibold text-orange tracking-wider uppercase">
-                  {exam}
+                  {tag}
                 </span>
               </div>
             ))}
           </div>
 
-          <h1 className="text-[clamp(1.8rem,5vw+0.5rem,4.25rem)] font-medium leading-[1.1] text-dark mb-[clamp(1.5rem,4vw,2rem)] tracking-[-0.03em]">
-            Your personal AI companion <br />
-            <div className="flex items-center justify-center text-orange italic">
-              <div 
-                className="flex flex-col md:flex-row items-center md:items-baseline min-w-[300px]" 
-                ref={textContainerRef}
-              >
-                {(() => {
-                  const words = PHRASES[textIndex].split(" ");
-                  const lastWord = words[words.length - 1];
-                  const basePart = words.slice(0, -1).join(" ") + " ";
-                  
-                  return (
-                    <>
-                      <div className="flex items-center">
-                        <span className="mr-3 whitespace-nowrap">&gt;</span>
-                        <span className="whitespace-pre">
-                          {basePart.split("").map((char, index) => (
-                            <span key={`base-${textIndex}-${index}`} className="char-span whitespace-pre">
-                              {char}
+          <h1 className={`${audience === 'institutions' ? 'text-[clamp(1.6rem,4vw,3.25rem)]' : 'text-[clamp(1.8rem,5vw+0.5rem,4.25rem)]'} font-medium leading-[1.1] text-dark mb-[clamp(1.5rem,4vw,2rem)] tracking-[-0.03em]`}>
+            {headingLeft} <br />
+            {audience === "students" ? (
+                <div className="flex items-center justify-center text-orange italic">
+                <div 
+                    className="flex flex-col md:flex-row items-center md:items-baseline min-w-[300px]" 
+                    ref={textContainerRef}
+                >
+                    {(() => {
+                    const words = phrases[textIndex].split(" ");
+                    const lastWord = words[words.length - 1];
+                    const basePart = words.slice(0, -1).join(" ") + (words.length > 1 ? " " : "");
+                    
+                    return (
+                        <>
+                        <div className="flex items-center">
+                            <span className="mr-3 whitespace-nowrap hidden md:inline">&gt;</span>
+                            <span className="whitespace-pre">
+                            {basePart.split("").map((char, index) => (
+                                <span key={`base-${textIndex}-${index}`} className="char-span whitespace-pre">
+                                {char}
+                                </span>
+                            ))}
                             </span>
-                          ))}
-                        </span>
-                      </div>
-                      <div className="flex justify-center w-full md:w-auto">
-                        <span className="whitespace-nowrap">
-                          {lastWord.split("").map((char, index) => (
-                            <span key={`last-${textIndex}-${index}`} className="char-span whitespace-pre">
-                              {char}
+                        </div>
+                        <div className="flex justify-center w-full md:w-auto">
+                            <span className="whitespace-nowrap">
+                            {lastWord.split("").map((char, index) => (
+                                <span key={`last-${textIndex}-${index}`} className="char-span whitespace-pre">
+                                {char}
+                                </span>
+                            ))}
+                            <span className="font-thin text-orange animate-[blink_1s_step-end_infinite] ml-1 not-italic">
+                                |
                             </span>
-                          ))}
-                          <span className="font-thin text-orange animate-[blink_1s_step-end_infinite] ml-1 not-italic">
-                            |
-                          </span>
-                        </span>
-                      </div>
-                    </>
-                  );
-                })()}
-              </div>
-            </div>
+                            </span>
+                        </div>
+                        </>
+                    );
+                    })()}
+                </div>
+                </div>
+            ) : (
+                <div className="flex items-center justify-center text-orange italic mt-2">
+                    Competency-Based Learning
+                </div>
+            )}
           </h1>
 
-          <p className="text-[clamp(0.75rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2rem,5vw,3rem)] mx-auto">
-            GalenAI is your AI medical mentor that explains, tests, and guides
-            you, so you spend less time planning and more time understanding.<br/>
+          <p className={audience === "institutions" ? "text-[clamp(0.85rem,1.5vw,1rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[850px] mb-[clamp(1.5rem,3.5vw,2rem)] mx-auto" : "text-[clamp(0.75rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2rem,5vw,3rem)] mx-auto"}>
+            {descriptionText}
           </p>
 
-          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)]">
-            <a
-              href="#ask"
-              ref={tryBtnRef}
-              onMouseEnter={handleTryEnter}
-              onMouseLeave={handleTryLeave}
-              className="group relative flex items-center justify-center py-[clamp(0.65rem,1.5vw,0.85rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-white bg-orange no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[180px]"
-            >
-              <div ref={tryBgRef} className="absolute inset-0 bg-white z-0 rounded-full"></div>
-              {/* Text centered exactly when no icon is visible */}
-              <div className="relative z-10 flex items-center justify-center w-full">
-                <span ref={tryTextRef} className="text-white transition-colors block font-semibold">Try GalenAI</span>
-                
-                {/* Icon positioned absolute relative to the center cluster, invisible normally */}
-                <div className="absolute right-0 w-[1rem] h-[1rem] overflow-hidden flex items-center justify-center">
-                  <ArrowUpRightIcon ref={tryIconRef} className="absolute w-[1rem] h-[1rem] text-orange" strokeWidth={3} />
-                </div>
-              </div>
-            </a>
-            <a
-              href="#download"
-              ref={downloadBtnRef}
-              onMouseEnter={handleDownloadEnter}
-              onMouseLeave={handleDownloadLeave}
-              className="relative border border-black/10 shadow-sm flex items-center justify-center gap-[clamp(0.3rem,1vw,0.5rem)] py-[clamp(0.5rem,1.5vw,0.7rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-dark no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] "
-            >
-              <span className="relative pb-[2px] font-semibold">
-                Download Now For Free
-                <span ref={downloadUnderlineRef} className="absolute left-0 bottom-0 w-full h-[2px] bg-orange"></span>
+          {audience === "institutions" && (
+            <div className="flex justify-center mb-[clamp(2rem,1vw,2rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
+              <span className="relative flex items-center justify-center text-[12px] sm:text-[13px] text-dark/60 font-medium tracking-[0.02em] leading-none before:content-[''] before:block before:w-6 before:h-[1px] before:bg-orange/40 before:mr-3 after:content-[''] after:block after:w-6 after:h-[1px] after:bg-orange/40 after:ml-3">
+                Built for Competency-Based Medical Education (CBME)
               </span>
-              <QrCodeIcon className="w-[1.3rem] h-[1.3rem] text-orange" strokeWidth={2.5} />
+            </div>
+          )}
 
-              {/* QR Popover - Visible only on Desktop */}
-              <div 
-                ref={qrPopoverRef}
-                className="hidden md:flex absolute bottom-[calc(100%-10rem)] left-[25rem] -translate-x-1/2 w-[220px] p-4 bg-white rounded-2xl border border-black/5 flex-col items-center gap-3 z-50 pointer-events-none shadow-sm"
-              >
-                <div className="w-full aspect-square rounded-xl overflow-hidden bg-orange/5 p-2 border border-orange/10">
-                  <img 
-                    src="/qr.png" 
-                    alt="Scan to Download" 
-                    className="w-full h-full object-contain mix-blend-multiply"
-                  />
-                </div>
-                <div className="flex flex-col items-center gap-1">
-                  <span className="text-[14px] font-bold text-dark">Scan to download</span>
-                  <span className="text-[11px] text-dark/60 font-medium whitespace-nowrap">Available on iOS & Android</span>
-                </div>
-                {/* Arrow */}
-                <div className="absolute right-full top-1/2 -translate-y-1/2 translate-x-1/2 w-4 h-4 bg-white border-l border-b border-black/5 rotate-45 shadow-[-5px_5px_10px_rgba(0,0,0,0.03)]" />
-              </div>
-            </a>
+          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)]">
+            {audience === "students" ? (
+              <>
+                <PrimaryButton href="#ask" text="Try GalenAI" icon={ArrowUpRightIcon} />
+                <SecondaryButton href="#download" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} />
+              </>
+            ) : (
+              <>
+                <PrimaryButton href="#contact" text="Request Institutional Demo" icon={ArrowUpRightIcon} className="!min-w-[180px] !px-[clamp(1.2rem,3vw,2rem)]" />
+                <SecondaryButton href="#overview" text="View System Overview" icon={ArrowRightIcon} showQrMobile={false} className="!min-w-[180px] !px-[clamp(1.2rem,3vw,2rem)]" />
+              </>
+            )}
           </div>
 
           <div className="flex items-center justify-center text-[clamp(0.85rem,1.5vw,0.95rem)] text-dark/70 mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.3s' }}>
@@ -472,17 +381,23 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Huge Video Below */}
-        <div className="w-full aspect-video rounded-[0.5rem] overflow-hidden max-w-[1200px]">
-          <div className="relative w-full h-full flex items-center justify-center">
-            <iframe
-              src="https://www.youtube.com/embed/1l0-dJic1dE?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=1l0-dJic1dE"
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full min-w-full min-h-full border-none pointer-events-none object-cover" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        </div>
+        {/* Huge Video Below or Visual */}
+        {audience === "students" ? (
+            <div className="w-full aspect-video rounded-[0.5rem] overflow-hidden max-w-[1200px]">
+                <div className="relative w-full h-full flex items-center justify-center">
+                    <iframe
+                    src="https://www.youtube.com/embed/1l0-dJic1dE?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=1l0-dJic1dE"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full min-w-full min-h-full border-none pointer-events-none object-cover" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    />
+                </div>
+            </div>
+        ) : (
+            <div className="w-full aspect-video rounded-[0.5rem] max-w-[1200px]">
+                <DashboardPlaceholder label="Competency Heatmap &amp; Cohort Analytics" accent />
+            </div>
+        )}
       </div>
     </section>
   );
