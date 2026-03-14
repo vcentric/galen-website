@@ -7,6 +7,7 @@ import InstitutionsProblem from '../components/institutions/InstitutionsProblem'
 import InstitutionsPlatform from '../components/institutions/InstitutionsPlatform';
 import InstitutionsModules from '../components/institutions/InstitutionsModules';
 import InstitutionsOutcomes from '../components/institutions/InstitutionsOutcomes';
+import InstitutionsRoadmap from '../components/institutions/InstitutionsRoadmap';
 
 const InstitutionsPage = () => (
     <>
@@ -16,7 +17,7 @@ const InstitutionsPage = () => (
             <InstitutionsPlatform />
             <InstitutionsModules />
             <InstitutionsOutcomes />
- 
+            <InstitutionsRoadmap />
         </main>
     </>
 );

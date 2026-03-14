@@ -99,7 +99,7 @@ const InstitutionsModules = () => {
                         ))}
                     </div>
 
-                    <div className=" mt-15 sm:mb-0 text-center relative z-10">
+                    <div className=" mt-15 py-3 sm:py-0 sm:mb-0 text-center relative z-10">
                         <PrimaryButton 
                             href="#contact" 
                             text="Request Institutional Demo" 
