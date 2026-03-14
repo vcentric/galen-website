@@ -53,7 +53,7 @@ const InstitutionsProblem = () => {
 
     return (
         <section className="relative pt-24 pb-36 sm:pt-32 sm:pb-48 bg-[linear-gradient(to_bottom,transparent,#fff0e4_10%,#fff0e4_90%,transparent)] overflow-hidden">
-            <div className="relative z-10 max-w-[1240px] mx-auto px-5 sm:px-8">
+            <div className="relative z-10 max-w-[1240px] mx-auto px-[clamp(2rem,6vw,4rem)]">
                 
                 {/* Header Area */}
                 <div className="flex flex-col items-center text-center">
@@ -61,7 +61,7 @@ const InstitutionsProblem = () => {
                         THE CHALLENGE
                     </span>
                     
-                    <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(1.5rem,6vw,1rem)] max-w-[800px] text-center">
+                    <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(1.5rem,6vw,1.5rem)] max-w-[800px] text-center">
                         Medical Faculty Are 
                         <span 
                             className="text-[#eb602d] relative inline-block ml-2 pb-2"

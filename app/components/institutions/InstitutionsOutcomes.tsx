@@ -33,7 +33,7 @@ const deploymentSteps = [
 
 const InstitutionsOutcomes = () => (
     <section className="py-6 sm:py-8 bg-[linear-gradient(to_bottom,#ffffff,#f7f8f8_20%,#f7f8f8_80%,#ffffff)]" id="outcomes">
-        <div className="max-w-[1160px] mx-auto px-5 sm:px-8">
+        <div className="max-w-[1240px] mx-auto px-[clamp(2rem,6vw,4rem)]">
             
             <div className="flex flex-col lg:flex-row items-stretch lg:items-start gap-8 lg:gap-12">
                 

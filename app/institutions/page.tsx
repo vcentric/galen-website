@@ -6,7 +6,6 @@ import NMCBanner from '../components/institutions/NMCBanner';
 import InstitutionsProblem from '../components/institutions/InstitutionsProblem';
 import InstitutionsPlatform from '../components/institutions/InstitutionsPlatform';
 import InstitutionsModules from '../components/institutions/InstitutionsModules';
-import InstitutionsDataFlow from '../components/institutions/InstitutionsDataFlow';
 import InstitutionsOutcomes from '../components/institutions/InstitutionsOutcomes';
 
 const InstitutionsPage = () => (
@@ -16,7 +15,6 @@ const InstitutionsPage = () => (
             <InstitutionsProblem />
             <InstitutionsPlatform />
             <InstitutionsModules />
-            <InstitutionsDataFlow />
             <InstitutionsOutcomes />
  
         </main>

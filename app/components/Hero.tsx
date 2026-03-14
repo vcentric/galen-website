@@ -231,14 +231,16 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             ))}
           </div>
           {/* Context Tags */}
-          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.25rem,1vw,0.5rem)] mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
+          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.25rem,1vw,0.6rem)] mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
             {tags.map((tag) => (
               <div
                 key={tag}
-                className="flex items-center gap-[clamp(0.2rem,0.5vw,0.375rem)] px-[clamp(0.5rem,1.5vw,0.75rem)] py-[clamp(0.15rem,0.5vw,0.25rem)] rounded-full bg-white/40 border-orange/40 border backdrop-blur-sm cursor-default"
+                className="flex items-center px-[clamp(0.5rem,1.4vw,0.75rem)] py-[clamp(0.15rem,0.4vw,0.25rem)] rounded-full bg-white/70 border-orange/40 border backdrop-blur-md cursor-default transition-all duration-300 hover:border-orange/60"
+                style={{ 
+                  boxShadow: 'inset 0 1.5px 3px rgba(235, 96, 45, 0.3), 0 1px 2px rgba(0, 0, 0, 0.03)'
+                }}
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-orange/80" />
-                <span className="text-[clamp(0.55rem,1vw,0.68rem)] font-semibold text-orange tracking-wider uppercase">
+                <span className="text-[clamp(0.55rem,0.95vw,0.65rem)] font-bold text-orange tracking-[0.03em] uppercase">
                   {tag}
                 </span>
               </div>

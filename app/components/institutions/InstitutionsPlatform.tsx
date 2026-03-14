@@ -24,12 +24,12 @@ const platformLayers = [
 
 const InstitutionsPlatform = () => (
     <section className="py-8 sm:py-16 bg-transparent" id="overview">
-        <div className="max-w-[1160px] mx-auto px-5 sm:px-8">
+        <div className="max-w-[1240px] mx-auto px-[clamp(2rem,6vw,4rem)]">
             <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)] block text-left">
                 THE SOLUTION
             </span>
-            <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-5">
-                One Connected Medical Education LMS
+            <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(1.5rem,6vw,2.5rem)]">
+                One <span className="text-orange">Connected</span> Medical Education LMS
             </h2>
             <p className="text-[1rem] sm:text-[1.15rem] leading-[1.65] text-gray-500 max-w-[640px] mb-8">
                 GalenAI connects students, faculty, and institutions through a single
