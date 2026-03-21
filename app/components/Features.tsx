@@ -59,7 +59,7 @@ const Features = () => {
 
     tweenRef.current = gsap.to(target, {
       width: "100%",
-      duration: DURATION,
+      duration: (current as any).duration || DURATION,
       ease: "none",
       onComplete: () => {
         swipeDirection.current = 1; // auto-advance is always forward
@@ -91,86 +91,59 @@ const Features = () => {
     <section id="features" className="w-full py-[clamp(4rem,10vw,4rem)] px-[clamp(2rem,6vw,4rem)] font-sans relative z-10">
       <div className="max-w-[1100px] mx-auto">
 
-        {/* Section label */}
-        <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)] block">
-          FEATURES
-        </span>
-
-        {/* Section headline */}
-        <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-[clamp(1.5rem,6vw,1rem)]">
-          Everything you need to{" "}
-          <span className="text-orange">ace medicine</span>
-        </h2>
-
         {/* Main layout */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 items-start lg:items-center">
 
-          {/* Left — Feature list */}
-          <div className="w-full lg:w-[62%] flex flex-col min-h-[520px] lg:h-[650px]">
-            {features.map((f, i) => {
-              const isActive = f.id === active;
-              const isComingSoon = f.tag === "Coming Soon";
-              return (
-                <button
-                  key={f.id}
-                  onClick={() => goTo(f.id)}
-                  className="w-full text-left group cursor-pointer"
-                >
-                  <div className={`flex gap-5 py-5 border-b border-border`}>
+          {/* Unified Column (Mobile: Column, Desktop: 2/3 and 1/3 split) */}
+          <div className="w-full lg:w-2/3 flex flex-col justify-center">
+            
+            {/* Navigation Pills (Now universal) */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-x-1.5 gap-y-2 lg:gap-2 mb-8 mx-auto lg:mx-0 max-w-[300px] sm:max-w-none">
+              {features.map((f) => {
+                const isActive = f.id === active;
+                return (
+                  <button
+                    key={`pill-${f.id}`}
+                    onClick={() => goTo(f.id)}
+                    className={`flex items-center shrink-0 px-2 lg:px-3 py-1 lg:py-1.5 rounded-full border transition-all duration-300 backdrop-blur-md cursor-pointer ${
+                      isActive
+                        ? "bg-orange text-white border-orange shadow-md scale-105"
+                        : "bg-white/70 text-orange border-orange/40 hover:border-orange/60"
+                    }`}
+                    style={!isActive ? { 
+                      boxShadow: 'inset 0 1.5px 3px rgba(235, 96, 45, 0.3), 0 1px 2px rgba(0, 0, 0, 0.03)'
+                    } : {}}
+                  >
+                    <span className="text-[9px] lg:text-[11px] font-bold tracking-[0.05em] uppercase whitespace-nowrap">
+                      {f.tag}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-                    {/* Left accent bar + number */}
-                    <div className="flex flex-col items-center gap-1.5 pt-0.5 shrink-0">
-                      <div className={`w-[2px] h-5 rounded-full transition-colors duration-300 ${isActive ? "bg-orange" : "bg-border-strong"}`} />
-                      <span className={`text-[10px] font-semibold tabular-nums transition-colors duration-300 ${isActive ? "text-orange" : "text-text-secondary"}`}>
-                        0{i + 1}
-                      </span>
-                    </div>
+            {/* Active Feature Content */}
+            <div key={active} className="animate-[fadeIn_0.6s_ease-out_forwards] mb-6 lg:mb-0 text-center lg:text-left">
+              <h3 className="text-[clamp(1.75rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-6">
+                {current.title}
+              </h3>
 
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className={`text-[12px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 ${isActive ? "text-orange" : "text-text-secondary"}`}>
-                          {f.tag}
-                        </span>
-                        {isComingSoon && (
-                          <span className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-orange/10 text-orange border border-orange/25">
-                            Coming Soon
-                          </span>
-                        )}
-                      </div>
+              <p className="text-[1rem] sm:text-[1.25rem] text-text-secondary leading-[1.6] mb-8 lg:mb-12 max-w-[95%] mx-auto lg:mx-0">
+                {current.desc}
+              </p>
 
-                      <h3 className={`font-[var(--font-space-var)] font-semibold leading-snug tracking-tight transition-all duration-300 ${
-                        isActive
-                          ? "text-dark text-[1.5rem] md:text-[2rem]"
-                          : "text-text-secondary text-[1.15rem] md:text-[1.5rem] group-hover:text-dark"
-                      }`}>
-                        {f.title}
-                      </h3>
-
-                      {/* Expandable description + progress bar */}
-                      <div className={`overflow-hidden transition-all duration-400 ${isActive ? "max-h-40 opacity-100 mt-2.5" : "max-h-0 opacity-0"}`}>
-                        <p className="text-[0.95rem] md:text-[1.1rem] text-text-secondary leading-[1.65]">
-                          {f.desc}
-                        </p>
-
-                        {/* GSAP progress bar */}
-                        <div className="mt-4 h-[2px] w-full bg-border rounded-full overflow-hidden">
-                          <div
-                            data-bar-id={f.id}
-                            className="h-full bg-orange rounded-full"
-                            style={{ width: "0%" }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
+              <div className="h-[3px] w-full bg-border rounded-full overflow-hidden">
+                <div
+                  data-bar-id={active}
+                  className="h-full bg-orange rounded-full"
+                  style={{ width: "0%" }}
+                />
+              </div>
+            </div>
           </div>
 
-          {/* Right — Phone mockup */}
-          <div className="w-full lg:w-[38%] flex justify-center items-center">
+          {/* Phone mockup (Now universal and following content on mobile) */}
+          <div className="w-full lg:w-1/3 flex justify-center items-center mt-0 lg:mt-0">
             <div 
               className="relative w-full max-w-[240px] sm:max-w-[280px] mx-auto p-3 sm:p-4 bg-[#f4f4f4] rounded-[40px] sm:rounded-[48px] touch-pan-y pointer-events-auto"
               onTouchStart={handleTouchStart}
@@ -205,13 +178,27 @@ const Features = () => {
                         ))}
                       </div>
                     ) : (
-                      <Image
-                        src={current.screen}
-                        alt={current.title}
-                        fill
-                        className="object-cover object-top scale-[0.97]"
-                        sizes="1500px"
-                      />
+                      <>
+                        {(current as any).video ? (
+                          <video
+                            key={(current as any).video}
+                            src={(current as any).video}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            className="w-full h-full object-cover object-top scale-[0.97]"
+                          />
+                        ) : (
+                          <Image
+                            src={current.screen}
+                            alt={current.title}
+                            fill
+                            className="object-cover object-top scale-[0.97]"
+                            sizes="1500px"
+                          />
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
@@ -239,17 +226,29 @@ const Features = () => {
         </div>
 
         {/* CTA */}
-        <div className="mt-[clamp(3rem,8vw,5rem)] flex justify-center">
+        <div className="mt-8 lg:mt-12 flex justify-center">
           <a
             href="#ask"
-            className="group inline-flex items-center text-[clamp(1.75rem,4vw,3rem)] font-semibold font-[var(--font-space-var)] text-dark tracking-tight no-underline"
+            className="group inline-flex items-center text-[clamp(1.75rem,4vw,3rem)] font-semibold font-[var(--font-space-var)] text-dark tracking-tight no-underline transition-all duration-300 hover:text-orange"
             onMouseEnter={(e) => {
               const path = e.currentTarget.querySelector("path");
-              if (path) gsap.to(path, { strokeDashoffset: 0, duration: 0.3, ease: "power3.out" });
+              const arrow = e.currentTarget.querySelector(".cta-arrow-icon");
+              const arrowContainer = e.currentTarget.querySelector(".cta-arrow-container");
+              
+              const tl = gsap.timeline({ overwrite: "auto" });
+              if (path) tl.to(path, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, 0);
+              if (arrowContainer) tl.to(arrowContainer, { 
+                width: "clamp(3.25rem,6vw,4.25rem)", 
+                marginLeft: "1rem", 
+                opacity: 1,
+                duration: 0.4, 
+                ease: "elastic.out(1, 0.82)" 
+              }, 0.1);
+              if (arrow) tl.to(arrow, { rotate: 0, scale: 1.1, duration: 0.4, ease: "back.out(2)" }, 0.15);
             }}
-            onMouseLeave={(e) => {
-              const path = e.currentTarget.querySelector("path");
-              if (path) gsap.to(path, { strokeDashoffset: 1, duration: 0.25, ease: "power3.in" });
+            onMouseLeave={() => {
+              // Final verdict: No animate out. 
+              // Once shown, it stays.
             }}
           >
             {/* Text — underline SVG only covers this span */}
@@ -272,13 +271,13 @@ const Features = () => {
               </svg>
             </span>
 
-            {/* Arrow — clip-slides in from right, then rotates */}
+            {/* Arrow — Improved GSAP reveal */}
             <span
-              className="overflow-hidden flex items-center w-0 group-hover:w-[clamp(3.25rem,6vw,4.25rem)] ml-0 group-hover:ml-4 transition-[width,margin] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] self-center"
+              className="cta-arrow-container overflow-hidden flex items-center w-0 self-center"
             >
-              <span className="flex-shrink-0 flex items-center justify-center w-[clamp(2.5rem,5vw,3.5rem)] h-[clamp(2.5rem,5vw,3.5rem)] rounded-full bg-orange text-white">
+              <span className="flex-shrink-0 flex items-center justify-center w-[clamp(2.5rem,5vw,3.5rem)] h-[clamp(2.5rem,5vw,3.5rem)] rounded-full bg-orange text-white shadow-lg">
                 <ArrowUpRightIcon
-                  className="w-[45%] h-[45%] flex-shrink-0 rotate-45 group-hover:rotate-0 transition-transform duration-400 delay-150 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                  className="cta-arrow-icon w-[45%] h-[45%] flex-shrink-0 rotate-45"
                   strokeWidth={2.5}
                 />
               </span>
