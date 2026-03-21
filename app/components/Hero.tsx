@@ -8,6 +8,7 @@ import Link from "next/link";
 import DashboardPlaceholder from "./institutions/DashboardPlaceholder";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
+import TrustedBy from "./TrustedBy";
 
 const STUDENT_PHRASES = [
   "for daily medical learning.",
@@ -208,7 +209,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
 
   return (
     <section className={sectionClass}>
-      <div className={`w-full flex flex-col items-center gap-[clamp(2rem,6vw,4rem)] relative z-[2] py-[clamp(1rem,4vw,2rem)] ${audience === 'institutions' ? 'max-w-[1500px]' : 'max-w-[1400px]'}`}>
+      <div className="w-full flex flex-col items-center relative z-[2] py-[clamp(1rem,4vw,2rem)]">
         {/* Centered Text Content */}
         <div className={`flex flex-col items-center text-center mx-auto ${audience === 'institutions' ? 'max-w-[1100px]' : 'max-w-[900px]'}`}>
           {/* Audience Toggle */}
@@ -312,7 +313,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             {audience === "students" ? (
               <>
                 <PrimaryButton href="#ask" text="Try GalenAI" icon={ArrowUpRightIcon} />
-                <SecondaryButton href="#download" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} />
+                <SecondaryButton href="https://onelink.to/wqg9n2" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} />
               </>
             ) : (
               <>
@@ -322,7 +323,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             )}
           </div>
 
-          <div className="flex items-center justify-center text-[clamp(0.85rem,1.5vw,0.95rem)] text-dark/70 mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.3s' }}>
+          <div className="flex items-center justify-center text-[clamp(0.85rem,1.5vw,0.95rem)] text-dark/70 mb-8 animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.3s' }}>
             <span>Already using GalenAI?</span>
             <span className="mx-3 text-black/20">|</span>
             <a 
@@ -359,29 +360,11 @@ const Hero = ({ audience = "students" }: HeroProps) => {
               </div>
             </a>
           </div>
-
-          <div className="flex flex-wrap justify-center items-center text-[clamp(0.75rem,1.5vw,0.875rem)] text-[rgba(46,46,46,0.6)]">
-            
-            <div className="flex  items-center gap-5">
-              <span className="text-[clamp(0.7rem,1.2vw,0.8rem)] opacity-80 uppercase tracking-[0.05em]">
-                Backed by
-              </span>
-           
-                <img 
-                src="/googlecloud.png" 
-                alt="Google Cloud" 
-                className="h-8 w-auto opacity-70 hover:opacity-100 transition-opacity"
-              />
-              <img 
-                src="/ksum.png" 
-                alt="Kerala Startup Mission" 
-                className="h-15 w-auto opacity-70 hover:opacity-100 transition-opacity"
-              />
-
-              
-            </div>
-          </div>
         </div>
+
+        {audience === "students" && <TrustedBy />}
+
+        <div className="w-full flex flex-col items-center mt-[clamp(2rem,6vw,4rem)]">
 
         {/* Huge Video Below or Visual */}
         {audience === "students" ? (
@@ -400,6 +383,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
                 <DashboardPlaceholder label="Competency Heatmap &amp; Cohort Analytics" accent />
             </div>
         )}
+        </div>
       </div>
     </section>
   );
