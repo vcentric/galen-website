@@ -7,6 +7,8 @@ export const features = [
     title: "Your Personal Medical Tutor, On Demand",
     desc: "Ask questions the way you actually think. GalenAI explains concepts step-by-step, aligned with standard textbooks — so you stop guessing and start understanding.",
     screen: "/mobile.png",
+    video: "/AI Tutor_1.mp4",
+    duration: 10,
   },
   {
     id: 1,
@@ -14,6 +16,8 @@ export const features = [
     title: "Practice Questions That Tell You Why, Not Just What",
     desc: "Every question becomes a learning moment. Get explanations that connect concepts, highlight traps, and show how examiners think — not just the right option.",
     screen: "/qbanks.png",
+    video: "/Qn bank_1.mp4",
+    duration: 12,
   },
   {
     id: 2,
@@ -21,6 +25,8 @@ export const features = [
     title: "Remember What Actually Matters",
     desc: "High-yield flashcards built from concepts — not random facts. Perfect for quick revisions, spaced recall, and busy days.",
     screen: "/Flashcards.png",
+    video: "/Flashcards.mp4",
+    duration: 10,
   },
   {
     id: 3,
@@ -28,6 +34,8 @@ export const features = [
     title: "Learn Medicine the Way It's Practiced",
     desc: "Work through real-world clinical scenarios. Build diagnostic thinking, connect theory to patients, and prepare for viva and ward discussions — not just MCQs.",
     screen: "/clinicalcases.png",
+    video: "/Clinical cases.mp4",
+    duration: 14,
   },
   {
     id: 4,
@@ -35,6 +43,7 @@ export const features = [
     title: "More Powerful Features on the Way",
     desc: "We're constantly building. AI-powered study plans, peer collaboration tools, and faculty dashboards are headed your way.",
     screen: "/mobile.png",
+    duration: 6,
   },
 ];
 
