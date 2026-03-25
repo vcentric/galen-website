@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useRef, ElementType } from "react";
+import React, { useState, useRef, ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { QrCodeIcon, ArrowUpRightIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import DashboardPlaceholder from "./institutions/DashboardPlaceholder";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
 import TrustedBy from "./TrustedBy";
@@ -191,16 +190,12 @@ const Hero = ({ audience = "students" }: HeroProps) => {
   });
 
   const tags = audience === "students" 
-    ? ["NEET PG", "NEET SS", "EMREE", "FMGE"] 
+    ? ["NEET PG", "INI-CET", "USMLE", "PLAB", "FMGE", "NEXT", "EMREE"] 
     : ["For Medical Institutions"];
-  
-  const headingLeft = audience === "students"
-    ? "Your personal AI companion"
-    : "The Medical Education Operating System for";
   
   const descriptionText = audience === "students"
     ? "GalenAI is your AI medical mentor that explains, tests, and guides you, so you spend less time planning and more time understanding."
-    : "A modern AI-powered Medical Education LMS designed for Competency-Based Medical Education (CBME). GalenAI connects student learning intelligence, faculty teaching workflows, and institutional analytics into one unified platform.";
+    : "An AI-powered medical education platform built for CBME, connecting student learning, faculty workflows, and institutional insights in one unified system.";
 
     const sectionClass = audience === "institutions" 
     ? "min-h-screen pt-[clamp(5.5rem,11vh,7.5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative"
@@ -233,24 +228,27 @@ const Hero = ({ audience = "students" }: HeroProps) => {
           </div>
           {/* Context Tags */}
           <div className="flex flex-wrap justify-center items-center gap-[clamp(0.25rem,1vw,0.6rem)] mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
-            {tags.map((tag) => (
-              <div
-                key={tag}
-                className="flex items-center px-[clamp(0.5rem,1.4vw,0.75rem)] py-[clamp(0.15rem,0.4vw,0.25rem)] rounded-full bg-white/70 border-orange/40 border backdrop-blur-md cursor-default transition-all duration-300 hover:border-orange/60"
-                style={{ 
-                  boxShadow: 'inset 0 1.5px 3px rgba(235, 96, 45, 0.3), 0 1px 2px rgba(0, 0, 0, 0.03)'
-                }}
-              >
-                <span className="text-[clamp(0.55rem,0.95vw,0.65rem)] font-bold text-orange tracking-[0.03em] uppercase">
-                  {tag}
-                </span>
-              </div>
+            {tags.map((tag, idx) => (
+              <React.Fragment key={tag}>
+                {audience === "students" && idx === 4 && <div className="w-full md:hidden shrink-0" />}
+                <div
+                  className="flex items-center px-[clamp(0.5rem,1.4vw,0.75rem)] py-[clamp(0.15rem,0.4vw,0.25rem)] rounded-full bg-white/70 border-orange/40 border backdrop-blur-md cursor-default transition-all duration-300 hover:border-orange/60"
+                  style={{ 
+                    boxShadow: 'inset 0 1.5px 3px rgba(235, 96, 45, 0.3), 0 1px 2px rgba(0, 0, 0, 0.03)'
+                  }}
+                >
+                  <span className="text-[clamp(0.55rem,0.95vw,0.65rem)] font-bold text-orange tracking-[0.03em] uppercase">
+                    {tag}
+                  </span>
+                </div>
+              </React.Fragment>
             ))}
           </div>
 
-          <h1 className={`${audience === 'institutions' ? 'text-[clamp(1.6rem,4vw,3.25rem)]' : 'text-[clamp(1.8rem,5vw+0.5rem,4.25rem)]'} font-medium leading-[1.1] text-dark mb-[clamp(1.5rem,4vw,2rem)] tracking-[-0.03em]`}>
-            {headingLeft} <br />
+          <h1 className="text-[clamp(1.8rem,5vw+0.5rem,4.25rem)] font-medium leading-[1.25] md:leading-[1.1] text-dark mb-[clamp(1.5rem,4vw,2rem)] tracking-[-0.03em]">
             {audience === "students" ? (
+              <>
+                Your personal AI companion <br />
                 <div className="flex items-center justify-center text-orange italic">
                 <div 
                     className="flex flex-col md:flex-row items-center md:items-baseline min-w-[300px]" 
@@ -290,10 +288,13 @@ const Hero = ({ audience = "students" }: HeroProps) => {
                     })()}
                 </div>
                 </div>
+              </>
             ) : (
-                <div className="flex items-center justify-center text-orange italic mt-2">
-                    Competency-Based Learning
-                </div>
+                <>
+                  The Medical Education <br className="hidden md:block" /> 
+                  <span className="text-orange">Operating System</span> for <br className="md:hidden" />
+                  <span className="text-orange italic block md:inline mt-1 md:mt-0">CBME</span>
+                </>
             )}
           </h1>
 
@@ -364,7 +365,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
 
         {audience === "students" && <TrustedBy />}
 
-        <div className="w-full flex flex-col items-center mt-[clamp(2rem,6vw,4rem)]">
+        <div className={`w-full flex flex-col items-center ${audience === 'institutions' ? 'mt-0 md:mt-[-0.5rem]' : 'mt-[clamp(2rem,6vw,4rem)]'}`}>
 
         {/* Huge Video Below or Visual */}
         {audience === "students" ? (
@@ -379,8 +380,15 @@ const Hero = ({ audience = "students" }: HeroProps) => {
                 </div>
             </div>
         ) : (
-            <div className="w-full aspect-video rounded-[0.5rem] max-w-[1200px]">
-                <DashboardPlaceholder label="Competency Heatmap &amp; Cohort Analytics" accent />
+            <div className="w-full h-auto rounded-sm overflow-hidden max-w-[1200px] border border-black/5  relative bg-transparent">
+                <video 
+                  src="/Insitutional Page Video Temp.webm" 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline
+                  className="w-full h-auto block"
+                />
             </div>
         )}
         </div>

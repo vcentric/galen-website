@@ -3,11 +3,13 @@
 import React from 'react';
 
 const deploymentSteps = [
-    { n: '01', label: 'Curriculum upload', phase: 'Phase 1' },
-    { n: '02', label: 'Academic calendar setup', phase: 'Phase 2' },
+    { n: '01', label: 'Data Configuration', phase: 'Phase 1' },
+    { n: '02', label: 'Timetable & Academic Setup', phase: 'Phase 2' },
     { n: '03', label: 'Faculty onboarding', phase: 'Phase 3' },
-    { n: '04', label: 'Student app integration', phase: 'Phase 4' },
-    { n: '05', label: 'Cohort analytics activation', phase: 'Phase 5' },
+    { n: '04', label: 'Student app onboarding', phase: 'Phase 4' },
+    { n: '05', label: 'Institution-Wide Training & Integration', phase: 'Phase 5' },
+    { n: '06', label: 'Faculty Workspace Activation', phase: 'Phase 6' },
+    { n: '07', label: 'Analytics & Insights Enablement', phase: 'Phase 7' },
 ];
 
 const InstitutionsRoadmap = () => (

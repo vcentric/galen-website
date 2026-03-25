@@ -14,22 +14,22 @@ import { PrimaryButton } from '../PrimaryButton';
 const modules = [
     {
         title: 'Cohort Analytics',
-        desc: 'Deep learning insights across student batches using real-time learning data generated from student activity. Validate progress and identify gaps automatically.',
+        desc: 'Track student performance across batches with real-time insights. Monitor progress, validate learning, and identify gaps early.',
         icon: ChartBarIcon,
     },
     {
         title: 'AI Lesson Planning',
-        desc: 'Align teaching sessions with competencies while receiving insights on curriculum gaps. Receive automated feedback on faculty session plans.',
+        desc: 'Plan teaching sessions aligned to competencies with AI support. Get structured guidance and feedback on lesson plans.',
         icon: LightBulbIcon,
     },
     {
         title: 'Faculty Content Engine',
-        desc: 'Upload lecture material and automatically generate assessments mapped to your institutional competencies. High-fidelity results in seconds.',
+        desc: 'Upload lecture material and instantly generate competency-mapped assessments. Use the AI workspace to create lecture slides, notes, and structured lesson plans for lectures, SGD, bedside teaching, and simulations, ready to use in class.',
         icon: DocumentPlusIcon,
     },
     {
-        title: 'Workflow Automation',
-        desc: 'Simplify institutional coordination with automated scheduling and task management. Connect faculty and administrators seamlessly.',
+        title: 'Timetables & Scheduling',
+        desc: 'Identify at-risk students early using learning data. Enable timely interventions and improve academic outcomes.',
         icon: CalendarIcon,
     },
     {
@@ -63,7 +63,7 @@ const InstitutionsModules = () => {
                                     {/* Illustrative Icon Block */}
                                     <div className="relative mb-6 w-16 h-16 flex items-center justify-center">
                                         <div className="relative w-14 h-14 rounded-xl flex items-center justify-center border border-white/10 bg-white/[0.03] group-hover:border-orange/30 transition-all duration-500">
-                                            <m.icon className="w-7 h-7 text-white/80 group-hover:text-orange transition-colors duration-500 stroke-[1.5]" />
+                                            {m.icon && <m.icon className="w-7 h-7 text-white/80 group-hover:text-orange transition-colors duration-500 stroke-[1.5]" />}
                                         </div>
                                     </div>
 

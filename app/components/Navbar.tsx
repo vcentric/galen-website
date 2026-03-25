@@ -230,7 +230,7 @@ const Navbar = () => {
 
           <div className="relative z-[40] flex-1 flex justify-start items-center">
             <Link href="/" className="hidden md:flex items-center no-underline transition-opacity duration-200 hover:opacity-80">
-              <Image src="/galenai-logo.png" alt="GalenAI" width={140} height={35} className="h-[35px] w-auto" />
+              <Image src="/galenai-logo.webp" alt="GalenAI" width={140} height={35} className="h-[35px] w-auto" />
             </Link>
             <button 
               onClick={toggleMenu}

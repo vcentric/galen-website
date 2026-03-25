@@ -1,166 +1,166 @@
+
 import Image from "next/image";
 import Link from "next/link";
-import { SiInstagram, SiLinkedin, SiX, SiYoutube } from "react-icons/si";
+import { SiInstagram, SiLinkedin, SiX, SiYoutube, SiAppstore, SiGoogleplay } from "react-icons/si";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 
 const Footer = () => {
   return (
-    <footer id="contact" className="w-full pt-[clamp(2rem,5vw,3rem)] pb-[clamp(1rem,3vw,1.5rem)] px-[clamp(2rem,6vw,4rem)] font-sans">
+    <footer id="contact" className="w-full pt-[clamp(2rem,5vw,3rem)] pb-[clamp(1rem,3vw,1.5rem)] px-[clamp(2rem,6vw,4rem)] font-primary">
       <div className="max-w-[1240px] mx-auto bg-[#303030] rounded-[40px] px-[clamp(1.5rem,5vw,2.5rem)] pt-[clamp(2.5rem,6vw,3rem)] pb-[clamp(2rem,5vw,2.5rem)] text-white relative overflow-hidden shadow-sm">
-        <div className="flex flex-col md:block relative mb-[clamp(4rem,10vw,5rem)]">
+        
+        {/* Main Footer Row: Logo | Links | Store Buttons */}
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-8 mb-[clamp(4rem,10vw,6rem)]">
           
-          {/* Col 1 - Icon */}
-          <div className="md:absolute md:left-0 md:top-0 mb-[clamp(1.5rem,4vw,2rem)] md:mb-0">
+          {/* Logo Column */}
+          <div className="shrink-0">
             <img 
-              src="/galenai-icon.png" 
+              src="/galenai-icon.webp" 
               alt="GalenAI" 
               className="w-10 h-10 object-contain"
             />
           </div>
 
-          {/* Links Grid */}
-          <div className="w-full">
-            <div className="grid grid-cols-2 md:flex md:flex-row md:flex-wrap md:justify-center gap-24 w-full mx-auto">
-
-              {/* Col 2 - Company */}
-              <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)] min-w-[120px]">
-            <h4 className="text-[clamp(1.1rem,2vw,1.25rem)] font-semibold text-white tracking-tight">
-              Company
-            </h4>
-            <div className="flex flex-col gap-3">
-              {[
-                { label: "About GalenAI", href: "/about" },
-                { label: "Our Mission", href: "/mission" },
-                { label: "Join the Team", href: "/careers" },
-                { label: "Pricing", href: "/pricing" },
-                { label: "FAQs", href: "/faq" },
-                { label: "Contact Us", href: "/contact" },
-              ].map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="group flex items-center w-fit text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
-                >
-                  {link.label}
-                  <div className="overflow-hidden ml-1.5 flex items-center justify-center">
-                    <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Col 3 - Study Resources */}
-          <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)]">
-            <h4 className="text-[clamp(1.1rem,2vw,1.25rem)] font-semibold text-white tracking-tight">
-              Resources
-            </h4>
-            <div className="flex flex-col gap-3">
-              {[
-                { label: "CBME Curriculum", href: "/cbme-curriculum" },
-                { label: "Learning Paths", href: "/learning-paths" },
-                { label: "Clinical Cases", href: "/cases" },
-                { label: "Practice MCQs", href: "/mcqs" },
-                { label: "Flashcards", href: "/flashcards" },
-                { label: "Exam Prep", href: "/exam-prep" },
-                { label: "Blogs & Notes", href: "/blog" },
-              ].map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="group flex items-center w-fit text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
-                >
-                  {link.label}
-                  <div className="overflow-hidden ml-1.5 flex items-center justify-center">
-                    <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-
-           {/* Col 4 - Contact */}
-          <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)]">
-            <h4 className="text-[clamp(1.1rem,2vw,1.25rem)] font-semibold text-white tracking-tight">
-              Contact
-            </h4>
-            <div className="flex flex-col gap-[clamp(1rem,3vw,1.25rem)] mt-1">
-              <div className="flex flex-col gap-1">
-                <span className="text-[clamp(0.7rem,1vw,0.75rem)] text-white font-semibold tracking-wider uppercase">
-                  General
-                </span>
-                <a
-                  href="mailto:support@galenai.io"
-                  className="group flex items-center w-fit text-[clamp(0.85rem,1.5vw,0.95rem)] text-gray-300 no-underline transition-colors hover:text-white"
-                >
-                  support@galenai.io
-                  <div className="overflow-hidden ml-1.5 flex items-center justify-center">
-                    <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
-                  </div>
-                </a>
-              </div>
+          {/* Links Group */}
+          <div className="flex-1 lg:pl-[clamp(2rem,6vw,4rem)]">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-[clamp(2rem,6vw,4rem)]">
               
-              <div className="flex flex-col gap-1">
-                <span className="text-[clamp(0.7rem,1vw,0.75rem)] text-white font-semibold tracking-wider uppercase">
-                  WhatsApp
-                </span>
-                <a
-                  href="https://wa.me/918848542046"
-                  className="group flex items-center w-fit text-[clamp(0.85rem,1.5vw,0.95rem)] text-gray-300 no-underline transition-colors hover:text-white"
-                >
-                  +91 88485 42046
-                  <div className="overflow-hidden ml-1.5 flex items-center justify-center">
-                    <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
-                  </div>
-                </a>
+              {/* Col 1 - Company */}
+              <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)] min-w-[120px]">
+                <h4 className="text-[clamp(1.1rem,2vw,1.25rem)] font-semibold text-white tracking-tight">
+                  Company
+                </h4>
+                <div className="flex flex-col gap-3">
+                  {[
+                    { label: "About GalenAI", href: "/about" },
+                    { label: "Our Mission", href: "/mission" },
+                    { label: "Join the Team", href: "#" },
+                    { label: "Pricing", href: "/pricing" },
+                    { label: "FAQs", href: "/faq" },
+                  ].map((link) => {
+                    const isPricing = link.label === "Pricing";
+                    const isJoinTeam = link.label === "Join the Team";
+                    const commonClasses = "flex items-center w-fit text-[0.95rem] no-underline transition-colors";
+                    
+                    if (isPricing) {
+                      return (
+                        <span key={link.label} className={`${commonClasses} text-gray-500 cursor-default`}>
+                          {link.label}
+                        </span>
+                      );
+                    }
+
+                    if (isJoinTeam) {
+                      return (
+                        <div key={link.label} className="group/join relative">
+                          <button className={`${commonClasses} font-sans text-white cursor-default`}>
+                            {link.label}
+                          </button>
+                          <div className="absolute bottom-full left-0 mb-3 w-[290px] p-5 bg-[#404040]/95 backdrop-blur-md font-sans text-[0.92rem] leading-relaxed text-gray-200 rounded-2xl opacity-0 invisible group-hover/join:opacity-100 group-hover/join:visible transition-all duration-300 transform translate-y-2 group-hover/join:translate-y-0 z-50 shadow-2xl border border-white/10 pointer-events-none">
+                            Interested in working with us? Reach out at <a href="mailto:info@galenai.io" className="text-white font-medium hover:underline pointer-events-auto">info@galenai.io</a> and tell us why you want to be part of GalenAI.
+                            <div className="absolute top-full left-6 -translate-y-1/2 w-3 h-3 bg-[#404040] rotate-45 border-r border-b border-white/10"></div>
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <a key={link.label} href={link.href} className={`${commonClasses} group text-gray-300 hover:text-white`}>
+                        {link.label}
+                        <div className="overflow-hidden ml-1.5 flex items-center justify-center">
+                          <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
 
-              <div className="flex flex-col gap-1">
-                <span className="text-[clamp(0.7rem,1vw,0.75rem)] text-white font-semibold tracking-wider uppercase">
-                  Office
-                </span>
-                <span className="text-[clamp(0.85rem,1.5vw,0.95rem)] text-white">
-                  India
-                </span>
-                
+              {/* Col 2 - Contact */}
+              <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)] min-w-[140px]">
+                <h4 className="text-[clamp(1.1rem,2vw,1.25rem)] font-semibold text-white tracking-tight">
+                  Contact
+                </h4>
+                <div className="flex flex-col gap-[clamp(1rem,3vw,1.25rem)] mt-1">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[clamp(0.7rem,1vw,0.75rem)] text-white font-semibold tracking-wider uppercase">General</span>
+                    <a href="mailto:support@galenai.io" className="group flex items-center w-fit text-[clamp(0.85rem,1.5vw,0.95rem)] text-gray-300 no-underline transition-colors hover:text-white">
+                      support@galenai.io
+                      <div className="overflow-hidden ml-1.5 flex items-center justify-center">
+                        <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
+                      </div>
+                    </a>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[clamp(0.7rem,1vw,0.75rem)] text-white font-semibold tracking-wider uppercase">WhatsApp</span>
+                    <a href="https://wa.me/918848542046" className="group flex items-center w-fit text-[clamp(0.85rem,1.5vw,0.95rem)] text-gray-300 no-underline transition-colors hover:text-white">
+                      +91 88485 42046
+                      <div className="overflow-hidden ml-1.5 flex items-center justify-center">
+                        <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Col 3 - Socials */}
+              <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)] min-w-[120px]">
+                <h4 className="text-[clamp(1.1rem,2vw,1.25rem)] font-semibold text-white tracking-tight">
+                  Follow us
+                </h4>
+                <div className="flex flex-col gap-3">
+                  {[
+                    { label: "Instagram", icon: <SiInstagram className="w-[18px] h-[18px]" />, href: "https://www.instagram.com/galen_ai/ " },
+                    { label: "LinkedIn", icon: <SiLinkedin className="w-[18px] h-[18px]" />, href: "https://linkedin.com/company/galenai-india/" },
+                    { label: "X", icon: <SiX className="w-[18px] h-[18px]" />, href: "#" },
+                    { label: "YouTube", icon: <SiYoutube className="w-[18px] h-[18px]" />, href: "#" }
+                  ].map((social) => (
+                    <a key={social.label} href={social.href} className="group flex items-center w-fit gap-3 text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white">
+                      {social.icon}
+                      {social.label}
+                      <div className="overflow-hidden ml-[-0.25rem] flex items-center justify-center">
+                        <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Col 5 - Socials */}
-          <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)]">
-            <h4 className="text-[clamp(1.1rem,2vw,1.25rem)] font-semibold text-white tracking-tight">
-              Follow us
-            </h4>
-            <div className="flex flex-col gap-3">
-              {[
-                { label: "Instagram", icon: <SiInstagram className="w-[18px] h-[18px]" />, href: "#" },
-                { label: "LinkedIn", icon: <SiLinkedin className="w-[18px] h-[18px]" />, href: "#" },
-                { label: "X", icon: <SiX className="w-[18px] h-[18px]" />, href: "#" },
-                { label: "YouTube", icon: <SiYoutube className="w-[18px] h-[18px]" />, href: "#" }
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  className="group flex items-center w-fit gap-3 text-[0.95rem] text-gray-300 no-underline transition-colors hover:text-white"
-                >
-                  {social.icon}
-                  {social.label}
-                  <div className="overflow-hidden ml-[-0.25rem] flex items-center justify-center">
-                    <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
+          {/* Store Buttons Section */}
+          <div className="flex flex-col gap-3 w-full lg:w-auto mt-8 lg:mt-0">
+            <a 
+              href="https://apps.apple.com/us/app/galenai/id6755653561" 
+              className="group flex items-center gap-4 bg-[#404040]/80 rounded-md p-4 border border-white/10 w-full-md:w-[220px]"
+            >
+              <div className="bg-[#303030] p-2 rounded-sm">
+                <SiAppstore className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="text-[0.65rem] uppercase tracking-wider text-gray-400 font-bold">Download from</span>
+                <span className="text-[0.95rem] font-bold text-white tracking-tight">App Store</span>
+              </div>
+            </a>
 
-            </div>
+            <a 
+              href="https://play.google.com/store/apps/details?id=com.galenai.galenai" 
+              className="group flex items-center gap-4 bg-[#404040]/80 rounded-md p-4 border border-white/10 w-full sm:w-[220px]"
+            >
+              <div className="bg-[#303030] p-2 rounded-sm">
+                <SiGoogleplay className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="text-[0.65rem] uppercase tracking-wider text-gray-400 font-bold">Get it on</span>
+                <span className="text-[0.95rem] font-bold text-white tracking-tight">Google Play</span>
+              </div>
+            </a>
           </div>
         </div>
 
         <div className="w-full flex justify-center items-center select-none overflow-hidden px-2">
           <Image
-            src="/footerlogo.png"
+            src="/footerlogo.webp"
             alt="GalenAI"
             width={1200}
             height={200}

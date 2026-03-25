@@ -2,29 +2,35 @@ import {
     PresentationChartLineIcon, 
     AcademicCapIcon, 
     ClipboardDocumentCheckIcon,
-    Square3Stack3DIcon
+    Square3Stack3DIcon,
+    BriefcaseIcon
 } from '@heroicons/react/24/outline';
 
 const benefits = [
     {
         icon: PresentationChartLineIcon,
-        title: 'Continuous competency monitoring',
-        desc: 'Move from exam-based evaluation to ongoing competency tracking across the entire curriculum.',
+        title: 'Continuous competency tracking',
+        desc: 'Move beyond exam-based evaluation to continuous, curriculum-wide visibility into student competency and progress.',
     },
     {
         icon: AcademicCapIcon,
-        title: 'Teaching aligned with learning gaps',
-        desc: 'Faculty gain visibility into student learning gaps and adjust teaching accordingly.',
+        title: 'Teaching aligned to real learning gaps',
+        desc: 'Enable faculty to adapt teaching based on real student performance, improving engagement and learning outcomes.',
     },
     {
         icon: ClipboardDocumentCheckIcon,
-        title: 'Accreditation-ready analytics',
-        desc: 'Generate insights for academic governance, curriculum evaluation, and accreditation reporting.',
+        title: 'Faster, more effective teaching preparation',
+        desc: 'Reduce the time and effort required to prepare classes while improving the quality and consistency of teaching delivery.',
     },
     {
         icon: Square3Stack3DIcon,
-        title: 'Workflow automation',
-        desc: 'Automate repetitive administrative tasks and academic coordination for zero-disruption operations.',
+        title: 'Accreditation-ready academic insights',
+        desc: 'Gain structured visibility into curriculum coverage, student performance, and institutional outcomes for accreditation and governance.',
+    },
+    {
+        icon: BriefcaseIcon,
+        title: 'Streamlined academic operations',
+        desc: 'Ensure smoother coordination across scheduling, faculty, and academic workflows, reducing operational friction across departments.',
     },
 ];
 
@@ -59,8 +65,11 @@ const InstitutionsOutcomes = () => (
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-12">
-                {benefits.map(({ icon: Icon, title, desc }) => (
-                    <div key={title} className="group flex items-start gap-6 border-l-[2px] border-gray-100/50 hover:border-orange/40 pl-6 transition-all duration-300">
+                {benefits.map(({ icon: Icon, title, desc }, index) => (
+                    <div 
+                        key={title} 
+                        className={`group flex items-start gap-6 border-l-[2px] border-gray-100/50 hover:border-orange/40 pl-6 transition-all duration-300 ${index === 4 ? 'md:col-span-2 md:max-w-[600px] md:mx-auto' : ''}`}
+                    >
                         <div className="shrink-0 mt-1">
                             <Icon className="w-7 h-7 text-dark/60 group-hover:text-orange transition-colors duration-300" strokeWidth={1.5} />
                         </div>

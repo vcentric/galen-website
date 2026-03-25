@@ -10,13 +10,14 @@ interface Feature {
 
 const Comparison = () => {
   const features: Feature[] = [
-    { title: "Daily personalised learning companion", marrow: false, chatgpt: false, openevidence: false, galen: true },
-    { title: "Competency‑based continuous learning",  marrow: false, chatgpt: false, openevidence: false, galen: true },
-    { title: "Verified sources & curriculum alignment", marrow: false, chatgpt: false, openevidence: true,  galen: true },
-    { title: "Medical‑only trained AI",               marrow: false, chatgpt: false, openevidence: "limited", galen: true },
-    { title: "Adaptive practice (MCQs, flashcards & cases)", marrow: false, chatgpt: false, openevidence: false, galen: true },
-    { title: "Affordability (under ₹20k/year)",       marrow: false, chatgpt: false, openevidence: true,  galen: true },
-    { title: "Ecosystem‑friendly (supports faculty & classrooms)", marrow: false, chatgpt: false, openevidence: false, galen: true },
+    { title: "Continuous AI Learning Companion", marrow: false, chatgpt: false, openevidence: false, galen: true },
+    { title: "Competency-Aligned Learning System",  marrow: false, chatgpt: false, openevidence: false, galen: true },
+    { title: "Verified & Curriculum-Aligned Intelligence", marrow: true, chatgpt: false, openevidence: true,  galen: true },  
+    { title: "Adapts to How You Learn",               marrow: false, chatgpt: false, openevidence:false, galen: true },
+    { title: "Tracks Your Learning Progress & Patterns", marrow: false, chatgpt: false, openevidence: false, galen: true },
+    { title: "Integrated Learning (Tutor + Qbanks + Cases + Flashcards)", marrow: false, chatgpt: false, openevidence: false,  galen: true },  
+    { title: "Accessible Pricing (Built for Students)",       marrow: false, chatgpt: false, openevidence: true,  galen: true },
+    { title: "Built for Students, Faculty & Classrooms", marrow: false, chatgpt: false, openevidence: false, galen: true },
   ];
 
   const CheckIcon = () => (
@@ -70,23 +71,23 @@ const Comparison = () => {
                 {/* Marrow */}
                 <th className="w-[17.5%] text-center p-[clamp(1.2rem,2vw,2rem)] align-middle bg-[#EB602D] border-r border-[rgba(255,255,255,0.25)]">
                   <div className="flex flex-col items-center gap-2 h-full justify-center">
-                    <Image src="/marrow.png" alt="Marrow" width={80} height={40} className="h-6 md:h-7 w-auto object-contain" />
-                    <span className="font-semibold text-white text-base">Marrow</span>
+                    <Image src="/marrow.webp" alt="Marrow" width={80} height={40} className="h-6 md:h-7 w-auto object-contain" />
+                    <span className="font-semibold text-white text-base">Traditional <br/> Ed-Tech</span>
                   </div>
                 </th>
 
                 {/* ChatGPT */}
                 <th className="w-[17.5%] text-center p-[clamp(1.2rem,2vw,2rem)] align-middle bg-[#EB602D] border-r border-[rgba(255,255,255,0.25)]">
                   <div className="flex flex-col items-center gap-2 h-full justify-center">
-                    <Image src="/chatgpt.png" alt="ChatGPT" width={80} height={40} className="h-6 md:h-7 w-auto object-contain" />
-                    <span className="font-semibold text-white text-base">ChatGPT</span>
+                    <Image src="/chatgpt.webp" alt="ChatGPT" width={80} height={40} className="h-6 md:h-7 w-auto object-contain" />
+                    <span className="font-semibold text-white text-base">Generic LLM</span>
                   </div>
                 </th>
 
                 {/* OpenEvidence */}
                 <th className="w-[17.5%] text-center p-[clamp(1.2rem,2vw,2rem)] align-middle bg-[#EB602D] border-r border-[rgba(255,255,255,0.25)]">
                   <div className="flex flex-col items-center gap-2 h-full justify-center">
-                    <Image src="/openevidence.png" alt="OpenEvidence" width={80} height={40} className="h-6 md:h-7 w-auto object-contain" />
+                    <Image src="/openevidence.webp" alt="OpenEvidence" width={80} height={40} className="h-6 md:h-7 w-auto object-contain" />
                     <span className="font-semibold text-white text-base">OpenEvidence</span>
                   </div>
                 </th>
@@ -94,7 +95,7 @@ const Comparison = () => {
                 {/* GalenAI — rightmost */}
                 <th className="w-[17.5%] text-center p-[clamp(1.2rem,2vw,2rem)] align-middle bg-[#EB602D]">
                   <div className="flex flex-col items-center gap-2 h-full justify-center">
-                    <Image src="/galenai-icon.png" alt="GalenAI" width={80} height={40} className="h-7 md:h-9 w-auto object-contain" />
+                    <Image src="/galenai-icon.webp" alt="GalenAI" width={80} height={40} className="h-7 md:h-9 w-auto object-contain" />
                     <span className="font-bold text-white text-base">GalenAI</span>
                   </div>
                 </th>
