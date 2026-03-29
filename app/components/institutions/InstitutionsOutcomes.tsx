@@ -13,11 +13,6 @@ const benefits = [
         desc: 'Move beyond exam-based evaluation to continuous, curriculum-wide visibility into student competency and progress.',
     },
     {
-        icon: AcademicCapIcon,
-        title: 'Teaching aligned to real learning gaps',
-        desc: 'Enable faculty to adapt teaching based on real student performance, improving engagement and learning outcomes.',
-    },
-    {
         icon: ClipboardDocumentCheckIcon,
         title: 'Faster, more effective teaching preparation',
         desc: 'Reduce the time and effort required to prepare classes while improving the quality and consistency of teaching delivery.',
@@ -43,7 +38,7 @@ const InstitutionsOutcomes = () => (
                 <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-[#666] font-semibold tracking-widest uppercase mb-4 block">
                     THE STRATEGIC IMPACT
                 </span>
-                <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1]">
+                <h2 className="text-[clamp(1.65rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1]">
                     What institutions gain <br className="hidden md:block" /> with 
                     <span className="text-[#eb602d] relative inline-block ml-2 pb-1.5">
                         GalenAI
@@ -74,7 +69,7 @@ const InstitutionsOutcomes = () => (
                             <Icon className="w-7 h-7 text-dark/60 group-hover:text-orange transition-colors duration-300" strokeWidth={1.5} />
                         </div>
                         <div>
-                            <h3 className="text-[1.15rem] font-bold text-[#222] mb-2 tracking-tight group-hover:text-orange transition-colors">
+                            <h3 className="text-[1.25rem] sm:text-[1.5rem] font-bold text-[#222] mb-2 tracking-tight group-hover:text-orange transition-colors">
                                 {title}
                             </h3>
                             <p className="text-[0.95rem] leading-[1.6] text-[#555] m-0">

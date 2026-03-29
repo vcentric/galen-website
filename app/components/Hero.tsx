@@ -313,7 +313,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
           <div className="flex flex-wrap justify-center items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)]">
             {audience === "students" ? (
               <>
-                <PrimaryButton href="#ask" text="Try GalenAI" icon={ArrowUpRightIcon} />
+                <PrimaryButton href="https://app.galenai.io" text="Try GalenAI" icon={ArrowUpRightIcon} />
                 <SecondaryButton href="https://onelink.to/wqg9n2" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} />
               </>
             ) : (
@@ -328,7 +328,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             <span>Already using GalenAI?</span>
             <span className="mx-3 text-black/20">|</span>
             <a 
-              href="#login" 
+              href="https://app.galenai.io/login" 
               ref={loginLinkRef}
               onMouseEnter={handleLoginEnter}
               onMouseLeave={handleLoginLeave}
@@ -369,18 +369,18 @@ const Hero = ({ audience = "students" }: HeroProps) => {
 
         {/* Huge Video Below or Visual */}
         {audience === "students" ? (
-            <div className="w-full aspect-video rounded-[0.5rem] overflow-hidden max-w-[1200px]">
+            <div className="w-full aspect-video rounded-[0.5rem] overflow-hidden max-w-[1240px]">
                 <div className="relative w-full h-full flex items-center justify-center">
                     <iframe
                     src="https://www.youtube.com/embed/1l0-dJic1dE?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=1l0-dJic1dE"
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full min-w-full min-h-full border-none pointer-events-none object-cover" 
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full border-none pointer-events-none" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     />
                 </div>
             </div>
         ) : (
-            <div className="w-full h-auto rounded-sm overflow-hidden max-w-[1200px] border border-black/5  relative bg-transparent">
+            <div className="w-full h-auto rounded-[0.5rem] overflow-hidden max-w-[1240px] border border-black/5  relative bg-transparent">
                 <video 
                   src="/Insitutional Page Video Temp.webm" 
                   autoPlay 

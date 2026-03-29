@@ -21,7 +21,7 @@ const platformLayers = [
         title: 'Student Learning Layer',
         desc: 'An AI learning companion that helps students build understanding through reasoning, practice, and continuous feedback.',
         color: '#5a7fc9',
-        image: '/Student Layer.webp',
+        image: '/Student Layer.png',
     },
 ];
 

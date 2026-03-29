@@ -41,74 +41,71 @@ const modules = [
 
 const InstitutionsModules = () => {
     return (
-        <section className="bg-transparent py-10 sm:py-16 overflow-hidden" id="modules">
-            <div className="w-full mx-auto ">
-                <div className="bg-[#1a1a1b] rounded-[40px] p-10 sm:p-14 relative border border-white/[0.05] overflow-hidden">
-                    
-                    {/* Header Area Matched with Solution Section */}
-                    <div className="text-center mb-12 sm:mb-16 relative z-10">
-                        <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-white/50 font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.25rem)] block">
-                            SYSTEM MODULES
-                        </span>
-                        <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-white tracking-[-0.03em] leading-[1.1] mb-5 max-w-[850px] mx-auto ">
-                            Everything your institution needs, <br className="hidden md:block" /> <span className="text-orange">works for you</span>, no matter your role
-                        </h2>
-                    </div>
+        <section className="relative py-12 sm:py-16 bg-black rounded-4xl overflow-hidden" id="modules">
+            <div className="relative z-10 max-w-[1240px] mx-auto px-[clamp(1.5rem,5vw,3rem)]">
+                
+                {/* Header Area - Clean & Professional in Dark Mode */}
+                <div className="text-center mb-10 sm:mb-14 relative z-10">
+                    <span className="text-[clamp(0.75rem,2vw,0.85rem)] text-gray-500 font-semibold tracking-widest uppercase mb-[clamp(1rem,3vw,1.5rem)] block">
+                        SYSTEM MODULES
+                    </span>
+                    <h2 className="text-[clamp(2rem,5.5vw,3.2rem)] font-medium font-[var(--font-space-var)] text-white tracking-[-0.03em] leading-[1.05] mb-5 lg:mb-6 max-w-[900px] mx-auto">
+                        Everything your institution needs, <br className="hidden md:block" /> <span className="text-[#eb602d]">works for you</span>
+                    </h2>
+                </div>
 
-                    {/* Minimal Illustrative Row with In-between Separators */}
-                    <div className="flex flex-col lg:flex-row items-stretch justify-between gap-10 lg:gap-0 relative z-10">
-                        {modules.map((m, i) => (
-                            <React.Fragment key={m.title}>
-                                <div className="flex-1 flex flex-col items-center text-center group px-4 lg:px-6">
-                                    {/* Illustrative Icon Block */}
-                                    <div className="relative mb-6 w-16 h-16 flex items-center justify-center">
-                                        <div className="relative w-14 h-14 rounded-xl flex items-center justify-center border border-white/10 bg-white/[0.03] group-hover:border-orange/30 transition-all duration-500">
-                                            {m.icon && <m.icon className="w-7 h-7 text-white/80 group-hover:text-orange transition-colors duration-500 stroke-[1.5]" />}
+                {/* Stack Layout - Widen Dark Rows (No gap, Color Indicator, Hover Fill) */}
+                <div className="flex flex-col relative z-10 border border-white/10 rounded-sm overflow-hidden bg-[#0a0a0a] max-w-[1100px] mx-auto">
+                    {modules.map((m, i) => (
+                        <div 
+                            key={m.title} 
+                            className="group relative flex flex-col md:flex-row items-stretch border-b border-white/[0.05] last:border-b-0 transition-all duration-500 overflow-hidden cursor-default"
+                        >
+                            {/* Hover Fill Background - Animation (Subtle Dark Orange) */}
+                            <div className="absolute inset-0 bg-[#eb602d]/[0.03] -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] z-0"></div>
+                            
+                            {/* Left Color Indicator */}
+                            <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#eb602d] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 ease-out origin-top z-20"></div>
+
+                            {/* Main Content Area - Refined Typography */}
+                            <div className="relative z-10 flex flex-col md:flex-row items-center w-full px-6 py-8 sm:px-12">
+                                {/* Icon Container (Balanced) */}
+                                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#eb602d]/10 border border-[#eb602d]/20 flex items-center justify-center mb-5 md:mb-0 md:mr-10 group-hover:bg-[#eb602d] transition-all duration-500 transform group-hover:rotate-[10deg]">
+                                    {m.icon && <m.icon className="w-6 h-6 text-[#eb602d] group-hover:text-white transition-colors duration-500 stroke-[1.5]" />}
+                                </div>
+                                
+                                {/* Info Column */}
+                                <div className="flex-1 text-center md:text-left">
+                                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mb-2">
+                                        <h3 className="text-[1.5rem] sm:text-[1.85rem] font-bold text-white tracking-tight group-hover:text-[#eb602d] transition-colors duration-500 m-0 leading-tight">
+                                            {m.title}
+                                        </h3>
+                                        <div className="text-[0.7rem] font-bold text-gray-700 group-hover:text-[#eb602d]/30 transition-colors duration-500 font-[var(--font-space-var)]">
+                                            / {String(i + 1).padStart(2, '0')}
                                         </div>
                                     </div>
-
-                                    {/* Title */}
-                                    <h3 className="text-[17px] font-bold text-white mb-4 tracking-tight group-hover:text-orange transition-colors duration-500">
-                                        {m.title}
-                                    </h3>
-
-                                    {/* Description */}
-                                    <p className="text-[13px] leading-[1.6] text-white/40 font-medium max-w-[280px] lg:max-w-[185px] group-hover:text-white/60 transition-colors duration-500">
+                                    <p className="text-[0.82rem] sm:text-[0.88rem] leading-[1.6] text-gray-400 group-hover:text-gray-300 transition-colors duration-500 m-0">
                                         {m.desc}
                                     </p>
                                 </div>
 
-                                {/* Mobile Horizontal Separator */}
-                                {i < modules.length - 1 && (
-                                    <div className="flex lg:hidden items-center justify-center w-full px-10 my-2">
-                                        <div className="h-[1px] flex-1 bg-white/[0.08]" />
-                                        <div className="mx-4 w-1.5 h-1.5 rounded-full bg-orange/40 shrink-0" />
-                                        <div className="h-[1px] flex-1 bg-white/[0.08]" />
-                                    </div>
-                                )}
+                               
+                            </div>
+                        </div>
+                    ))}
+                </div>
 
-                                {/* Vertical Separator */}
-                                {i < modules.length - 1 && (
-                                    <div className="hidden lg:flex flex-col items-center justify-center px-4 w-px">
-                                        <div className="h-32 w-[1px] bg-white/[0.08]" />
-                                        <div className="my-4 w-1.5 h-1.5 rounded-full bg-orange/40 shrink-0" />
-                                        <div className="h-32 w-[1px] bg-white/[0.08]" />
-                                    </div>
-                                )}
-                            </React.Fragment>
-                        ))}
-                    </div>
-
-                    <div className=" mt-15 py-3 sm:py-0 sm:mb-0 text-center relative z-10">
-                        <PrimaryButton 
-                            href="#contact" 
-                            text="Request Institutional Demo" 
-                            icon={ArrowUpRightIcon} 
-                            className="!min-w-0 !w-fit mx-auto !px-10" 
-                        />
-                    </div>
+                {/* Footer CTA */}
+                <div className="mt-10 sm:mt-14 text-center relative z-10">
+                    <PrimaryButton 
+                        href="#contact" 
+                        text="Request Institutional Demo" 
+                        icon={ArrowUpRightIcon} 
+                        className="!min-w-0 !w-fit mx-auto !px-10 !h-12 sm:!h-14 !text-[1rem]" 
+                    />
                 </div>
             </div>
+
         </section>
     );
 };

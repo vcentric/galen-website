@@ -251,7 +251,7 @@ const Navbar = () => {
 
           <div className="relative z-10 flex-1 flex justify-end">
             <a
-              href="#ask"
+              href={pathname === "/institutions" ? "#contact" : "https://app.galenai.io"}
               className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md
                          h-8 text-xs pl-3 pr-9
                          md:h-[clamp(2.5rem,5vw,2.75rem)] md:text-[clamp(0.85rem,2vw,0.95rem)] md:pl-[clamp(1rem,3vw,1.5rem)] md:pr-[clamp(3rem,6vw,3.5rem)]

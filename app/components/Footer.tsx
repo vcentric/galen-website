@@ -132,9 +132,9 @@ const Footer = () => {
           <div className="flex flex-col gap-3 w-full lg:w-auto mt-8 lg:mt-0">
             <a 
               href="https://apps.apple.com/us/app/galenai/id6755653561" 
-              className="group flex items-center gap-4 bg-[#404040]/80 rounded-md p-4 border border-white/10 w-full-md:w-[220px]"
+              className="group flex items-center gap-4 bg-[#404040]/80 rounded-xl p-4 border border-white/10 w-full sm:w-[220px] transition-colors duration-300 hover:bg-[#4a4a4a] hover:border-white/20"
             >
-              <div className="bg-[#303030] p-2 rounded-sm">
+              <div className="bg-[#303030] p-2 rounded-lg">
                 <SiAppstore className="w-6 h-6 text-white" />
               </div>
               <div className="flex flex-col text-left">
@@ -145,9 +145,9 @@ const Footer = () => {
 
             <a 
               href="https://play.google.com/store/apps/details?id=com.galenai.galenai" 
-              className="group flex items-center gap-4 bg-[#404040]/80 rounded-md p-4 border border-white/10 w-full sm:w-[220px]"
+              className="group flex items-center gap-4 bg-[#404040]/80 rounded-xl p-4 border border-white/10 w-full sm:w-[220px] transition-colors duration-300 hover:bg-[#4a4a4a] hover:border-white/20"
             >
-              <div className="bg-[#303030] p-2 rounded-sm">
+              <div className="bg-[#303030] p-2 rounded-lg">
                 <SiGoogleplay className="w-6 h-6 text-white" />
               </div>
               <div className="flex flex-col text-left">
@@ -186,3 +186,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

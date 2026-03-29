@@ -91,37 +91,37 @@ const Features = () => {
     <section id="features" className="w-full py-[clamp(4rem,10vw,4rem)] px-[clamp(2rem,6vw,4rem)] font-sans relative z-10">
       <div className="max-w-[1100px] mx-auto">
 
+        {/* Navigation Pills — above everything */}
+        <div className="flex flex-wrap justify-center gap-x-1.5 gap-y-2 lg:gap-2 mb-8">
+          {features.map((f) => {
+            const isActive = f.id === active;
+            return (
+              <button
+                key={`pill-${f.id}`}
+                onClick={() => goTo(f.id)}
+                className={`flex items-center shrink-0 px-2 lg:px-3 py-1 lg:py-1.5 rounded-full border transition-all duration-300 backdrop-blur-md cursor-pointer ${
+                  isActive
+                    ? "bg-orange text-white border-orange shadow-md scale-105"
+                    : "bg-white/70 text-orange border-orange/40 hover:border-orange/60"
+                }`}
+                style={!isActive ? { 
+                  boxShadow: 'inset 0 1.5px 3px rgba(235, 96, 45, 0.3), 0 1px 2px rgba(0, 0, 0, 0.03)'
+                } : {}}
+              >
+                <span className="text-[9px] lg:text-[11px] font-bold tracking-[0.05em] uppercase whitespace-nowrap">
+                  {f.tag}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
         {/* Main layout */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 items-start lg:items-center">
 
           {/* Unified Column (Mobile: Column, Desktop: 2/3 and 1/3 split) */}
           <div className="w-full lg:w-2/3 flex flex-col justify-center">
             
-            {/* Navigation Pills (Now universal) */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-x-1.5 gap-y-2 lg:gap-2 mb-8 mx-auto lg:mx-0 max-w-[300px] sm:max-w-none">
-              {features.map((f) => {
-                const isActive = f.id === active;
-                return (
-                  <button
-                    key={`pill-${f.id}`}
-                    onClick={() => goTo(f.id)}
-                    className={`flex items-center shrink-0 px-2 lg:px-3 py-1 lg:py-1.5 rounded-full border transition-all duration-300 backdrop-blur-md cursor-pointer ${
-                      isActive
-                        ? "bg-orange text-white border-orange shadow-md scale-105"
-                        : "bg-white/70 text-orange border-orange/40 hover:border-orange/60"
-                    }`}
-                    style={!isActive ? { 
-                      boxShadow: 'inset 0 1.5px 3px rgba(235, 96, 45, 0.3), 0 1px 2px rgba(0, 0, 0, 0.03)'
-                    } : {}}
-                  >
-                    <span className="text-[9px] lg:text-[11px] font-bold tracking-[0.05em] uppercase whitespace-nowrap">
-                      {f.tag}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
             {/* Active Feature Content */}
             <div key={active} className="animate-[fadeIn_0.6s_ease-out_forwards] mb-6 lg:mb-0 text-center lg:text-left">
               <h3 className="text-[clamp(1.75rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-6">
@@ -155,23 +155,22 @@ const Features = () => {
                 <div className="relative w-full h-full rounded-[30px] overflow-hidden bg-black">
                   <div ref={screenRef} className="absolute inset-0 w-full h-full">
                     {current.tag === "Coming Soon" ? (
-                      <div className="w-full h-full bg-[#151516] text-white p-3.5 overflow-y-auto pt-7 pb-10 flex flex-col gap-2.5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                        <div className="text-center mb-1">
-                          <h4 className="text-[14px] font-[var(--font-space-var)] font-bold text-white tracking-tight">Coming Soon</h4>
-                          <p className="text-[9px] text-gray-400">Future updates for you</p>
+                      <div className="w-full h-full bg-[#151516] text-white p-3 sm:p-4 overflow-y-auto pt-6 sm:pt-8 pb-10 flex flex-col gap-2.5 sm:gap-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                        <div className="text-center mb-0.5 sm:mb-1">
+                          <h4 className="text-[16px] sm:text-[18px] font-[var(--font-space-var)] font-bold text-white tracking-tight">Coming Soon</h4>
+                          <p className="text-[11px] sm:text-[12px] text-gray-400">Future updates for you</p>
                         </div>
                         {COMING_SOON_DATA.map((item, idx) => (
-                          <div key={idx} className="bg-[#212123] rounded-2xl p-3 border border-[#333] shadow-md flex flex-col gap-1.5 shrink-0">
-                            <div className="flex items-center gap-2">
-                              <div className="w-7 h-7 rounded-full bg-orange/15 flex items-center justify-center shrink-0">
+                          <div key={idx} className="bg-[#212123] rounded-2xl sm:rounded-3xl p-3 sm:p-4 border border-[#333] shadow-lg flex flex-col gap-1.5 sm:gap-2 shrink-0">
+                            <div className="flex items-center gap-2.5 sm:gap-3.5">
+                              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-orange/20 flex items-center justify-center shrink-0">
                                 {item.icon}
                               </div>
                               <div className="min-w-0">
-                                <h5 className="text-[12px] font-bold text-white leading-tight truncate">{item.title}</h5>
-                                <p className="text-[8px] text-orange font-medium leading-tight truncate">{item.subtitle}</p>
+                                <h5 className="text-[15px] sm:text-[18px] font-bold text-white leading-[1.2] tracking-tight">{item.title}</h5>
                               </div>
                             </div>
-                            <p className="text-[9px] text-[#A0A0A0] leading-[1.4]">
+                            <p className="text-[11px] sm:text-[12px] text-[#D1D1D1] leading-[1.5] font-medium">
                               {item.desc}
                             </p>
                           </div>
@@ -228,28 +227,8 @@ const Features = () => {
         {/* CTA */}
         <div className="mt-8 lg:mt-12 flex justify-center">
           <a
-            href="#ask"
+            href="https://app.galenai.io"
             className="group inline-flex items-center text-[clamp(1.75rem,4vw,3rem)] font-semibold font-[var(--font-space-var)] text-dark tracking-tight no-underline transition-all duration-300 hover:text-orange"
-            onMouseEnter={(e) => {
-              const path = e.currentTarget.querySelector("path");
-              const arrow = e.currentTarget.querySelector(".cta-arrow-icon");
-              const arrowContainer = e.currentTarget.querySelector(".cta-arrow-container");
-              
-              const tl = gsap.timeline({ overwrite: "auto" });
-              if (path) tl.to(path, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, 0);
-              if (arrowContainer) tl.to(arrowContainer, { 
-                width: "clamp(3.25rem,6vw,4.25rem)", 
-                marginLeft: "1rem", 
-                opacity: 1,
-                duration: 0.4, 
-                ease: "elastic.out(1, 0.82)" 
-              }, 0.1);
-              if (arrow) tl.to(arrow, { rotate: 0, scale: 1.1, duration: 0.4, ease: "back.out(2)" }, 0.15);
-            }}
-            onMouseLeave={() => {
-              // Final verdict: No animate out. 
-              // Once shown, it stays.
-            }}
           >
             {/* Text — underline SVG only covers this span */}
             <span className="relative">
@@ -266,18 +245,18 @@ const Features = () => {
                   fill="none"
                   strokeLinecap="butt"
                   pathLength={1}
-                  style={{ strokeDasharray: 1, strokeDashoffset: 1 }}
+                  style={{ strokeDasharray: 1, strokeDashoffset: 0 }}
                 />
               </svg>
             </span>
 
-            {/* Arrow — Improved GSAP reveal */}
+            {/* Arrow — Improved CSS reveal and rotation */}
             <span
-              className="cta-arrow-container overflow-hidden flex items-center w-0 self-center"
+              className="cta-arrow-container overflow-hidden flex items-center w-[clamp(3.25rem,6vw,4.25rem)] ml-4 self-center opacity-100 transition-all duration-500 ease-out"
             >
-              <span className="flex-shrink-0 flex items-center justify-center w-[clamp(2.5rem,5vw,3.5rem)] h-[clamp(2.5rem,5vw,3.5rem)] rounded-full bg-orange text-white shadow-lg">
+              <span className="flex-shrink-0 flex items-center justify-center w-[clamp(2.5rem,5vw,3.5rem)] h-[clamp(2.5rem,5vw,3.5rem)] rounded-full bg-orange text-white shadow-lg shadow-orange/20 transition-transform duration-300">
                 <ArrowUpRightIcon
-                  className="cta-arrow-icon w-[45%] h-[45%] flex-shrink-0 rotate-45"
+                  className="cta-arrow-icon w-[45%] h-[45%] flex-shrink-0 rotate-45 transition-transform duration-300 ease-out group-hover:rotate-0"
                   strokeWidth={2.5}
                 />
               </span>
