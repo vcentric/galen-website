@@ -38,7 +38,7 @@ const TeamPage = () => {
     <div className="min-h-screen">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="pt-32 pb-20 px-6 text-center">
+      <section className="pt-32 pb-12 px-6 text-center">
         <div className="max-w-[780px] mx-auto">
           {/* Eyebrow */}
           <span className="inline-block mb-5 text-[0.75rem] font-primary font-semibold uppercase tracking-[0.12em] text-orange">
@@ -46,7 +46,7 @@ const TeamPage = () => {
           </span>
 
           <h1 className="font-primary text-[clamp(2.2rem,6vw,3.5rem)] font-semibold text-dark leading-[1.1] tracking-[-0.03em] mb-5">
-            Meet the Minds Behind GalenAI
+            Meet the Minds Behind <span className="text-orange">GalenAI</span>
           </h1>
 
           {/* Decorative rule */}
@@ -75,7 +75,7 @@ const TeamPage = () => {
       `}</style>
 
       {/* ── Founders ─────────────────────────────── */}
-      <section className="py-16 px-6 bg-[linear-gradient(to_bottom,#ffffff,#fff0e4_20%,#fff0e4_80%,#ffffff)]">
+      <section className="pt-8 pb-16 px-6 bg-[linear-gradient(to_bottom,#ffffff,#fff0e4_20%,#fff0e4_80%,#ffffff)]">
         <div className="max-w-[1100px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
             {founders.map((founder, i) => (
@@ -89,8 +89,8 @@ const TeamPage = () => {
                 <img
                   src={
                     i === 0
-                      ? "/Dr.%20Arun%20Biju.jpg"
-                      : "/Varun.jpg"
+                      ? "/Dr.%20Arun%20Biju.webp"
+                      : "/Varun.webp"
                   }
                   alt={founder.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-focus:scale-105 group-active:scale-105"
@@ -106,12 +106,19 @@ const TeamPage = () => {
                 <div className="absolute bottom-0 left-0 right-0 p-7 flex flex-col justify-end z-10 pointer-events-none">
                   {/* Name + title */}
                   <div className="transform transition-transform duration-500 ease-out translate-y-2 group-hover:translate-y-0 group-focus:translate-y-0 group-active:translate-y-0">
-                    <h2 className="font-primary text-white text-[1.6rem] font-bold leading-tight tracking-[-0.02em] mb-1 drop-shadow-sm group-hover:drop-shadow-none group-focus:drop-shadow-none group-active:drop-shadow-none">
+                    <h2 className="font-primary text-white text-[1.6rem] font-bold leading-[1.2] tracking-[-0.02em] mb-1.5 drop-shadow-sm group-hover:drop-shadow-none group-focus:drop-shadow-none group-active:drop-shadow-none transition-all duration-300">
                       {founder.name}
                     </h2>
-                    <p className="font-primary text-white/80 text-[0.85rem] font-medium tracking-[0.04em] drop-shadow-sm group-hover:drop-shadow-none group-focus:drop-shadow-none group-active:drop-shadow-none group-hover:text-white group-focus:text-white group-active:text-white transition-colors duration-500">
-                      {founder.title}
-                    </p>
+                    <div className="flex flex-col gap-1">
+                      <p className="font-primary text-white/90 text-[0.9rem] font-bold tracking-[0.04em] drop-shadow-sm group-hover:drop-shadow-none group-hover:text-white transition-all duration-500">
+                        {founder.title}
+                      </p>
+                      {founder.subTitle && (
+                        <p className="font-primary text-white/65 text-[0.72rem] font-medium leading-relaxed tracking-[0.02em] drop-shadow-sm group-hover:drop-shadow-none group-hover:text-white/80 transition-all duration-500">
+                          {founder.subTitle}
+                        </p>
+                      )}
+                    </div>
                   </div>
 
                   {/* Hidden Quote + LinkedIn */}
@@ -171,8 +178,8 @@ const TeamPage = () => {
                 <img
                   src={
                     i === 0
-                      ? "/Sridhar%20Vaidyanathan%20(1).jpg"
-                      : "/Dr%20Sivaramakrishnan.jpg"
+                      ? "/Sridhar%20Vaidyanathan%20(1).webp"
+                      : "/Dr%20Sivaramakrishnan.webp"
                   }
                   alt={advisor.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-focus:scale-105 group-active:scale-105"

@@ -23,7 +23,7 @@ const Testimonials = () => {
               return (
                 <div 
                   key={testimonial.id}
-                  className="relative shrink-0 w-[clamp(320px,80vw,400px)] h-[clamp(450px,70vh,520px)] rounded-[1.5rem] overflow-hidden snap-center shadow-[0_8px_30px_rgba(0,0,0,0.06)] group cursor-pointer"
+                  className="relative shrink-0 w-[clamp(320px,80vw,400px)] h-[clamp(380px,55vh,460px)] rounded-[1.5rem] overflow-hidden snap-center shadow-[0_8px_30px_rgba(0,0,0,0.06)] group cursor-pointer"
                 >
                   {/* Video Thumbnail Full Bleed */}
                   <div className="absolute inset-0 w-full h-full">
@@ -51,13 +51,13 @@ const Testimonials = () => {
             return (
               <div 
                 key={testimonial.id}
-                className="relative shrink-0 w-[clamp(320px,80vw,400px)] h-[clamp(450px,70vh,520px)] bg-white rounded-[1.5rem] p-[clamp(2rem,5vw,2.5rem)] flex flex-col justify-between snap-center shadow-[0_4px_24px_rgba(0,0,0,0.04)] transition-shadow duration-300"
+                className="relative shrink-0 w-[clamp(320px,80vw,400px)] h-[clamp(380px,55vh,460px)] bg-white rounded-[1.5rem] p-[clamp(2rem,5vw,2.5rem)] flex flex-col justify-between snap-center shadow-[0_4px_24px_rgba(0,0,0,0.04)] transition-shadow duration-300"
               >
                 <div>
-                  <img src={testimonial.avatar} alt={testimonial.name} className="w-[clamp(2.5rem,5vw,3rem)] h-[clamp(2.5rem,5vw,3rem)] rounded-full mb-[clamp(1.5rem,4vw,2rem)] bg-[#f5f5f5]" />
-                  <p className="text-[#333] text-[clamp(0.95rem,2vw,1.05rem)] leading-[1.65] tracking-[-0.01em]">
-                    {testimonial.text}
-                  </p>
+                  <p 
+                    className="text-[#333] text-[clamp(0.95rem,2vw,1.05rem)] leading-[1.65] tracking-[-0.01em]"
+                    dangerouslySetInnerHTML={{ __html: testimonial.text || "" }}
+                  />
                 </div>
 
                 <div className="flex flex-col gap-1 mt-6">
