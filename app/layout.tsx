@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Raleway } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
+const GA_MEASUREMENT_ID = "G-XXXXXXXXXX"; // Replace with your GA4 Measurement ID
 
 const space = Space_Grotesk({
   variable: "--font-space-var",
@@ -32,6 +35,19 @@ export default function RootLayout({
       <body
         className={`${space.variable} ${raleway.variable} antialiased overflow-x-hidden bg-white`}
       >
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <Navbar />
         <main className="relative w-full min-h-screen">
           {children}

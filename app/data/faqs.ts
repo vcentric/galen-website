@@ -32,11 +32,11 @@ export const faqs: FAQItem[] =
     links: [
       {
         label: "iOS App",
-        url: "https://apps.apple.com/in/app/galenai/id6755653561",
+        url: "/qr",
       },
       {
         label: "Android App",
-        url: "https://play.google.com/store/apps/details?id=com.galenai.galenai",
+        url: "/qr",
       },
     ],
   },

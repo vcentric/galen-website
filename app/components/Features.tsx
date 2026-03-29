@@ -5,6 +5,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { features, COMING_SOON_DATA } from "../data/features";
+import { trackEvent } from "../../lib/analytics";
 
 const DURATION = 3; // seconds per card
 
@@ -227,7 +228,8 @@ const Features = () => {
         {/* CTA */}
         <div className="mt-8 lg:mt-12 flex justify-center">
           <a
-            href="https://app.galenai.io"
+            href="/qr"
+            onClick={() => trackEvent("features_cta_click")}
             className="group inline-flex items-center text-[clamp(1.75rem,4vw,3rem)] font-semibold font-[var(--font-space-var)] text-dark tracking-tight no-underline transition-all duration-300 hover:text-orange"
           >
             {/* Text — underline SVG only covers this span */}

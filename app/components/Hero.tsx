@@ -8,6 +8,7 @@ import Link from "next/link";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
 import TrustedBy from "./TrustedBy";
+import { trackEvent } from "../../lib/analytics";
 
 const STUDENT_PHRASES = [
   "for daily medical learning.",
@@ -313,8 +314,8 @@ const Hero = ({ audience = "students" }: HeroProps) => {
           <div className="flex flex-wrap justify-center items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)]">
             {audience === "students" ? (
               <>
-                <PrimaryButton href="https://app.galenai.io" text="Try GalenAI" icon={ArrowUpRightIcon} />
-                <SecondaryButton href="https://onelink.to/wqg9n2" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} />
+                <PrimaryButton href="/qr" text="Try GalenAI" icon={ArrowUpRightIcon} />
+                <SecondaryButton href="/qr" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} />
               </>
             ) : (
               <>
@@ -328,10 +329,11 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             <span>Already using GalenAI?</span>
             <span className="mx-3 text-black/20">|</span>
             <a 
-              href="https://app.galenai.io/login" 
+              href="https://app.galenai.io" 
               ref={loginLinkRef}
               onMouseEnter={handleLoginEnter}
               onMouseLeave={handleLoginLeave}
+              onClick={() => trackEvent("login_click", { location: "hero" })}
               className="group relative flex items-center gap-2 text-orange font-medium transition-colors no-underline"
             >
               <span className="relative pb-0.5 font-semibold">

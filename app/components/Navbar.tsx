@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowUpRightIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import NMCBanner from "./institutions/NMCBanner";
+import { trackEvent } from "../../lib/analytics";
 
 interface AnimatedNavLinkProps {
   href: string;
@@ -251,7 +252,8 @@ const Navbar = () => {
 
           <div className="relative z-10 flex-1 flex justify-end">
             <a
-              href={pathname === "/institutions" ? "#contact" : "https://app.galenai.io"}
+              href={pathname === "/institutions" ? "#contact" : "/qr"}
+              onClick={() => trackEvent("navbar_cta_click", { destination: pathname === "/institutions" ? "contact" : "qr" })}
               className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md
                          h-8 text-xs pl-3 pr-9
                          md:h-[clamp(2.5rem,5vw,2.75rem)] md:text-[clamp(0.85rem,2vw,0.95rem)] md:pl-[clamp(1rem,3vw,1.5rem)] md:pr-[clamp(3rem,6vw,3.5rem)]

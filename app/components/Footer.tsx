@@ -1,8 +1,10 @@
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { SiInstagram, SiLinkedin, SiX, SiYoutube, SiAppstore, SiGoogleplay } from "react-icons/si";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { trackEvent } from "../../lib/analytics";
 
 const Footer = () => {
   return (
@@ -131,7 +133,8 @@ const Footer = () => {
           {/* Store Buttons Section */}
           <div className="flex flex-col gap-3 w-full lg:w-auto mt-8 lg:mt-0">
             <a 
-              href="https://apps.apple.com/us/app/galenai/id6755653561" 
+              href="/qr" 
+              onClick={() => trackEvent("footer_app_store_click")}
               className="group flex items-center gap-4 bg-[#404040]/80 rounded-xl p-4 border border-white/10 w-full sm:w-[220px] transition-colors duration-300 hover:bg-[#4a4a4a] hover:border-white/20"
             >
               <div className="bg-[#303030] p-2 rounded-lg">
@@ -144,7 +147,8 @@ const Footer = () => {
             </a>
 
             <a 
-              href="https://play.google.com/store/apps/details?id=com.galenai.galenai" 
+              href="/qr" 
+              onClick={() => trackEvent("footer_google_play_click")}
               className="group flex items-center gap-4 bg-[#404040]/80 rounded-xl p-4 border border-white/10 w-full sm:w-[220px] transition-colors duration-300 hover:bg-[#4a4a4a] hover:border-white/20"
             >
               <div className="bg-[#303030] p-2 rounded-lg">
