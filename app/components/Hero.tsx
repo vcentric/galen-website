@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState, useRef, ElementType } from "react";
+import React, { useState, useRef, useEffect, ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { QrCodeIcon, ArrowUpRightIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import { QrCodeIcon, ArrowUpRightIcon, ArrowRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
 import TrustedBy from "./TrustedBy";
+import { trackEvent, trackCTAClick } from "../../lib/analytics";
 
 const STUDENT_PHRASES = [
   "for daily medical learning.",
@@ -127,7 +128,22 @@ interface HeroProps {
 
 const Hero = ({ audience = "students" }: HeroProps) => {
   const [textIndex, setTextIndex] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
   const textContainerRef = useRef<HTMLDivElement>(null);
+
+  // Prevent background scroll when video is expanded
+  useEffect(() => {
+    if (isExpanded) {
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("video-lightbox-open");
+    } else {
+      document.body.style.overflow = "unset";
+      document.body.classList.remove("video-lightbox-open");
+    }
+    return () => {
+      document.body.classList.remove("video-lightbox-open");
+    };
+  }, [isExpanded]);
 
   const phrases = STUDENT_PHRASES;
 
@@ -198,8 +214,12 @@ const Hero = ({ audience = "students" }: HeroProps) => {
     : "An AI-powered medical education platform built for CBME, connecting student learning, faculty workflows, and institutional insights in one unified system.";
 
     const sectionClass = audience === "institutions" 
-    ? "min-h-screen pt-[clamp(5.5rem,11vh,7.5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative"
-    : "min-h-screen pt-[clamp(3.5rem,8vh,5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative";
+    ? `min-h-screen pt-[clamp(5.5rem,11vh,7.5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative ${isExpanded ? "z-[10000]" : "z-auto"}`
+    : `min-h-screen pt-[clamp(3.5rem,8vh,5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative ${isExpanded ? "z-[10000]" : "z-auto"}`;
+
+  const currentVideoSrc = audience === "students" 
+    ? "/BrandVideo.webm" 
+    : "/Insitutional Page Video Temp.webm";
 
 
   return (
@@ -313,8 +333,8 @@ const Hero = ({ audience = "students" }: HeroProps) => {
           <div className="flex flex-wrap justify-center items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)]">
             {audience === "students" ? (
               <>
-                <PrimaryButton href="https://app.galenai.io" text="Try GalenAI" icon={ArrowUpRightIcon} />
-                <SecondaryButton href="https://onelink.to/wqg9n2" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} />
+                <PrimaryButton href="/qr" text="Try GalenAI" icon={ArrowUpRightIcon} />
+                <SecondaryButton href="/qr" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} />
               </>
             ) : (
               <>
@@ -328,10 +348,11 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             <span>Already using GalenAI?</span>
             <span className="mx-3 text-black/20">|</span>
             <a 
-              href="https://app.galenai.io/login" 
+              href="https://app.galenai.io" 
               ref={loginLinkRef}
               onMouseEnter={handleLoginEnter}
               onMouseLeave={handleLoginLeave}
+              onClick={() => trackCTAClick("web_app")}
               className="group relative flex items-center gap-2 text-orange font-medium transition-colors no-underline"
             >
               <span className="relative pb-0.5 font-semibold">
@@ -369,18 +390,30 @@ const Hero = ({ audience = "students" }: HeroProps) => {
 
         {/* Huge Video Below or Visual */}
         {audience === "students" ? (
-            <div className="w-full aspect-video rounded-[0.5rem] overflow-hidden max-w-[1240px]">
-                <div className="relative w-full h-full flex items-center justify-center">
-                    <iframe
-                    src="https://www.youtube.com/embed/1l0-dJic1dE?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=1l0-dJic1dE"
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full border-none pointer-events-none" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    />
-                </div>
+            <div 
+              onClick={() => {
+                setIsExpanded(true);
+                trackEvent("hero_video_expand", { audience, video: "/BrandVideo.webm" });
+              }}
+              className="w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
+            >
+                <video 
+                  src="/BrandVideo.webm" 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline
+                  className="w-full h-auto block"
+                />
             </div>
         ) : (
-            <div className="w-full h-auto rounded-[0.5rem] overflow-hidden max-w-[1240px] border border-black/5  relative bg-transparent">
+            <div 
+              onClick={() => {
+                setIsExpanded(true);
+                trackEvent("hero_video_expand", { audience, video: "/Insitutional Page Video Temp.webm" });
+              }}
+              className="w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
+            >
                 <video 
                   src="/Insitutional Page Video Temp.webm" 
                   autoPlay 
@@ -392,6 +425,40 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             </div>
         )}
         </div>
+
+        {/* Video Lightbox / Modal */}
+        {isExpanded && (
+          <div 
+            className="fixed inset-0 z-[999] flex items-center justify-center bg-black transition-all duration-500 text-white"
+            onClick={() => setIsExpanded(false)}
+          >
+            {/* Close Button */}
+            <button 
+              className="absolute top-8 right-8 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 group z-[1000]"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsExpanded(false);
+              }}
+            >
+              <XMarkIcon className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300" />
+            </button>
+
+            <div 
+              className="w-full max-w-[1280px] px-4 md:px-8 relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative aspect-video rounded-[1.5rem] overflow-hidden bg-black">
+                <video 
+                  src={currentVideoSrc}
+                  autoPlay 
+                  controls
+                  playsInline
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

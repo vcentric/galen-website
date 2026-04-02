@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Raleway } from "next/font/google";
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body
         className={`${space.variable} ${raleway.variable} antialiased overflow-x-hidden bg-white`}
       >
+        <GoogleAnalytics gaId="G-K3TH8HMZP6" />
         <Navbar />
         <main className="relative w-full min-h-screen">
           {children}
@@ -41,3 +43,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowUpRightIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import NMCBanner from "./institutions/NMCBanner";
+import { trackEvent } from "../../lib/analytics";
 
 interface AnimatedNavLinkProps {
   href: string;
@@ -201,12 +202,12 @@ const Navbar = () => {
   return (
     <>
       {pathname === "/institutions" && (
-        <div className="absolute top-0 left-0 right-0 w-full z-[130] pointer-events-auto">
+        <div className="absolute top-0 left-0 right-0 w-full z-[130] pointer-events-auto nmc-banner-wrapper">
           <NMCBanner />
         </div>
       )}
       {/* Level 1: Standard Stationary Navbar (Top Bar) */}
-      <div className="fixed top-0 left-0 right-0 z-[120] flex flex-col items-center pointer-events-none">
+      <div className="fixed top-0 left-0 right-0 z-[120] flex flex-col items-center pointer-events-none site-navbar">
         <div 
           className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] nav-glass-container z-10 ${
             isScrolled 
@@ -251,7 +252,8 @@ const Navbar = () => {
 
           <div className="relative z-10 flex-1 flex justify-end">
             <a
-              href={pathname === "/institutions" ? "#contact" : "https://app.galenai.io"}
+              href={pathname === "/institutions" ? "#contact" : "/qr"}
+              onClick={() => trackEvent("navbar_cta_click", { destination: pathname === "/institutions" ? "contact" : "qr" })}
               className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md
                          h-8 text-xs pl-3 pr-9
                          md:h-[clamp(2.5rem,5vw,2.75rem)] md:text-[clamp(0.85rem,2vw,0.95rem)] md:pl-[clamp(1rem,3vw,1.5rem)] md:pr-[clamp(3rem,6vw,3.5rem)]

@@ -1,6 +1,6 @@
 "use client";
 
-import { getAllCategories } from "@/lib/blogUtils";
+import React from "react";
 
 interface FilterBarProps {
   selectedCategory: string;
@@ -15,39 +15,41 @@ const FilterBar = ({
   sortOrder,
   onSortChange,
 }: FilterBarProps) => {
-  const categories = ["All", ...getAllCategories()];
+  const categories = ["All", "Clinical Reasoning", "Exam Strategy", "Medical Learning", "CBME Guide", "Study Systems"];
 
   return (
-    <div className="flex justify-between items-center gap-8 mb-10 p-6 bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] max-[768px]:flex-col max-[768px]:items-stretch max-[768px]:gap-5 max-[768px]:p-5">
-      <div className="flex flex-wrap gap-3 flex-1 max-[768px]:justify-start">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={`font-sans text-[0.9rem] font-medium rounded-full px-5 py-[0.625rem] cursor-pointer transition-all duration-200 border max-[480px]:text-[0.85rem] max-[480px]:px-4 max-[480px]:py-2 ${
-              selectedCategory === category
-                ? "bg-cta text-white border-cta"
-                : "bg-surface text-foreground/60 border-transparent hover:bg-[#ffe8d6] hover:text-cta"
-            }`}
-            onClick={() => onCategoryChange(category)}
+    <div className="flex flex-col gap-6 mb-12">
+      <div className="flex items-center justify-between flex-wrap gap-6">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => onCategoryChange(category)}
+              className={`font-primary text-[0.8rem] font-bold px-5 py-2.5 rounded-full transition-all duration-300 border backdrop-blur-md cursor-pointer uppercase tracking-wider ${
+                selectedCategory === category
+                  ? "bg-orange text-white border-orange shadow-md scale-105"
+                  : "bg-white/70 text-orange border-orange/20 hover:border-orange/40 hover:bg-white"
+              }`}
+              style={selectedCategory !== category ? { 
+                boxShadow: 'inset 0 1.5px 3px rgba(235, 96, 45, 0.2), 0 1px 2px rgba(0, 0, 0, 0.03)'
+              } : {}}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-3">
+          <span className="font-primary text-[0.7rem] font-bold text-text-muted uppercase tracking-widest">Sort by:</span>
+          <select
+            value={sortOrder}
+            onChange={(e) => onSortChange(e.target.value)}
+            className="font-primary text-[0.85rem] font-bold text-dark bg-white border border-black/5 rounded-xl px-4 py-2.5 outline-none focus:border-orange/40 transition-all cursor-pointer shadow-sm"
           >
-            {category}
-          </button>
-        ))}
-      </div>
-      <div className="flex gap-2 bg-surface p-[0.375rem] rounded-[0.625rem] max-[768px]:w-full max-[768px]:justify-center">
-        {["latest", "oldest"].map((order) => (
-          <button
-            key={order}
-            className={`font-sans text-[0.875rem] font-medium border-none rounded-lg px-4 py-2 cursor-pointer transition-all duration-200 max-[480px]:text-[0.8rem] max-[480px]:px-[0.875rem] ${
-              sortOrder === order
-                ? "bg-white text-foreground shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
-                : "bg-transparent text-foreground/60 hover:text-foreground"
-            }`}
-            onClick={() => onSortChange(order)}
-          >
-            {order.charAt(0).toUpperCase() + order.slice(1)}
-          </button>
-        ))}
+            <option value="latest">Latest first</option>
+            <option value="oldest">Oldest first</option>
+          </select>
+        </div>
       </div>
     </div>
   );

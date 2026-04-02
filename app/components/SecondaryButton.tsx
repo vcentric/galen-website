@@ -4,6 +4,7 @@ import { useRef, ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { QrCodeIcon } from "@heroicons/react/24/outline";
+import { trackEvent } from "../../lib/analytics";
 
 interface SecondaryButtonProps {
   href: string;
@@ -11,9 +12,10 @@ interface SecondaryButtonProps {
   icon?: ElementType;
   showQrMobile?: boolean;
   className?: string;
+  onClick?: () => void;
 }
 
-export const SecondaryButton = ({ href, text, icon: Icon = QrCodeIcon, showQrMobile = false, className = "" }: SecondaryButtonProps) => {
+export const SecondaryButton = ({ href, text, icon: Icon = QrCodeIcon, showQrMobile = false, className = "", onClick }: SecondaryButtonProps) => {
   const btnRef = useRef<HTMLAnchorElement>(null);
   const underlineRef = useRef<HTMLSpanElement>(null);
   const qrPopoverRef = useRef<HTMLDivElement>(null);
@@ -49,12 +51,18 @@ export const SecondaryButton = ({ href, text, icon: Icon = QrCodeIcon, showQrMob
     }
   });
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    trackEvent("secondary_button_click", { button_text: text, button_href: href });
+    if (onClick) onClick();
+  };
+
   return (
     <a
       href={href}
       ref={btnRef}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
+      onClick={handleClick}
       className={`relative border border-black/10 shadow-sm flex items-center justify-center gap-[clamp(0.75rem,2vw,1.2rem)] py-[clamp(0.5rem,1.5vw,0.7rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-dark no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${className}`}
     >
       <span className="relative pb-[2px] font-semibold">
@@ -66,7 +74,7 @@ export const SecondaryButton = ({ href, text, icon: Icon = QrCodeIcon, showQrMob
       {showQrMobile && (
         <div ref={qrPopoverRef} className="hidden md:flex absolute bottom-[calc(100%-10rem)] left-[25rem] -translate-x-1/2 w-[220px] p-4 bg-white rounded-2xl border border-black/5 flex-col items-center gap-3 z-50 pointer-events-none shadow-sm">
           <div className="w-full aspect-square rounded-xl overflow-hidden bg-orange/5 p-2 border border-orange/10">
-            <img src="/Galen QR.png" alt="Scan to Download" className="w-full h-full object-contain mix-blend-multiply" />
+            <img src="/galen_qr.png" alt="Scan to Download" className="w-full h-full object-contain mix-blend-multiply" />
           </div>
           <div className="flex flex-col items-center gap-1">
             <span className="text-[14px] font-bold text-dark">Scan to download</span>

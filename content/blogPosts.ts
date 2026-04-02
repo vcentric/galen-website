@@ -22,7 +22,7 @@ export const blogPosts: BlogPost[] = [
     slug: "study-pharmacology-without-drowning",
     excerpt:
       "A calm system to build drug reasoning using active recall and clinical anchors. Learn how to master pharmacology without memorizing thousands of drug names.",
-    coverImage: "/blog-images/pharma.jpg",
+    coverImage: "/blog-images/pharma.svg",
     category: "Study Systems",
     tags: ["pharmacology", "active-recall", "study-methods"],
     author: "Team GalenAI",
@@ -69,7 +69,7 @@ export const blogPosts: BlogPost[] = [
     slug: "cbme-curriculum-2025-changes",
     excerpt:
       "A comprehensive breakdown of the latest CBME curriculum updates and what they mean for your medical education journey.",
-    coverImage: "/blog-images/cbme.jpg",
+    coverImage: "/blog-images/cbme.svg",
     category: "CBME Guide",
     tags: ["cbme", "curriculum", "medical-education"],
     author: "Dr. Priya Sharma",
@@ -105,7 +105,7 @@ export const blogPosts: BlogPost[] = [
     slug: "active-recall-vs-passive-reading",
     excerpt:
       "Discover why active recall is scientifically proven to be more effective than passive reading, and how to implement it in your medical studies.",
-    coverImage: "/blog-images/active-recall.jpg",
+    coverImage: "/blog-images/active-recall.svg",
     category: "Study Systems",
     tags: ["active-recall", "learning-science", "study-methods"],
     author: "Team GalenAI",
@@ -141,7 +141,7 @@ export const blogPosts: BlogPost[] = [
     slug: "clinical-reasoning-frameworks-mbbs",
     excerpt:
       "Master the art of clinical reasoning with proven frameworks that help you think like an experienced clinician.",
-    coverImage: "/blog-images/clinical-reasoning.jpg",
+    coverImage: "/blog-images/clinical-reasoning.svg",
     category: "Clinical Reasoning",
     tags: ["clinical-reasoning", "diagnosis", "mbbs"],
     author: "Dr. Rajesh Kumar",
@@ -185,7 +185,7 @@ export const blogPosts: BlogPost[] = [
     slug: "galenai-neet-pg-preparation",
     excerpt:
       "A comprehensive guide to using GalenAI's AI-powered platform to ace your NEET PG exam with smart study strategies.",
-    coverImage: "/blog-images/neet-pg.jpg",
+    coverImage: "/blog-images/neet-pg.svg",
     category: "Exam Strategy",
     tags: ["neet-pg", "exam-prep", "galenai"],
     author: "Team GalenAI",

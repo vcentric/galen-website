@@ -4,15 +4,17 @@ import { useRef, ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { trackEvent } from "../../lib/analytics";
 
 interface PrimaryButtonProps {
   href: string;
   text: string;
   icon?: ElementType;
   className?: string;
+  onClick?: () => void;
 }
 
-export const PrimaryButton = ({ href, text, icon: Icon = ArrowUpRightIcon, className = "" }: PrimaryButtonProps) => {
+export const PrimaryButton = ({ href, text, icon: Icon = ArrowUpRightIcon, className = "", onClick }: PrimaryButtonProps) => {
   const btnRef = useRef<HTMLAnchorElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -38,12 +40,18 @@ export const PrimaryButton = ({ href, text, icon: Icon = ArrowUpRightIcon, class
     if (iconRef.current) gsap.to(iconRef.current, { y: 15, opacity: 0, duration: 0.2, ease: "power3.in", overwrite: "auto" });
   });
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    trackEvent("primary_button_click", { button_text: text, button_href: href });
+    if (onClick) onClick();
+  };
+
   return (
     <a
       href={href}
       ref={btnRef}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
+      onClick={handleClick}
       className={`group relative flex items-center justify-center py-[clamp(0.65rem,1.5vw,0.85rem)] px-[clamp(2rem,6vw,3.5rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-white bg-orange no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[220px] ${className}`}
     >
       <div ref={bgRef} className="absolute inset-0 bg-white z-0 rounded-full"></div>

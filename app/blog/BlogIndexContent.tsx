@@ -70,25 +70,30 @@ export default function BlogIndexContent({
   };
 
   return (
-    <div className="min-h-screen bg-surface-cream">
+    <div className="min-h-screen bg-transparent">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-[#fff5ed] to-[#ffe8d6] pt-24 pb-16 px-8 text-left max-[768px]:pt-20 max-[768px]:pb-12 max-[768px]:px-6 max-[480px]:pt-16 max-[480px]:pb-10 max-[480px]:px-5">
-        <div className="max-w-[800px] mx-auto">
-          <h1 className="font-sans text-[2.5rem] font-semibold text-foreground mb-6 tracking-[-0.03em] leading-[1.1] inline-block relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-[60px] after:h-[3px] after:bg-cta after:rounded-sm max-[768px]:text-[2.5rem] max-[480px]:text-[2rem]">
-            {initialCategory !== "All"
-              ? `Category: ${initialCategory}`
+      <div className="pt-32 pb-20 px-8 text-center border-b border-black/5 relative">
+        <div className="max-w-[800px] mx-auto relative z-10 flex flex-col items-center">
+          <h1 className="font-primary text-[clamp(2.2rem,6vw,3.5rem)] font-semibold text-dark mb-6 tracking-[-0.03em] leading-[1.1] inline-block relative pb-5">
+            {selectedCategory !== "All"
+              ? `Category: ${selectedCategory}`
               : "Blogs & Resources"}
+            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100px] h-[4px] bg-orange rounded-full opacity-90"></span>
           </h1>
-          <p className="font-sans text-[1.25rem] font-normal text-foreground/60 leading-[1.7] mb-10 max-[768px]:text-[1.125rem] max-[480px]:text-base">
+
+          <p className="font-secondary text-[clamp(1rem,2.5vw,1.2rem)] font-normal text-text-secondary leading-[1.6] mb-10 max-w-[600px] opacity-80">
             Clinical reasoning, study systems, CBME insights, and medical
             learning science.
           </p>
-          <SearchBar onSearch={handleSearch} />
+          <div className="w-full max-w-[500px]">
+            <SearchBar onSearch={handleSearch} />
+          </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-[1200px] mx-auto px-8 py-12 pb-20 max-[768px]:px-6 max-[768px]:py-10 max-[480px]:px-5 max-[480px]:py-8">
+      <div className="max-w-[1240px] mx-auto px-[clamp(1.5rem,5vw,3rem)] py-20 pb-32">
+
         {/* Featured Post */}
         {featuredPost && !searchQuery && selectedCategory === "All" && (
           <FeaturedPost post={featuredPost} />
@@ -105,7 +110,7 @@ export default function BlogIndexContent({
         {/* Blog Grid */}
         {paginatedData.posts.length > 0 ? (
           <>
-            <div className="grid grid-cols-3 gap-8 max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1 max-[768px]:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {paginatedData.posts.map((post) => (
                 <BlogCard key={post.id} post={post} />
               ))}
@@ -118,9 +123,9 @@ export default function BlogIndexContent({
             />
           </>
         ) : (
-          <div className="text-center py-20">
+          <div className="text-center py-24 bg-white/50 rounded-3xl border border-black/5 backdrop-blur-sm">
             <svg
-              className="w-16 h-16 text-foreground/20 mx-auto mb-6"
+              className="w-20 h-20 text-text-muted/20 mx-auto mb-6"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -129,10 +134,10 @@ export default function BlogIndexContent({
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35" />
             </svg>
-            <h3 className="font-sans text-2xl font-bold text-foreground mb-3">
+            <h3 className="font-primary text-2xl font-medium text-dark mb-3">
               No articles found
             </h3>
-            <p className="font-sans text-base text-foreground/40">
+            <p className="font-secondary text-base text-text-muted">
               Try adjusting your search or filter to find what you&apos;re
               looking for.
             </p>
@@ -142,3 +147,4 @@ export default function BlogIndexContent({
     </div>
   );
 }
+
