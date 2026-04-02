@@ -93,14 +93,14 @@ const Features = () => {
       <div className="max-w-[1100px] mx-auto">
 
         {/* Navigation Pills — above everything */}
-        <div className="flex flex-wrap justify-center gap-x-1.5 gap-y-2 lg:gap-2 mb-8">
+        <div className="flex flex-wrap justify-center gap-x-2 gap-y-2.5 lg:gap-3 mb-8 lg:mb-10">
           {features.map((f) => {
             const isActive = f.id === active;
             return (
               <button
                 key={`pill-${f.id}`}
                 onClick={() => goTo(f.id)}
-                className={`flex items-center shrink-0 px-2 lg:px-3 py-1 lg:py-1.5 rounded-full border transition-all duration-300 backdrop-blur-md cursor-pointer ${
+                className={`flex items-center shrink-0 px-2.5 lg:px-4.5 py-1.5 lg:py-2 rounded-full border transition-all duration-300 backdrop-blur-md cursor-pointer ${
                   isActive
                     ? "bg-orange text-white border-orange shadow-md scale-105"
                     : "bg-white/70 text-orange border-orange/40 hover:border-orange/60"
@@ -109,7 +109,7 @@ const Features = () => {
                   boxShadow: 'inset 0 1.5px 3px rgba(235, 96, 45, 0.3), 0 1px 2px rgba(0, 0, 0, 0.03)'
                 } : {}}
               >
-                <span className="text-[9px] lg:text-[11px] font-bold tracking-[0.05em] uppercase whitespace-nowrap">
+                <span className="text-[10px] lg:text-[12px] font-bold tracking-[0.06em] uppercase whitespace-nowrap">
                   {f.tag}
                 </span>
               </button>
@@ -156,26 +156,29 @@ const Features = () => {
                 <div className="relative w-full h-full rounded-[30px] overflow-hidden bg-black">
                   <div ref={screenRef} className="absolute inset-0 w-full h-full">
                     {current.tag === "Coming Soon" ? (
-                      <div className="w-full h-full bg-[#151516] text-white p-3 sm:p-4 overflow-y-auto pt-6 sm:pt-8 pb-10 flex flex-col gap-2.5 sm:gap-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                        <div className="text-center mb-0.5 sm:mb-1">
-                          <h4 className="text-[16px] sm:text-[18px] font-[var(--font-space-var)] font-bold text-white tracking-tight">Coming Soon</h4>
-                          <p className="text-[11px] sm:text-[12px] text-gray-400">Future updates for you</p>
+                      <div className="w-full h-full bg-[#151516] text-white p-4 sm:p-5 overflow-y-auto pt-7 sm:pt-9 pb-10 flex flex-col gap-5 sm:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                        <div className="mb-1.5 sm:mb-3">
+                          <h4 className="text-[18px] sm:text-[21px] font-[var(--font-space-var)] font-bold text-white tracking-tight leading-tight">Coming Soon</h4>
+                          <p className="text-[12px] sm:text-[13px] text-gray-400 mt-0.5">Future updates for you</p>
                         </div>
-                        {COMING_SOON_DATA.map((item, idx) => (
-                          <div key={idx} className="bg-[#212123] rounded-2xl sm:rounded-3xl p-3 sm:p-4 border border-[#333] shadow-lg flex flex-col gap-1.5 sm:gap-2 shrink-0">
-                            <div className="flex items-center gap-2.5 sm:gap-3.5">
-                              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-orange/20 flex items-center justify-center shrink-0">
-                                {item.icon}
+                        <div className="flex flex-col gap-5 sm:gap-6">
+                          {COMING_SOON_DATA.map((item, idx) => (
+                            <div key={idx} className="flex flex-col gap-1 sm:gap-1.5 shrink-0 relative pl-9 sm:pl-10">
+                              {/* Numbered Indicator */}
+                              <div className="absolute left-0 top-0.5 w-6 h-6 rounded-full bg-orange/10 border border-orange/20 text-orange text-[10px] font-bold flex items-center justify-center font-[var(--font-space-var)]">
+                                {String(idx + 1).padStart(2, '0')}
                               </div>
-                              <div className="min-w-0">
-                                <h5 className="text-[15px] sm:text-[18px] font-bold text-white leading-[1.2] tracking-tight">{item.title}</h5>
-                              </div>
+                              
+                              <h5 className="text-[16px] sm:text-[19px] font-bold text-white leading-[1.2] tracking-tight">
+                                {item.title}
+                              </h5>
+                              <p className="text-[12px] sm:text-[14px] text-[#D1D1D1] leading-[1.5] font-medium opacity-90">
+                                {item.desc}
+                              </p>
                             </div>
-                            <p className="text-[11px] sm:text-[12px] text-[#D1D1D1] leading-[1.5] font-medium">
-                              {item.desc}
-                            </p>
-                          </div>
-                        ))}
+                          ))}
+
+                        </div>
                       </div>
                     ) : (
                       <>
@@ -207,15 +210,15 @@ const Features = () => {
               </div>
 
               {/* Dot indicators */}
-              <div className="flex justify-center gap-2 mt-5">
+              <div className="flex justify-center gap-3 mt-6 lg:mt-8">
                 {features.map((f) => (
                   <button
                     key={f.id}
                     onClick={() => goTo(f.id)}
                     className={`rounded-full transition-all duration-300 cursor-pointer ${
                       f.id === active
-                        ? "w-5 h-1.5 bg-orange"
-                        : "w-1.5 h-1.5 bg-border-strong"
+                        ? "w-5 h-1.5 lg:w-8 lg:h-2 bg-orange"
+                        : "w-1.5 h-1.5 lg:w-2 lg:h-2 bg-border-strong"
                     }`}
                   />
                 ))}

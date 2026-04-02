@@ -8,7 +8,7 @@ import Link from "next/link";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
 import TrustedBy from "./TrustedBy";
-import { trackEvent } from "../../lib/analytics";
+import { trackEvent, trackCTAClick } from "../../lib/analytics";
 
 const STUDENT_PHRASES = [
   "for daily medical learning.",
@@ -333,7 +333,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
               ref={loginLinkRef}
               onMouseEnter={handleLoginEnter}
               onMouseLeave={handleLoginLeave}
-              onClick={() => trackEvent("login_click", { location: "hero" })}
+              onClick={() => trackCTAClick("web_app")}
               className="group relative flex items-center gap-2 text-orange font-medium transition-colors no-underline"
             >
               <span className="relative pb-0.5 font-semibold">

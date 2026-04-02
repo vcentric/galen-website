@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { trackCTAClick } from "../../lib/analytics";
 
 export default function QRPage() {
   useEffect(() => {
@@ -20,17 +21,20 @@ export default function QRPage() {
 
     // Detect Android
     if (/android/i.test(userAgent)) {
+      trackCTAClick("play_store");
       window.location.href = getFinalUrl(androidLink);
       return;
     }
 
     // Detect iOS (iPhone, iPad, iPod)
     if (/iphone|ipad|ipod/i.test(userAgent)) {
+      trackCTAClick("app_store");
       window.location.href = getFinalUrl(iosLink);
       return;
     }
 
     // Default to desktop web app
+    trackCTAClick("web_app");
     window.location.href = getFinalUrl(desktopLink);
   }, []);
 
@@ -42,11 +46,30 @@ export default function QRPage() {
       <div className="mt-8">
         <p className="text-xs text-gray-400 mb-2">Not redirected? Click a link below:</p>
         <div className="flex flex-col gap-3">
-          <a href="https://apps.apple.com/us/app/galenai/id6755653561" className="text-orange hover:underline text-sm font-medium">App Store (iOS)</a>
-          <a href="https://play.google.com/store/apps/details?id=com.galenai.galenai" className="text-orange hover:underline text-sm font-medium">Google Play (Android)</a>
-          <a href="https://app.galenai.io" className="text-orange hover:underline text-sm font-medium">Web Application</a>
+          <a
+            href="https://apps.apple.com/us/app/galenai/id6755653561"
+            className="text-orange hover:underline text-sm font-medium"
+            onClick={() => trackCTAClick("app_store")}
+          >
+            App Store (iOS)
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.galenai.galenai"
+            className="text-orange hover:underline text-sm font-medium"
+            onClick={() => trackCTAClick("play_store")}
+          >
+            Google Play (Android)
+          </a>
+          <a
+            href="https://app.galenai.io"
+            className="text-orange hover:underline text-sm font-medium"
+            onClick={() => trackCTAClick("web_app")}
+          >
+            Web Application
+          </a>
         </div>
       </div>
     </div>
   );
 }
+

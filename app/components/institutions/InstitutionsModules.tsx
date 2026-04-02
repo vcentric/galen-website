@@ -84,7 +84,7 @@ const InstitutionsModules = () => {
                                             / {String(i + 1).padStart(2, '0')}
                                         </div>
                                     </div>
-                                    <p className="text-[0.82rem] sm:text-[0.88rem] leading-[1.6] text-gray-400 group-hover:text-gray-300 transition-colors duration-500 m-0">
+                                    <p className="text-[0.93rem] sm:text-[1rem] leading-[1.6] text-gray-400 group-hover:text-gray-300 transition-colors duration-500 m-0">
                                         {m.desc}
                                     </p>
                                 </div>
