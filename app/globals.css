@@ -478,3 +478,9 @@ nav, nav a, nav button {
   color: #000;
   display: inline;
 }
+
+/* ── Lightbox Immersive Mode ── */
+body.video-lightbox-open .site-navbar,
+body.video-lightbox-open .nmc-banner-wrapper {
+  display: none !important;
+}

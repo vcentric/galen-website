@@ -202,12 +202,12 @@ const Navbar = () => {
   return (
     <>
       {pathname === "/institutions" && (
-        <div className="absolute top-0 left-0 right-0 w-full z-[130] pointer-events-auto">
+        <div className="absolute top-0 left-0 right-0 w-full z-[130] pointer-events-auto nmc-banner-wrapper">
           <NMCBanner />
         </div>
       )}
       {/* Level 1: Standard Stationary Navbar (Top Bar) */}
-      <div className="fixed top-0 left-0 right-0 z-[120] flex flex-col items-center pointer-events-none">
+      <div className="fixed top-0 left-0 right-0 z-[120] flex flex-col items-center pointer-events-none site-navbar">
         <div 
           className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] nav-glass-container z-10 ${
             isScrolled 
