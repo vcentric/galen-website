@@ -42,9 +42,9 @@ const Pagination = ({
   };
 
   return (
-    <div className="flex justify-center items-center gap-4 mt-16 py-8 max-[768px]:gap-3">
+    <div className="flex justify-center items-center gap-4 mt-16 py-8">
       <button
-        className="flex items-center gap-2 font-sans text-[0.95rem] font-medium text-foreground bg-white border border-[#e5e5e5] rounded-[0.625rem] px-5 py-3 cursor-pointer transition-all duration-200 hover:bg-surface hover:border-cta hover:text-cta disabled:opacity-40 disabled:cursor-not-allowed max-[768px]:text-[0.875rem] max-[768px]:px-4 max-[768px]:py-[0.625rem] max-[480px]:px-[0.625rem]"
+        className="flex items-center gap-2 font-primary text-[0.85rem] font-bold text-orange bg-white border border-orange/20 rounded-xl px-5 py-3 cursor-pointer transition-all duration-300 hover:bg-orange hover:text-white disabled:opacity-40 disabled:cursor-not-allowed shadow-sm shadow-orange/5"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         aria-label="Previous page"
@@ -54,29 +54,29 @@ const Pagination = ({
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="2.5"
         >
           <path d="M15 18l-6-6 6-6" />
         </svg>
-        <span className="max-[480px]:hidden">Previous</span>
+        <span className="max-sm:hidden uppercase tracking-wider">Previous</span>
       </button>
 
-      <div className="flex items-center gap-2 max-[480px]:gap-[0.375rem]">
+      <div className="flex items-center gap-2">
         {getPageNumbers().map((page, index) =>
           page === "..." ? (
             <span
               key={`ellipsis-${index}`}
-              className="font-sans text-foreground/40 px-2"
+              className="font-primary text-text-muted px-2"
             >
               ...
             </span>
           ) : (
             <button
               key={page}
-              className={`font-sans text-[0.95rem] font-medium border rounded-lg w-10 h-10 flex items-center justify-center cursor-pointer transition-all duration-200 max-[768px]:w-9 max-[768px]:h-9 max-[768px]:text-[0.875rem] max-[480px]:w-8 max-[480px]:h-8 max-[480px]:text-[0.8rem] ${
+              className={`font-primary text-[0.85rem] font-bold border rounded-xl w-10 h-10 flex items-center justify-center cursor-pointer transition-all duration-300 ${
                 currentPage === page
-                  ? "bg-cta border-cta text-white"
-                  : "bg-white border-[#e5e5e5] text-foreground/60 hover:bg-surface hover:border-cta hover:text-cta"
+                  ? "bg-orange border-orange text-white shadow-md scale-110"
+                  : "bg-white border-black/5 text-text-secondary hover:border-orange/40 hover:text-orange"
               }`}
               onClick={() => onPageChange(page as number)}
             >
@@ -87,18 +87,18 @@ const Pagination = ({
       </div>
 
       <button
-        className="flex items-center gap-2 font-sans text-[0.95rem] font-medium text-foreground bg-white border border-[#e5e5e5] rounded-[0.625rem] px-5 py-3 cursor-pointer transition-all duration-200 hover:bg-surface hover:border-cta hover:text-cta disabled:opacity-40 disabled:cursor-not-allowed max-[768px]:text-[0.875rem] max-[768px]:px-4 max-[768px]:py-[0.625rem] max-[480px]:px-[0.625rem]"
+        className="flex items-center gap-2 font-primary text-[0.85rem] font-bold text-orange bg-white border border-orange/20 rounded-xl px-5 py-3 cursor-pointer transition-all duration-300 hover:bg-orange hover:text-white disabled:opacity-40 disabled:cursor-not-allowed shadow-sm shadow-orange/5"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         aria-label="Next page"
       >
-        <span className="max-[480px]:hidden">Next</span>
+        <span className="max-sm:hidden uppercase tracking-wider">Next</span>
         <svg
           className="w-[18px] h-[18px]"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="2.5"
         >
           <path d="M9 18l6-6-6-6" />
         </svg>
