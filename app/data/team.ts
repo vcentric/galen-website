@@ -22,7 +22,7 @@ export const advisors = [
   {
     name: "Dr. Sivaramakrishnan R Guruvayur",
     title: "Advisor - AI & Innovation",
-    bio: "Global AI Policy Leader | Chief AI Scientist, Aaquarians.ai | Research Fellow, IIT Madras (CeRAI) | Member- MEG & UNESCO for Artificial Intelligence | 30+ years across applied AI & enterprise platforms.",
+    bio: "Global AI Policy Leader| Chief AI Scientist - Aaquarians.AI| Senior Research Fellow - CeRAI, IITM| Expert Group Member GPAI/OECD  & UNESCO for Artificial Intelligence|  Head & Professor of Practice - AI Safety Research Lab, Amritapuri Vishwa Vidyapeetham|  Non-resident Research Fellow  for AI Safety - MBRSG, Dubai  & University of Graneda, Spain| Adjunct Research Professor - Africa AI Research Institute.",
   },
 ];
 

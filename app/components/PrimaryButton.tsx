@@ -52,7 +52,7 @@ export const PrimaryButton = ({ href, text, icon: Icon = ArrowUpRightIcon, class
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       onClick={handleClick}
-      className={`group relative flex items-center justify-center py-[clamp(0.65rem,1.5vw,0.85rem)] px-[clamp(2rem,6vw,3.5rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-white bg-orange no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[220px] ${className}`}
+      className={`group relative flex items-center justify-center py-[clamp(0.65rem,1.5vw,0.85rem)] px-[clamp(2rem,6vw,3.5rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-white bg-orange no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden md:min-w-[220px] ${className}`}
     >
       <div ref={bgRef} className="absolute inset-0 bg-white z-0 rounded-full"></div>
       <div className="relative z-10 flex items-center justify-center">

@@ -178,7 +178,7 @@ const TeamPage = () => {
                 <img
                   src={
                     i === 0
-                      ? "/Sridhar%20Vaidyanathan%20(1).webp"
+                      ? "/Sridhar.webp"
                       : "/Dr%20Sivaramakrishnan.webp"
                   }
                   alt={advisor.name}

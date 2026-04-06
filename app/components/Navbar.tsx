@@ -14,10 +14,12 @@ interface AnimatedNavLinkProps {
   href: string;
   children: React.ReactNode;
   onClick?: () => void;
-  className?: string; // Added optional className
+  className?: string;
+  target?: string;
+  rel?: string;
 }
 
-const AnimatedNavLink = ({ href, children, onClick, className }: AnimatedNavLinkProps) => {
+const AnimatedNavLink = ({ href, children, onClick, className, target, rel }: AnimatedNavLinkProps) => {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const { contextSafe } = useGSAP({ scope: linkRef });
@@ -98,6 +100,8 @@ const AnimatedNavLink = ({ href, children, onClick, className }: AnimatedNavLink
     <a 
       href={href} 
       ref={linkRef}
+      target={target}
+      rel={rel}
       onMouseEnter={handleMouseEnter} 
       onMouseLeave={handleMouseLeave}
       className={finalClassName}
@@ -250,7 +254,20 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <div className="relative z-10 flex-1 flex justify-end">
+          <div className="relative z-10 flex-1 flex justify-end items-center gap-5 overflow-visible">
+            {/* House MD game button — desktop only */}
+            <div className="hidden md:inline-flex items-center gap-2 whitespace-nowrap">
+              <AnimatedNavLink
+                href="https://itsnotlupusgalenai.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("navbar_housemed_click", {})}
+                className="relative no-underline text-dark/80 text-[15px] font-primary font-semibold tracking-[0.01em] transition-opacity duration-200 hover:opacity-100 opacity-90 inline-block"
+              >
+                Think Like House
+              </AnimatedNavLink>
+              <span className="badge-shimmer px-1.5 py-[4px] rounded text-white text-[7px] font-bold tracking-wide uppercase leading-none">NEW</span>
+            </div>
             <a
               href={pathname === "/institutions" ? "#contact" : "/qr"}
               onClick={() => trackEvent("navbar_cta_click", { destination: pathname === "/institutions" ? "contact" : "qr" })}
@@ -289,33 +306,41 @@ const Navbar = () => {
         className="fixed top-0 left-0 w-[60vw] h-full bg-[#fcfaf8] z-[1000] p-[clamp(1.5rem,5vw,2.25rem)] flex flex-col pt-[clamp(2rem,6vw,3rem)] md:hidden shadow-[10px_0_30px_rgba(0,0,0,0.05)] pointer-events-auto"
         style={{ transform: 'translateX(-100%)', visibility: 'hidden' }}
       >
-        <div className="mb-10 mobile-nav-item">
-          <button 
-            onClick={closeMenu}
-            className="flex items-center gap-2 text-dark/60 hover:text-orange transition-colors font-primary font-medium text-[14px] uppercase tracking-[0.05em]"
-          >
-            <svg 
-              width="16" 
-              height="16" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2.5" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
+        <div className="flex flex-col gap-8">
+          {/* Go Back */}
+          <div className="mobile-nav-item">
+            <button
+              onClick={closeMenu}
+              className="flex items-center gap-2 text-dark/60 hover:text-orange transition-colors font-primary font-medium text-[14px] uppercase tracking-[0.05em]"
             >
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Go Back
-          </button>
-        </div>
-        <nav className="flex flex-col gap-[clamp(1.25rem,2.5vw,1.75rem)]">
-          {navLinks.map((link) => (
-            <div key={link.label} className="mobile-nav-item" onClick={closeMenu}>
-              <AnimatedNavLink href={link.href} className="relative inline-block text-dark no-underline text-[17px] font-medium tracking-[0.02em] opacity-90 hover:opacity-100 transition-opacity duration-200">{link.label}</AnimatedNavLink>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              Go Back
+            </button>
+          </div>
+
+          {/* Nav links — Think Like House is first, same style, only diff is NEW badge */}
+          <nav className="flex flex-col gap-[clamp(1.25rem,2.5vw,1.75rem)]">
+            <div className="mobile-nav-item inline-flex items-center gap-2">
+              <AnimatedNavLink
+                href="https://itsnotlupusgalenai.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => { trackEvent("navbar_housemed_click", {}); closeMenu(); }}
+                className="relative inline-block text-dark no-underline text-[17px] font-medium opacity-90 hover:opacity-100 transition-opacity duration-200"
+              >
+                Think Like House
+              </AnimatedNavLink>
+              <span className="badge-shimmer px-1.5 py-[4px] rounded text-white text-[7px] font-bold tracking-wide uppercase leading-none">NEW</span>
             </div>
-          ))}
-        </nav>
+            {navLinks.map((link) => (
+              <div key={link.label} className="mobile-nav-item" onClick={closeMenu}>
+                <AnimatedNavLink href={link.href} className="relative inline-block text-dark no-underline text-[17px] font-medium tracking-[0.02em] opacity-90 hover:opacity-100 transition-opacity duration-200">{link.label}</AnimatedNavLink>
+              </div>
+            ))}
+          </nav>
+        </div>
       </div>
     </>
   );

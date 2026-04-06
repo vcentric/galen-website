@@ -265,13 +265,13 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             ))}
           </div>
 
-          <h1 className="text-[clamp(1.8rem,5vw+0.5rem,4.25rem)] font-medium leading-[1.25] md:leading-[1.1] text-dark mb-[clamp(1.5rem,4vw,2rem)] tracking-[-0.03em]">
+          <h1 className="text-[clamp(2.3rem,5vw+0.5rem,4.25rem)] font-medium leading-[1.2] md:leading-[1.1] text-dark mb-[clamp(1.5rem,4vw,2rem)] tracking-[-0.03em]">
             {audience === "students" ? (
               <>
                 Your personal AI companion <br />
                 <div className="flex items-center justify-center text-orange italic">
                 <div 
-                    className="flex flex-col md:flex-row items-center md:items-baseline min-w-[300px]" 
+                    className="flex flex-col md:flex-row items-center md:items-baseline w-full md:w-auto" 
                     ref={textContainerRef}
                 >
                     {(() => {
@@ -318,7 +318,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             )}
           </h1>
 
-          <p className={audience === "institutions" ? "text-[clamp(0.85rem,1.5vw,1rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[850px] mb-[clamp(1.5rem,3.5vw,2rem)] mx-auto" : "text-[clamp(0.75rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2rem,5vw,3rem)] mx-auto"}>
+          <p className={audience === "institutions" ? "text-[clamp(0.85rem,1.5vw,1rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[850px] mb-[clamp(1.5rem,3.5vw,2rem)] mx-auto" : "text-[clamp(0.95rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2rem,5vw,3rem)] mx-auto"}>
             {descriptionText}
           </p>
 
@@ -330,16 +330,16 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             </div>
           )}
 
-          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)]">
+          <div className={`flex items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)] ${audience === 'students' ? 'flex-col md:grid md:grid-cols-2 w-full md:w-auto' : 'flex-col md:flex-row w-full md:w-auto md:justify-center'}`}>
             {audience === "students" ? (
               <>
-                <PrimaryButton href="/qr" text="Try GalenAI" icon={ArrowUpRightIcon} />
-                <SecondaryButton href="/qr" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} />
+                <PrimaryButton href="/qr" text="Try GalenAI" icon={ArrowUpRightIcon} className="w-full" />
+                <SecondaryButton href="/qr" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} className="w-full" />
               </>
             ) : (
               <>
-                <PrimaryButton href="#contact" text="Request Institutional Demo" icon={ArrowUpRightIcon} className="!min-w-[180px] !px-[clamp(1.2rem,3vw,2rem)]" />
-                <SecondaryButton href="#overview" text="View System Overview" icon={ArrowRightIcon} showQrMobile={false} className="!min-w-[180px] !px-[clamp(1.2rem,3vw,2rem)]" />
+                <PrimaryButton href="#contact" text="Request Institutional Demo" icon={ArrowUpRightIcon} className="w-full md:w-auto !px-[clamp(1.2rem,3vw,2rem)]" />
+                <SecondaryButton href="#overview" text="View System Overview" icon={ArrowRightIcon} showQrMobile={false} className="w-full md:w-auto !px-[clamp(1.2rem,3vw,2rem)]" />
               </>
             )}
           </div>
