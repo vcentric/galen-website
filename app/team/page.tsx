@@ -129,13 +129,17 @@ const TeamPage = () => {
                           {founder.quote}
                         </blockquote>
                         <div className="flex justify-end w-full">
-                          <a
-                            href="#"
-                            className="text-[#ffffff] opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-110 outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm drop-shadow-sm pointer-events-none group-hover:pointer-events-auto"
-                            aria-label={`${founder.name} LinkedIn`}
-                          >
-                            <LinkedInIcon className="w-6 h-6 text-[#ffffff]" />
-                          </a>
+                          {founder.linkedin && (
+                            <a
+                              href={founder.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[#ffffff] opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-110 outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm drop-shadow-sm pointer-events-auto relative z-20"
+                              aria-label={`${founder.name} LinkedIn`}
+                            >
+                              <LinkedInIcon className="w-6 h-6 text-[#ffffff]" />
+                            </a>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -211,13 +215,17 @@ const TeamPage = () => {
                           {advisor.bio}
                         </p>
                         <div className="flex justify-end w-full">
-                          <a
-                            href="#"
-                            className="text-[#ffffff] opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-110 outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm drop-shadow-sm pointer-events-none group-hover:pointer-events-auto"
-                            aria-label={`${advisor.name} LinkedIn`}
-                          >
-                            <LinkedInIcon className="w-6 h-6 text-[#ffffff]" />
-                          </a>
+                          {advisor.linkedin && (
+                            <a
+                              href={advisor.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[#ffffff] opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-110 outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm drop-shadow-sm pointer-events-auto relative z-20"
+                              aria-label={`${advisor.name} LinkedIn`}
+                            >
+                              <LinkedInIcon className="w-6 h-6 text-[#ffffff]" />
+                            </a>
+                          )}
                         </div>
                       </div>
                     </div>

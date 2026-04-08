@@ -63,7 +63,7 @@ export const SecondaryButton = ({ href, text, icon: Icon = QrCodeIcon, showQrMob
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       onClick={handleClick}
-      className={`relative border border-black/10 shadow-sm flex items-center justify-center gap-[clamp(0.75rem,2vw,1.2rem)] py-[clamp(0.5rem,1.5vw,0.7rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-dark no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${className}`}
+      className={`relative bg-white border border-black/10 shadow-sm flex items-center justify-center gap-[clamp(0.75rem,2vw,1.2rem)] py-[clamp(0.5rem,1.5vw,0.7rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.9rem,1.5vw,1rem)] font-primary font-medium text-dark no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${className}`}
     >
       <span className="relative pb-[2px] font-semibold">
         {text}
@@ -74,7 +74,7 @@ export const SecondaryButton = ({ href, text, icon: Icon = QrCodeIcon, showQrMob
       {showQrMobile && (
         <div ref={qrPopoverRef} className="hidden md:flex absolute bottom-[calc(100%-10rem)] left-[25rem] -translate-x-1/2 w-[220px] p-4 bg-white rounded-2xl border border-black/5 flex-col items-center gap-3 z-50 pointer-events-none shadow-sm">
           <div className="w-full aspect-square rounded-xl overflow-hidden bg-orange/5 p-2 border border-orange/10">
-            <img src="/galen_qr.png" alt="Scan to Download" className="w-full h-full object-contain mix-blend-multiply" />
+            <img src="/qrnew.png" alt="Scan to Download" className="w-full h-full object-contain mix-blend-multiply" />
           </div>
           <div className="flex flex-col items-center gap-1">
             <span className="text-[14px] font-bold text-dark">Scan to download</span>

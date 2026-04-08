@@ -13,7 +13,7 @@ const deploymentSteps = [
 ];
 
 const InstitutionsRoadmap = () => (
-    <section className="py-12 sm:py-16 bg-transparent" id="roadmap">
+    <section className="pt-12 pb-6 sm:pt-16 sm:pb-8 bg-transparent" id="roadmap">
         <div className="max-w-[1240px] mx-auto px-[clamp(2rem,6vw,4rem)]">
             
             {/* Standardized Header */}
@@ -43,7 +43,7 @@ const InstitutionsRoadmap = () => (
             </div>
 
             {/* Steps Container */}
-            <div className="relative mb-16">
+            <div className="relative mb-8">
                 
                 {/* 1. Desktop Layout (Alternating Top/Bottom) */}
                 <div className="hidden md:block relative h-[300px]">

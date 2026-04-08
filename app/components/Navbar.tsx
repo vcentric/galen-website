@@ -189,7 +189,6 @@ const Navbar = () => {
     ? [
         { label: "Solution", href: "#overview" },
         { label: "Team", href: "/team" },
-        { label: "Blog", href: "/blog" },
         { label: "Outcomes", href: "#outcomes" },
         { label: "Contact", href: "#contact" },
       ]
@@ -198,10 +197,13 @@ const Navbar = () => {
           ? { label: "Home", href: "/" }
           : { label: "Features", href: "#features" },
         { label: "Team", href: "/team" },
-        { label: "Blog", href: "/blog" },
-        { label: "FAQ's", href: "#faq" },
+        { label: "FAQ's", href: "/#faq" },
         { label: "Contact", href: "#contact" },
       ];
+
+  if (pathname === '/terms' || pathname === '/privacy') {
+    return null;
+  }
 
   return (
     <>
@@ -210,13 +212,20 @@ const Navbar = () => {
           <NMCBanner />
         </div>
       )}
+      {pathname === "/" && (
+        <div className="absolute top-0 left-0 right-0 w-full z-[130] pointer-events-auto flex items-center justify-center px-1 py-2 bg-[#eb602d] text-white text-[7.5px] min-[370px]:text-[8.5px] min-[400px]:text-[9.5px] sm:text-[11px] md:text-[12px] font-medium tracking-tight sm:tracking-[0.01em] leading-[1.4] text-center overflow-hidden">
+          <span className="opacity-95 whitespace-nowrap">
+            NEET PG • INI-CET • USMLE • PLAB • FMGE • NEXT • EMREE &nbsp;—&nbsp; Coming Soon
+          </span>
+        </div>
+      )}
       {/* Level 1: Standard Stationary Navbar (Top Bar) */}
       <div className="fixed top-0 left-0 right-0 z-[120] flex flex-col items-center pointer-events-none site-navbar">
         <div 
           className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] nav-glass-container z-10 ${
             isScrolled 
               ? "is-scrolled w-[calc(100%-10px)] max-w-[1400px] px-6 py-3 border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)] mt-2" 
-              : `w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent ${pathname === "/institutions" ? "mt-[44px] md:mt-[26px]" : "mt-0"}`
+              : `w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent ${pathname === "/institutions" ? "mt-[48px] md:mt-[30px]" : pathname === "/" ? "mt-[30px]" : "mt-0"}`
           }`}
         >
           <svg style={{ display: 'none' }}>
@@ -264,7 +273,7 @@ const Navbar = () => {
                 onClick={() => trackEvent("navbar_housemed_click", {})}
                 className="relative no-underline text-dark/80 text-[15px] font-primary font-semibold tracking-[0.01em] transition-opacity duration-200 hover:opacity-100 opacity-90 inline-block"
               >
-                Think Like House
+                Think Like HouseMD
               </AnimatedNavLink>
               <span className="badge-shimmer px-1.5 py-[4px] rounded text-white text-[7px] font-bold tracking-wide uppercase leading-none">NEW</span>
             </div>
@@ -330,7 +339,7 @@ const Navbar = () => {
                 onClick={() => { trackEvent("navbar_housemed_click", {}); closeMenu(); }}
                 className="relative inline-block text-dark no-underline text-[17px] font-medium opacity-90 hover:opacity-100 transition-opacity duration-200"
               >
-                Think Like House
+                Think Like HouseMD
               </AnimatedNavLink>
               <span className="badge-shimmer px-1.5 py-[4px] rounded text-white text-[7px] font-bold tracking-wide uppercase leading-none">NEW</span>
             </div>

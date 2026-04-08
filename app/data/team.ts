@@ -4,12 +4,14 @@ export const founders = [
     title: "Chief Product & Medical Officer",
     subTitle: "MD (Medicine) | MPMCX (IIM Ahmedabad) Faculty - St. John’s Medical College",
     quote: '"Medical students deserve more than static lectures. Learning should feel like guidance."',
+    linkedin: "https://www.linkedin.com/in/dr-arun-biju-oommen-774584114/",
   },
   {
     name: "Varun Jagannathan",
     title: "Chief Executive Officer",
     subTitle: "Product Marketing, Business & GTM Ex. Myelin Foundry | Ex. Enertics Inc",
     quote: '"Building the systems, structure, and execution that make good ideas real."',
+    linkedin: "https://www.linkedin.com/in/varun-j97/",
   },
 ];
 
@@ -18,11 +20,13 @@ export const advisors = [
     name: "Sridhar Vaidyanathan",
     title: "Advisor, Finance & Investments",
     bio: "Ex-Investec, Ex-BNP Paribas, Ex-Myelin Foundry | 30+ years across banking, deep tech, capital and regulatory strategy across emerging markets.",
+    linkedin: "https://www.linkedin.com/in/sridhar-vaidyanathan-0288352/",
   },
   {
     name: "Dr. Sivaramakrishnan R Guruvayur",
     title: "Advisor - AI & Innovation",
     bio: "Global AI Policy Leader| Chief AI Scientist - Aaquarians.AI| Senior Research Fellow - CeRAI, IITM| Expert Group Member GPAI/OECD  & UNESCO for Artificial Intelligence|  Head & Professor of Practice - AI Safety Research Lab, Amritapuri Vishwa Vidyapeetham|  Non-resident Research Fellow  for AI Safety - MBRSG, Dubai  & University of Graneda, Spain| Adjunct Research Professor - Africa AI Research Institute.",
+    linkedin: "https://www.linkedin.com/in/sivaramakrishnan-r-guruvayur/",
   },
 ];
 

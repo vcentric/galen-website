@@ -125,9 +125,9 @@ const Features = () => {
             
             {/* Active Feature Content */}
             <div key={active} className="animate-[fadeIn_0.6s_ease-out_forwards] mb-6 lg:mb-0 text-center lg:text-left">
-              <h3 className="text-[clamp(1.75rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-6">
+              <h2 className="text-[clamp(2.1rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1] mb-6">
                 {current.title}
-              </h3>
+              </h2>
 
               <p className="text-[1rem] sm:text-[1.25rem] text-text-secondary leading-[1.6] mb-8 lg:mb-12 max-w-[95%] mx-auto lg:mx-0">
                 {current.desc}
@@ -156,28 +156,60 @@ const Features = () => {
                 <div className="relative w-full h-full rounded-[30px] overflow-hidden bg-black">
                   <div ref={screenRef} className="absolute inset-0 w-full h-full">
                     {current.tag === "Coming Soon" ? (
-                      <div className="w-full h-full bg-[#151516] text-white p-4 sm:p-5 overflow-y-auto pt-7 sm:pt-9 pb-10 flex flex-col gap-5 sm:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                        <div className="mb-1.5 sm:mb-3">
-                          <h4 className="text-[18px] sm:text-[21px] font-[var(--font-space-var)] font-bold text-white tracking-tight leading-tight">Coming Soon</h4>
-                          <p className="text-[12px] sm:text-[13px] text-gray-400 mt-0.5">Future updates for you</p>
-                        </div>
-                        <div className="flex flex-col gap-5 sm:gap-6">
-                          {COMING_SOON_DATA.map((item, idx) => (
-                            <div key={idx} className="flex flex-col gap-1 sm:gap-1.5 shrink-0 relative pl-9 sm:pl-10">
-                              {/* Numbered Indicator */}
-                              <div className="absolute left-0 top-0.5 w-6 h-6 rounded-full bg-orange/10 border border-orange/20 text-orange text-[10px] font-bold flex items-center justify-center font-[var(--font-space-var)]">
-                                {String(idx + 1).padStart(2, '0')}
+                      <div className="w-full h-full bg-[#0a0a0a] text-white overflow-y-auto flex flex-col [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                        <div 
+                          className="relative w-full min-h-full p-3 sm:p-3.5 flex flex-col justify-center py-6"
+                          style={{
+                            backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)",
+                            backgroundSize: "30px 30px"
+                          }}
+                        >
+                          <div className="mb-4">
+                            <div className="flex items-center gap-1.5 mb-2.5">
+                              <div className="relative flex items-center justify-center">
+                                <div className="absolute w-2.5 h-2.5 bg-orange/40 rounded-full blur-[2px]"></div>
+                                <div className="relative w-[3.5px] h-[3.5px] bg-[#fdbd9c] rounded-full"></div>
                               </div>
-                              
-                              <h5 className="text-[16px] sm:text-[19px] font-bold text-white leading-[1.2] tracking-tight">
-                                {item.title}
-                              </h5>
-                              <p className="text-[12px] sm:text-[14px] text-[#D1D1D1] leading-[1.5] font-medium opacity-90">
-                                {item.desc}
-                              </p>
+                              <div className="h-[1px] w-3.5 bg-orange/40"></div>
+                              <span className="text-orange text-[8px] sm:text-[9px] font-bold tracking-[0.15em]">WHAT'S NEXT</span>
                             </div>
-                          ))}
+                            
+                            <div className="font-[var(--font-space-var)] font-bold mb-3 leading-[0.95]">
+                              <div className="text-[30px] sm:text-[34px] tracking-tight">Coming</div>
+                              <div className="flex items-center text-[30px] sm:text-[34px] text-orange tracking-tight">
+                                <span className="mr-1">&gt;</span> Soon.
+                              </div>
+                            </div>
+                            
+                            <p className="text-[10px] sm:text-[11px] text-[#8a8a8e] leading-[1.35] font-medium max-w-[95%]">
+                              Future updates rolling out to make your medical prep smarter.
+                            </p>
+                          </div>
 
+                          <div className="flex items-center gap-2 mb-3.5">
+                            <div className="h-[1px] flex-grow bg-white/[0.08]"></div>
+                            <span className="text-[9px] font-bold tracking-[0.15em] text-[#555]">UPCOMING</span>
+                          </div>
+
+                          <div className="flex flex-col gap-2.5">
+                            {COMING_SOON_DATA.map((item, idx) => (
+                              <div key={idx} className="flex gap-2.5 sm:gap-3 p-2 sm:p-2.5 rounded-[14px] bg-white/[0.02] border border-white/[0.08]">
+                                <div className="flex-shrink-0 w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] rounded-lg bg-transparent border border-orange/30 flex items-center justify-center mt-0.5">
+                                  <span className="text-[#fdbd9c] font-bold text-[11px] sm:text-[12px]">
+                                    {String(idx + 1).padStart(2, '0')}
+                                  </span>
+                                </div>
+                                <div className="flex flex-col justify-center gap-0.5">
+                                  <h3 className="text-[11.5px] sm:text-[12.5px] font-bold text-white leading-tight">
+                                    {item.title}
+                                  </h3>
+                                  <p className="text-[9.5px] sm:text-[10.5px] pr-1 text-[#8a8a8e] leading-[1.3]">
+                                    {item.desc}
+                                  </p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     ) : (
@@ -236,7 +268,7 @@ const Features = () => {
             className="group inline-flex items-center text-[clamp(1.75rem,4vw,3rem)] font-semibold font-[var(--font-space-var)] text-dark tracking-tight no-underline transition-all duration-300 hover:text-orange"
           >
             {/* Text — underline SVG only covers this span */}
-            <span className="relative">
+            <span className="relative whitespace-nowrap">
               Start Learning Today!
               <svg
                 viewBox="0 0 100 10"

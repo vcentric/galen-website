@@ -39,7 +39,7 @@ const InstitutionsOutcomes = () => (
                     THE STRATEGIC IMPACT
                 </span>
                 <h2 className="text-[clamp(1.65rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-dark tracking-[-0.03em] leading-[1.1]">
-                    What institutions gain <br className="hidden md:block" /> with 
+                    What Institutions Gain <br className="hidden md:block" /> With 
                     <span className="text-[#eb602d] relative inline-block ml-2 pb-1.5">
                         GalenAI
                         <svg

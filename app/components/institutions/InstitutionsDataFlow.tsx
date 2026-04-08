@@ -50,7 +50,7 @@ const InstitutionsDataFlow = () => (
                     HOW IT WORKS
                 </span>
                 <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] font-medium font-[var(--font-space-var)] text-white tracking-[-0.03em] leading-[1.1]">
-                    A connected learning <span className="text-orange">intelligence system</span>
+                    A Connected Learning <span className="text-orange">Intelligence System</span>
                 </h2>
             </div>
 

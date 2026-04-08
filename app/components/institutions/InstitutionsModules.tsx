@@ -50,7 +50,7 @@ const InstitutionsModules = () => {
                         SYSTEM MODULES
                     </span>
                     <h2 className="text-[clamp(2rem,5.5vw,3.2rem)] font-medium font-[var(--font-space-var)] text-white tracking-[-0.03em] leading-[1.05] mb-5 lg:mb-6 max-w-[900px] mx-auto">
-                        Everything your institution needs, <br className="hidden md:block" /> <span className="text-[#eb602d]">works for you</span>
+                        Everything Your Institution Needs, <br className="hidden md:block" /> <span className="text-[#eb602d]">Works For You</span>
                     </h2>
                 </div>
 
