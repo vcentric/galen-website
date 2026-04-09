@@ -486,18 +486,30 @@ body.video-lightbox-open .nmc-banner-wrapper {
 }
 
 /* ── NEW badge shimmer ── */
-@keyframes badge-shimmer-sweep {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
+.badge-shimmer {
+  background: var(--color-orange);
+  position: relative;
+  overflow: hidden;
 }
 
-.badge-shimmer {
+.badge-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(
-    105deg,
-    #eb602d 40%,
-    #ff9e7a 50%,
-    #eb602d 60%
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent
   );
-  background-size: 200% auto;
-  animation: badge-shimmer-sweep 5s linear infinite;
+  transform: translateX(-100%) skewX(-20deg);
+  animation: badge-shimmer-slide 3s infinite ease-in-out;
+}
+
+@keyframes badge-shimmer-slide {
+  0% { transform: translateX(-100%) skewX(-20deg); }
+  50%, 100% { transform: translateX(100%) skewX(-20deg); }
 }
