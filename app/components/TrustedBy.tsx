@@ -6,7 +6,7 @@ export default function TrustedBy() {
     <div className="w-full py-2">
       <div className="w-full mx-auto">
         <h2 className="text-[clamp(0.8rem,1.5vw,0.9rem)] font-medium text-dark/60 text-center mb-4 tracking-[-0.01em] px-[clamp(1rem,4vw,3rem)]">
-          Trusted by students from the top colleges in India
+          Trusted by students
         </h2>
 
         {/*
@@ -35,3 +35,4 @@ export default function TrustedBy() {
     </div>
   );
 }
+             

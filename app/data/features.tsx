@@ -4,7 +4,7 @@ export const features = [
   {
     id: 0,
     tag: "AI Tutor",
-    title: "Your Personal AI Medical Tutor",
+    title: "Your personal AI medical tutor",
     desc: "Learn the way you think. Ask anything, GalenAI breaks it down step-by-step, adapts to your learning style, and explains with verified, curriculum-aligned references so you truly understand, not just memorize.",
     screen: "/mobile.png",
     video: "/AI Tutor_1.webm",
@@ -13,7 +13,7 @@ export const features = [
   {
     id: 1,
     tag: "Question Banks",
-    title: "Practice Questions That Teach You Why, Not Just What",
+    title: "Practice questions that teach you why, not just what",
     desc: "Every question is designed to build understanding. Get clear explanations that connect concepts, highlight common traps, and show how examiners think, not just the right answer.",
     screen: "/qbanks.png",
     video: "/Qn bank_1.webm",
@@ -22,7 +22,7 @@ export const features = [
   {
     id: 2,
     tag: "Flashcards",
-    title: "Remember What Actually Matters",
+    title: "Remember what actually matters",
     desc: "High-yield flashcards built from concepts, not isolated facts. Designed for quick revision, spaced recall, and retaining what truly sticks.",
     screen: "/Flashcards.png",
     video: "/Flashcards.webm",
@@ -31,7 +31,7 @@ export const features = [
   {
     id: 3,
     tag: "Clinical Cases",
-    title: "Learn Medicine the Way It's Practiced",
+    title: "Learn medicine the way it's practiced",
     desc: "Work through real clinical scenarios. Build diagnostic thinking, connect concepts to patients, and prepare for viva and ward discussions, not just MCQs.",
     screen: "/clinicalcases.png",
     video: "/Clinical cases.webm",
@@ -40,7 +40,7 @@ export const features = [
   {
     id: 4,
     tag: "Learning Analytics",
-    title: "Know How You’re Actually Learning",
+    title: "Know how you’re actually learning",
     desc: "Track your progress across subjects, competencies, and questions. Understand your accuracy, concept mastery, and learning patterns, with clear insights on where you stand and what to focus on next.",
     screen: "/mobile.png",
     video: "/dashboard.webm",
@@ -49,7 +49,7 @@ export const features = [
   {
     id: 5,
     tag: "Coming Soon",
-    title: "More Powerful Features on the Way",
+    title: "More powerful features on the way",
     desc: "We're constantly building. AI-powered study plans, peer collaboration tools, and faculty dashboards are headed your way.",
     screen: "/mobile.png",
     duration: 6,

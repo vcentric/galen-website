@@ -4,6 +4,7 @@ import Features from "./components/Features";
 import Testimonials from "./components/Testimonials";
 import Comparison from "./components/Comparison";
 import FAQ from "./components/FAQ";
+import { FinalCTA } from "./components/FinalCTA";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
       <Testimonials />
       <Comparison />
       <FAQ />
-
+      <FinalCTA />
     </>
   );
 }

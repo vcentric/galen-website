@@ -8,16 +8,19 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowUpRightIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import NMCBanner from "./institutions/NMCBanner";
-import { trackEvent } from "../../lib/analytics";
+import { trackEvent, trackCTAClick } from "../../lib/analytics";
+import { decorateUrl } from "../../lib/utm";
 
 interface AnimatedNavLinkProps {
   href: string;
   children: React.ReactNode;
   onClick?: () => void;
-  className?: string; // Added optional className
+  className?: string;
+  target?: string;
+  rel?: string;
 }
 
-const AnimatedNavLink = ({ href, children, onClick, className }: AnimatedNavLinkProps) => {
+const AnimatedNavLink = ({ href, children, onClick, className, target, rel }: AnimatedNavLinkProps) => {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const { contextSafe } = useGSAP({ scope: linkRef });
@@ -98,6 +101,8 @@ const AnimatedNavLink = ({ href, children, onClick, className }: AnimatedNavLink
     <a 
       href={href} 
       ref={linkRef}
+      target={target}
+      rel={rel}
       onMouseEnter={handleMouseEnter} 
       onMouseLeave={handleMouseLeave}
       className={finalClassName}
@@ -185,7 +190,6 @@ const Navbar = () => {
     ? [
         { label: "Solution", href: "#overview" },
         { label: "Team", href: "/team" },
-        { label: "Blog", href: "/blog" },
         { label: "Outcomes", href: "#outcomes" },
         { label: "Contact", href: "#contact" },
       ]
@@ -194,10 +198,13 @@ const Navbar = () => {
           ? { label: "Home", href: "/" }
           : { label: "Features", href: "#features" },
         { label: "Team", href: "/team" },
-        { label: "Blog", href: "/blog" },
-        { label: "FAQ's", href: "#faq" },
+        { label: "FAQ's", href: "/#faq" },
         { label: "Contact", href: "#contact" },
       ];
+
+  if (pathname === '/terms' || pathname === '/privacy') {
+    return null;
+  }
 
   return (
     <>
@@ -206,13 +213,34 @@ const Navbar = () => {
           <NMCBanner />
         </div>
       )}
+      {pathname === "/" && (
+        <div className="absolute top-0 left-0 right-0 w-full z-[130] pointer-events-auto flex items-center justify-center px-6 py-2 bg-[#eb602d] text-white text-[0.75rem] font-medium tracking-tight leading-[1.4] text-center">
+          <div className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5">
+            <span className="opacity-80">
+              NEET PG • INI-CET • USMLE • PLAB • FMGE • NEXT • EMREE &nbsp;—&nbsp;
+            </span>
+            <div className="flex items-center gap-x-1.5 whitespace-nowrap">
+              <span className="opacity-100 italic">Coming Soon</span>
+              <span className="opacity-40">|</span>
+              <a 
+                href={decorateUrl("/qr")} 
+                onClick={() => trackCTAClick("qr", { source: "top_banner" })}
+                className="underline font-bold hover:opacity-80 transition-opacity flex items-center gap-0.5"
+              >
+                Sign up to stay updated
+                <ArrowUpRightIcon className="w-3 h-3" strokeWidth={3} />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Level 1: Standard Stationary Navbar (Top Bar) */}
       <div className="fixed top-0 left-0 right-0 z-[120] flex flex-col items-center pointer-events-none site-navbar">
         <div 
           className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] nav-glass-container z-10 ${
             isScrolled 
               ? "is-scrolled w-[calc(100%-10px)] max-w-[1400px] px-6 py-3 border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)] mt-2" 
-              : `w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent ${pathname === "/institutions" ? "mt-[44px] md:mt-[26px]" : "mt-0"}`
+              : `w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent ${pathname === "/institutions" || pathname === "/" ? "mt-[48px] md:mt-[30px]" : "mt-0"}`
           }`}
         >
           <svg style={{ display: 'none' }}>
@@ -250,10 +278,27 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <div className="relative z-10 flex-1 flex justify-end">
+          <div className="relative z-10 flex-1 flex justify-end items-center gap-5 overflow-visible">
+            {/* House MD game button — desktop only */}
+            <div className="hidden md:inline-flex items-center gap-2 whitespace-nowrap">
+              <AnimatedNavLink
+                href="https://itsnotlupusgalenai.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("navbar_housemed_click", {})}
+                className="relative no-underline text-dark/80 text-[15px] font-primary font-semibold tracking-[0.01em] transition-opacity duration-200 hover:opacity-100 opacity-90 inline-block"
+              >
+                Think Like HouseMD
+              </AnimatedNavLink>
+              <span className="badge-shimmer px-1.5 py-[4px] rounded text-white text-[7px] font-bold tracking-wide uppercase leading-none">NEW</span>
+            </div>
             <a
-              href={pathname === "/institutions" ? "#contact" : "/qr"}
-              onClick={() => trackEvent("navbar_cta_click", { destination: pathname === "/institutions" ? "contact" : "qr" })}
+              href={decorateUrl(pathname === "/institutions" ? "#contact" : "/qr")}
+              onClick={() => {
+                const destination = pathname === "/institutions" ? "contact" : "qr";
+                trackEvent("navbar_cta_click", { destination });
+                trackCTAClick(destination, { source: "navbar" });
+              }}
               className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md
                          h-8 text-xs pl-3 pr-9
                          md:h-[clamp(2.5rem,5vw,2.75rem)] md:text-[clamp(0.85rem,2vw,0.95rem)] md:pl-[clamp(1rem,3vw,1.5rem)] md:pr-[clamp(3rem,6vw,3.5rem)]
@@ -289,33 +334,41 @@ const Navbar = () => {
         className="fixed top-0 left-0 w-[60vw] h-full bg-[#fcfaf8] z-[1000] p-[clamp(1.5rem,5vw,2.25rem)] flex flex-col pt-[clamp(2rem,6vw,3rem)] md:hidden shadow-[10px_0_30px_rgba(0,0,0,0.05)] pointer-events-auto"
         style={{ transform: 'translateX(-100%)', visibility: 'hidden' }}
       >
-        <div className="mb-10 mobile-nav-item">
-          <button 
-            onClick={closeMenu}
-            className="flex items-center gap-2 text-dark/60 hover:text-orange transition-colors font-primary font-medium text-[14px] uppercase tracking-[0.05em]"
-          >
-            <svg 
-              width="16" 
-              height="16" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2.5" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
+        <div className="flex flex-col gap-8">
+          {/* Go Back */}
+          <div className="mobile-nav-item">
+            <button
+              onClick={closeMenu}
+              className="flex items-center gap-2 text-dark/60 hover:text-orange transition-colors font-primary font-medium text-[14px] uppercase tracking-[0.05em]"
             >
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Go Back
-          </button>
-        </div>
-        <nav className="flex flex-col gap-[clamp(1.25rem,2.5vw,1.75rem)]">
-          {navLinks.map((link) => (
-            <div key={link.label} className="mobile-nav-item" onClick={closeMenu}>
-              <AnimatedNavLink href={link.href} className="relative inline-block text-dark no-underline text-[17px] font-medium tracking-[0.02em] opacity-90 hover:opacity-100 transition-opacity duration-200">{link.label}</AnimatedNavLink>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              Go Back
+            </button>
+          </div>
+
+          {/* Nav links — Think Like House is first, same style, only diff is NEW badge */}
+          <nav className="flex flex-col gap-[clamp(1.25rem,2.5vw,1.75rem)]">
+            <div className="mobile-nav-item inline-flex items-center gap-2">
+              <AnimatedNavLink
+                href="https://itsnotlupusgalenai.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => { trackEvent("navbar_housemed_click", {}); closeMenu(); }}
+                className="relative inline-block text-dark no-underline text-[17px] font-medium opacity-90 hover:opacity-100 transition-opacity duration-200"
+              >
+                Think Like HouseMD
+              </AnimatedNavLink>
+              <span className="badge-shimmer px-1.5 py-[4px] rounded text-white text-[7px] font-bold tracking-wide uppercase leading-none">NEW</span>
             </div>
-          ))}
-        </nav>
+            {navLinks.map((link) => (
+              <div key={link.label} className="mobile-nav-item" onClick={closeMenu}>
+                <AnimatedNavLink href={link.href} className="relative inline-block text-dark no-underline text-[17px] font-medium tracking-[0.02em] opacity-90 hover:opacity-100 transition-opacity duration-200">{link.label}</AnimatedNavLink>
+              </div>
+            ))}
+          </nav>
+        </div>
       </div>
     </>
   );

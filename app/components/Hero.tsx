@@ -3,12 +3,13 @@
 import React, { useState, useRef, useEffect, ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { QrCodeIcon, ArrowUpRightIcon, ArrowRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { QrCodeIcon, ArrowUpRightIcon, ArrowRightIcon, XMarkIcon, ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
 import TrustedBy from "./TrustedBy";
 import { trackEvent, trackCTAClick } from "../../lib/analytics";
+import { decorateUrl } from "../../lib/utm";
 
 const STUDENT_PHRASES = [
   "for daily medical learning.",
@@ -213,22 +214,24 @@ const Hero = ({ audience = "students" }: HeroProps) => {
     ? "GalenAI is your AI medical mentor that explains, tests, and guides you, so you spend less time planning and more time understanding."
     : "An AI-powered medical education platform built for CBME, connecting student learning, faculty workflows, and institutional insights in one unified system.";
 
-    const sectionClass = audience === "institutions" 
-    ? `min-h-screen pt-[clamp(5.5rem,11vh,7.5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative ${isExpanded ? "z-[10000]" : "z-auto"}`
-    : `min-h-screen pt-[clamp(3.5rem,8vh,5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex justify-center items-center overflow-visible relative ${isExpanded ? "z-[10000]" : "z-auto"}`;
+    const sectionClass = `w-full pt-[5rem] md:pt-[clamp(5.5rem,11vh,7.5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex flex-col overflow-visible relative ${isExpanded ? "z-[10000]" : "z-auto"}`;
 
+  const STU_YT_ID = "j3lw8EERc18";
   const currentVideoSrc = audience === "students" 
-    ? "/BrandVideo.webm" 
-    : "/Insitutional Page Video Temp.webm";
+    ? STU_YT_ID 
+    : "/Institutions.mp4";
 
+  const isYouTube = (src: string) => !src.startsWith("/") && !src.includes(".");
 
   return (
     <section className={sectionClass}>
-      <div className="w-full flex flex-col items-center relative z-[2] py-[clamp(1rem,4vw,2rem)]">
-        {/* Centered Text Content */}
-        <div className={`flex flex-col items-center text-center mx-auto ${audience === 'institutions' ? 'max-w-[1100px]' : 'max-w-[900px]'}`}>
+      {/* Viewport Height Container for Text + TrustedBy */}
+      <div className="w-full flex flex-col items-center relative z-[2]">
+        
+        {/* Centered Text Content pushed just slightly down from the top */}
+        <div className={`mt-12 md:mt-[clamp(1.5rem,4vh,3rem)] flex flex-col items-center text-center mx-auto w-full ${audience === 'institutions' ? 'max-w-[1100px]' : 'max-w-[900px]'}`}>
           {/* Audience Toggle */}
-          <div className="inline-flex gap-[clamp(1.5rem,4vw,3rem)] mb-[clamp(1rem,3vw,1.5rem)] relative">
+          <div className="inline-flex gap-[clamp(2.5rem,8vw,4.5rem)] mb-[clamp(1.5rem,3vw,2.5rem)] relative">
             {(['students', 'institutions'] as const).map((aud) => (
               aud === audience ? (
                 <AudienceButton
@@ -247,11 +250,11 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             ))}
           </div>
           {/* Context Tags */}
-          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.25rem,1vw,0.6rem)] mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
-            {tags.map((tag, idx) => (
-              <React.Fragment key={tag}>
-                {audience === "students" && idx === 4 && <div className="w-full md:hidden shrink-0" />}
+          {audience === "institutions" && (
+            <div className="flex flex-wrap justify-center items-center gap-[clamp(0.25rem,1vw,0.6rem)] mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
+              {tags.map((tag) => (
                 <div
+                  key={tag}
                   className="flex items-center px-[clamp(0.5rem,1.4vw,0.75rem)] py-[clamp(0.15rem,0.4vw,0.25rem)] rounded-full bg-white/70 border-orange/40 border backdrop-blur-md cursor-default transition-all duration-300 hover:border-orange/60"
                   style={{ 
                     boxShadow: 'inset 0 1.5px 3px rgba(235, 96, 45, 0.3), 0 1px 2px rgba(0, 0, 0, 0.03)'
@@ -261,17 +264,17 @@ const Hero = ({ audience = "students" }: HeroProps) => {
                     {tag}
                   </span>
                 </div>
-              </React.Fragment>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
-          <h1 className="text-[clamp(1.8rem,5vw+0.5rem,4.25rem)] font-medium leading-[1.25] md:leading-[1.1] text-dark mb-[clamp(1.5rem,4vw,2rem)] tracking-[-0.03em]">
+          <h1 className="text-[clamp(2.3rem,5vw+0.5rem,4.25rem)] font-medium leading-[1.3] md:leading-[1.25] text-dark mb-[clamp(1rem,2.5vw,1.5rem)] tracking-[-0.03em]">
             {audience === "students" ? (
               <>
                 Your personal AI companion <br />
                 <div className="flex items-center justify-center text-orange italic">
                 <div 
-                    className="flex flex-col md:flex-row items-center md:items-baseline min-w-[300px]" 
+                    className="flex flex-col md:flex-row items-center md:items-baseline w-full md:w-auto" 
                     ref={textContainerRef}
                 >
                     {(() => {
@@ -318,7 +321,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             )}
           </h1>
 
-          <p className={audience === "institutions" ? "text-[clamp(0.85rem,1.5vw,1rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[850px] mb-[clamp(1.5rem,3.5vw,2rem)] mx-auto" : "text-[clamp(0.75rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2rem,5vw,3rem)] mx-auto"}>
+          <p className={audience === "institutions" ? "text-[clamp(0.85rem,1.5vw,1rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[850px] mb-[clamp(2.5rem,4vw,3rem)] mx-auto" : "text-[clamp(0.95rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2.5rem,4vw,3rem)] mx-auto"}>
             {descriptionText}
           </p>
 
@@ -330,29 +333,30 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             </div>
           )}
 
-          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)]">
+          <div className={`flex items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-4 ${audience === 'students' ? 'flex-col md:grid md:grid-cols-2 w-full md:w-auto' : 'flex-col md:flex-row w-full md:w-auto md:justify-center'}`}>
             {audience === "students" ? (
               <>
-                <PrimaryButton href="/qr" text="Try GalenAI" icon={ArrowUpRightIcon} />
-                <SecondaryButton href="/qr" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} />
+                <PrimaryButton href="/qr" text="Try GalenAI" icon={ArrowUpRightIcon} className="w-full" />
+                <SecondaryButton href="/qr" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} className="w-full" />
               </>
             ) : (
               <>
-                <PrimaryButton href="#contact" text="Request Institutional Demo" icon={ArrowUpRightIcon} className="!min-w-[180px] !px-[clamp(1.2rem,3vw,2rem)]" />
-                <SecondaryButton href="#overview" text="View System Overview" icon={ArrowRightIcon} showQrMobile={false} className="!min-w-[180px] !px-[clamp(1.2rem,3vw,2rem)]" />
+                <PrimaryButton href="#contact" text="Request Institutional Demo" icon={ArrowUpRightIcon} className="w-full md:w-auto !px-[clamp(1.2rem,3vw,2rem)]" />
+                <SecondaryButton href="#overview" text="View System Overview" icon={ArrowRightIcon} showQrMobile={false} className="w-full md:w-auto !px-[clamp(1.2rem,3vw,2rem)]" />
               </>
             )}
           </div>
 
-          <div className="flex items-center justify-center text-[clamp(0.85rem,1.5vw,0.95rem)] text-dark/70 mb-8 animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.3s' }}>
+          <div className="relative flex items-center justify-center text-[clamp(0.85rem,1.5vw,0.95rem)] text-dark/70 animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.3s' }}>
+            <div className="absolute w-[150%] h-[200%] max-w-[400px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,1)_20%,rgba(255,255,255,0.8)_50%,transparent_80%)] pointer-events-none" style={{ zIndex: -1 }}></div>
             <span>Already using GalenAI?</span>
             <span className="mx-3 text-black/20">|</span>
             <a 
-              href="https://app.galenai.io" 
+              href={decorateUrl("https://app.galenai.io")} 
               ref={loginLinkRef}
               onMouseEnter={handleLoginEnter}
               onMouseLeave={handleLoginLeave}
-              onClick={() => trackCTAClick("web_app")}
+              onClick={() => trackCTAClick("web_app", { source: "hero_login" })}
               className="group relative flex items-center gap-2 text-orange font-medium transition-colors no-underline"
             >
               <span className="relative pb-0.5 font-semibold">
@@ -384,46 +388,51 @@ const Hero = ({ audience = "students" }: HeroProps) => {
           </div>
         </div>
 
-        {audience === "students" && <TrustedBy />}
+        {audience === "students" && (
+          <div className="w-full mt-12 md:mt-[clamp(3rem,6vh,4.5rem)] ">
+            <TrustedBy />
+          </div>
+        )}
+      </div>
 
-        <div className={`w-full flex flex-col items-center ${audience === 'institutions' ? 'mt-0 md:mt-[-0.5rem]' : 'mt-[clamp(2rem,6vw,4rem)]'}`}>
+      {/* Second Screen / Scroll Container for Video */}
+      <div className={`w-full flex flex-col items-center relative z-[2] pb-16 ${audience === 'institutions' ? 'mt-[6vh] md:mt-[8vh]' : 'mt-[clamp(2rem,6vh,4rem)] md:mt-[8vh]'}`}>
 
         {/* Huge Video Below or Visual */}
-        {audience === "students" ? (
-            <div 
-              onClick={() => {
-                setIsExpanded(true);
-                trackEvent("hero_video_expand", { audience, video: "/BrandVideo.webm" });
-              }}
-              className="w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
-            >
-                <video 
-                  src="/BrandVideo.webm" 
-                  autoPlay 
-                  muted 
-                  loop 
-                  playsInline
-                  className="w-full h-auto block"
-                />
+        <div 
+          onClick={() => {
+            setIsExpanded(true);
+            trackEvent("hero_video_expand", { 
+              audience_type: audience, 
+              video_path: currentVideoSrc 
+            });
+          }}
+          className="group w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
+        >
+            <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-black/50 backdrop-blur-md rounded-full w-8 h-8 md:w-9 md:h-9 transition-all duration-500 z-10 group-hover:bg-black/70 flex items-center justify-center pointer-events-none shadow-[inset_0_0_8px_rgba(255,255,255,0.2)]">
+              <ArrowsPointingOutIcon className="w-3.5 h-3.5 md:w-[1.1rem] md:h-[1.1rem] text-white" strokeWidth={1.5} />
             </div>
-        ) : (
-            <div 
-              onClick={() => {
-                setIsExpanded(true);
-                trackEvent("hero_video_expand", { audience, video: "/Insitutional Page Video Temp.webm" });
-              }}
-              className="w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
-            >
-                <video 
-                  src="/Insitutional Page Video Temp.webm" 
-                  autoPlay 
-                  muted 
-                  loop 
-                  playsInline
-                  className="w-full h-auto block"
+            
+            {isYouTube(currentVideoSrc) ? (
+              <div className="w-full aspect-video pointer-events-none">
+                <iframe
+                  width="1920"
+                  height="1080"
+                  src={`https://www.youtube.com/embed/${currentVideoSrc}?autoplay=1&mute=1&loop=1&playlist=${currentVideoSrc}&controls=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
+                  className="w-full h-full border-none"
+                  allow="autoplay; encrypted-media"
                 />
-            </div>
-        )}
+              </div>
+            ) : (
+              <video 
+                src={currentVideoSrc}
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                className="w-full h-auto block"
+              />
+            )}
         </div>
 
         {/* Video Lightbox / Modal */}
@@ -448,13 +457,23 @@ const Hero = ({ audience = "students" }: HeroProps) => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative aspect-video rounded-[1.5rem] overflow-hidden bg-black">
-                <video 
-                  src={currentVideoSrc}
-                  autoPlay 
-                  controls
-                  playsInline
-                  className="w-full h-full"
-                />
+                {isYouTube(currentVideoSrc) ? (
+                  <iframe
+                    width="1920"
+                    height="1080"
+                    src={`https://www.youtube.com/embed/${currentVideoSrc}?autoplay=1&rel=0&modestbranding=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
+                    className="w-full h-full border-none"
+                    allow="autoplay; encrypted-media; fullscreen"
+                  />
+                ) : (
+                  <video 
+                    src={currentVideoSrc}
+                    autoPlay 
+                    controls
+                    playsInline
+                    className="w-full h-full"
+                  />
+                )}
               </div>
             </div>
           </div>

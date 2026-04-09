@@ -4,71 +4,14 @@ import { ArrowRightIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { useState, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { SiWhatsapp } from "react-icons/si";
 import { faqs } from "../data/faqs";
+import { trackCTAClick } from "../../lib/analytics";
+import { decorateUrl } from "../../lib/utm";
+import { PrimaryButton } from "./PrimaryButton";
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const tryBtnRef = useRef<HTMLAnchorElement>(null);
-  const tryBgRef = useRef<HTMLDivElement>(null);
-  const tryTextRef = useRef<HTMLSpanElement>(null);
-  const tryIconRef = useRef<SVGSVGElement>(null);
-
-  const { contextSafe: contextSafeTry } = useGSAP({ scope: tryBtnRef });
-
-  useGSAP(() => {
-    gsap.set(tryBgRef.current, { scaleY: 0, transformOrigin: "bottom center" });
-    gsap.set(tryTextRef.current, { x: 0 }); // Initially centered
-    gsap.set(tryIconRef.current, { x: 0, y: 15, opacity: 0 }); // Starts below, no x offset
-  }, { scope: tryBtnRef });
-
-  const handleTryEnter = contextSafeTry(() => {
-    gsap.to(tryBgRef.current, {
-      scaleY: 1,
-      duration: 0.25,
-      ease: "power4.out",
-      overwrite: "auto"
-    });
-    gsap.to(tryTextRef.current, {
-      x: -12, // Slide text to the left to make room
-      color: "#ffffff",
-      duration: 0.25,
-      ease: "power4.out",
-      overwrite: "auto"
-    });
-    gsap.to(tryIconRef.current, {
-      y: 0, // Pop up
-      opacity: 1,
-      duration: 0.3,
-      ease: "back.out(1.5)",
-      overwrite: "auto",
-    });
-  });
-
-  const handleTryLeave = contextSafeTry(() => {
-    gsap.to(tryBgRef.current, {
-      scaleY: 0,
-      duration: 0.25,
-      ease: "power4.out",
-      overwrite: "auto"
-    });
-    gsap.to(tryTextRef.current, {
-      x: 0, // Slide text back to exact center
-      color: "var(--color-orange)",
-      duration: 0.25,
-      ease: "power4.out",
-      overwrite: "auto"
-    });
-    gsap.to(tryIconRef.current, {
-      y: 15, // Drop back down
-      opacity: 0,
-      duration: 0.2,
-      ease: "power3.in",
-      overwrite: "auto"
-    });
-  });
-
-
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -84,7 +27,7 @@ const FAQ = () => {
             FAQ
           </span>
           <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] leading-[1.1] font-serif font-medium text-[#222] tracking-[-0.03em] mb-[clamp(2rem,6vw,3rem)]">
-            Frequently asked<br/>questions about us.
+            Frequently Asked<br/>Questions.
           </h2>
         </div>
 
@@ -150,25 +93,18 @@ const FAQ = () => {
 
         {/* 3. CTA Column (Bottom-left on desktop, Bottom on mobile) */}
         <div className="lg:col-span-6 lg:row-start-2 flex flex-col items-start lg:pr-8 lg:self-start">
-          <div className="w-full bg-orange rounded-md rounded-br-4xl p-[clamp(1.5rem,4vw,2rem)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-[clamp(1rem,3vw,1.5rem)] shadow-md">
-            <p className="text-[clamp(1.05rem,2vw,1.15rem)] leading-snug text-white font-medium max-w-[200px]">
-              Have a question? Let's discuss it now!
+          <div className="w-full bg-orange rounded-md rounded-br-4xl p-[clamp(1.5rem,4vw,2rem)] flex flex-col sm:flex-row items-center justify-center gap-x-12 gap-y-4 shadow-md">
+            <p className="text-[clamp(1.1rem,2vw,1.15rem)] leading-snug text-white font-medium max-w-[240px] text-center sm:text-left">
+              Have a question? <br/>
+              <span className="whitespace-nowrap font-medium">Let's discuss it now!</span>
             </p>
-            <a 
-              href="https://wa.me/918848542046" 
-              ref={tryBtnRef}
-              onMouseEnter={handleTryEnter}
-              onMouseLeave={handleTryLeave}
-              className="group relative flex items-center justify-center py-[clamp(0.75rem,2vw,0.85rem)] px-[clamp(1.5rem,4vw,2rem)] rounded-full text-[clamp(0.85rem,1.5vw,0.85rem)] font-primary font-medium text-orange bg-white no-underline transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-[0.98] overflow-hidden min-w-[200px]"
-            >
-              <div ref={tryBgRef} className="absolute inset-0 bg-[#303030] z-0 rounded-full"></div>
-              <div className="relative z-10 flex items-center justify-center w-full">
-                <span ref={tryTextRef} className="text-orange transition-colors block" style={{ color: "var(--color-orange)" }}>Chat on WhatsApp</span>
-                <div className="absolute -right-[0.25rem] w-[1.25rem] h-[1.25rem] overflow-hidden flex items-center justify-center">
-                  <ArrowUpRightIcon ref={tryIconRef} className="absolute w-[12px] h-[12px] text-white" strokeWidth={3} />
-                </div>
-              </div>
-            </a>
+            
+            <PrimaryButton 
+              href="https://wa.me/919741591110" 
+              text="Chat on WhatsApp"
+              className="!bg-[#2e2e2e] !min-w-[160px] sm:!min-w-[180px] !py-2.5 !px-6 !text-[0.85rem]"
+              onClick={() => trackCTAClick("whatsapp", { source: "faq" })}
+            />
           </div>
         </div>
 
