@@ -225,9 +225,10 @@ const Navbar = () => {
               <a 
                 href={decorateUrl("/qr")} 
                 onClick={() => trackCTAClick("qr", { source: "top_banner" })}
-                className="underline font-bold hover:opacity-80 transition-opacity"
+                className="underline font-bold hover:opacity-80 transition-opacity flex items-center gap-0.5"
               >
                 Sign up to stay updated
+                <ArrowUpRightIcon className="w-3 h-3" strokeWidth={3} />
               </a>
             </div>
           </div>

@@ -216,10 +216,12 @@ const Hero = ({ audience = "students" }: HeroProps) => {
 
     const sectionClass = `w-full pt-[5rem] md:pt-[clamp(5.5rem,11vh,7.5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex flex-col overflow-visible relative ${isExpanded ? "z-[10000]" : "z-auto"}`;
 
+  const STU_YT_ID = "j3lw8EERc18";
   const currentVideoSrc = audience === "students" 
-    ? "/BrandVideo.webm" 
-    : "/Insitutional Page Video Temp.webm";
+    ? STU_YT_ID 
+    : "/Institutions.mp4";
 
+  const isYouTube = (src: string) => !src.startsWith("/") && !src.includes(".");
 
   return (
     <section className={sectionClass}>
@@ -397,47 +399,41 @@ const Hero = ({ audience = "students" }: HeroProps) => {
       <div className={`w-full flex flex-col items-center relative z-[2] pb-16 ${audience === 'institutions' ? 'mt-[6vh] md:mt-[8vh]' : 'mt-[clamp(2rem,6vh,4rem)] md:mt-[8vh]'}`}>
 
         {/* Huge Video Below or Visual */}
-        {audience === "students" ? (
-            <div 
-              onClick={() => {
-                setIsExpanded(true);
-                trackEvent("hero_video_expand", { audience_type: audience, video_path: "/BrandVideo.webm" });
-              }}
-              className="group w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
-            >
-                <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-black/50 backdrop-blur-md rounded-full w-8 h-8 md:w-9 md:h-9 transition-all duration-500 z-10 group-hover:bg-black/70 flex items-center justify-center pointer-events-none shadow-[inset_0_0_8px_rgba(255,255,255,0.2)]">
-                  <ArrowsPointingOutIcon className="w-3.5 h-3.5 md:w-[1.1rem] md:h-[1.1rem] text-white" strokeWidth={1.5} />
-                </div>
-                <video 
-                  src="/BrandVideo.webm" 
-                  autoPlay 
-                  muted 
-                  loop 
-                  playsInline
-                  className="w-full h-auto block"
-                />
+        <div 
+          onClick={() => {
+            setIsExpanded(true);
+            trackEvent("hero_video_expand", { 
+              audience_type: audience, 
+              video_path: currentVideoSrc 
+            });
+          }}
+          className="group w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
+        >
+            <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-black/50 backdrop-blur-md rounded-full w-8 h-8 md:w-9 md:h-9 transition-all duration-500 z-10 group-hover:bg-black/70 flex items-center justify-center pointer-events-none shadow-[inset_0_0_8px_rgba(255,255,255,0.2)]">
+              <ArrowsPointingOutIcon className="w-3.5 h-3.5 md:w-[1.1rem] md:h-[1.1rem] text-white" strokeWidth={1.5} />
             </div>
-        ) : (
-            <div 
-              onClick={() => {
-                setIsExpanded(true);
-                trackEvent("hero_video_expand", { audience_type: audience, video_path: "/Insitutional Page Video Temp.webm" });
-              }}
-              className="group w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
-            >
-                <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-black/50 backdrop-blur-md rounded-full w-8 h-8 md:w-9 md:h-9 transition-all duration-500 z-10 group-hover:bg-black/70 flex items-center justify-center pointer-events-none shadow-[inset_0_0_8px_rgba(255,255,255,0.2)]">
-                  <ArrowsPointingOutIcon className="w-3.5 h-3.5 md:w-[1.1rem] md:h-[1.1rem] text-white" strokeWidth={1.5} />
-                </div>
-                <video 
-                  src="/Insitutional Page Video Temp.webm" 
-                  autoPlay 
-                  muted 
-                  loop 
-                  playsInline
-                  className="w-full h-auto block"
+            
+            {isYouTube(currentVideoSrc) ? (
+              <div className="w-full aspect-video pointer-events-none">
+                <iframe
+                  width="1920"
+                  height="1080"
+                  src={`https://www.youtube.com/embed/${currentVideoSrc}?autoplay=1&mute=1&loop=1&playlist=${currentVideoSrc}&controls=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
+                  className="w-full h-full border-none"
+                  allow="autoplay; encrypted-media"
                 />
-            </div>
-        )}
+              </div>
+            ) : (
+              <video 
+                src={currentVideoSrc}
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                className="w-full h-auto block"
+              />
+            )}
+        </div>
 
         {/* Video Lightbox / Modal */}
         {isExpanded && (
@@ -461,13 +457,23 @@ const Hero = ({ audience = "students" }: HeroProps) => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative aspect-video rounded-[1.5rem] overflow-hidden bg-black">
-                <video 
-                  src={currentVideoSrc}
-                  autoPlay 
-                  controls
-                  playsInline
-                  className="w-full h-full"
-                />
+                {isYouTube(currentVideoSrc) ? (
+                  <iframe
+                    width="1920"
+                    height="1080"
+                    src={`https://www.youtube.com/embed/${currentVideoSrc}?autoplay=1&rel=0&modestbranding=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
+                    className="w-full h-full border-none"
+                    allow="autoplay; encrypted-media; fullscreen"
+                  />
+                ) : (
+                  <video 
+                    src={currentVideoSrc}
+                    autoPlay 
+                    controls
+                    playsInline
+                    className="w-full h-full"
+                  />
+                )}
               </div>
             </div>
           </div>
