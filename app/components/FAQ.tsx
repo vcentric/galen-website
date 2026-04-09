@@ -4,7 +4,11 @@ import { ArrowRightIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { useState, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { SiWhatsapp } from "react-icons/si";
 import { faqs } from "../data/faqs";
+import { trackCTAClick } from "../../lib/analytics";
+import { decorateUrl } from "../../lib/utm";
+import { PrimaryButton } from "./PrimaryButton";
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -23,7 +27,7 @@ const FAQ = () => {
             FAQ
           </span>
           <h2 className="text-[clamp(1.9rem,5vw,3.25rem)] leading-[1.1] font-serif font-medium text-[#222] tracking-[-0.03em] mb-[clamp(2rem,6vw,3rem)]">
-            Frequently Asked<br/>Questions About Us.
+            Frequently Asked<br/>Questions.
           </h2>
         </div>
 
@@ -89,34 +93,18 @@ const FAQ = () => {
 
         {/* 3. CTA Column (Bottom-left on desktop, Bottom on mobile) */}
         <div className="lg:col-span-6 lg:row-start-2 flex flex-col items-start lg:pr-8 lg:self-start">
-          <div className="w-full bg-orange rounded-md rounded-br-4xl p-[clamp(1.5rem,4vw,2rem)] flex flex-col sm:flex-row items-center justify-between gap-[clamp(1rem,3vw,1.5rem)] shadow-md">
-            <p className="text-[clamp(1.15rem,2.2vw,1.25rem)] leading-snug text-white font-medium max-w-[200px] text-center sm:text-left">
-              Have a question? <br/> Let's discuss it now!
+          <div className="w-full bg-orange rounded-md rounded-br-4xl p-[clamp(1.5rem,4vw,2rem)] flex flex-col sm:flex-row items-center justify-center gap-x-12 gap-y-4 shadow-md">
+            <p className="text-[clamp(1.1rem,2vw,1.15rem)] leading-snug text-white font-medium max-w-[240px] text-center sm:text-left">
+              Have a question? <br/>
+              <span className="whitespace-nowrap font-medium">Let's discuss it now!</span>
             </p>
             
-            <a 
+            <PrimaryButton 
               href="https://wa.me/919741591110" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative no-underline select-none flex justify-center items-center group"
-              style={{
-                padding: '0.1em 0.25em',
-                width: '15em',
-                height: '4em',
-                backgroundColor: '#212121',
-                border: '0.08em solid #fff',
-                borderRadius: '0.3em',
-                fontSize: '12px',
-                cursor: 'pointer',
-                fontFamily: 'var(--font-space-var), sans-serif'
-              }}
-            >
-              <span 
-                className="relative flex justify-center items-center w-[11em] h-[2.5em] bg-[#eb602d] rounded-[0.2em] text-[1.3em] text-[#ffffff] border-[0.08em] border-white shadow-[0_0.4em_0.1em_0.019em_#fff] bottom-[0.4em] transition-all duration-[0.5s] group-hover:duration-[0.5s] group-hover:translate-y-[0.4em] group-hover:shadow-none font-bold"
-              >
-                Chat on WhatsApp
-              </span>
-            </a>
+              text="Chat on WhatsApp"
+              className="!bg-[#2e2e2e] !min-w-[160px] sm:!min-w-[180px] !py-2.5 !px-6 !text-[0.85rem]"
+              onClick={() => trackCTAClick("whatsapp", { source: "faq" })}
+            />
           </div>
         </div>
 

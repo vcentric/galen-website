@@ -2,40 +2,34 @@
 
 import { useEffect } from "react";
 import { trackCTAClick } from "../../lib/analytics";
+import { decorateUrl } from "../../lib/utm";
 
 export default function QRPage() {
   useEffect(() => {
     const userAgent = (window.navigator.userAgent || "").toLowerCase();
-    const queryParams = window.location.search;
 
     // Store Links
     const iosLink = "https://apps.apple.com/us/app/galenai/id6755653561";
     const androidLink = "https://play.google.com/store/apps/details?id=com.galenai.galenai";
     const desktopLink = "https://app.galenai.io";
 
-    // Append UTMs/Query Params
-    const getFinalUrl = (baseUrl: string) => {
-      if (!queryParams) return baseUrl;
-      return baseUrl.includes("?") ? `${baseUrl}&${queryParams.slice(1)}` : `${baseUrl}${queryParams}`;
-    };
-
     // Detect Android
     if (/android/i.test(userAgent)) {
       trackCTAClick("play_store");
-      window.location.href = getFinalUrl(androidLink);
+      window.location.href = decorateUrl(androidLink);
       return;
     }
 
     // Detect iOS (iPhone, iPad, iPod)
     if (/iphone|ipad|ipod/i.test(userAgent)) {
       trackCTAClick("app_store");
-      window.location.href = getFinalUrl(iosLink);
+      window.location.href = decorateUrl(iosLink);
       return;
     }
 
     // Default to desktop web app
     trackCTAClick("web_app");
-    window.location.href = getFinalUrl(desktopLink);
+    window.location.href = decorateUrl(desktopLink);
   }, []);
 
   return (

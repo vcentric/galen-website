@@ -8,7 +8,8 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowUpRightIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import NMCBanner from "./institutions/NMCBanner";
-import { trackEvent } from "../../lib/analytics";
+import { trackEvent, trackCTAClick } from "../../lib/analytics";
+import { decorateUrl } from "../../lib/utm";
 
 interface AnimatedNavLinkProps {
   href: string;
@@ -213,10 +214,23 @@ const Navbar = () => {
         </div>
       )}
       {pathname === "/" && (
-        <div className="absolute top-0 left-0 right-0 w-full z-[130] pointer-events-auto flex items-center justify-center px-1 py-2 bg-[#eb602d] text-white text-[7.5px] min-[370px]:text-[8.5px] min-[400px]:text-[9.5px] sm:text-[11px] md:text-[12px] font-medium tracking-tight sm:tracking-[0.01em] leading-[1.4] text-center overflow-hidden">
-          <span className="opacity-95 whitespace-nowrap">
-            NEET PG • INI-CET • USMLE • PLAB • FMGE • NEXT • EMREE &nbsp;—&nbsp; Coming Soon
-          </span>
+        <div className="absolute top-0 left-0 right-0 w-full z-[130] pointer-events-auto flex items-center justify-center px-6 py-2 bg-[#eb602d] text-white text-[0.75rem] font-medium tracking-tight leading-[1.4] text-center">
+          <div className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5">
+            <span className="opacity-80">
+              NEET PG • INI-CET • USMLE • PLAB • FMGE • NEXT • EMREE &nbsp;—&nbsp;
+            </span>
+            <div className="flex items-center gap-x-1.5 whitespace-nowrap">
+              <span className="opacity-100 italic">Coming Soon</span>
+              <span className="opacity-40">|</span>
+              <a 
+                href={decorateUrl("/qr")} 
+                onClick={() => trackCTAClick("qr", { source: "top_banner" })}
+                className="underline font-bold hover:opacity-80 transition-opacity"
+              >
+                Sign up to stay updated
+              </a>
+            </div>
+          </div>
         </div>
       )}
       {/* Level 1: Standard Stationary Navbar (Top Bar) */}
@@ -225,7 +239,7 @@ const Navbar = () => {
           className={`pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] nav-glass-container z-10 ${
             isScrolled 
               ? "is-scrolled w-[calc(100%-10px)] max-w-[1400px] px-6 py-3 border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)] mt-2" 
-              : `w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent ${pathname === "/institutions" ? "mt-[48px] md:mt-[30px]" : pathname === "/" ? "mt-[30px]" : "mt-0"}`
+              : `w-full max-w-[1400px] px-[clamp(1rem,5vw,2.5rem)] py-4 border-transparent ${pathname === "/institutions" || pathname === "/" ? "mt-[48px] md:mt-[30px]" : "mt-0"}`
           }`}
         >
           <svg style={{ display: 'none' }}>
@@ -278,8 +292,12 @@ const Navbar = () => {
               <span className="badge-shimmer px-1.5 py-[4px] rounded text-white text-[7px] font-bold tracking-wide uppercase leading-none">NEW</span>
             </div>
             <a
-              href={pathname === "/institutions" ? "#contact" : "/qr"}
-              onClick={() => trackEvent("navbar_cta_click", { destination: pathname === "/institutions" ? "contact" : "qr" })}
+              href={decorateUrl(pathname === "/institutions" ? "#contact" : "/qr")}
+              onClick={() => {
+                const destination = pathname === "/institutions" ? "contact" : "qr";
+                trackEvent("navbar_cta_click", { destination });
+                trackCTAClick(destination, { source: "navbar" });
+              }}
               className="relative group transition-all flex items-center justify-center whitespace-nowrap rounded-full will-change-transform duration-300 shadow-sm hover:shadow-md
                          h-8 text-xs pl-3 pr-9
                          md:h-[clamp(2.5rem,5vw,2.75rem)] md:text-[clamp(0.85rem,2vw,0.95rem)] md:pl-[clamp(1rem,3vw,1.5rem)] md:pr-[clamp(3rem,6vw,3.5rem)]

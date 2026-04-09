@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiInstagram, SiLinkedin, SiX, SiYoutube, SiAppstore, SiGoogleplay } from "react-icons/si";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
-import { trackEvent } from "../../lib/analytics";
+import { trackEvent, trackCTAClick } from "../../lib/analytics";
+import { decorateUrl } from "../../lib/utm";
 
 import { usePathname } from 'next/navigation';
 
@@ -104,7 +105,11 @@ const Footer = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="text-[clamp(0.7rem,1vw,0.75rem)] text-white font-semibold tracking-wider uppercase">WhatsApp</span>
-                    <a href="https://wa.me/919741591110" className="group flex items-center w-fit text-[clamp(0.85rem,1.5vw,0.95rem)] text-gray-300 no-underline transition-colors hover:text-white">
+                    <a 
+                      href={decorateUrl("https://wa.me/919741591110")} 
+                      onClick={() => trackCTAClick("whatsapp", { source: "footer" })}
+                      className="group flex items-center w-fit text-[clamp(0.85rem,1.5vw,0.95rem)] text-gray-300 no-underline transition-colors hover:text-white"
+                    >
                       +91 97415 91110
                       <div className="overflow-hidden ml-1.5 flex items-center justify-center">
                         <ArrowUpRightIcon className="w-3.5 h-3.5 -translate-x-[120%] translate-y-[120%] transition-transform duration-300 ease-out group-hover:duration-200 group-hover:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" strokeWidth={2.5} />
@@ -142,8 +147,11 @@ const Footer = () => {
           {/* Store Buttons Section */}
           <div className="flex flex-col gap-3 w-full lg:w-auto mt-8 lg:mt-0">
             <a 
-              href="/qr" 
-              onClick={() => trackEvent("footer_app_store_click")}
+              href={decorateUrl("/qr")} 
+              onClick={() => {
+                trackEvent("footer_app_store_click");
+                trackCTAClick("app_store", { source: "footer" });
+              }}
               className="group flex items-center gap-4 bg-[#404040]/80 rounded-xl p-4 border border-white/10 w-full sm:w-[220px] transition-colors duration-300 hover:bg-[#4a4a4a] hover:border-white/20"
             >
               <div className="bg-[#303030] p-2 rounded-lg">
@@ -156,8 +164,11 @@ const Footer = () => {
             </a>
 
             <a 
-              href="/qr" 
-              onClick={() => trackEvent("footer_google_play_click")}
+              href={decorateUrl("/qr")} 
+              onClick={() => {
+                trackEvent("footer_google_play_click");
+                trackCTAClick("play_store", { source: "footer" });
+              }}
               className="group flex items-center gap-4 bg-[#404040]/80 rounded-xl p-4 border border-white/10 w-full sm:w-[220px] transition-colors duration-300 hover:bg-[#4a4a4a] hover:border-white/20"
             >
               <div className="bg-[#303030] p-2 rounded-lg">

@@ -4,7 +4,8 @@ import { useRef, ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { QrCodeIcon } from "@heroicons/react/24/outline";
-import { trackEvent } from "../../lib/analytics";
+import { trackEvent, trackCTAClick } from "../../lib/analytics";
+import { decorateUrl } from "../../lib/utm";
 
 interface SecondaryButtonProps {
   href: string;
@@ -53,12 +54,15 @@ export const SecondaryButton = ({ href, text, icon: Icon = QrCodeIcon, showQrMob
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     trackEvent("secondary_button_click", { button_text: text, button_href: href });
+    trackCTAClick("secondary_button", { button_text: text, button_href: href });
     if (onClick) onClick();
   };
 
+  const decoratedHref = decorateUrl(href);
+
   return (
     <a
-      href={href}
+      href={decoratedHref}
       ref={btnRef}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}

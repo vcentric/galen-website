@@ -4,7 +4,8 @@ import { useRef, ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
-import { trackEvent } from "../../lib/analytics";
+import { trackEvent, trackCTAClick } from "../../lib/analytics";
+import { decorateUrl } from "../../lib/utm";
 
 interface PrimaryButtonProps {
   href: string;
@@ -35,19 +36,22 @@ export const PrimaryButton = ({ href, text, icon: Icon = ArrowUpRightIcon, class
   });
 
   const handleLeave = contextSafe(() => {
-    if (bgRef.current) gsap.to(bgRef.current, { scaleY: 0, duration: 0.25, ease: "power4.out", overwrite: "auto" });
-    if (textRef.current) gsap.to(textRef.current, { x: 0, color: "#ffffff", duration: 0.25, ease: "power4.out", overwrite: "auto" });
-    if (iconRef.current) gsap.to(iconRef.current, { y: 15, opacity: 0, duration: 0.2, ease: "power3.in", overwrite: "auto" });
+    if (bgRef.current) gsap.to(bgRef.current, { scaleY: 0, duration: 0.15, ease: "power4.inOut", overwrite: "auto" });
+    if (textRef.current) gsap.to(textRef.current, { x: 0, color: "#ffffff", duration: 0.15, ease: "power4.inOut", overwrite: "auto" });
+    if (iconRef.current) gsap.to(iconRef.current, { y: 15, opacity: 0, duration: 0.12, ease: "power3.in", overwrite: "auto" });
   });
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     trackEvent("primary_button_click", { button_text: text, button_href: href });
+    trackCTAClick("primary_button", { button_text: text, button_href: href });
     if (onClick) onClick();
   };
 
+  const decoratedHref = decorateUrl(href);
+
   return (
     <a
-      href={href}
+      href={decoratedHref}
       ref={btnRef}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}

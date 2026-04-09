@@ -9,6 +9,7 @@ import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
 import TrustedBy from "./TrustedBy";
 import { trackEvent, trackCTAClick } from "../../lib/analytics";
+import { decorateUrl } from "../../lib/utm";
 
 const STUDENT_PHRASES = [
   "for daily medical learning.",
@@ -226,9 +227,9 @@ const Hero = ({ audience = "students" }: HeroProps) => {
       <div className="w-full flex flex-col items-center relative z-[2]">
         
         {/* Centered Text Content pushed just slightly down from the top */}
-        <div className={`mt-7 md:mt-[clamp(2.5rem,6vh,4.5rem)] flex flex-col items-center text-center mx-auto w-full ${audience === 'institutions' ? 'max-w-[1100px]' : 'max-w-[900px]'}`}>
+        <div className={`mt-12 md:mt-[clamp(1.5rem,4vh,3rem)] flex flex-col items-center text-center mx-auto w-full ${audience === 'institutions' ? 'max-w-[1100px]' : 'max-w-[900px]'}`}>
           {/* Audience Toggle */}
-          <div className="inline-flex gap-[clamp(1.5rem,4vw,3rem)] mb-[clamp(2rem,4vw,2.5rem)] relative">
+          <div className="inline-flex gap-[clamp(2.5rem,8vw,4.5rem)] mb-[clamp(1.5rem,3vw,2.5rem)] relative">
             {(['students', 'institutions'] as const).map((aud) => (
               aud === audience ? (
                 <AudienceButton
@@ -349,11 +350,11 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             <span>Already using GalenAI?</span>
             <span className="mx-3 text-black/20">|</span>
             <a 
-              href="https://app.galenai.io" 
+              href={decorateUrl("https://app.galenai.io")} 
               ref={loginLinkRef}
               onMouseEnter={handleLoginEnter}
               onMouseLeave={handleLoginLeave}
-              onClick={() => trackCTAClick("web_app")}
+              onClick={() => trackCTAClick("web_app", { source: "hero_login" })}
               className="group relative flex items-center gap-2 text-orange font-medium transition-colors no-underline"
             >
               <span className="relative pb-0.5 font-semibold">
@@ -400,7 +401,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             <div 
               onClick={() => {
                 setIsExpanded(true);
-                trackEvent("hero_video_expand", { audience, video: "/BrandVideo.webm" });
+                trackEvent("hero_video_expand", { audience_type: audience, video_path: "/BrandVideo.webm" });
               }}
               className="group w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
             >
@@ -420,7 +421,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
             <div 
               onClick={() => {
                 setIsExpanded(true);
-                trackEvent("hero_video_expand", { audience, video: "/Insitutional Page Video Temp.webm" });
+                trackEvent("hero_video_expand", { audience_type: audience, video_path: "/Insitutional Page Video Temp.webm" });
               }}
               className="group w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
             >

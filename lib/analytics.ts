@@ -1,3 +1,5 @@
+import { getUtmParams } from "./utm";
+
 declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
@@ -5,15 +7,22 @@ declare global {
 }
 
 export const trackEvent = (eventName: string, params?: Record<string, any>) => {
-  console.log("📊 GA Event Tracked:", eventName, params || "");
+  const utms = getUtmParams();
+  const eventParams = { ...utms, ...params };
+  
+  console.log("📊 GA Event Tracked:", eventName, eventParams);
+  
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
-    window.gtag("event", eventName, params);
+    window.gtag("event", eventName, eventParams);
   }
 };
 
-export const trackCTAClick = (destination: "app_store" | "play_store" | "web_app" | "final_cta") => {
+export const trackCTAClick = (destination: string, extraParams?: Record<string, any>) => {
   console.log("🚀 GA CTA Click Tracked:", destination);
-  if (typeof window === "undefined") return; // SSR guard
-  window.gtag?.("event", "cta_click", { destination });
+  
+  trackEvent("cta_click", { 
+    destination,
+    ...extraParams 
+  });
 };
 
