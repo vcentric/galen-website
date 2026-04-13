@@ -3,7 +3,13 @@
 import React, { useState, useRef, useEffect, ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { QrCodeIcon, ArrowUpRightIcon, ArrowRightIcon, XMarkIcon, ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
+import {
+  QrCodeIcon,
+  ArrowUpRightIcon,
+  ArrowRightIcon,
+  XMarkIcon,
+  ArrowsPointingOutIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
@@ -24,20 +30,28 @@ interface AudienceButtonProps {
   onClick?: () => void;
 }
 
-const AudienceButton = ({ audience, isActive, href, onClick }: AudienceButtonProps) => {
+const AudienceButton = ({
+  audience,
+  isActive,
+  href,
+  onClick,
+}: AudienceButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
 
   const { contextSafe } = useGSAP({ scope: buttonRef });
 
-  useGSAP(() => {
-    gsap.to(pathRef.current, {
-      strokeDashoffset: isActive ? 0 : 1,
-      duration: 0.25,
-      ease: "power3.out",
-      overwrite: "auto",
-    });
-  }, { scope: buttonRef, dependencies: [isActive] });
+  useGSAP(
+    () => {
+      gsap.to(pathRef.current, {
+        strokeDashoffset: isActive ? 0 : 1,
+        duration: 0.25,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+    },
+    { scope: buttonRef, dependencies: [isActive] },
+  );
 
   const handleMouseEnter = contextSafe(() => {
     if (!isActive) {
@@ -100,7 +114,7 @@ const AudienceButton = ({ audience, isActive, href, onClick }: AudienceButtonPro
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         className={className}
-        style={{ textDecoration: 'none' }}
+        style={{ textDecoration: "none" }}
       >
         {content}
       </Link>
@@ -119,9 +133,6 @@ const AudienceButton = ({ audience, isActive, href, onClick }: AudienceButtonPro
     </button>
   );
 };
-
-
-
 
 interface HeroProps {
   audience?: "students" | "institutions";
@@ -148,40 +159,47 @@ const Hero = ({ audience = "students" }: HeroProps) => {
 
   const phrases = STUDENT_PHRASES;
 
-  useGSAP(() => {
-    if (audience === "institutions") return;
+  useGSAP(
+    () => {
+      if (audience === "institutions") return;
 
-    const container = textContainerRef.current;
-    if (!container) return;
+      const container = textContainerRef.current;
+      if (!container) return;
 
-    const chars = gsap.utils.toArray(container.querySelectorAll('.char-span'));
-    
-    gsap.set(chars, { display: "none" });
+      const chars = gsap.utils.toArray(
+        container.querySelectorAll(".char-span"),
+      );
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setTimeout(() => {
-          if (phrases.length > 1) {
-            setTextIndex((prev) => (prev + 1) % phrases.length);
-          }
-        }, 1500);
-      }
-    });
+      gsap.set(chars, { display: "none" });
 
-    if (chars.length > 0) {
-      tl.to(chars, {
-        display: "inline-block",
-        duration: 0.001,
-        stagger: 0.04,
-        ease: "none"
+      const tl = gsap.timeline({
+        onComplete: () => {
+          setTimeout(() => {
+            if (phrases.length > 1) {
+              setTextIndex((prev) => (prev + 1) % phrases.length);
+            }
+          }, 1500);
+        },
       });
-    }
 
-    return () => {
-      tl.kill();
-    };
-  }, { dependencies: [textIndex, audience, phrases.length], scope: textContainerRef });
+      if (chars.length > 0) {
+        tl.to(chars, {
+          display: "inline-block",
+          duration: 0.001,
+          stagger: 0.04,
+          ease: "none",
+        });
+      }
 
+      return () => {
+        tl.kill();
+      };
+    },
+    {
+      dependencies: [textIndex, audience, phrases.length],
+      scope: textContainerRef,
+    },
+  );
 
   const loginLinkRef = useRef<HTMLAnchorElement>(null);
   const loginPathRef = useRef<SVGPathElement>(null);
@@ -189,37 +207,40 @@ const Hero = ({ audience = "students" }: HeroProps) => {
   const { contextSafe: contextSafeLogin } = useGSAP({ scope: loginLinkRef });
 
   const handleLoginEnter = contextSafeLogin(() => {
-    if (loginPathRef.current) gsap.to(loginPathRef.current, {
-      strokeDashoffset: 0,
-      duration: 0.25,
-      ease: "power3.out",
-      overwrite: "auto",
-    });
+    if (loginPathRef.current)
+      gsap.to(loginPathRef.current, {
+        strokeDashoffset: 0,
+        duration: 0.25,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
   });
 
   const handleLoginLeave = contextSafeLogin(() => {
-    if (loginPathRef.current) gsap.to(loginPathRef.current, {
-      strokeDashoffset: 1,
-      duration: 0.25,
-      ease: "power3.in",
-      overwrite: "auto",
-    });
+    if (loginPathRef.current)
+      gsap.to(loginPathRef.current, {
+        strokeDashoffset: 1,
+        duration: 0.25,
+        ease: "power3.in",
+        overwrite: "auto",
+      });
   });
 
-  const tags = audience === "students" 
-    ? ["NEET PG", "INI-CET", "USMLE", "PLAB", "FMGE", "NEXT", "EMREE"] 
-    : ["For Medical Institutions"];
-  
-  const descriptionText = audience === "students"
-    ? "GalenAI is your AI medical mentor that explains, tests, and guides you, so you spend less time planning and more time understanding."
-    : "An AI-powered medical education platform built for CBME, connecting student learning, faculty workflows, and institutional insights in one unified system.";
+  const tags =
+    audience === "students"
+      ? ["NEET PG", "INI-CET", "USMLE", "PLAB", "FMGE", "NEXT", "EMREE"]
+      : ["For Medical Institutions"];
 
-    const sectionClass = `w-full pt-[5rem] md:pt-[clamp(5.5rem,11vh,7.5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex flex-col overflow-visible relative ${isExpanded ? "z-[10000]" : "z-auto"}`;
+  const descriptionText =
+    audience === "students"
+      ? "GalenAI is your AI medical mentor that explains, tests, and guides you, so you spend less time planning and more time understanding."
+      : "An AI-powered medical education platform built for CBME, connecting student learning, faculty workflows, and institutional insights in one unified system.";
+
+  const sectionClass = `w-full pt-[5rem] md:pt-[clamp(5.5rem,11vh,7.5rem)] px-[clamp(2rem,6vw,4rem)] bg-transparent flex flex-col overflow-visible relative ${isExpanded ? "z-[10000]" : "z-auto"}`;
 
   const STU_YT_ID = "j3lw8EERc18";
-  const currentVideoSrc = audience === "students" 
-    ? STU_YT_ID 
-    : "/Institutions.mp4";
+  const currentVideoSrc =
+    audience === "students" ? STU_YT_ID : "/Institutions.mp4";
 
   const isYouTube = (src: string) => !src.startsWith("/") && !src.includes(".");
 
@@ -227,37 +248,38 @@ const Hero = ({ audience = "students" }: HeroProps) => {
     <section className={sectionClass}>
       {/* Viewport Height Container for Text + TrustedBy */}
       <div className="w-full flex flex-col items-center relative z-[2]">
-        
         {/* Centered Text Content pushed just slightly down from the top */}
-        <div className={`mt-12 md:mt-[clamp(1.5rem,4vh,3rem)] flex flex-col items-center text-center mx-auto w-full ${audience === 'institutions' ? 'max-w-[1100px]' : 'max-w-[900px]'}`}>
+        <div
+          className={`mt-12 md:mt-[clamp(1.5rem,4vh,3rem)] flex flex-col items-center text-center mx-auto w-full ${audience === "institutions" ? "max-w-[1100px]" : "max-w-[900px]"}`}
+        >
           {/* Audience Toggle */}
           <div className="inline-flex gap-[clamp(2.5rem,8vw,4.5rem)] mb-[clamp(1.5rem,3vw,2.5rem)] relative">
-            {(['students', 'institutions'] as const).map((aud) => (
+            {(["students", "institutions"] as const).map((aud) =>
               aud === audience ? (
-                <AudienceButton
-                  key={aud}
-                  audience={aud}
-                  isActive={true}
-                />
+                <AudienceButton key={aud} audience={aud} isActive={true} />
               ) : (
                 <AudienceButton
                   key={aud}
                   audience={aud}
                   isActive={false}
-                  href={aud === 'students' ? '/' : '/institutions'}
+                  href={aud === "students" ? "/" : "/institutions"}
                 />
-              )
-            ))}
+              ),
+            )}
           </div>
           {/* Context Tags */}
           {audience === "institutions" && (
-            <div className="flex flex-wrap justify-center items-center gap-[clamp(0.25rem,1vw,0.6rem)] mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
+            <div
+              className="flex flex-wrap justify-center items-center gap-[clamp(0.25rem,1vw,0.6rem)] mb-[clamp(1rem,3vw,1.5rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0"
+              style={{ animationDelay: "0.2s" }}
+            >
               {tags.map((tag) => (
                 <div
                   key={tag}
                   className="flex items-center px-[clamp(0.5rem,1.4vw,0.75rem)] py-[clamp(0.15rem,0.4vw,0.25rem)] rounded-full bg-white/70 border-orange/40 border backdrop-blur-md cursor-default transition-all duration-300 hover:border-orange/60"
-                  style={{ 
-                    boxShadow: 'inset 0 1.5px 3px rgba(235, 96, 45, 0.3), 0 1px 2px rgba(0, 0, 0, 0.03)'
+                  style={{
+                    boxShadow:
+                      "inset 0 1.5px 3px rgba(235, 96, 45, 0.3), 0 1px 2px rgba(0, 0, 0, 0.03)",
                   }}
                 >
                   <span className="text-[clamp(0.55rem,0.95vw,0.65rem)] font-bold text-orange tracking-[0.03em] uppercase">
@@ -273,90 +295,156 @@ const Hero = ({ audience = "students" }: HeroProps) => {
               <>
                 Your personal AI companion <br />
                 <div className="flex items-center justify-center text-orange italic">
-                <div 
-                    className="flex flex-col md:flex-row items-center md:items-baseline w-full md:w-auto" 
+                  <div
+                    className="flex flex-col md:flex-row items-center md:items-baseline w-full md:w-auto"
                     ref={textContainerRef}
-                >
+                  >
                     {(() => {
-                    const words = phrases[textIndex].split(" ");
-                    const lastWord = words[words.length - 1];
-                    const basePart = words.slice(0, -1).join(" ") + (words.length > 1 ? " " : "");
-                    
-                    return (
+                      const words = phrases[textIndex].split(" ");
+                      const lastWord = words[words.length - 1];
+                      const basePart =
+                        words.slice(0, -1).join(" ") +
+                        (words.length > 1 ? " " : "");
+
+                      return (
                         <>
-                        <div className="flex items-center">
-                            <span className="mr-3 whitespace-nowrap hidden md:inline">&gt;</span>
+                          <div className="flex items-center">
+                            <span className="mr-3 whitespace-nowrap hidden md:inline">
+                              &gt;
+                            </span>
                             <span className="whitespace-pre">
-                            {basePart.split("").map((char, index) => (
-                                <span key={`base-${textIndex}-${index}`} className="char-span whitespace-pre">
-                                {char}
+                              {basePart.split("").map((char, index) => (
+                                <span
+                                  key={`base-${textIndex}-${index}`}
+                                  className="char-span whitespace-pre"
+                                >
+                                  {char}
                                 </span>
-                            ))}
+                              ))}
                             </span>
-                        </div>
-                        <div className="flex justify-center w-full md:w-auto">
+                          </div>
+                          <div className="flex justify-center w-full md:w-auto">
                             <span className="whitespace-nowrap">
-                            {lastWord.split("").map((char, index) => (
-                                <span key={`last-${textIndex}-${index}`} className="char-span whitespace-pre">
-                                {char}
+                              {lastWord.split("").map((char, index) => (
+                                <span
+                                  key={`last-${textIndex}-${index}`}
+                                  className="char-span whitespace-pre"
+                                >
+                                  {char}
                                 </span>
-                            ))}
-                            <span className="font-thin text-orange animate-[blink_1s_step-end_infinite] ml-1 not-italic">
+                              ))}
+                              <span className="font-thin text-orange animate-[blink_1s_step-end_infinite] ml-1 not-italic">
                                 |
+                              </span>
                             </span>
-                            </span>
-                        </div>
+                          </div>
                         </>
-                    );
+                      );
                     })()}
-                </div>
+                  </div>
                 </div>
               </>
             ) : (
-                <>
-                  The Medical Education <br className="hidden md:block" /> 
-                  <span className="text-orange">Operating System</span> for <br className="md:hidden" />
-                  <span className="text-orange italic block md:inline mt-1 md:mt-0">CBME</span>
-                </>
+              <>
+                The Medical Education <br className="hidden md:block" />
+                <span className="text-orange">Operating System</span> for{" "}
+                <br className="md:hidden" />
+                <span className="text-orange italic block md:inline mt-1 md:mt-0">
+                  CBME
+                </span>
+              </>
             )}
           </h1>
 
-          <p className={audience === "institutions" ? "text-[clamp(0.85rem,1.5vw,1rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[850px] mb-[clamp(2.5rem,4vw,3rem)] mx-auto" : "text-[clamp(0.95rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2.5rem,4vw,3rem)] mx-auto"}>
+          <p
+            className={
+              audience === "institutions"
+                ? "text-[clamp(0.85rem,1.5vw,1rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[850px] mb-[clamp(2.5rem,4vw,3rem)] mx-auto"
+                : "text-[clamp(0.95rem,2vw,1.15rem)] leading-[1.6] text-[rgba(46,46,46,0.7)] max-w-[600px] mb-[clamp(2.5rem,4vw,3rem)] mx-auto"
+            }
+          >
             {descriptionText}
           </p>
 
           {audience === "institutions" && (
-            <div className="flex justify-center mb-[clamp(2rem,1vw,2rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.2s' }}>
+            <div
+              className="flex justify-center mb-[clamp(2rem,1vw,2rem)] animate-[fadeIn_0.8s_ease-out_forwards] opacity-0"
+              style={{ animationDelay: "0.2s" }}
+            >
               <span className="relative flex items-center justify-center text-[12px] sm:text-[13px] text-dark/60 font-medium tracking-[0.02em] leading-none before:content-[''] before:block before:w-6 before:h-[1px] before:bg-orange/40 before:mr-3 after:content-[''] after:block after:w-6 after:h-[1px] after:bg-orange/40 after:ml-3">
                 Built for Competency-Based Medical Education (CBME)
               </span>
             </div>
           )}
 
-          <div className={`flex items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-4 ${audience === 'students' ? 'flex-col md:grid md:grid-cols-2 w-full md:w-auto' : 'flex-col md:flex-row w-full md:w-auto md:justify-center'}`}>
+          <div
+            className={`flex items-center gap-[clamp(0.8rem,2vw,1.25rem)] mb-4 ${audience === "students" ? "flex-col md:grid md:grid-cols-2 w-full md:w-auto" : "flex-col md:flex-row w-full md:w-auto md:justify-center"}`}
+          >
             {audience === "students" ? (
               <>
-                <PrimaryButton href="/qr" text="Try GalenAI" icon={ArrowUpRightIcon} className="w-full" />
-                <SecondaryButton href="/qr" text="Download Now For Free" icon={QrCodeIcon} showQrMobile={true} className="w-full" />
+                <PrimaryButton
+                  href="/qr"
+                  text="Try GalenAI"
+                  icon={ArrowUpRightIcon}
+                  className="w-full"
+                  ctaId="try_now"
+                  extraParams={{ source: "hero" }}
+                />
+                <SecondaryButton
+                  href="/qr"
+                  text="Download Now For Free"
+                  icon={QrCodeIcon}
+                  showQrMobile={true}
+                  className="w-full"
+                  ctaId="download_now"
+                  extraParams={{ source: "hero" }}
+                />
               </>
             ) : (
               <>
-                <PrimaryButton href="#contact" text="Request Institutional Demo" icon={ArrowUpRightIcon} className="w-full md:w-auto !px-[clamp(1.2rem,3vw,2rem)]" />
-                <SecondaryButton href="#overview" text="View System Overview" icon={ArrowRightIcon} showQrMobile={false} className="w-full md:w-auto !px-[clamp(1.2rem,3vw,2rem)]" />
+                <PrimaryButton
+                  href="#contact"
+                  text="Request Institutional Demo"
+                  icon={ArrowUpRightIcon}
+                  className="w-full md:w-auto !px-[clamp(1.2rem,3vw,2rem)]"
+                  ctaId="institutional_demo"
+                  extraParams={{ source: "institutions" }}
+                />
+                <SecondaryButton
+                  href="#overview"
+                  text="View System Overview"
+                  icon={ArrowRightIcon}
+                  showQrMobile={false}
+                  className="w-full md:w-auto !px-[clamp(1.2rem,3vw,2rem)]"
+                  ctaId="system_overview"
+                  extraParams={{ source: "hero" }}
+                />
               </>
             )}
           </div>
 
-          <div className="relative flex items-center justify-center text-[clamp(0.85rem,1.5vw,0.95rem)] text-dark/70 animate-[fadeIn_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.3s' }}>
-            <div className="absolute w-[150%] h-[200%] max-w-[400px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,1)_20%,rgba(255,255,255,0.8)_50%,transparent_80%)] pointer-events-none" style={{ zIndex: -1 }}></div>
+          <div
+            className="relative flex items-center justify-center text-[clamp(0.85rem,1.5vw,0.95rem)] text-dark/70 animate-[fadeIn_0.8s_ease-out_forwards] opacity-0"
+            style={{ animationDelay: "0.3s" }}
+          >
+            <div
+              className="absolute w-[150%] h-[200%] max-w-[400px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,1)_20%,rgba(255,255,255,0.8)_50%,transparent_80%)] pointer-events-none"
+              style={{ zIndex: -1 }}
+            ></div>
             <span>Already using GalenAI?</span>
             <span className="mx-3 text-black/20">|</span>
-            <a 
-              href={decorateUrl("https://app.galenai.io")} 
+            <a
+              href={decorateUrl("https://app.galenai.io")}
               ref={loginLinkRef}
               onMouseEnter={handleLoginEnter}
               onMouseLeave={handleLoginLeave}
-              onClick={() => trackCTAClick("web_app", { source: "hero_login" })}
+              onClick={() =>
+                trackCTAClick("web_app", {
+                  source: "hero_login",
+                  button_type: "link",
+                  button_text: "Login here",
+                })
+              }
               className="group relative flex items-center gap-2 text-orange font-medium transition-colors no-underline"
             >
               <span className="relative pb-0.5 font-semibold">
@@ -382,7 +470,10 @@ const Hero = ({ audience = "students" }: HeroProps) => {
                 </svg>
               </span>
               <div className="flex items-center justify-center w-[1.3rem] h-[1.3rem] rounded-full bg-orange/10 transition-colors group-hover:bg-orange/20">
-                <ArrowRightIcon className="w-3 h-3 text-orange" strokeWidth={2.5} />
+                <ArrowRightIcon
+                  className="w-3 h-3 text-orange"
+                  strokeWidth={2.5}
+                />
               </div>
             </a>
           </div>
@@ -396,53 +487,57 @@ const Hero = ({ audience = "students" }: HeroProps) => {
       </div>
 
       {/* Second Screen / Scroll Container for Video */}
-      <div className={`w-full flex flex-col items-center relative z-[2] pb-16 ${audience === 'institutions' ? 'mt-[6vh] md:mt-[8vh]' : 'mt-[clamp(2rem,6vh,4rem)] md:mt-[8vh]'}`}>
-
+      <div
+        className={`w-full flex flex-col items-center relative z-[2] pb-16 ${audience === "institutions" ? "mt-[6vh] md:mt-[8vh]" : "mt-[clamp(2rem,6vh,4rem)] md:mt-[8vh]"}`}
+      >
         {/* Huge Video Below or Visual */}
-        <div 
+        <div
           onClick={() => {
             setIsExpanded(true);
-            trackEvent("hero_video_expand", { 
-              audience_type: audience, 
-              video_path: currentVideoSrc 
+            trackEvent("hero_video_expand", {
+              audience_type: audience,
+              video_path: currentVideoSrc,
             });
           }}
           className="group w-full h-auto rounded-[1rem] overflow-hidden max-w-[1240px] border border-black/5 shadow-sm relative bg-transparent cursor-pointer"
         >
-            <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-black/50 backdrop-blur-md rounded-full w-8 h-8 md:w-9 md:h-9 transition-all duration-500 z-10 group-hover:bg-black/70 flex items-center justify-center pointer-events-none shadow-[inset_0_0_8px_rgba(255,255,255,0.2)]">
-              <ArrowsPointingOutIcon className="w-3.5 h-3.5 md:w-[1.1rem] md:h-[1.1rem] text-white" strokeWidth={1.5} />
-            </div>
-            
-            {isYouTube(currentVideoSrc) ? (
-              <div className="w-full aspect-video pointer-events-none">
-                <iframe
-                  width="1920"
-                  height="1080"
-                  src={`https://www.youtube.com/embed/${currentVideoSrc}?autoplay=1&mute=1&loop=1&playlist=${currentVideoSrc}&controls=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
-                  className="w-full h-full border-none"
-                  allow="autoplay; encrypted-media"
-                />
-              </div>
-            ) : (
-              <video 
-                src={currentVideoSrc}
-                autoPlay 
-                muted 
-                loop 
-                playsInline
-                className="w-full h-auto block"
+          <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-black/50 backdrop-blur-md rounded-full w-8 h-8 md:w-9 md:h-9 transition-all duration-500 z-10 group-hover:bg-black/70 flex items-center justify-center pointer-events-none shadow-[inset_0_0_8px_rgba(255,255,255,0.2)]">
+            <ArrowsPointingOutIcon
+              className="w-3.5 h-3.5 md:w-[1.1rem] md:h-[1.1rem] text-white"
+              strokeWidth={1.5}
+            />
+          </div>
+
+          {isYouTube(currentVideoSrc) ? (
+            <div className="w-full aspect-video pointer-events-none">
+              <iframe
+                width="1920"
+                height="1080"
+                src={`https://www.youtube.com/embed/${currentVideoSrc}?autoplay=1&mute=1&loop=1&playlist=${currentVideoSrc}&controls=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}`}
+                className="w-full h-full border-none"
+                allow="autoplay; encrypted-media"
               />
-            )}
+            </div>
+          ) : (
+            <video
+              src={currentVideoSrc}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-auto block"
+            />
+          )}
         </div>
 
         {/* Video Lightbox / Modal */}
         {isExpanded && (
-          <div 
+          <div
             className="fixed inset-0 z-[999] flex items-center justify-center bg-black transition-all duration-500 text-white"
             onClick={() => setIsExpanded(false)}
           >
             {/* Close Button */}
-            <button 
+            <button
               className="absolute top-8 right-8 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 group z-[1000]"
               onClick={(e) => {
                 e.stopPropagation();
@@ -452,7 +547,7 @@ const Hero = ({ audience = "students" }: HeroProps) => {
               <XMarkIcon className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300" />
             </button>
 
-            <div 
+            <div
               className="w-full max-w-[1280px] px-4 md:px-8 relative"
               onClick={(e) => e.stopPropagation()}
             >
@@ -461,14 +556,14 @@ const Hero = ({ audience = "students" }: HeroProps) => {
                   <iframe
                     width="1920"
                     height="1080"
-                    src={`https://www.youtube.com/embed/${currentVideoSrc}?autoplay=1&rel=0&modestbranding=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
+                    src={`https://www.youtube.com/embed/${currentVideoSrc}?autoplay=1&rel=0&modestbranding=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}`}
                     className="w-full h-full border-none"
                     allow="autoplay; encrypted-media; fullscreen"
                   />
                 ) : (
-                  <video 
+                  <video
                     src={currentVideoSrc}
-                    autoPlay 
+                    autoPlay
                     controls
                     playsInline
                     className="w-full h-full"

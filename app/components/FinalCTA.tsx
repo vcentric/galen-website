@@ -21,7 +21,7 @@ export const FinalCTA = () => {
 
         {/* Hero-style Primary Button */}
         <div className="flex justify-center w-full md:w-auto">
-          <PrimaryButton href="/qr" text="Try GalenAI Today" />
+          <PrimaryButton href="/qr" text="Try GalenAI Today" ctaId="try_now" extraParams={{ source: "final_cta" }} />
         </div>
 
       </div>

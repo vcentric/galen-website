@@ -103,7 +103,8 @@ const FAQ = () => {
               href="https://wa.me/919741591110" 
               text="Chat on WhatsApp"
               className="!bg-[#2e2e2e] !min-w-[160px] sm:!min-w-[180px] !py-2.5 !px-6 !text-[0.85rem]"
-              onClick={() => trackCTAClick("whatsapp", { source: "faq" })}
+              ctaId="whatsapp"
+              extraParams={{ source: "faq" }}
             />
           </div>
         </div>
