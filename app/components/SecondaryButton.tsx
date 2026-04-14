@@ -138,11 +138,11 @@ export const SecondaryButton = ({
           ref={qrPopoverRef}
           className="hidden md:flex absolute bottom-[calc(100%-10rem)] left-[25rem] -translate-x-1/2 w-[220px] p-4 bg-white rounded-2xl border border-black/5 flex-col items-center gap-3 z-50 pointer-events-none shadow-sm"
         >
-          <div className="w-full aspect-square rounded-xl overflow-hidden bg-orange/5 p-2 border border-orange/10">
+          <div className="w-full aspect-square rounded-xl overflow-hidden p-0 border border-orange/10">
             <img
-              src="/qrnew.png"
+              src="/galenai_qr.png"
               alt="Scan to Download"
-              className="w-full h-full object-contain mix-blend-multiply"
+              className="w-full h-full object-contain mix-blend-multiply scale-110"
             />
           </div>
           <div className="flex flex-col items-center gap-1">

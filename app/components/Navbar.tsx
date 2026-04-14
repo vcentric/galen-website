@@ -34,6 +34,7 @@ const AnimatedNavLink = ({
 }: AnimatedNavLinkProps) => {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const { contextSafe } = useGSAP({ scope: linkRef });
 
   const handleMouseEnter = contextSafe(() => {
@@ -41,6 +42,11 @@ const AnimatedNavLink = ({
       strokeDashoffset: 0,
       duration: 0.25,
       ease: "power3.out",
+      overwrite: "auto",
+    });
+    gsap.to(svgRef.current, {
+      opacity: 1,
+      duration: 0.2,
       overwrite: "auto",
     });
   });
@@ -52,14 +58,20 @@ const AnimatedNavLink = ({
       ease: "power3.in",
       overwrite: "auto",
     });
+    gsap.to(svgRef.current, {
+      opacity: 0,
+      duration: 0.2,
+      overwrite: "auto",
+    });
   });
 
   const content = (
     <>
       {children}
       <svg
+        ref={svgRef}
         viewBox="0 0 100 10"
-        className="absolute left-0 bottom-[-4px] w-full h-[8px] pointer-events-none"
+        className="absolute left-0 bottom-[-4px] w-full h-[8px] pointer-events-none opacity-0"
         preserveAspectRatio="none"
       >
         <path
