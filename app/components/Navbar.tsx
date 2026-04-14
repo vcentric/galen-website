@@ -349,7 +349,7 @@ const Navbar = () => {
             {/* House MD game button — desktop only */}
             <div className="hidden md:inline-flex items-center gap-2 whitespace-nowrap">
               <AnimatedNavLink
-                href="https://itsnotlupusgalenai.netlify.app/"
+                href="https://house.galenai.io"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() =>
@@ -450,7 +450,7 @@ const Navbar = () => {
           <nav className="flex flex-col gap-[clamp(1.25rem,2.5vw,1.75rem)]">
             <div className="mobile-nav-item inline-flex items-center gap-2">
               <AnimatedNavLink
-                href="https://itsnotlupusgalenai.netlify.app/"
+                href="https://house.galenai.io"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {
