@@ -192,7 +192,7 @@ const Footer = () => {
                     {
                       label: "YouTube",
                       icon: <SiYoutube className="w-[18px] h-[18px]" />,
-                      href: "#",
+                      href: "https://www.youtube.com/@GalenAI-2025",
                     },
                   ].map((social) => (
                     <a

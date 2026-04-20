@@ -69,7 +69,8 @@ export default function PrivacyPage() {
 
           <h3 className="text-lg font-medium mt-6 mb-2 text-dark">1.4 Technical and Log Data</h3>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Device identifiers, IP address, browser and operating system details, login timestamps, usage patterns, and error logs.</li>
+            <li>Device identifiers, browser and operating system details, login timestamps, usage patterns, and error logs.</li>
+            <li>Raw IP addresses are temporarily processed and immediately hashed for installation attribution purposes (see Section 1.6); they are not stored indefinitely as log data.</li>
           </ul>
 
           <h3 className="text-lg font-medium mt-6 mb-2 text-dark">1.5 Third-Party or Integrated Data</h3>
@@ -77,10 +78,36 @@ export default function PrivacyPage() {
             <li>Information provided by institutional partners or integrated learning management systems, limited to academic and access-related information.</li>
           </ul>
 
+          <h3 className="text-lg font-medium mt-6 mb-2 text-dark">1.6 Installation Attribution Data</h3>
+          <p>
+            When you tap an advertisement for GalenAI and subsequently install the app, we measure which advertising campaign led to your installation. This processing is conducted solely to assess campaign effectiveness and allocate our marketing budget responsibly. We do not use this data to build user profiles or serve behavioural advertising.
+          </p>
+          <p className="mt-4 mb-2 font-medium">What we collect:</p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>Campaign parameters from the advertisement link clicked (e.g., utm_source, utm_medium, utm_campaign), which describe the campaign, not you.</li>
+            <li>A one-way cryptographic hash of your device&apos;s network (IP) address — used only on iOS to match your click to your install. The raw IP address is never stored by GalenAI.</li>
+            <li>Device type and operating system version (e.g., &quot;iPhone, iOS 18.2&quot;), used to improve match accuracy where multiple users share a network.</li>
+            <li>Play Install Referrer string (Android only), provided by Google Play upon installation, containing the campaign parameters originally embedded in our advertisement link.</li>
+            <li>A referral code, only if voluntarily entered during onboarding.</li>
+          </ul>
+          <p className="mt-4">
+            <span className="font-medium">What we do not collect:</span> We do not access your device&apos;s advertising identifier (IDFA on iOS or AAID on Android), store your raw IP address, track you across other apps or websites, build a device fingerprint, or share this data with any third party.
+          </p>
+          <p className="mt-4">
+            <span className="font-medium">Retention:</span> Unmatched advertisement click records are deleted within 72 hours. Upon a successful match, the IP hash is immediately deleted; only campaign metadata (source, campaign name, medium) is retained with your account and deleted upon account deletion.
+          </p>
+          <p className="mt-4">
+            <span className="font-medium">Legal basis:</span> We rely on your consent, provided when you accept our Terms &amp; Conditions during onboarding. You may opt out by installing the app directly from the app store (without clicking an advertisement link), or by deleting your account at any time.
+          </p>
+          <p className="mt-4">
+            This processing complies with the Digital Personal Data Protection Act, 2023 (India) and, where applicable, the General Data Protection Regulation (GDPR).
+          </p>
+
           <h2 className="text-xl font-semibold mt-10 mb-4 text-dark">2. Purpose and Basis of Processing</h2>
           <p>GalenAI processes personal and institutional data only for the following purposes:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li><strong>Service Delivery:</strong> To provide, operate, and maintain the Services, including account provisioning, personalised learning pathways, multilingual support, and institutional reporting.</li>
+            <li><strong>Marketing Attribution:</strong> To assess advertising campaign effectiveness without profiling users, as outlined in Section 1.6.</li>
             <li><strong>Improvement and Innovation:</strong> To enhance platform features, improve AI models (using de-identified data), and conduct product research and analytics.</li>
             <li><strong>Compliance and Security:</strong> To ensure lawful use, protect against fraud or unauthorised access, and comply with applicable laws and regulatory requirements.</li>
             <li><strong>Support and Communication:</strong> To respond to support requests, notify about system updates, and share service-related communications.</li>
@@ -89,7 +116,7 @@ export default function PrivacyPage() {
           <p>Processing is carried out under contractual necessity, compliance with law, and legitimate business interests as defined by applicable Indian regulations.</p>
 
           <h2 className="text-xl font-semibold mt-10 mb-4 text-dark">3. Data Sharing and Disclosure</h2>
-          <p>GalenAI does not sell or monetise Customer Data. Data may be disclosed only in the following situations:</p>
+          <p>GalenAI does not sell or monetise Customer Data. We also do not share data (including Installation Attribution Data, see Section 1.6) with advertising networks or third parties. Data may be disclosed only in the following situations:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li><strong>Within the Institution:</strong> Certain usage or performance data may be made available to the subscribing institution for academic and administrative purposes.</li>
             <li><strong>Service Providers:</strong> Third-party vendors providing hosting, cloud storage, payment processing, analytics, or customer support. These entities are bound by confidentiality and data protection obligations equivalent to those of GalenAI.</li>
@@ -111,6 +138,9 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-semibold mt-10 mb-4 text-dark">5. Data Retention and Deletion</h2>
           <p>GalenAI retains Customer Data for the duration of the active subscription. Following termination or expiry of the Agreement, Customer Data will remain accessible for retrieval by the User for up to fifteen (15) days at no additional charge.</p>
           <p>After this period, GalenAI may continue to retain User Data indefinitely for archival, compliance, backup, and service-improvement purposes, in accordance with applicable data protection and privacy laws. Backups maintained for disaster recovery shall also be retained under the same framework.</p>
+          <p className="mt-4">
+            <span className="font-medium">Exceptions to indefinite retention:</span> Campaign metadata and unmatched advertisement click records described in Section 1.6 are subject to specific deletion rules and are permanently deleted when you delete your account or within 72 hours, respectively.
+          </p>
 
           <h2 className="text-xl font-semibold mt-10 mb-4 text-dark">6. Rights of Customers and Users</h2>
           <p>Subject to applicable law, Customers and Authorised Users have the right to:</p>
