@@ -240,11 +240,16 @@ const Navbar = () => {
           ? { label: "Home", href: "/" }
           : { label: "Features", href: "#features" },
         { label: "Team", href: "/team" },
+        { label: "Articles", href: "/blog" },
         { label: "FAQ's", href: "/#faq" },
         { label: "Contact", href: "#contact" },
       ];
 
-  if (pathname === "/terms" || pathname === "/privacy") {
+  if (
+    pathname === "/terms" ||
+    pathname === "/privacy" ||
+    pathname.startsWith("/keystatic")
+  ) {
     return null;
   }
 

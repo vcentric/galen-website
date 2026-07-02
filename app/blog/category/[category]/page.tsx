@@ -1,16 +1,27 @@
-import { getAllCategories, getCategorySlug, getCategoryFromSlug } from "@/lib/blogUtils";
+import { getAllPostsMeta } from "@/lib/posts";
+import { BLOG_CATEGORIES } from "@/content/categories";
+import { getCategorySlug, getCategoryFromSlug } from "@/lib/blogFilters";
 import BlogIndexContent from "../../BlogIndexContent";
 
 export function generateStaticParams() {
-  const categories = getAllCategories();
-  return categories.map((cat) => ({ category: getCategorySlug(cat) }));
+  return BLOG_CATEGORIES.map((cat) => ({ category: getCategorySlug(cat) }));
 }
 
-export default function BlogCategoryPage({
+export default async function BlogCategoryPage({
   params,
 }: {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }) {
-  const categoryName = getCategoryFromSlug(params.category);
-  return <BlogIndexContent initialCategory={categoryName || "All"} />;
+  const { category } = await params;
+  const categoryName = getCategoryFromSlug(category, BLOG_CATEGORIES);
+  const posts = await getAllPostsMeta();
+  const editorsChoice = posts.filter((post) => post.isEditorsChoice).slice(0, 2);
+
+  return (
+    <BlogIndexContent
+      posts={posts}
+      editorsChoice={editorsChoice}
+      initialCategory={categoryName || "All"}
+    />
+  );
 }

@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeftIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
-import { getPostBySlug, getRelatedPosts, formatDate } from "@/lib/blogUtils";
+import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { formatDate, type PostMeta } from "@/lib/blogFilters";
 import BlogCard from "../../components/blog/BlogCard";
 
 interface TOCItem {
@@ -13,21 +12,26 @@ interface TOCItem {
   level: string;
 }
 
-export default function BlogPostClient() {
-  const params = useParams();
-  const slug = params.slug as string;
+interface BlogPostClientProps {
+  post: PostMeta;
+  contentHtml: string;
+  relatedPosts: PostMeta[];
+}
+
+export default function BlogPostClient({
+  post,
+  contentHtml,
+  relatedPosts,
+}: BlogPostClientProps) {
   const [activeHeading, setActiveHeading] = useState("");
-  const post = getPostBySlug(slug);
 
   useEffect(() => {
-    if (post) {
-      const content = document.querySelector(".blog-content");
-      if (content) {
-        const headings = content.querySelectorAll("h2, h3");
-        headings.forEach((heading, index) => {
-          heading.id = `heading-${index}`;
-        });
-      }
+    const content = document.querySelector(".blog-content");
+    if (content) {
+      const headings = content.querySelectorAll("h2, h3");
+      headings.forEach((heading, index) => {
+        heading.id = `heading-${index}`;
+      });
     }
 
     const handleScroll = () => {
@@ -44,24 +48,7 @@ export default function BlogPostClient() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [post]);
-
-  if (!post) {
-    return (
-      <div className="min-h-screen bg-bg-primary flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="font-primary text-2xl font-bold text-dark mb-4">
-            Post not found
-          </h2>
-          <Link href="/blog" className="text-orange font-bold flex items-center gap-2 justify-center no-underline hover:underline">
-            <ArrowLeftIcon className="w-4 h-4" /> Back to blog
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  const relatedPosts = getRelatedPosts(post, 3);
+  }, [contentHtml]);
 
   const handleShare = (platform: string) => {
     const url = typeof window !== "undefined" ? window.location.href : "";
@@ -84,7 +71,7 @@ export default function BlogPostClient() {
   const generateTOC = (): TOCItem[] => {
     if (typeof window === "undefined") return [];
     const parser = new DOMParser();
-    const doc = parser.parseFromString(post.content, "text/html");
+    const doc = parser.parseFromString(contentHtml, "text/html");
     const headings = doc.querySelectorAll("h2, h3");
     return Array.from(headings).map((heading, index) => ({
       id: `heading-${index}`,
@@ -95,10 +82,14 @@ export default function BlogPostClient() {
 
   const toc = generateTOC();
 
+  const handlePrint = () => {
+    if (typeof window !== "undefined") window.print();
+  };
+
   return (
-    <div className="min-h-screen bg-bg-primary">
+    <div className="min-h-screen bg-bg-primary blog-article-root">
       {/* Breadcrumb */}
-      <div className="bg-white/50 backdrop-blur-md border-b border-black/5 px-8 py-5 pt-28 max-[768px]:px-6 max-[768px]:pt-24">
+      <div className="no-print bg-white/50 backdrop-blur-md border-b border-black/5 px-8 py-5 pt-28 max-[768px]:px-6 max-[768px]:pt-24">
         <div className="max-w-[1240px] mx-auto flex items-center gap-3 font-primary text-[0.85rem] font-bold uppercase tracking-wider text-text-muted">
           <Link href="/blog" className="text-text-muted no-underline transition-colors duration-200 hover:text-orange">
             Blog
@@ -117,21 +108,33 @@ export default function BlogPostClient() {
         </div>
       </div>
 
-      <div className="max-w-[1240px] mx-auto px-[clamp(1.5rem,5vw,3rem)] py-16 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16">
+      <div className="blog-article-grid max-w-[1240px] mx-auto px-[clamp(1.5rem,5vw,3rem)] py-16 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16">
         <article className="min-w-0">
           {/* Header */}
           <header className="mb-12">
-            <span className="inline-block bg-orange/10 text-orange font-primary text-[0.7rem] font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-8 border border-orange/10">
-              {post.category}
-            </span>
-            <h1 className="font-primary text-[clamp(2rem,5vw,3.5rem)] font-medium text-dark leading-[1.1] mb-8 tracking-[-0.03em]">
+            <div className="flex flex-wrap items-center gap-3 mb-8">
+              <span className="inline-block bg-orange/10 text-orange font-primary text-[0.7rem] font-bold px-4 py-2 rounded-full uppercase tracking-widest border border-orange/10">
+                {post.category}
+              </span>
+              {post.isPressRelease && (
+                <span className="inline-flex items-center gap-2 bg-dark text-white font-primary text-[0.7rem] font-bold px-4 py-2 rounded-full uppercase tracking-widest">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange" />
+                  Press Release
+                  {post.partnerName ? ` · ${post.partnerName}` : ""}
+                </span>
+              )}
+            </div>
+            <h1 className="font-primary text-[clamp(2.2rem,5.5vw,3.75rem)] font-medium text-dark leading-[1.08] mb-8 tracking-[-0.035em] text-balance">
               {post.title}
             </h1>
-            <p className="font-secondary text-[clamp(1.1rem,2vw,1.35rem)] text-text-secondary leading-[1.6] mb-8 italic">
-              {post.excerpt}
+            <p className="font-secondary text-[clamp(1.15rem,2.2vw,1.5rem)] text-text-secondary leading-[1.55] mb-10 max-w-[720px]">
+              {post.subtitle || post.excerpt}
             </p>
-            <div className="flex items-center gap-4 font-secondary text-[0.9rem] text-text-muted font-medium">
-              <span className="text-dark font-bold underline decoration-orange/30 decoration-2 underline-offset-4">{post.author}</span>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-3 font-secondary text-[0.9rem] text-text-muted font-medium">
+              <span className="text-dark font-bold underline decoration-orange/30 decoration-2 underline-offset-4">
+                {post.authorName}
+                {post.authorRole ? `, ${post.authorRole}` : ""}
+              </span>
               <span className="text-black/10">•</span>
               <span>{formatDate(post.date)}</span>
               <span className="text-black/10">•</span>
@@ -141,22 +144,68 @@ export default function BlogPostClient() {
                 </svg>
                 {post.readingTime} min read
               </span>
+              {post.isB2B && (
+                <button
+                  onClick={handlePrint}
+                  className="no-print ml-auto flex items-center gap-2 font-primary text-[0.78rem] font-bold text-text-secondary bg-white border border-black/5 rounded-xl px-4 py-2.5 hover:border-orange/30 hover:text-orange transition-all duration-300 shadow-sm"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z" />
+                  </svg>
+                  Download as PDF
+                </button>
+              )}
             </div>
           </header>
 
           {/* Cover Image */}
-          <div className="rounded-[2.5rem] overflow-hidden mb-16 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-black/5">
-            <img src={post.coverImage} alt={post.title} className="w-full h-auto block" />
-          </div>
+          {post.coverImage && (
+            <figure className="mb-16">
+              <div className="rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-black/5">
+                <img src={post.coverImage} alt={post.title} className="w-full h-auto block" />
+              </div>
+              {(post.heroCaption || post.heroSource) && (
+                <figcaption className="mt-4 px-2 font-secondary text-[0.85rem] text-text-muted leading-relaxed">
+                  {post.heroCaption}
+                  {post.heroCaption && post.heroSource ? " " : ""}
+                  {post.heroSource && (
+                    <span className="text-text-muted/70 italic">{post.heroSource}</span>
+                  )}
+                </figcaption>
+              )}
+            </figure>
+          )}
 
           {/* Content Body */}
           <div
             className="blog-content font-secondary text-[1.15rem] text-dark leading-[1.8] max-w-[800px]"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: contentHtml }}
           />
 
+          {/* Sources */}
+          {post.sources.length > 0 && (
+            <div className="mt-16 pt-10 border-t border-black/5 max-w-[800px]">
+              <h4 className="font-primary text-[0.75rem] font-bold text-dark uppercase tracking-widest mb-6">
+                Sources &amp; References
+              </h4>
+              <ol className="flex flex-col gap-3 list-none p-0 m-0">
+                {post.sources.map((source, index) => (
+                  <li
+                    key={index}
+                    className="flex gap-3 font-secondary text-[0.9rem] text-text-secondary leading-relaxed"
+                  >
+                    <span className="font-primary font-bold text-orange shrink-0">
+                      {index + 1}.
+                    </span>
+                    <span className="break-words">{source}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+
           {/* Share Buttons */}
-          <div className="mt-20 pt-12 border-t border-black/5">
+          <div className="no-print mt-20 pt-12 border-t border-black/5">
             <h4 className="font-primary text-[1rem] font-bold text-dark uppercase tracking-widest mb-6">Share this insights</h4>
             <div className="flex gap-3 flex-wrap">
               {[
@@ -190,7 +239,7 @@ export default function BlogPostClient() {
         </article>
 
         {/* Sidebar */}
-        <aside className="lg:block">
+        <aside className="no-print lg:block">
           <div className="sticky top-28 flex flex-col gap-8">
             {/* Table of Contents */}
             {toc.length > 0 && (
@@ -250,12 +299,12 @@ export default function BlogPostClient() {
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
-        <div className="bg-white border-t border-black/5 px-8 py-24 mt-16 max-[768px]:px-6">
+        <div className="no-print bg-white border-t border-black/5 px-8 py-24 mt-16 max-[768px]:px-6">
           <div className="max-w-[1240px] mx-auto">
             <h3 className="font-primary text-[2rem] font-medium text-dark mb-12 tracking-[-0.02em]">Related Articles</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {relatedPosts.map((relatedPost) => (
-                <BlogCard key={relatedPost.id} post={relatedPost} />
+                <BlogCard key={relatedPost.slug} post={relatedPost} />
               ))}
             </div>
           </div>

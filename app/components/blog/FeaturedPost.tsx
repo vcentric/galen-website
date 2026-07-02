@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { formatDate } from "@/lib/blogUtils";
+import { formatDate, type PostMeta } from "@/lib/blogFilters";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
-import type { BlogPost } from "@/content/blogPosts";
 
 interface FeaturedPostProps {
-  post: BlogPost;
+  post: PostMeta;
 }
 
 const FeaturedPost = ({ post }: FeaturedPostProps) => {
@@ -15,12 +14,18 @@ const FeaturedPost = ({ post }: FeaturedPostProps) => {
       href={`/blog/${post.slug}`}
       className="group relative flex flex-col lg:flex-row bg-white rounded-[2rem] overflow-hidden no-underline mb-16 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-black/5 hover:shadow-[0_24px_48px_rgba(235,96,45,0.12)] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
     >
-      <div className="w-full lg:w-1/2 relative aspect-video lg:aspect-auto overflow-hidden">
-        <img
-          src={post.coverImage}
-          alt={post.title}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-        />
+      <div className="w-full lg:w-1/2 relative aspect-video lg:aspect-auto overflow-hidden bg-beige">
+        {post.coverImage ? (
+          <img
+            src={post.coverImage}
+            alt={post.title}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <img src="/galenai-icon.webp" alt="" className="w-20 h-20 opacity-20" />
+          </div>
+        )}
         <span className="absolute top-6 left-6 bg-orange text-white font-primary text-[0.7rem] font-bold px-4 py-2 rounded-full uppercase tracking-wider shadow-lg z-10">
           Editor&apos;s Choice
         </span>
@@ -42,7 +47,8 @@ const FeaturedPost = ({ post }: FeaturedPostProps) => {
           <div className="flex items-center gap-4">
             <div className="flex flex-col">
               <span className="font-primary text-[0.9rem] font-bold text-dark">
-                {post.author}
+                By {post.authorName}
+                {post.authorRole ? `, ${post.authorRole}` : ""}
               </span>
               <div className="flex items-center gap-2 text-text-muted text-[0.8rem] font-medium font-secondary">
                 <span>{formatDate(post.date)}</span>

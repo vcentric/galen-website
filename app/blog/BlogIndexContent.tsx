@@ -6,19 +6,17 @@ import BlogCard from "../components/blog/BlogCard";
 import FilterBar from "../components/blog/FilterBar";
 import SearchBar from "../components/blog/SearchBar";
 import Pagination from "../components/blog/Pagination";
-import {
-  getAllPosts,
-  getPostsByCategory,
-  getFeaturedPost,
-  searchPosts,
-  paginatePosts,
-} from "@/lib/blogUtils";
+import { searchPosts, paginatePosts, type PostMeta } from "@/lib/blogFilters";
 
 interface BlogIndexContentProps {
+  posts: PostMeta[];
+  editorsChoice?: PostMeta[];
   initialCategory?: string;
 }
 
 export default function BlogIndexContent({
+  posts,
+  editorsChoice = [],
   initialCategory = "All",
 }: BlogIndexContentProps) {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
@@ -26,21 +24,19 @@ export default function BlogIndexContent({
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const featuredPost = getFeaturedPost();
-
   const getFilteredPosts = useCallback(() => {
-    let posts = searchQuery
-      ? searchPosts(searchQuery)
+    let result = searchQuery
+      ? searchPosts(posts, searchQuery)
       : selectedCategory === "All"
-      ? getAllPosts()
-      : getPostsByCategory(selectedCategory);
+      ? posts
+      : posts.filter((post) => post.category === selectedCategory);
 
     if (sortOrder === "oldest") {
-      posts = [...posts].reverse();
+      result = [...result].reverse();
     }
 
-    return posts.filter((post) => !post.featured);
-  }, [selectedCategory, sortOrder, searchQuery]);
+    return result.filter((post) => !post.isEditorsChoice);
+  }, [posts, selectedCategory, sortOrder, searchQuery]);
 
   const filteredPosts = getFilteredPosts();
   const paginatedData = paginatePosts(filteredPosts, currentPage, 12);
@@ -72,7 +68,7 @@ export default function BlogIndexContent({
   return (
     <div className="min-h-screen bg-transparent">
       {/* Hero Section */}
-      <div className="pt-32 pb-20 px-8 text-center border-b border-black/5 relative">
+      <div className="pt-32 pb-8 px-8 text-center border-b border-black/5 relative">
         <div className="max-w-[800px] mx-auto relative z-10 flex flex-col items-center">
           <h1 className="font-primary text-[clamp(2.2rem,6vw,3.5rem)] font-semibold text-dark mb-6 tracking-[-0.03em] leading-[1.1] inline-block relative pb-5">
             {selectedCategory !== "All"
@@ -92,11 +88,21 @@ export default function BlogIndexContent({
       </div>
 
       {/* Main Content */}
-      <div className="max-w-[1240px] mx-auto px-[clamp(1.5rem,5vw,3rem)] py-20 pb-32">
+      <div className="max-w-[1240px] mx-auto px-[clamp(1.5rem,5vw,3rem)] pt-6 pb-32">
 
-        {/* Featured Post */}
-        {featuredPost && !searchQuery && selectedCategory === "All" && (
-          <FeaturedPost post={featuredPost} />
+        {/* Editor's Choice strip (up to 2) */}
+        {editorsChoice.length > 0 && !searchQuery && selectedCategory === "All" && (
+          <div
+            className={
+              editorsChoice.length > 1
+                ? "grid grid-cols-1 lg:grid-cols-2 gap-6"
+                : ""
+            }
+          >
+            {editorsChoice.map((post) => (
+              <FeaturedPost key={post.slug} post={post} />
+            ))}
+          </div>
         )}
 
         {/* Filter Bar */}
@@ -112,7 +118,7 @@ export default function BlogIndexContent({
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {paginatedData.posts.map((post) => (
-                <BlogCard key={post.id} post={post} />
+                <BlogCard key={post.slug} post={post} />
               ))}
             </div>
 

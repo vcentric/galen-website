@@ -19,7 +19,11 @@ import { usePathname } from "next/navigation";
 const Footer = () => {
   const pathname = usePathname();
 
-  if (pathname === "/terms" || pathname === "/privacy") {
+  if (
+    pathname === "/terms" ||
+    pathname === "/privacy" ||
+    pathname.startsWith("/keystatic")
+  ) {
     return null;
   }
 
@@ -53,6 +57,7 @@ const Footer = () => {
                     { label: "About GalenAI", href: "#" },
                     { label: "Our Mission", href: "#" },
                     { label: "Join the Team", href: "#" },
+                    { label: "Articles", href: "/blog" },
                     { label: "Pricing", href: "/pricing" },
                     { label: "FAQs", href: "/#faq" },
                   ].map((link) => {

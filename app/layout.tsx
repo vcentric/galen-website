@@ -18,6 +18,7 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.galenai.io"),
   title: "GalenAI - Your Personal AI Medical Companion",
   description:
     "GalenAI is your AI medical mentor that explains, tests, and guides you, so you spend less time planning and more time understanding.",

@@ -386,8 +386,175 @@ nav, nav a, nav button {
   font-family: var(--font-raleway-var);
   font-size: 1rem;
 }
-.blog-content tbody tr:last-child td { 
-  border-bottom: none; 
+.blog-content tbody tr:last-child td {
+  border-bottom: none;
+}
+/* Dark-header + striped tables (marketing brief editorial look) */
+.blog-content thead {
+  background: var(--color-dark);
+}
+.blog-content th {
+  color: #fff;
+  border-bottom: none;
+}
+/* Bold header cells must not fall back to the dark `strong` colour (dark-on-dark) */
+.blog-content th,
+.blog-content th strong {
+  color: #fff;
+}
+.blog-content tbody tr:nth-child(even) {
+  background: var(--color-beige);
+}
+
+/* Stat callout — big orange figure on a dark card */
+.blog-content .stat-callout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: var(--color-bg-darker);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1.5rem;
+  padding: 2.25rem 2.5rem;
+  margin: 3rem 0;
+}
+.blog-content .stat-callout-number {
+  font-family: var(--font-space-var);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  line-height: 1;
+  color: var(--color-orange);
+  letter-spacing: -0.03em;
+}
+.blog-content .stat-callout-label {
+  font-family: var(--font-raleway-var);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+}
+
+/* Action box — light card with orange-tinted border */
+.blog-content .action-box {
+  background: #fff;
+  border: 1px solid var(--color-accent-muted);
+  border-radius: 1.5rem;
+  padding: 2rem 2.25rem;
+  margin: 3rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+.blog-content .action-box-title {
+  font-family: var(--font-space-var);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-dark);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+.blog-content .action-box-body > :last-child {
+  margin-bottom: 0;
+}
+
+/* CTA box — dark inline call-to-action */
+.blog-content .cta-box {
+  background: var(--color-dark);
+  border-radius: 1.5rem;
+  padding: 2.25rem 2.5rem;
+  margin: 3rem 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-secondary);
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+.blog-content .cta-box > :last-child {
+  margin-bottom: 0;
+}
+.blog-content .cta-box p {
+  color: rgba(255, 255, 255, 0.85);
+}
+.blog-content .cta-box strong {
+  color: var(--color-orange);
+}
+.blog-content .cta-box a {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: var(--color-orange);
+  text-underline-offset: 3px;
+}
+
+/* Figure with caption */
+.blog-content .image-with-caption {
+  margin: 3rem 0;
+}
+.blog-content .image-with-caption img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.blog-content .figure-caption {
+  margin-top: 0.9rem;
+  padding: 0 0.25rem;
+  font-family: var(--font-raleway-var);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+.blog-content .figure-source {
+  font-style: italic;
+  color: var(--color-text-faint);
+}
+
+/* Ordered lists → orange numbered step circles */
+.blog-content ol {
+  list-style: none;
+  counter-reset: step;
+  padding-left: 0;
+}
+.blog-content ol > li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 3.25rem;
+  min-height: 2rem;
+  margin-bottom: 1.25rem;
+}
+.blog-content ol > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -0.1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--color-orange);
+  color: #fff;
+  font-family: var(--font-space-var);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Print — clean article-only PDF output */
+@media print {
+  .no-print { display: none !important; }
+  .blog-article-root { background: #fff !important; }
+  .blog-article-grid {
+    display: block !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .blog-content .stat-callout,
+  .blog-content .cta-box {
+    background: #fff !important;
+    color: var(--color-dark) !important;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .blog-content .stat-callout-label,
+  .blog-content .cta-box p { color: var(--color-dark) !important; }
+  .blog-content thead { background: var(--color-beige) !important; }
+  .blog-content th { color: var(--color-dark) !important; }
 }
 
 
