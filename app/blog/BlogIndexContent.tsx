@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import FeaturedPost from "../components/blog/FeaturedPost";
 import BlogCard from "../components/blog/BlogCard";
 import FilterBar from "../components/blog/FilterBar";
 import SearchBar from "../components/blog/SearchBar";
 import Pagination from "../components/blog/Pagination";
 import { searchPosts, paginatePosts, type PostMeta } from "@/lib/blogFilters";
+import { trackEvent } from "@/lib/analytics";
 
 interface BlogIndexContentProps {
   posts: PostMeta[];
@@ -23,6 +24,12 @@ export default function BlogIndexContent({
   const [sortOrder, setSortOrder] = useState("latest");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+
+  // Fire once per blog-page load — "number of visits to the blog page".
+  // Covers /blog (category "All") and /blog/category/* (the category name).
+  useEffect(() => {
+    trackEvent("blog_index_view", { category: initialCategory });
+  }, [initialCategory]);
 
   const getFilteredPosts = useCallback(() => {
     let result = searchQuery

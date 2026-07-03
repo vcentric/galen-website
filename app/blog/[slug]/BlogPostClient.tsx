@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { formatDate, type PostMeta } from "@/lib/blogFilters";
+import { trackEvent } from "@/lib/analytics";
 import BlogCard from "../../components/blog/BlogCard";
 
 interface TOCItem {
@@ -24,6 +25,15 @@ export default function BlogPostClient({
   relatedPosts,
 }: BlogPostClientProps) {
   const [activeHeading, setActiveHeading] = useState("");
+
+  // Fire once per article load — "how many people viewed this blog + which one".
+  useEffect(() => {
+    trackEvent("article_view", {
+      slug: post.slug,
+      title: post.title,
+      category: post.category,
+    });
+  }, [post.slug, post.title, post.category]);
 
   useEffect(() => {
     const content = document.querySelector(".blog-content");
