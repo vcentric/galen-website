@@ -1,0 +1,102 @@
+---
+title: ' Can AI Out-Diagnose Doctors? What Microsoft''s MAI-DxO Study Actually Shows'
+subtitle: >
+  Microsoft says its AI diagnosed hard cases at 85.5%, against 20% for the
+  doctors in its study. The number is real. What it actually proves is more
+  complicated.
+excerpt: >
+  Microsoft's AI hit 85.5% on tough diagnoses, four times the doctors in its own
+  study. Here's what the number means, and what it leaves out.
+category: Medicine × AI
+tags:
+  - ' diagnostic AI'
+  - Microsoft MAI-DxO
+  - medical AI benchmarks
+  - clinical reasoning
+author_name: Team GalenAI
+author_type: galenai_team
+publish_date: 2026-10-12
+hero_image: >-
+  /blog-images/can-ai-out-diagnose-doctors-what-microsoft-s-mai-dx-o-study-actually-shows/hero_image.png
+is_editors_choice: false
+is_published: false
+is_press_release: false
+is_b2b: false
+sources:
+  - >-
+    Nori, Daswani, Kelly, Lundberg, Ribeiro, Wilson, Liu, Sounderajah, Carlson,
+    Lungren, Gross, Hames, Suleyman, King & Horvitz, "Sequential Diagnosis with
+    Language Models," arXiv, June 27, 2025 (v2 July 2, 2025)
+  - ' Microsoft AI, "The Path to Medical Superintelligence," June 2025'
+  - >-
+    Healio, "AI Shows Promise for Complex Diagnoses, But Superiority to
+    Physicians May Be 'Exaggerated,'" July 3, 2025
+  - >-
+    Reuters, reporting on Microsoft's MAI Superintelligence Team announcement,
+    November 2025
+  - >-
+    "How Do Dialysis Nurses and AI Reason Clinically? A Scenario-Based
+    Comparative Study," BMC Nursing, January 31, 2026
+  - ' Google Research, "AMIE: A Research AI System for Diagnostic Medical Reasoning and Conversations," updated October 2026 (published in Nature)'
+meta_description: |2
+   Microsoft's AI hit 85.5% on tough diagnoses, four times the doctors in its own study. What the number means, what it leaves out, and where things stand now.
+---
+By now you've probably seen the headline somewhere: Microsoft built an AI that diagnoses disease better than doctors. 85.5% accuracy, against 20% for the humans. Four times better, cheaper too.
+
+All of that is technically true. It's also not the whole story, and the parts left out matter more than the parts that made it into the headline.
+
+## Inside the study everyone's quoting
+
+The study is called "Sequential Diagnosis with Language Models," and it comes from a Microsoft AI team that includes CEO Mustafa Suleyman and chief scientist Eric Horvitz. They built something called SDBench: 304 of the hardest cases from the New England Journal of Medicine's clinicopathological conference, the kind used to train doctors on genuinely difficult diagnoses. Instead of handing a model the full case and asking for an answer, SDBench makes it work for the information. The model has to ask questions, order tests, and narrow things down step by step, the way an actual workup happens.
+
+On top of that, they built MAI-DxO, short for the Microsoft AI Diagnostic Orchestrator. It doesn't diagnose on its own. It runs several AI "physicians" who debate the case from different angles before settling on an answer, more like a tumor board than a single doctor thinking out loud.
+
+{% statCallout
+   number="85.5%"
+   label="MAI-DxO's top accuracy on 304 hard NEJM diagnostic cases, paired with OpenAI's o3 (Nori et al., 2025)." /%}
+
+Paired with OpenAI's o3, that setup solved 80% of cases in its standard configuration and 85.5% in its best one. It also did this while ordering fewer, cheaper tests than the humans in the study, 20% less than the physicians and 70% less than running o3 by itself at matching accuracy.
+
+## The doctors scored 20%, and that number needs context
+
+Here's the detail that gets dropped from most writeups: the 21 physicians in the study, each with 5 to 20 years of experience, worked the same cases with no textbooks, no colleagues, no internet, and no AI. Whatever they knew off the top of their heads was all they had.
+
+That's not how doctors actually practice, and three physicians interviewed by Healio said so directly. Lauren Bruckner, a pediatric hematologist-oncologist at Roswell Park, called the restriction "a very important disclaimer," because it changes what the comparison actually measures. Nasim Eftekhari, City of Hope's chief AI and analytics officer, pointed out that a real generalist facing a rare disease would refer the patient to a specialist rather than solve it alone, which makes the "four times better" framing feel bigger than it is. James Barry, who directs a neonatal ICU at the University of Colorado, argued the study asked the wrong question entirely: the comparison that actually matters isn't AI versus an unaided doctor, it's an unaided doctor versus a doctor working with AI.
+
+That last point turns out to matter a lot, because it's exactly what a separate research effort found.
+
+## Microsoft isn't working on this alone
+
+Google has been running its own version of this question through a system called AMIE. In an OSCE-style study, 20 primary care physicians and AMIE both worked through 149 standardized patient scenarios, and the results, later published in Nature, leaned the same direction as Microsoft's: on a related NEJM-based case set, AMIE reached 59.1% top-10 diagnostic accuracy on its own, against 33.6% for unassisted clinicians.
+
+Two different companies, two different benchmarks, and the same shape of result: language models reasoning step by step through a case can match or beat an unaided doctor on hard, unusual presentations. Neither company is claiming the model should work alone in a real clinic, and the more interesting number in both lines of research is what happens when a doctor and the AI work the case together, not against each other.
+
+{% callout type="summary" %}
+Two separate labs found the same pattern: AI reasoning through a case step by step can beat an unaided doctor on hard cases. Neither has shown it should replace one.
+{% /callout %}
+
+## A year later, where does this actually stand?
+
+It's worth asking what's happened since the headlines faded. As of this writing, "Sequential Diagnosis with Language Models" is still sitting at the version posted in July 2025. MAI-DxO hasn't shipped as a product, and Microsoft has described SDBench and the orchestrator as research work, not something ready for a clinic.
+
+The closest thing to a real-world test so far is small. In a January 2026 study published in BMC Nursing, 110 dialysis nurses and two AI systems, including MAI-DxO, worked through four hemodialysis scenarios. MAI-DxO scored higher on average, particularly on structured reasoning, while the nurses were stronger at picking up on context and dialysis-specific complications the scenarios didn't spell out. Four scenarios isn't a clinical trial, but it's a more honest test than a benchmark, because real nurses with real judgment were on the other side of it.
+
+In November 2025, Suleyman formed a dedicated "superintelligence" team inside Microsoft and said the company has "line of sight to medical superintelligence in the next two to three years," starting with diagnosis. That's Microsoft's own estimate of how far away this still is, which is worth remembering the next time a headline makes it sound finished.
+
+## Picture yourself a few years from now
+
+You're two years into residency. A senior hands you a case that doesn't fit the usual pattern, vague symptoms, nothing that points to one clear diagnosis. Somewhere, a system like MAI-DxO has already scored 85.5% on cases this hard. You can't run the case through it mid-round. And even if you could, this whole post shows it still needs a human checking its reasoning. What you actually have is the practice you put in long before that moment.
+
+That's what the 85.5% headline misses. This isn't really about AI replacing doctors. It's about one skill: working through a case step by step instead of jumping to an answer. The AI did it that way. So did the best doctors in the study.
+
+The earlier you practice that skill, the more natural it feels later, once a tool like this really is sitting next to you on the job. And it matters which AI you practice with. A generic chatbot just hands you an answer and moves on. What helps here is an AI built for medicine, not the open web. That's what GalenAI is for.
+
+{% actionBox title="Build the habit here first" %}
+Most AI tools students reach for weren't built for medicine. They answer from the open internet, and when they don't actually know something, they still answer anyway, confidently, and sometimes wrong. That's the real risk with a general chatbot: not that it fails, but that you can't tell when it has.
+
+GalenAI is built to close that gap. It answers from curriculum-based, NMC-standard textbook content instead of the open web, so you can check an answer against material you're already studying. Case-based mode walks you through a patient step by step, symptoms first, diagnosis last, the same discipline behind MAI-DxO and AMIE. Socratic mode asks guiding questions instead of handing you the conclusion, and Explain mode or Quick Q&A are there for a fast, clear answer when that's what you need.
+{% /actionBox %}
+
+{% cta %}
+**A model that reasons well under pressure is still rare. A doctor who does is worth more.** Every case you work through on GalenAI, grounded in your own curriculum, is practice for exactly the kind of reasoning these studies are measuring. [Try GalenAI free](/qr).
+{% /cta %}
