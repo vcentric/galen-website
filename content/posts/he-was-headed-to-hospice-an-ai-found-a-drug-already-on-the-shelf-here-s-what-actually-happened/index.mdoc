@@ -1,0 +1,105 @@
+---
+title: >-
+  He Was Headed to Hospice. An AI Found a Drug Already on the Shelf. Here's What
+  Actually Happened
+subtitle: >
+  A case study in AI-driven drug repurposing from the University of Pennsylvania
+  and Every Cure. A machine learning model scored every approved drug against a
+  rare disease and found one nobody had tried, and a viral post about it got one
+  basic detail wrong.
+excerpt: >
+  A case study in AI-driven drug repurposing, how a model found a forgotten
+  treatment for a dying man, and what a viral post about it got wrong.
+category: Case Studies
+tags:
+  - AI drug repurposing
+  - rare disease
+  - Castleman disease
+  - Every Cure
+  - case study
+author_name: Team GalenAI
+author_type: galenai_team
+publish_date: 2026-10-14
+hero_image: >-
+  /blog-images/he-was-headed-to-hospice-an-ai-found-a-drug-already-on-the-shelf-here-s-what-actually-happened/hero_image.png
+hero_image_caption: A pharmacy shelf of already-approved medications.
+is_editors_choice: false
+is_published: true
+is_press_release: false
+is_b2b: false
+sources:
+  - >-
+    Ma, Koslicki, Chen, Fajgenbaum et al., "Identifying and Targeting TNF
+    Signaling in Idiopathic Multicentric Castleman Disease," New England Journal
+    of Medicine, February 6, 2025
+  - >-
+    Every Cure, "First Life Saved With AI-Discovered Repurposed Medicine for
+    Castleman Disease," press release, May 4, 2023
+  - >-
+    University of Pennsylvania / ScienceDaily, "AI Tool Helps Find Life-Saving
+    Medicine for Rare Disease," February 5, 2025
+  - ' Newsweek, "AI Impact Awards 2025: Every Cure Aims to ''Teach Old Drugs New Tricks,''" June 18, 2025 (updated September 5, 2025)'
+  - Cicero Institute (@InstituteCicero), 2026
+meta_description: ' A case study in AI-driven drug repurposing, how a model found a forgotten treatment for a dying man, and what a viral post about it got wrong.'
+---
+This is a case study in AI-driven drug repurposing: one patient, one model, one drug that was already sitting in pharmacies. It's also the real story behind a post that went viral with one basic detail wrong. Here's the documented version, from the people who treated him.
+
+## Background: a disease that kept coming back
+
+The patient, identified in public materials as Alan, was 50 years old and had spent two years fighting idiopathic multicentric Castleman disease, iMCD for short, a rare disorder in which the immune system attacks the body's own organs. Five different treatment regimens, BTK inhibitors, immune-suppressing drugs, anti-cancer agents, had failed him in turn. By the time his family was preparing for hospice care, he had relapsed for the fifth time.
+
+His case was treated by Luke Chen, a hematologist at Vancouver General Hospital, working with David Fajgenbaum's team at the University of Pennsylvania. Their account was later published as a peer-reviewed letter in the New England Journal of Medicine.
+
+## The method: scoring every drug against every disease
+
+Fajgenbaum's team had built a machine learning model called KGML-xDTD, trained on a knowledge graph connecting drugs, diseases, and biology. Instead of starting from a hypothesis about one drug, it generates a predicted score for how likely every FDA-approved drug is to treat every disease, roughly 4,000 drugs, run against thousands of conditions at once.
+
+Run against iMCD, the model ranked adalimumab, a drug approved for rheumatoid arthritis and Crohn's disease, as the top candidate. Nobody had used it for Castleman disease before.
+
+## The intervention and outcome
+
+Chen added adalimumab to Alan's sixth treatment regimen, alongside the BTK inhibitor and immune-suppressing drugs he was already on. Within days, his organs started working again and his symptoms eased.
+
+{% statCallout
+   number="22 months"
+   label="Length of Alan's remission after adalimumab was added to his treatment, the longest since his diagnosis (Ma, Koslicki, Chen, Fajgenbaum et al., NEJM, 2025)." /%}
+
+As of the February 2025 publication, he had been in remission for 22 months, longer than any stretch since his diagnosis.
+
+## Why it worked: the biology behind the ranking
+
+The prediction wasn't a guess with no explanation attached. It pointed researchers toward a specific mechanism: tumor necrosis factor, or TNF, a protein that adalimumab blocks. When Fajgenbaum's team checked blood samples from iMCD patients, the ones with the most severe disease had unusually high TNF activity, a biological reason the ranking might actually hold.
+
+{% callout type="summary" %}
+The model didn't invent a new drug. It noticed a connection between an old one and a disease it had never been tested on, and pointed to a biological reason why that connection might hold.
+{% /callout %}
+
+## From one case to a platform
+
+Alan's case became the origin story for Every Cure, the nonprofit Fajgenbaum co-founded. Its platform, MATRIX, now scores roughly 75 million drug-disease combinations, backed by $48.3 million from the US government's ARPA-H and $60 million from the Audacious Project. A public version of the tool is expected in 2026. The team has more than 40 data scientists, engineers, and physicians working through it, with a stated goal of validating 15 to 25 repurposed treatments by 2030.
+
+Early candidates under study include bosutinib for ALS, metreleptin for severe anorexia, and leucovorin for some cases of autism spectrum disorder. None of those are confirmed the way Alan's case is. They're hypotheses the model has flagged, the same starting point adalimumab was at before anyone tried it.
+
+{% callout type="tip" %}
+A post about this case went viral on X, describing the patient as 37 years old and saying he responded within a week. The documented record says he was 50, and that a week-long response came after two years and five failed regimens, not instead of them. Worth checking the original source before sharing a number.
+{% /callout %}
+
+## Limits of this case study
+
+One documented case isn't a clinical trial. Twenty-two months is a real and meaningful remission, and it's also a number measured at the time of publication, not a guarantee the disease won't return, the way it returned five times before. The honest version of this story is a genuine success built on real biology, with real uncertainty still attached. Both things are true at once.
+
+## Why this is worth knowing as a student, not just a headline
+
+The habit that actually matters here isn't "trust the AI." It's the one Fajgenbaum's team used before they trusted it: they had a prediction, and they went looking for the biology that would explain it, elevated TNF levels in the sickest patients, before anyone gave a patient the drug. The model pointed somewhere. The reasoning is what made it safe to act on.
+
+That's the same habit worth building with anything an AI tells you while you're still a student, a viral post, a chatbot answer, a study tool. Check where it came from. Ask what would have to be true for it to be right. A result without a reason behind it is a guess wearing a lab coat.
+
+{% actionBox title="Build that habit here first" %}
+Most AI tools students use weren't built for medicine. They answer from the open internet, and when they don't actually know something, they still answer anyway, confidently, and sometimes wrong. You end up trusting a result with no reason attached, the exact thing Fajgenbaum's team was careful not to do.
+
+GalenAI is built to close that gap. Every answer is drawn from curriculum-based, NMC-standard textbook content instead of the open web, so you can check it against material you're already studying rather than taking it on faith. Case-based mode walks you through a patient from symptoms to diagnosis, one step at a time, Socratic mode asks guiding questions instead of handing you the conclusion, and Explain mode or Quick Q&A are there for a fast, clear answer when that's what you need.
+{% /actionBox %}
+
+{% cta %}
+**Want answers with the reasoning attached, not just the result?** GalenAI keeps every answer grounded in your curriculum, so you can see why it's right, not just that it sounds right. [Try GalenAI free](/qr).
+{% /cta %}
