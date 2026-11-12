@@ -24,7 +24,7 @@ export const institutionPages: PageSpec[] = [
     primaryCta: "faculty-live",
     secondaryCta: "demo",
     sections: [
-      { id: "workspace", kind: "demo", heading: "The AI Workspace", notes: "public/brand/ui/desktop_ai_workspace.png: Sources, Chat with citations, Studio. Desktop mockup card per design system." },
+      { id: "workspace", kind: "demo", heading: "The AI Workspace", notes: "public/brand/ui/desktop_ai_workspace.webp: Sources, Chat with citations, Studio. Desktop mockup card per design system." },
       { id: "steps", kind: "steps", heading: "From timetable to analytics in six steps", notes: "01 Upload the timetable. 02 See every competency. 03 Create lessons. 04 Create with AI. 05 Review and publish. 06 Track and report. Copy verbatim from brochure page 2." },
       { id: "outputs", kind: "features", heading: "What AI drafts for you", notes: "Five tinted output chips: Lecture PPT, Assessment, SGD case, Mind map, Flashcards (tints in DESIGN_SYSTEM section 3). One screen each." },
       { id: "trust", kind: "explain", heading: "AI drafts. Faculty review.", notes: "Written only from your reference library. Drafts only. Every output stays with your faculty." },

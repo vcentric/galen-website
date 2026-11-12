@@ -23,7 +23,7 @@ export const features: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "demo", heading: "See a real answer", notes: "Phone frame, dark mode. Use public/brand/ui/phone_tutor_answer_cited.png or how-to img s_explain. Sample question chips swap the answer (cardiac cycle, troponin, heart sounds). Medical content must be the faculty-checked text already in the collateral." },
+      { id: "demo", kind: "demo", heading: "See a real answer", notes: "Phone frame, dark mode. Use public/brand/ui/phone_tutor_answer_cited.webp or how-to img s_explain. Sample question chips swap the answer (cardiac cycle, troponin, heart sounds). Medical content must be the faculty-checked text already in the collateral." },
       { id: "how", kind: "steps", heading: "How the AI tutor works", notes: "3 steps: Ask in your words (or attach a PDF with the paperclip). Read the answer with References. Tap a follow-up chip or ask for a quiz. Source: how-to st-tutor." },
       { id: "why", kind: "features", heading: "Why students use it instead of searching", notes: "Dot list: references on every reply; follow-up chips; feedback (thumbs, flag); chat history; works for college lessons and exam prep. Citations are supporting, not the headline." },
       { id: "modes", kind: "links", heading: "Choose how it teaches", notes: "Teaser cards for the five modes, link to /features/tutor-modes." },
@@ -148,7 +148,7 @@ export const features: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "screens", heading: "Your progress at a glance", notes: "public/brand/ui/phone_dashboard.png. Label clearly as sample data." },
+      { id: "demo", kind: "screens", heading: "Your progress at a glance", notes: "public/brand/ui/phone_dashboard.webp. Label clearly as sample data." },
       { id: "what", kind: "features", heading: "What it tracks", notes: "Today, past 7 days, overall competencies, focus area, weekly activity, best subject. Source: how-to st-dashboard." },
       { id: "cta", kind: "cta", heading: "Find your weak topic", notes: "Download CTA." },
     ],
@@ -222,7 +222,7 @@ export const features: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "faculty-live",
     sections: [
-      { id: "demo", kind: "demo", heading: "See a generated quiz", notes: "public/brand/ui/phone_tutor_quiz_references.png (troponin quiz). " },
+      { id: "demo", kind: "demo", heading: "See a generated quiz", notes: "public/brand/ui/phone_tutor_quiz_references.webp (troponin quiz). " },
       { id: "students", kind: "steps", heading: "For students: quiz yourself in the chat", notes: "Ask the tutor for a quiz on a topic." },
       { id: "faculty", kind: "steps", heading: "For faculty: assessments from your references", notes: "AI Workspace, Studio, Assessment. AI drafts. Faculty review." },
       { id: "cta", kind: "cta", heading: "Make your first quiz", notes: "Two CTAs by audience." },
@@ -294,7 +294,7 @@ export const features: PageSpec[] = [
     primaryCta: "faculty-live",
     secondaryCta: "demo",
     sections: [
-      { id: "demo", kind: "screens", heading: "Generate lesson content", notes: "public/brand/ui/desktop_lesson_page.png with panel_generate_lesson_content.png overlaid (brochure page 2 layout)." },
+      { id: "demo", kind: "screens", heading: "Generate lesson content", notes: "public/brand/ui/desktop_lesson_page.webp with panel_generate_lesson_content.webp overlaid (brochure page 2 layout)." },
       { id: "how", kind: "steps", heading: "From timetable to published lesson", notes: "The six brochure steps: upload timetable, see every competency, create lessons, create with AI, review and publish, track and report." },
       { id: "cta", kind: "cta", heading: "Try it live", notes: "faculty.galenai.io + Book a demo." },
     ],
