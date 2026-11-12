@@ -98,7 +98,8 @@ export default function SpecPage({
         </Section>
       ) : null}
 
-      <StickyMobileCta intent={spec.primaryCta} source={src} />
+      {/* No sticky bar on form pages: it would cover the fields while typing. */}
+      {!spec.sections.some((s) => s.kind === "form") && <StickyMobileCta intent={spec.primaryCta} source={src} />}
     </div>
   );
 }

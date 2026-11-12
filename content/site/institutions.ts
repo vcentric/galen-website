@@ -138,7 +138,7 @@ export const institutionPages: PageSpec[] = [
   {
     slug: "book-demo",
     path: "/institutions/book-demo",
-    status: "skeleton",
+    status: "live",
     audience: "institution",
     title: "Book a GalenAI Demo for Your Medical College",
     description:

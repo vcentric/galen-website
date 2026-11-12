@@ -6,6 +6,28 @@ Read first: `MASTERPLAN.md` (why), `PAGE_BLUEPRINTS.md` (bespoke pages), `refere
 
 ---
 
+## Progress (update as you go)
+
+| Done | Task | Notes |
+|---|---|---|
+| ✅ | F1 skeleton | |
+| ✅ | F2, F3 images | Image optimisation left OFF (Netlify image runtime unverified); screens pre-converted to WebP |
+| ✅ | F4, F6 nav and footer | `app/components/v2/Navbar.tsx`, `Footer.tsx`. Legacy v1 components deleted |
+| ✅ | F5 `/download`, `/qr` | `StoreRedirect`, `DownloadPanel`, QR at `public/qr/download.svg` (segno) |
+| ✅ | F7 OG image | `public/og/default.png` |
+| ✅ | F9 analytics | debug logs removed; `demo_interaction`, `generate_lead` events added |
+| ⏳ | F8 team and FAQ data | blocked on Varun (team changes). Student FAQs already rewritten in `content/site/demos.ts` |
+| ⏳ | F10 remove notebook background | after `/team` and `/blog` are restyled |
+| ✅ | C2, C3, C4, C10, C11, C12 | `PhoneFrame`, `QrBlock`, `TutorDemo`, `LeadForm` (+ `public/__forms.html`), `ModeExplorer`, `StoreBadges` |
+| ✅ | P1 student home | |
+| ✅ | P2 institutions home | video id still pending |
+| ✅ | `/institutions/book-demo` | live; Netlify form `demo-request` needs a notification email |
+| ⏭ | Next | P3 remaining institution subpages, then P4 features |
+
+Gotchas learned: stop any `next start` server before `next build` (TaskStop does not always kill the node process; free port 3123 with `Stop-Process`). Check the build's exit code, not a grep's. Headless Chrome screenshots under 500 px wide are wrong; use Playwright with a mobile viewport.
+
+---
+
 ## Setup
 
 ```bash

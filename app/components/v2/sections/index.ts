@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import type { PageSpec, SectionSpec } from "@/content/site/types";
+import { DemoContactSection, DemoFormSection, DemoTrySection, DemoWhySection } from "./bookDemo";
 
 /**
  * Section registry. This is how the skeleton turns into the real site.
@@ -21,7 +22,10 @@ export const byKind: Partial<Record<SectionSpec["kind"], ComponentType<SectionPr
 };
 
 export const byPage: Record<string, ComponentType<SectionProps>> = {
-  // "/features/ai-tutor#demo": TutorDemo,
+  "/institutions/book-demo#form": DemoFormSection,
+  "/institutions/book-demo#why": DemoWhySection,
+  "/institutions/book-demo#try": DemoTrySection,
+  "/institutions/book-demo#contact": DemoContactSection,
 };
 
 export const resolveSection = (spec: PageSpec, section: SectionSpec) =>
