@@ -18,7 +18,6 @@ export const howToRoles: Record<
     description: "Step-by-step guides to the GalenAI student app: AI tutor, tutor modes, question bank, flashcards, clinical cases and dashboard.",
     appUrl: "https://app.galenai.io",
     guides: [
-      { slug: "start", title: "Start here", sourceId: "st-start", description: "Your first five minutes on GalenAI as a student." },
       { slug: "sign-in", title: "Sign in and get around", sourceId: "st-signin", description: "How to sign in to GalenAI and find your way around the app." },
       { slug: "ai-tutor", title: "How to use the AI Tutor", sourceId: "st-tutor", description: "Ask your first question, read references and use follow-ups in the GalenAI AI tutor." },
       { slug: "tutor-modes", title: "Tutor modes, one by one", sourceId: "st-modes", description: "When to use Auto, Explain, Socratic, Case-based and Quick Q&A." },
@@ -41,7 +40,6 @@ export const howToRoles: Record<
     description: "Step-by-step guides for medical faculty: calendar, lesson planning, AI Workspace, Content Bank, assessments and cohort analytics.",
     appUrl: "https://faculty.galenai.io",
     guides: [
-      { slug: "start", title: "Start here", sourceId: "fa-start", description: "Your first session on GalenAI as faculty." },
       { slug: "calendar", title: "Your calendar", sourceId: "fa-calendar", description: "Read your competency-mapped teaching calendar." },
       { slug: "lesson-planning", title: "Lesson planning", sourceId: "fa-lessons", description: "Plan a lesson with Must, Good and Nice to know levels." },
       { slug: "ai-workspace", title: "How to use the AI Workspace", sourceId: "fa-workspace", description: "Add sources, chat with citations and generate in Studio." },
@@ -58,7 +56,6 @@ export const howToRoles: Record<
     description: "Set up and run GalenAI for your college: roles, courses, batches, people, the CBME timetable and analytics.",
     appUrl: "https://faculty.galenai.io",
     guides: [
-      { slug: "start", title: "Start here", sourceId: "ad-start", description: "Set up your college on GalenAI." },
       { slug: "roles", title: "Roles and permissions", sourceId: "ad-roles", description: "What Super Admin and Secretary can do." },
       { slug: "settings", title: "Overview and settings", sourceId: "ad-settings", description: "Institute settings and timezone." },
       { slug: "courses-years-batches", title: "Courses, years and batches", sourceId: "ad-courses", description: "Create and import your academic structure." },

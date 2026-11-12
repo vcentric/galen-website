@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { howToRoles, howToRoleKeys, HOW_TO_LIVE } from "@/content/site";
 import type { HowToRole } from "@/content/site/howto";
-import { buildMetadata, breadcrumbLd } from "@/lib/seo";
+import { faqsFromHtml, guideSection } from "@/content/howto";
+import { buildMetadata, breadcrumbLd, faqLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import { Blueprint, Breadcrumbs, Headline, Kicker, Section } from "@/app/components/v2/ui";
+import HowToShell from "@/app/components/v2/HowToShell";
 
 type Props = { params: Promise<{ role: string; guide: string }> };
 
@@ -31,10 +32,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
+/** One guide, ported verbatim from the approved How to Use page (scripts/build-howto.py). */
 export default async function HowToGuidePage({ params }: Props) {
   const { role, guide } = await params;
   const hit = find(role, guide);
-  if (!hit) notFound();
+  const section = guideSection(role as HowToRole, guide);
+  if (!hit || !section) notFound();
   const { r, idx, g } = hit;
   const prev = r.guides[idx - 1];
   const next = r.guides[idx + 1];
@@ -44,44 +47,44 @@ export default async function HowToGuidePage({ params }: Props) {
     { name: r.label, path: `/how-to-use/${role}` },
     { name: g.title, path: `/how-to-use/${role}/${guide}` },
   ];
+  const faqs = faqsFromHtml(section.html);
+  const ld: object[] = [breadcrumbLd(trail)];
+  if (faqs.length) ld.push(faqLd(faqs));
+
   return (
-    <div className="v2" data-tone="neutral">
-      <JsonLd data={breadcrumbLd(trail)} />
-      <header className="wrap pt-24 md:pt-32 pb-6">
-        <Breadcrumbs trail={trail} />
-        <Kicker>{r.label} guide</Kicker>
-        <div className="mt-5">
-          <Headline text={g.title} />
+    <HowToShell
+      role={role as HowToRole}
+      current={guide}
+      toc={section.toc}
+      trail={trail}
+      footer={
+        <div className="mt-14 border-t border-[#e7dfd6] pt-8">
+          <nav className="flex flex-wrap justify-between gap-4" aria-label="More guides">
+            {prev ? (
+              <Link className="btn btn-ghost" href={`/how-to-use/${role}/${prev.slug}`}>
+                ← {prev.title}
+              </Link>
+            ) : (
+              <Link className="btn btn-ghost" href={`/how-to-use/${role}`}>
+                ← Start here
+              </Link>
+            )}
+            {next ? (
+              <Link className="btn btn-ghost" href={`/how-to-use/${role}/${next.slug}`}>
+                {next.title} →
+              </Link>
+            ) : null}
+          </nav>
+          <p className="mt-8">
+            <a className="btn btn-primary" href={r.appUrl} rel="noopener">
+              Open GalenAI {role === "students" ? "" : "for faculty"}
+            </a>
+          </p>
         </div>
-        <p className="lead mt-6">{g.description}</p>
-      </header>
-      <Section>
-        <Blueprint
-          kind="how-to guide"
-          notes={`Port <section id="${g.sourceId}"> from docs/v2/reference/how-to-use-source/index.html. Copy is approved: keep it verbatim. Build the step viewer once (numbered steps left, screenshot right, click a step to swap the image from data-img, caption from data-cap) and reuse it for every guide. Screenshots: /how-to-use/img/<name>.webp. Keep Tip / Note / Careful callouts, 'use it when' chips and copyable prompts. FAQ guides also emit faqLd().`}
-        />
-      </Section>
-      <Section>
-        <nav className="flex flex-wrap justify-between gap-4" aria-label="More guides">
-          {prev ? (
-            <Link className="btn btn-ghost" href={`/how-to-use/${role}/${prev.slug}`}>
-              ← {prev.title}
-            </Link>
-          ) : (
-            <span />
-          )}
-          {next ? (
-            <Link className="btn btn-ghost" href={`/how-to-use/${role}/${next.slug}`}>
-              {next.title} →
-            </Link>
-          ) : null}
-        </nav>
-        <p className="mt-8">
-          <a className="btn btn-primary" href={r.appUrl} rel="noopener">
-            Open GalenAI
-          </a>
-        </p>
-      </Section>
-    </div>
+      }
+    >
+      <JsonLd data={ld} />
+      <div dangerouslySetInnerHTML={{ __html: section.html }} />
+    </HowToShell>
   );
 }

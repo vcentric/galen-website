@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./v2.css";
+@import "./how-to.css";
 
 /* ═══════════════════════════════════════════
    DESIGN SYSTEM TOKENS
@@ -85,8 +86,12 @@ body {
   box-sizing: border-box;
 }
 
-a {
-  color: inherit;
+/* In the base layer so Tailwind colour utilities on links (text-*) can override it.
+   Unlayered, it beat every utility and made the active audience toggle unreadable. */
+@layer base {
+  a {
+    color: inherit;
+  }
 }
 
 /* ── Global Typography Hierarchy ── */

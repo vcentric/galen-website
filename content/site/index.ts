@@ -32,13 +32,13 @@ export const staticRoutes: { path: string; live: boolean; priority: number }[] =
   { path: "/privacy", live: true, priority: 0.2 },
   { path: "/terms", live: true, priority: 0.2 },
   { path: "/features", live: false, priority: 0.8 },
-  { path: "/how-to-use", live: false, priority: 0.7 },
+  { path: "/how-to-use", live: true, priority: 0.7 },
   { path: "/contact", live: false, priority: 0.4 },
   // /qr and /go/* are deliberately absent: noindex.
 ];
 
 /** How-to routes go live together, once the port from the source page is checked. */
-export const HOW_TO_LIVE = false;
+export const HOW_TO_LIVE = true;
 
 const BESPOKE_LABELS: Record<string, string> = {
   "/": "GalenAI for students",

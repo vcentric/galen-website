@@ -47,6 +47,45 @@ const BEATS = [
   },
 ];
 
+const AUDIENCE_CHIPS = [
+  { label: "MBBS 1st to final year", href: "/for/mbbs-students" },
+  { label: "Interns", href: "/for/neet-pg" },
+  { label: "NEET PG", href: "/for/neet-pg" },
+  { label: "INI-CET", href: "/for/inicet" },
+  { label: "FMGE", href: "/for/fmge" },
+];
+
+const STAGES = [
+  {
+    tag: "Phase 1 and 2",
+    who: "First and second year",
+    body: "Anatomy, physiology, biochemistry, then pathology, pharmacology and microbiology. Doubts explained, vivas practised, facts revised.",
+    href: "/for/mbbs-students",
+    link: "For MBBS students",
+  },
+  {
+    tag: "Phase 3",
+    who: "Final years and postings",
+    body: "Clinical cases you work through one decision at a time, and quick answers between ward rounds.",
+    href: "/features/clinical-cases",
+    link: "Clinical cases",
+  },
+  {
+    tag: "NEET PG and INI-CET",
+    who: "Interns and PG aspirants",
+    body: "Clinical MCQs with reasoning, exam mode, and a dashboard that shows your weakest subject.",
+    href: "/for/neet-pg",
+    link: "For NEET PG",
+  },
+  {
+    tag: "FMGE",
+    who: "Foreign medical graduates",
+    body: "A tutor for studying on your own, with a question bank and flashcards for fast revision.",
+    href: "/for/fmge",
+    link: "For FMGE",
+  },
+];
+
 /** Student home. Blueprint: docs/v2/PAGE_BLUEPRINTS.md section 1. */
 export default function Home() {
   return (
@@ -57,15 +96,29 @@ export default function Home() {
       <section className="wrap pt-24 pb-14 md:pt-32 md:pb-20">
         <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
           <div>
-            <Kicker>For MBBS students</Kicker>
+            <Kicker>For MBBS and medical students</Kicker>
             <h1 className="h1 mt-5">
               Ask anything.
               <br />
               Get it <span className="acc">explained.</span>
             </h1>
             <p className="lead mt-6">
-              The AI tutor for MBBS. Clear answers with references, then practice until it sticks.
+              GalenAI is the AI study app for medical students in India. Ask any doubt and get a clear answer with
+              references, then practise and revise until it sticks. From first-year MBBS to NEET PG.
             </p>
+            {/* Who it's for, at a glance */}
+            <ul className="mt-6 flex flex-wrap gap-2" aria-label="Who GalenAI is for">
+              {AUDIENCE_CHIPS.map((c) => (
+                <li key={c.label}>
+                  <Link
+                    href={c.href}
+                    className="inline-block rounded-full border-2 border-[#2e2e2e]/15 bg-white/60 px-3.5 py-1.5 text-sm font-bold hover:border-[#eb602d]"
+                  >
+                    {c.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
             <div className="mt-8 flex flex-wrap gap-3">
               <CtaLink intent="download" source="home_hero" />
               <CtaLink intent="try-web" source="home_hero" variant="ghost" />
@@ -81,6 +134,36 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 1b. Who it's for: every stage of medical school, one card each. */}
+      <Section id="who">
+        <Kicker>Who it&apos;s for</Kicker>
+        <h2 className="h2 mt-5">
+          Built for every stage of medical <span className="acc">school.</span>
+        </h2>
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {STAGES.map((st) => (
+            <li key={st.who}>
+              <Link href={st.href} className="card group flex h-full flex-col p-6">
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#c94d20]">{st.tag}</p>
+                <h3 className="h3 mt-3 !text-[1.35rem]">{st.who}</h3>
+                <p className="mt-2 flex-1" style={{ color: "var(--body)" }}>
+                  {st.body}
+                </p>
+                <span className="mt-4 font-bold underline decoration-2 underline-offset-4 group-hover:decoration-[#eb602d]">
+                  {st.link}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-8 font-semibold" style={{ color: "var(--body)" }}>
+          Teaching at a medical college?{" "}
+          <Link href="/institutions" className="text-[#2e2e2e] underline decoration-[#eb602d] decoration-2 underline-offset-4">
+            See GalenAI for colleges
+          </Link>
+        </p>
+      </Section>
 
       {/* 2. Try it here: the "I need this" moment, before any download. */}
       <section id="try" className="sec bg-white/60">

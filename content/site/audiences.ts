@@ -166,7 +166,7 @@ export const audiences: PageSpec[] = [
       },
       { id: "cta", kind: "cta", heading: "Ask anything", notes: "" },
     ],
-    related: ["/features/ai-tutor", "/features/guided-lessons", "/how-to-use/students/start"],
+    related: ["/features/ai-tutor", "/features/guided-lessons", "/how-to-use/students"],
   },
 ];
 

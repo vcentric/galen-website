@@ -12,7 +12,6 @@ const STUDENT_LINKS = [
   { label: "How to use", href: "/how-to-use" },
   { label: "Articles", href: "/blog" },
   { label: "Team", href: "/team" },
-  { label: "For colleges", href: "/institutions" },
 ];
 
 const INSTITUTION_LINKS = [
@@ -21,8 +20,30 @@ const INSTITUTION_LINKS = [
   { label: "vs LMS", href: "/institutions/vs-lms" },
   { label: "How to use", href: "/how-to-use/faculty" },
   { label: "Team", href: "/team" },
-  { label: "For students", href: "/" },
 ];
+
+/** Pages that belong to the college side of the site (toggle shows "Colleges"). */
+const isCollegePath = (p: string) =>
+  p.startsWith("/institutions") || p.startsWith("/how-to-use/faculty") || p.startsWith("/how-to-use/administration");
+
+/**
+ * Students / Colleges switch. Plain links (prefetched, instant client navigation),
+ * styled as a segmented control so the two audiences are one tap apart everywhere.
+ */
+function AudienceToggle({ inst, className = "" }: { inst: boolean; className?: string }) {
+  const item = (active: boolean) =>
+    `rounded-full px-3 py-1.5 sm:px-4 transition-colors ${active ? "bg-[#2e2e2e] text-[#fff0e4]" : "text-[#2e2e2e]/70 hover:text-[#2e2e2e]"}`;
+  return (
+    <nav aria-label="Choose audience" className={`flex shrink-0 items-center rounded-full border border-[#2e2e2e]/15 bg-white/70 p-1 text-[13px] font-bold sm:text-sm ${className}`}>
+      <Link href="/" aria-current={!inst ? "page" : undefined} className={item(!inst)}>
+        Students
+      </Link>
+      <Link href="/institutions" aria-current={inst ? "page" : undefined} className={item(inst)}>
+        Colleges
+      </Link>
+    </nav>
+  );
+}
 
 /**
  * Site navigation. Small client island (pathname + phone menu), no animation library.
@@ -31,7 +52,7 @@ const INSTITUTION_LINKS = [
 export default function Navbar() {
   const pathname = usePathname() ?? "/";
   const [open, setOpen] = useState(false);
-  const inst = pathname.startsWith("/institutions");
+  const inst = isCollegePath(pathname);
   const links = inst ? INSTITUTION_LINKS : STUDENT_LINKS;
 
   useEffect(() => setOpen(false), [pathname]);
@@ -41,7 +62,7 @@ export default function Navbar() {
     <header className="v2 fixed inset-x-0 top-0 z-[120] !bg-[#fff0e4]/90 backdrop-blur border-b border-black/5">
       <nav className="wrap flex h-16 items-center justify-between gap-4" aria-label="Main">
         <Link href={inst ? "/institutions" : "/"} aria-label="GalenAI home" className="shrink-0">
-          <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} priority />
+          <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} priority className="h-auto w-[104px] sm:w-[127px]" />
         </Link>
 
         <ul className="hidden lg:flex items-center gap-6 xl:gap-7 text-[0.95rem] font-semibold">
@@ -58,11 +79,12 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
+          <AudienceToggle inst={inst} />
           <CtaLink
             intent={inst ? "demo" : "download"}
             source="nav"
             label={inst ? "Book a demo" : "Get the app"}
-            className="!min-h-10 !px-4 !text-sm"
+            className="!hidden !min-h-10 !px-4 !text-sm sm:!inline-flex"
           />
           <button
             type="button"
@@ -81,6 +103,14 @@ export default function Navbar() {
 
       {open && (
         <div id="mobile-menu" className="lg:hidden border-t border-black/5 bg-[#fff0e4]">
+          <div className="wrap pt-4 sm:hidden">
+            <CtaLink
+              intent={inst ? "demo" : "download"}
+              source="nav_menu"
+              label={inst ? "Book a demo" : "Get the app"}
+              className="w-full"
+            />
+          </div>
           <ul className="wrap py-4 flex flex-col">
             {links.map((l) => (
               <li key={l.href}>

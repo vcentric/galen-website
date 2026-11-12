@@ -98,7 +98,7 @@ export const institutionPages: PageSpec[] = [
       { q: "Can faculty use their own notes and slides?", a: "Yes. Faculty add their own references, videos and existing content as sources, and GalenAI drafts from those." },
       { q: "Can faculty change the class date or time?", a: "No. The timetable is managed by the college's secretary role, so the calendar stays consistent for every batch. Faculty plan and publish the teaching." },
     ],
-    related: ["/institutions/administration", "/how-to-use/faculty/start", "/features/ai-lesson-plan-generator"],
+    related: ["/institutions/administration", "/how-to-use/faculty", "/features/ai-lesson-plan-generator"],
   },
   {
     slug: "administration",
@@ -179,7 +179,7 @@ export const institutionPages: PageSpec[] = [
       { q: "Can GalenAI produce reports for CBME audits?", a: "Yes. Lesson delivery, learning and assessment results are recorded per competency, with course and programme outcomes, so audit-ready reports come from one place." },
       { q: "How do we add students and faculty?", a: "Invite them individually or import them by CSV. The required columns are listed in the administration guide." },
     ],
-    related: ["/institutions/faculty", "/institutions/vs-lms", "/how-to-use/administration/start"],
+    related: ["/institutions/faculty", "/institutions/vs-lms", "/how-to-use/administration"],
   },
   {
     slug: "students",
