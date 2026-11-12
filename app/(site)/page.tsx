@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { buildMetadata, faqLd, softwareAppLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
-import { studentFaqs, testimonials } from "@/content/site/demos";
+import { studentFaqs, testimonials, tutorDemos } from "@/content/site/demos";
 import JsonLd from "@/app/components/v2/JsonLd";
 import CtaLink from "@/app/components/v2/CtaLink";
 import QrBlock from "@/app/components/v2/QrBlock";
 import StickyMobileCta from "@/app/components/v2/StickyMobileCta";
 import StoreBadges from "@/app/components/v2/StoreBadges";
-import TutorDemo from "@/app/components/v2/TutorDemo";
+import TutorDemo, { TutorPhone } from "@/app/components/v2/TutorDemo";
 import ModeExplorer from "@/app/components/v2/ModeExplorer";
 import PhoneFrame from "@/app/components/v2/PhoneFrame";
 import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
@@ -25,7 +25,7 @@ const BEATS = [
     word: "Ask.",
     title: "An AI tutor for every doubt",
     body: "Ask in your own words. Get a clear answer with references, in the mode that suits the topic.",
-    img: "/how-to-use/img/s_explain.webp",
+    img: "/how-to-use/img/s_explain_web.webp",
     href: "/features/ai-tutor",
     link: "How the tutor works",
   },
@@ -76,15 +76,8 @@ export default function Home() {
             <QrBlock className="mt-10 hidden lg:flex" size={112} />
           </div>
           <div className="flex justify-center lg:justify-end">
-            <Image
-              src="/brand/ui/phone_tutor_answer_cited.webp"
-              alt="GalenAI AI tutor answering a cardiac cycle question with references"
-              width={720}
-              height={1369}
-              priority
-              sizes="(min-width: 1024px) 340px, 260px"
-              className="h-auto w-[260px] lg:w-[340px]"
-            />
+            {/* Coded app screen (real answer, see content/site/demos.ts). Text, so the H1 stays the LCP. */}
+            <TutorPhone d={tutorDemos[2]} />
           </div>
         </div>
       </section>

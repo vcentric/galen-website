@@ -11,6 +11,7 @@ const STUDENT_LINKS = [
   { label: "For NEET PG", href: "/for/neet-pg" },
   { label: "How to use", href: "/how-to-use" },
   { label: "Articles", href: "/blog" },
+  { label: "Team", href: "/team" },
   { label: "For colleges", href: "/institutions" },
 ];
 
@@ -19,6 +20,7 @@ const INSTITUTION_LINKS = [
   { label: "Administration", href: "/institutions/administration" },
   { label: "vs LMS", href: "/institutions/vs-lms" },
   { label: "How to use", href: "/how-to-use/faculty" },
+  { label: "Team", href: "/team" },
   { label: "For students", href: "/" },
 ];
 
@@ -42,7 +44,7 @@ export default function Navbar() {
           <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} priority />
         </Link>
 
-        <ul className="hidden lg:flex items-center gap-7 text-[0.95rem] font-semibold">
+        <ul className="hidden lg:flex items-center gap-6 xl:gap-7 text-[0.95rem] font-semibold">
           {links.map((l) => (
             <li key={l.href}>
               <Link

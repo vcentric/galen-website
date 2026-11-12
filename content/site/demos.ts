@@ -1,15 +1,23 @@
 /**
- * Stored demo content for the "try it here" sections. Every medical fact here is
- * copied from approved, faculty-checked collateral (brochure, pamphlets, How to Use
- * page). Do not add new medical content without faculty review.
+ * Stored demo content for the "try it here" sections.
+ * Tutor answers are transcribed from real GalenAI app screenshots (Nov 2026,
+ * Sources/Context for webpage/The app screen answers from GalenAI/), lightly
+ * shortened, em dashes removed. The app shows a "References (n)" pill; we show the
+ * count only, never textbook, author or publisher names, and never channel names
+ * for the "Watch next" videos. Do not add new medical content without faculty review.
  */
+
+export type DemoExtra =
+  | { kind: "table"; title: string; head: [string, string]; rows: [string, string][] }
+  | { kind: "video"; title: string; from: string; length: string };
 
 export type DemoAnswer = {
   id: string;
   question: string; // the chip label and the user bubble
   mode: string; // shown on the tutor pill
-  answer: string[]; // paragraphs
-  references: string[];
+  answer: string[]; // paragraphs; **bold** spans supported
+  extra?: DemoExtra;
+  referenceCount: number;
   followUps: string[];
 };
 
@@ -17,35 +25,50 @@ export const tutorDemos: DemoAnswer[] = [
   {
     id: "isovolumetric",
     question: "Why does volume stay the same during isovolumetric contraction?",
-    mode: "Explain",
+    mode: "Default",
     answer: [
-      "Because both valves are shut. The mitral valve has just closed (S1) and the aortic valve has not opened yet, so blood has nowhere to go.",
-      "Pressure climbs from about 10 to 80 mmHg while volume holds at about 120 mL. That flat line is the left edge of the pressure-volume loop.",
+      "During **isovolumic contraction**, ventricular volume remains constant because all heart valves are closed.",
+      "The mitral valve has closed and the aortic valve has not yet opened, so blood cannot enter or leave. Pressure rises rapidly with no change in chamber volume.",
+      "It is depicted as a vertical line on the left ventricular pressure-volume loop.",
     ],
-    references: ["Uploaded textbook, Ch. 9, p. 114", "Lecture notes, p. 3"],
-    followUps: ["Quiz me on the cardiac cycle", "What happens in isovolumetric relaxation?"],
+    extra: { kind: "video", title: "The Wiggers diagram: how ECG, pressures, volumes and heart sounds fit together", from: "14:18", length: "29:58" },
+    referenceCount: 3,
+    followUps: ["Quiz me on pressure-volume loops", "What happens to the loop when afterload increases?"],
   },
   {
     id: "s2",
     question: "What produces the second heart sound (S2)?",
-    mode: "Quick Q&A",
+    mode: "Default",
     answer: [
-      "Closure of the semilunar valves.",
-      "S2 is caused by closure of the aortic and pulmonary valves at the end of systole.",
+      "The **second heart sound** (S2) is produced by vibrations of the cardiac structures and great vessels at the end of ventricular systole.",
+      "They are triggered when the semilunar valves, the **aortic valve** and the **pulmonary valve**, close to prevent diastolic reflux of blood into the ventricles.",
+      "S2 has two components: **A2** (aortic closure) and **P2** (pulmonary closure). Normally A2 comes first.",
     ],
-    references: ["Uploaded textbook, Ch. 9"],
-    followUps: ["What produces S1?", "Give me 4 questions on heart sounds"],
+    extra: { kind: "video", title: "Difference between the first and second heart sounds", from: "0:00", length: "7:32" },
+    referenceCount: 3,
+    followUps: ["Explain splitting of S2", "Quiz me on heart sounds"],
   },
   {
     id: "troponin",
     question: "How long does cardiac troponin T stay raised after an MI?",
-    mode: "Auto",
+    mode: "Default",
     answer: [
-      "About 10 to 14 days after an acute myocardial infarction.",
-      "A common mistake is 3 to 4 days. Want to lock this in with 5 questions?",
+      "Cardiac troponin T (cTnT) typically remains elevated for **10 to 14 days** after an acute myocardial infarction (MI).",
+      "Depending on the assay and the size of the infarct, it can sometimes be detected for 5 to 21 days.",
     ],
-    references: ["Standard references (3)"],
-    followUps: ["Yes, give me 5 questions", "Compare troponin and CK-MB"],
+    extra: {
+      kind: "table",
+      title: "Biochemical markers of myocardial necrosis",
+      head: ["Marker", "MW (kDa)"],
+      rows: [
+        ["CK-MB mass", "85.0"],
+        ["Myoglobin", "17.8"],
+        ["Troponin T", "33.0"],
+        ["Troponin I", "22.5"],
+      ],
+    },
+    referenceCount: 3,
+    followUps: ["Compare troponin and CK-MB", "Quiz me on cardiac markers"],
   },
 ];
 
@@ -58,7 +81,7 @@ export const tutorModes = [
     what: "Breaks a topic into numbered steps in plain language, then ends with a quick check question so you know it landed.",
     bestFor: ["First read of a new topic", "A lecture that didn't click", "Cycles, pathways, phases"],
     tryAsking: "Explain the coagulation cascade step by step",
-    img: "s_explain",
+    img: "s_explain_web",
   },
   {
     id: "socratic",

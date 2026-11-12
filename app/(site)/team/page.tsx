@@ -171,7 +171,7 @@ const TeamPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
-            {advisors.map((advisor, i) => (
+            {advisors.map((advisor) => (
               <div
                 key={advisor.name}
                 className="group relative rounded-3xl overflow-hidden cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-orange/50"
@@ -180,11 +180,7 @@ const TeamPage = () => {
               >
                 {/* Full-bleed photo */}
                 <img
-                  src={
-                    i === 0
-                      ? "/Sridhar.webp"
-                      : "/Dr%20Sivaramakrishnan.webp"
-                  }
+                  src={advisor.photo}
                   alt={advisor.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-focus:scale-105 group-active:scale-105"
                 />

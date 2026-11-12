@@ -21,12 +21,15 @@ export const advisors = [
     title: "Advisor, Finance & Investments",
     bio: "Ex-Investec, Ex-BNP Paribas, Ex-Myelin Foundry | 30+ years across banking, deep tech, capital and regulatory strategy across emerging markets.",
     linkedin: "https://www.linkedin.com/in/sridhar-vaidyanathan-0288352/",
+    photo: "/Sridhar.webp",
   },
   {
-    name: "Dr. Sivaramakrishnan R Guruvayur",
-    title: "Advisor - AI & Innovation",
-    bio: "Global AI Policy Leader| Chief AI Scientist - Aaquarians.AI| Senior Research Fellow - CeRAI, IITM| Expert Group Member GPAI/OECD  & UNESCO for Artificial Intelligence|  Head & Professor of Practice - AI Safety Research Lab, Amritapuri Vishwa Vidyapeetham|  Non-resident Research Fellow  for AI Safety - MBRSG, Dubai  & University of Graneda, Spain| Adjunct Research Professor - Africa AI Research Institute.",
-    linkedin: "https://www.linkedin.com/in/sivaramakrishnan-r-guruvayur/",
+    // From the 2026 pitch deck team slide.
+    name: "Kavitha Vchalam",
+    title: "Advisor, CEO Entomo and Investor",
+    bio: "Ex-HCL Technologies, Ex-Accenture | 30+ years in HR transformation, startup leadership and digital healthcare.",
+    linkedin: "https://www.linkedin.com/in/kavithavchalam/",
+    photo: "/Kavitha.webp", // cropped from the deck photo; swap for a higher-resolution one when available
   },
 ];
 

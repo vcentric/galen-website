@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { faqLd } from "@/lib/seo";
+import { faqLd, videoLd } from "@/lib/seo";
 import { CONTACT, LINKS, SITE } from "@/lib/site";
 import JsonLd from "@/app/components/v2/JsonLd";
 import CtaLink from "@/app/components/v2/CtaLink";
 import VideoLite from "@/app/components/v2/VideoLite";
+import { TutorPhone } from "@/app/components/v2/TutorDemo";
+import { tutorDemos } from "@/content/site/demos";
 import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
 
 /**
@@ -13,8 +15,14 @@ import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
  * Wording: BMC briefing note, vs-LMS comparison, brochure, deck slides 2, 3, 6.
  */
 
-// TODO(varun): institutions YouTube video id. Add videoLd() once id + upload date exist.
-const INSTITUTIONS_VIDEO_ID: string | undefined = undefined;
+const VIDEO = {
+  youtubeId: "3GjvIeQn9Yw",
+  name: "How GalenAI Brings AI to Medical Colleges (CBME Ready)",
+  description:
+    "A CBME timetable uploaded and validated, competency-mapped lessons and assessments drafted with AI from faculty references, published to the class, and results by competency.",
+  uploadDate: "2026-11-09",
+  durationIso: "PT1M56S",
+};
 
 const HAPPENING = [
   {
@@ -102,7 +110,7 @@ const FAQS = [
 export default function InstitutionsPage() {
   return (
     <div className="v2" data-tone="neutral">
-      <JsonLd data={faqLd(FAQS)} />
+      <JsonLd data={[faqLd(FAQS), videoLd(VIDEO)]} />
 
       {/* 1. Hero, brochure-cover style */}
       <section className="tone-dark overflow-hidden">
@@ -138,14 +146,12 @@ export default function InstitutionsPage() {
                 sizes="(min-width: 1024px) 600px, 92vw"
                 className="h-auto w-full rounded-[18px] shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
               />
-              <Image
-                src="/brand/ui/phone_tutor_answer_cited.webp"
-                alt=""
-                width={720}
-                height={1369}
-                sizes="150px"
-                className="absolute -bottom-10 -left-4 hidden h-auto w-[150px] sm:block"
-              />
+              {/* Coded student screen at half size (320px rendered, scaled 0.5). */}
+              <div className="absolute -bottom-12 -left-4 hidden h-[330px] w-[160px] sm:block">
+                <div className="origin-top-left scale-50">
+                  <TutorPhone d={tutorDemos[0]} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -154,10 +160,9 @@ export default function InstitutionsPage() {
       {/* 2. Video */}
       <Section id="video">
         <div className="mx-auto max-w-4xl">
-          <VideoLite youtubeId={INSTITUTIONS_VIDEO_ID} title="GalenAI for medical colleges" />
+          <VideoLite youtubeId={VIDEO.youtubeId} title={VIDEO.name} />
           <p className="mt-5 text-center" style={{ color: "var(--body)" }}>
-            In 75 seconds: a CBME timetable uploaded and validated, a competency-mapped lesson drafted with AI from
-            faculty references, published to the class, and the results by competency.
+            In under two minutes: {VIDEO.description.charAt(0).toLowerCase() + VIDEO.description.slice(1)}
           </p>
         </div>
       </Section>
@@ -309,18 +314,24 @@ export default function InstitutionsPage() {
       {/* 7. Proof: approved points only (MASTERPLAN section 6) */}
       <Section id="outcomes">
         <Kicker>Where we are</Kicker>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <div className="card p-7">
-            <p className="h2 text-[#eb602d]">MoU</p>
-            <p className="mt-3 font-semibold">signed with St. John&apos;s Medical College, Bengaluru.</p>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="card flex flex-col justify-between gap-6 p-7">
+            {/* TODO(varun): swap for the logo file Varun sends, if different */}
+            <Image
+              src="/stjohns.webp"
+              alt="St. John's National Academy of Health Sciences"
+              width={1252}
+              height={210}
+              sizes="360px"
+              className="h-auto w-full max-w-[360px]"
+            />
+            <p className="font-semibold">
+              <span className="h3 text-[#eb602d]">MoU signed</span> with St. John&apos;s Medical College, Bengaluru.
+            </p>
           </div>
-          <div className="card p-7">
-            <p className="h2 text-[#eb602d]">2,000+</p>
-            <p className="mt-3 font-semibold">students signed up at launch.</p>
-          </div>
-          <div className="card p-7">
-            <p className="h2 text-[#eb602d]">All</p>
-            <p className="mt-3 font-semibold">first-year students in our college deployments have been actively using it.</p>
+          <div className="card flex flex-col justify-between gap-6 p-7">
+            <p className="h1 !text-[clamp(3rem,7vw,4.5rem)] text-[#eb602d]">2,000+</p>
+            <p className="font-semibold">students signed up at launch.</p>
           </div>
         </div>
         <p className="mt-8 max-w-3xl" style={{ color: "var(--body)" }}>
