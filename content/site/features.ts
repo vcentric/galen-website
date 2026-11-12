@@ -46,7 +46,7 @@ export const features: PageSpec[] = [
         notes: "How-to st-tutor.",
         content: {
           items: [
-            { t: "Ask in your own words", b: "Type a doubt, or attach a PDF with the paperclip and ask about it." },
+            { t: "Ask in your own words", b: "Type a doubt, or tap the paperclip to attach a PDF or an image, like a diagram or your notes, and ask about it." },
             { t: "Read the answer", b: "Every reply has References you can open, plus related figures, tables and videos where they help." },
             { t: "Keep going", b: "Tap a follow-up chip, ask for a quiz, or switch the tutor mode." },
           ],
@@ -74,9 +74,10 @@ export const features: PageSpec[] = [
       { q: "Is the GalenAI AI tutor free?", a: "GalenAI is currently free for a limited time while we gather feedback from students." },
       { q: "Where do the tutor's answers come from?", a: "Answers are written from standard medical references, and each reply lists its references so you can check them. In colleges that use GalenAI, the tutor also answers from the college's approved content." },
       { q: "Can I use it for NEET PG, INI-CET or FMGE?", a: "Yes. You can ask exam-style doubts, switch to Quick Q&A for rapid revision, and practise in the question bank in the same app." },
+      { q: "Can I ask about a diagram or my own notes?", a: "Yes. Attach an image or a PDF with the paperclip and ask the tutor about it." },
+      { q: "Can the tutor make quizzes and flashcards for me?", a: "Yes. Ask it to quiz you on any topic, or to turn a topic into flashcards, right inside the chat." },
     ],
     related: ["/features/tutor-modes", "/features/question-bank", "/how-to-use/students/ai-tutor", "/vs/chatgpt"],
-    flags: ["Confirm what attachments are live today (PDF only, or images too)."],
   },
   {
     slug: "tutor-modes",
@@ -419,7 +420,7 @@ export const features: PageSpec[] = [
     h1: "Any topic. Quizzed in",
     h1Accent: "seconds.",
     answer:
-      "GalenAI's AI quiz generator makes multiple-choice questions on a medical topic, with the correct answer and reasoning. Students ask the tutor to quiz them on any topic; faculty use the AI Workspace to draft competency-based assessments from their own references.",
+      "GalenAI's AI quiz generator makes multiple-choice questions on a medical topic, with the correct answer and reasoning. Students ask the AI tutor to quiz them on any topic, their own notes or an attached PDF; faculty use the AI Workspace to draft competency-based assessments from their own references.",
     primaryCta: "download",
     secondaryCta: "faculty-live",
     sections: [
@@ -430,7 +431,7 @@ export const features: PageSpec[] = [
         notes: "",
         content: {
           items: [
-            { t: "Ask about a topic", b: "Get the explanation first." },
+            { t: "Ask about a topic, or attach your notes", b: "A topic, a PDF or an image of your notes all work." },
             { t: "Tap \"Quiz me on this\"", b: "Or type \"Give me 5 questions on heart sounds\"." },
             { t: "Answer and learn", b: "Every question comes with the reasoning." },
           ],
@@ -449,7 +450,6 @@ export const features: PageSpec[] = [
       { id: "cta", kind: "cta", heading: "Make your first quiz", notes: "" },
     ],
     related: ["/features/question-bank", "/institutions/faculty"],
-    flags: ["Confirm students can ask for a quiz from an attached PDF today."],
   },
   {
     slug: "ai-flashcard-generator",
@@ -463,21 +463,34 @@ export const features: PageSpec[] = [
     h1: "Your notes, turned into",
     h1Accent: "flashcards.",
     answer:
-      "GalenAI generates flashcards from medical references. Faculty create decks in the AI Workspace from their own sources and publish them to the class; students revise them with spaced revision in the app.",
-    primaryCta: "faculty-live",
-    secondaryCta: "download",
+      "GalenAI generates flashcards on any medical topic. Students ask the AI tutor to turn a topic or their notes into flashcards and revise them with spaced revision; faculty create decks in the AI Workspace from their own sources and publish them to the class.",
+    primaryCta: "download",
+    secondaryCta: "faculty-live",
     sections: [
+      {
+        id: "students",
+        kind: "steps",
+        heading: "For students: flashcards from the tutor",
+        notes: "",
+        content: {
+          items: [
+            { t: "Ask about a topic, or attach your notes", b: "A topic, a PDF or an image all work." },
+            { t: "Ask for flashcards", b: "\"Make flashcards on the brachial plexus.\"" },
+            { t: "Revise", b: "Cards you find hard come back sooner." },
+          ],
+        },
+      },
       {
         id: "demo",
         kind: "screens",
-        heading: "A generated deck",
+        heading: "For faculty: decks for the whole class",
         notes: "",
         content: { screens: [desk("a_flash", "Flashcards generated in the AI Workspace")] },
       },
       {
         id: "how",
         kind: "steps",
-        heading: "How it works",
+        heading: "How faculty create a deck",
         notes: "",
         content: {
           items: [
@@ -490,7 +503,6 @@ export const features: PageSpec[] = [
       { id: "cta", kind: "cta", heading: "Generate a deck", notes: "" },
     ],
     related: ["/features/flashcards", "/institutions/faculty"],
-    flags: ["Can students generate their own flashcards, or faculty only?"],
   },
   {
     slug: "ai-mind-map-generator",

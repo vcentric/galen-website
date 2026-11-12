@@ -121,25 +121,26 @@ export const tutorModes = [
   },
 ] as const;
 
-/** Student testimonials, from app/data/testimonials.ts, trimmed. TODO(varun): confirm still current. */
+/**
+ * Student testimonials, supplied by Varun (Nov 2026). Rose Joseph's quote says
+ * "material" in place of "textbooks" at Varun's request, and "that fact" is
+ * corrected to "the fact".
+ */
 export const testimonials = [
   {
-    quote:
-      "It has become my go-to platform for NEET PG. The clinical cases are both engaging and challenging, and it has changed how I think exam preparation should be approached.",
-    name: "Dr. Dhanya Rao",
-    meta: "MBBS, Father Muller Medical College · NEET PG aspirant",
+    quote: "It was useful to revise before classes and I even used it before exam for quick revision.",
+    name: "K Netanya Harriet",
+    meta: "First-year MBBS, St. John's Medical College",
   },
   {
-    quote:
-      "It helps with both pre-lecture preparation and post-lecture revision, especially for internals. Having all 19 subjects in one place makes it easy to query and learn.",
-    name: "Dr. Navya Yalangi Rao",
-    meta: "MBBS, Bharati Vidyapeeth Medical College",
+    quote: "I liked the fact that it uses standardised material for reference and framing answers.",
+    name: "Rose Joseph",
+    meta: "First-year MBBS, St. John's Medical College",
   },
   {
-    quote:
-      "I use it during my postings for fast reading and answering questions. The case-based learning and the different tutor modes are my personal favourite. It truly feels like a study buddy.",
-    name: "Siddhartha Kakani",
-    meta: "III MBBS Phase II, Bharati Vidyapeeth Medical College, Pune",
+    quote: "It's good and easy to approach. Timesaving.",
+    name: "Kiran Rawat",
+    meta: "First-year MBBS, St. John's Medical College",
   },
 ];
 
