@@ -62,6 +62,12 @@
 .v2 .blueprint { border: 2px dashed rgba(46, 46, 46, 0.25); border-radius: 22px; padding: 1.25rem 1.5rem; background: rgba(255, 255, 255, 0.5); color: var(--color-dark); font-size: 0.9375rem; line-height: 1.5; overflow-wrap: anywhere; }
 .v2 .blueprint b { font-family: var(--font-space-var), sans-serif; color: var(--orange-dark); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; }
 
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* Orange strike bar across a word (design system: WATCHING, Doomscroll). */
+.v2 .strike { position: relative; display: inline-block; }
+.v2 .strike::after { content: ""; position: absolute; left: -0.12em; right: -0.12em; top: 50%; height: 0.2em; background: var(--color-orange); transform: rotate(-3deg); border-radius: 4px; }
+
 @media (prefers-reduced-motion: reduce) {
   .v2 * { animation: none !important; transition: none !important; }
 }
