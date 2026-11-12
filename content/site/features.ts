@@ -36,7 +36,7 @@ export const features: PageSpec[] = [
     h1: "Ask anything. Get it",
     h1Accent: "explained.",
     answer:
-      "GalenAI's AI tutor is a medical tutor on your phone for MBBS students in India. You ask a doubt in your own words, and it answers step by step with references, related figures and teaching videos, then offers follow-up questions and a quick quiz so the concept sticks.",
+      "GalenAI's AI tutor is a medical tutor on your phone for medical students everywhere. You ask a doubt in your own words, and it answers step by step with references, related figures and teaching videos, then offers follow-up questions and a quick quiz so the concept sticks.",
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [

@@ -104,7 +104,7 @@ export default function Home() {
               Get it <span className="acc">explained.</span>
             </h1>
             <p className="lead mt-6">
-              GalenAI is the AI study app for medical students in India. Ask any doubt and get a clear answer with
+              GalenAI is the AI study app for medical students around the world. Ask any doubt and get a clear answer with
               references, then practise and revise until it sticks.
             </p>
             {/* Who it's for, at a glance */}

@@ -152,7 +152,7 @@ export const audiences: PageSpec[] = [
     h1: "One app from first lecture to final",
     h1Accent: "exam.",
     answer:
-      "GalenAI is a study app for MBBS students in India. It combines an AI tutor for doubts, guided lessons, a question bank, flashcards and clinical cases in one place, mapped to the NMC's competency-based curriculum, so college work and exam preparation happen in the same app.",
+      "GalenAI is a study app for MBBS and medical students around the world. It combines an AI tutor for doubts, guided lessons, a question bank, flashcards and clinical cases in one place, mapped to competency-based curricula such as India's NMC CBME, so college work and exam preparation happen in the same app.",
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [

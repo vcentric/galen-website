@@ -59,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-IN">
+    <html lang="en">
       <body className={`${space.variable} ${raleway.variable} ${hanken.variable} antialiased overflow-x-hidden bg-white`}>
         <JsonLd data={[organizationLd(), websiteLd()]} />
         <GoogleAnalytics gaId={IDS.ga4} />

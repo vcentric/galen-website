@@ -7,7 +7,7 @@ export const SITE = {
   name: "GalenAI",
   legalName: "GalenAI Private Limited",
   url: "https://www.galenai.io",
-  locale: "en_IN",
+  locale: "en_US", // global audience (Varun, Nov 2026)
   // Approved lines. Use verbatim.
   tagline: "AI for medical colleges.",
   subTagline: "Students learn smarter. Faculty teach easier.",
@@ -16,7 +16,7 @@ export const SITE = {
   lmsLine: "Your LMS stores the syllabus. GalenAI delivers it.",
   campusLine: "Bring GalenAI to your campus.",
   defaultDescription:
-    "GalenAI is the AI tutor, question bank, flashcards and clinical cases app for MBBS students in India, with an AI teaching workspace for medical college faculty, built around the NMC CBME curriculum.",
+    "GalenAI is the AI tutor, question bank, flashcards and clinical cases app for medical students around the world, with an AI teaching workspace for medical college faculty built around competency-based medical education (CBME).",
   ogImage: "/og/default.png", // TODO(exec): 1200x630, see docs/v2/EXECUTION.md task F7
 } as const;
 

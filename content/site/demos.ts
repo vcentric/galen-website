@@ -148,7 +148,7 @@ export const testimonials = [
 export const studentFaqs = [
   {
     q: "What is GalenAI?",
-    a: "GalenAI is a study app for MBBS students and PG aspirants in India. It has an AI tutor that explains any doubt with references, a question bank with step-by-step reasoning, flashcards, clinical cases and a dashboard that shows your weak topics, all mapped to the NMC's competency-based curriculum.",
+    a: "GalenAI is an AI study app for medical students around the world, from first-year MBBS to PG entrance and licensing exams. It has an AI tutor that explains any doubt with references, a question bank with step-by-step reasoning, flashcards, clinical cases and a dashboard that shows your weak topics, all mapped to competencies.",
   },
   {
     q: "Is GalenAI free?",

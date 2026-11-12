@@ -76,7 +76,7 @@ export const websiteLd = () => ({
   url: SITE.url,
   name: SITE.name,
   publisher: { "@id": ORG_ID },
-  inLanguage: "en-IN",
+  inLanguage: "en",
 });
 
 export const softwareAppLd = (opts?: { name?: string; description?: string; path?: string }) => ({
@@ -169,7 +169,7 @@ export const learningResourceLd = (l: {
   about: l.subject,
   educationalLevel: "MBBS",
   learningResourceType: "Topic note",
-  inLanguage: "en-IN",
+  inLanguage: "en",
   dateModified: l.dateModified,
   ...(l.competencyCodes?.length ? { teaches: l.competencyCodes } : {}),
   ...(l.reviewedBy ? { reviewedBy: { "@type": "Person", name: l.reviewedBy } } : {}),
