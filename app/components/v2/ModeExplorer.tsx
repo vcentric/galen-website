@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { tutorModes } from "@/content/site/demos";
-import PhoneFrame from "./PhoneFrame";
+import AppScreen from "./AppScreen";
 
 /**
  * Tutor mode explorer, ported from the How to Use page (#modeSeg + mode panels).
@@ -10,7 +10,6 @@ import PhoneFrame from "./PhoneFrame";
  */
 export default function ModeExplorer() {
   const [active, setActive] = useState<string>(tutorModes[0].id);
-  const current = tutorModes.find((m) => m.id === active) ?? tutorModes[0];
 
   return (
     <div className="grid items-start gap-10 lg:grid-cols-[1fr_auto] lg:gap-16">
@@ -61,7 +60,8 @@ export default function ModeExplorer() {
       </div>
 
       <div className="flex justify-center">
-        <PhoneFrame key={current.id} src={`/how-to-use/img/${current.img}.webp`} alt={`${current.name} mode in the GalenAI app`} width={280} />
+        {/* The real Tutor Mode picker from the app (dark theme capture). */}
+        <AppScreen name="tutor-modes" alt="The Tutor Mode picker in the GalenAI app: Auto, Explain, Socratic, Case-based, Quick Q&A" width={280} />
       </div>
     </div>
   );

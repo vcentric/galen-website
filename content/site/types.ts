@@ -24,7 +24,8 @@ export type SectionKind =
   | "cta" // closing CTA band
   | "links"; // internal link hub
 
-export type Screen = { src: string; alt: string; frame: "phone" | "desk" | "none"; caption?: string };
+/** frame "app" = a real app capture in public/app (src is the file name without extension). */
+export type Screen = { src: string; alt: string; frame: "app" | "phone" | "desk" | "none"; caption?: string };
 
 /**
  * Real content for a section. When present, the shared component for the section's

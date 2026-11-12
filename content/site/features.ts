@@ -13,6 +13,8 @@ const phone = (name: string, alt: string, caption?: string): Screen => ({
   frame: "phone",
   caption,
 });
+/** Real app capture from public/app (see components/v2/AppScreen.tsx). */
+const app = (name: string, alt: string, caption?: string): Screen => ({ src: name, alt, frame: "app", caption });
 const desk = (name: string, alt: string, caption?: string): Screen => ({
   src: `/how-to-use/img/${name}.webp`,
   alt,
@@ -65,7 +67,7 @@ export const features: PageSpec[] = [
             { t: "Five tutor modes", b: "Explain, Socratic, Case-based, Quick Q&A or Auto.", href: "/features/tutor-modes" },
             { t: "Your chat history", b: "Every conversation saved, so revision starts where you stopped." },
           ],
-          screens: [phone("s_history", "Chat history in the GalenAI app")],
+          screens: [app("chat-history", "Chat history in the GalenAI app")],
         },
       },
       { id: "cta", kind: "cta", heading: "Ask your first question", notes: "" },
@@ -166,9 +168,9 @@ export const features: PageSpec[] = [
         notes: "",
         content: {
           screens: [
-            phone("s_qb_subjects", "Question bank subjects", "Subjects"),
-            phone("s_qb_q", "A clinical MCQ", "Question"),
-            phone("s_qb_ans", "Answer with explanation", "Reasoning"),
+            app("question-bank", "Question bank subjects by year and phase", "Subjects by phase"),
+            app("question-bank-answer", "A question answered with the explanation", "Answer and reasoning"),
+            app("tutor-s2", "Asking the AI tutor why", "Ask the tutor why"),
           ],
         },
       },
@@ -202,9 +204,9 @@ export const features: PageSpec[] = [
         notes: "",
         content: {
           screens: [
-            phone("s_fc_subjects", "Flashcard decks by subject", "Decks"),
-            phone("s_fc_front", "Flashcard front", "Front"),
-            phone("s_fc_back", "Flashcard back", "Back"),
+            app("flashcards", "Flashcard decks by subject, with cards due", "Decks"),
+            app("flashcard-front", "A flashcard, front", "Recall"),
+            app("flashcard-back", "A flashcard, back, rated Easy, Medium or Hard", "Rate it"),
           ],
         },
       },
@@ -248,9 +250,7 @@ export const features: PageSpec[] = [
         notes: "",
         content: {
           screens: [
-            phone("s_cc_subjects", "Clinical case subjects", "Pick a subject"),
-            phone("s_cc_intro", "Case introduction", "Meet the patient"),
-            phone("s_cc_stage", "A case stage with a decision", "Decide, step by step"),
+            app("clinical-cases", "Clinical cases by system", "Pick a system, then a case"),
           ],
         },
       },
@@ -314,7 +314,7 @@ export const features: PageSpec[] = [
             { t: "Weekly activity and streak", b: "So consistency is visible." },
             { t: "Competencies covered", b: "Progress across the CBME competencies." },
           ],
-          screens: [phone("s_dash", "GalenAI dashboard (sample data)")],
+          screens: [app("dashboard", "GalenAI dashboard (sample data)")],
         },
       },
       { id: "cta", kind: "cta", heading: "Find your weak topic", notes: "" },
@@ -387,7 +387,7 @@ export const features: PageSpec[] = [
         kind: "screens",
         heading: "What it will look like",
         notes: "Coming soon pill everywhere.",
-        content: { pill: "Coming soon", screens: [phone("d_viva", "Voice viva preview (coming soon)")] },
+        content: { pill: "Coming soon", screens: [app("viva", "Voice viva preview (coming soon)")] },
       },
       {
         id: "now",

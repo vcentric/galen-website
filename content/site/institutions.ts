@@ -221,9 +221,9 @@ export const institutionPages: PageSpec[] = [
         notes: "Student screens.",
         content: {
           screens: [
-            { src: "/how-to-use/img/s_dash.webp", alt: "Student dashboard with progress by competency", frame: "phone", caption: "Dashboard" },
+            { src: "dashboard", alt: "Student dashboard with progress by competency", frame: "app", caption: "Dashboard" },
             { src: "/how-to-use/img/d_cal.webp", alt: "Faculty lessons on the student calendar", frame: "phone", caption: "College calendar" },
-            { src: "/how-to-use/img/s_qb_ans.webp", alt: "Question bank answer with explanation", frame: "phone", caption: "Question bank" },
+            { src: "question-bank-answer", alt: "Question bank answer with explanation", frame: "app", caption: "Question bank" },
           ],
         },
       },

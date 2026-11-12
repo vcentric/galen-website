@@ -5,6 +5,7 @@ import CtaLink from "../CtaLink";
 import McqDemo from "../McqDemo";
 import ModeExplorer from "../ModeExplorer";
 import PhoneFrame from "../PhoneFrame";
+import AppScreen, { type AppScreenName } from "../AppScreen";
 import TutorDemo from "../TutorDemo";
 import { Headline } from "../ui";
 import type { SectionProps } from "./index";
@@ -27,6 +28,7 @@ function Head({ section }: SectionProps) {
 }
 
 function ScreenView({ s, width = 240 }: { s: Screen; width?: number }) {
+  if (s.frame === "app") return <AppScreen name={s.src as AppScreenName} alt={s.alt} width={width} />;
   if (s.frame === "phone") return <PhoneFrame src={s.src} alt={s.alt} width={width} />;
   return (
     <Image
@@ -69,7 +71,7 @@ export function StepsSection(props: SectionProps) {
 export function FeaturesSection(props: SectionProps) {
   const c = props.section.content!;
   const screen = c.screens?.[0];
-  const side = screen?.frame === "phone";
+  const side = screen?.frame === "phone" || screen?.frame === "app";
   return (
     <div className={side ? "grid items-center gap-10 lg:grid-cols-[1fr_auto] lg:gap-16" : ""}>
       <div>
@@ -109,7 +111,7 @@ export function FeaturesSection(props: SectionProps) {
 
 export function ScreensSection(props: SectionProps) {
   const screens = props.section.content?.screens ?? [];
-  const phones = screens.every((s) => s.frame === "phone");
+  const phones = screens.every((s) => s.frame === "phone" || s.frame === "app");
   return (
     <>
       <Head {...props} />

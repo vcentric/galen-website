@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Raleway } from "next/font/google";
+import { Space_Grotesk, Raleway, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import JsonLd from "./components/v2/JsonLd";
@@ -18,6 +18,15 @@ const raleway = Raleway({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
+});
+
+// The app's own UI font, used only inside coded app screens (TutorPhone).
+const hanken = Hanken_Grotesk({
+  variable: "--font-app-var",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
 });
 
 // Site-wide defaults only. Every route sets its own title, description and canonical
@@ -51,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-IN">
-      <body className={`${space.variable} ${raleway.variable} antialiased overflow-x-hidden bg-white`}>
+      <body className={`${space.variable} ${raleway.variable} ${hanken.variable} antialiased overflow-x-hidden bg-white`}>
         <JsonLd data={[organizationLd(), websiteLd()]} />
         <GoogleAnalytics gaId={IDS.ga4} />
         {children}

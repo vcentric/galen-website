@@ -5,8 +5,7 @@ import { CONTACT, LINKS, SITE } from "@/lib/site";
 import JsonLd from "@/app/components/v2/JsonLd";
 import CtaLink from "@/app/components/v2/CtaLink";
 import VideoLite from "@/app/components/v2/VideoLite";
-import { TutorPhone } from "@/app/components/v2/TutorDemo";
-import { tutorDemos } from "@/content/site/demos";
+import AppScreen from "@/app/components/v2/AppScreen";
 import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
 
 /**
@@ -146,11 +145,9 @@ export default function InstitutionsPage() {
                 sizes="(min-width: 1024px) 600px, 92vw"
                 className="h-auto w-full rounded-[18px] shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
               />
-              {/* Coded student screen at half size (320px rendered, scaled 0.5). */}
-              <div className="absolute -bottom-12 -left-4 hidden h-[330px] w-[160px] sm:block">
-                <div className="origin-top-left scale-50">
-                  <TutorPhone d={tutorDemos[0]} />
-                </div>
+              {/* Real student app screen (dark theme), overlapping the workspace like the brochure cover. */}
+              <div className="absolute -bottom-12 -left-4 hidden sm:block">
+                <AppScreen name="tutor-isovolumetric" alt="" width={165} />
               </div>
             </div>
           </div>

@@ -2,15 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { buildMetadata, faqLd, softwareAppLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
-import { studentFaqs, testimonials, tutorDemos } from "@/content/site/demos";
+import { studentFaqs, testimonials } from "@/content/site/demos";
 import JsonLd from "@/app/components/v2/JsonLd";
 import CtaLink from "@/app/components/v2/CtaLink";
 import QrBlock from "@/app/components/v2/QrBlock";
 import StickyMobileCta from "@/app/components/v2/StickyMobileCta";
 import StoreBadges from "@/app/components/v2/StoreBadges";
-import TutorDemo, { TutorPhone } from "@/app/components/v2/TutorDemo";
+import TutorDemo, { HeroTutor } from "@/app/components/v2/TutorDemo";
 import ModeExplorer from "@/app/components/v2/ModeExplorer";
 import PhoneFrame from "@/app/components/v2/PhoneFrame";
+import AppScreen, { type AppScreenName } from "@/app/components/v2/AppScreen";
 import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
 
 export const metadata = buildMetadata({
@@ -25,7 +26,7 @@ const BEATS = [
     word: "Ask.",
     title: "An AI tutor for every doubt",
     body: "Ask in your own words. Get a clear answer with references, in the mode that suits the topic.",
-    img: "/how-to-use/img/s_explain_web.webp",
+    img: "tutor-s2" as AppScreenName,
     href: "/features/ai-tutor",
     link: "How the tutor works",
   },
@@ -33,7 +34,7 @@ const BEATS = [
     word: "Practise.",
     title: "Questions and cases that test you",
     body: "Clinical MCQs with step-by-step reasoning, and patient cases you work through one decision at a time.",
-    img: "/how-to-use/img/s_qb_ans.webp",
+    img: "question-bank-answer" as AppScreenName,
     href: "/features/question-bank",
     link: "See the question bank",
   },
@@ -41,7 +42,7 @@ const BEATS = [
     word: "Revise.",
     title: "Flashcards and a map of your gaps",
     body: "Spaced revision brings hard cards back sooner. Your dashboard shows the weakest topic so you know what's next.",
-    img: "/how-to-use/img/s_dash.webp",
+    img: "flashcard-back" as AppScreenName,
     href: "/features/dashboard",
     link: "See the dashboard",
   },
@@ -130,7 +131,7 @@ export default function Home() {
           </div>
           <div className="flex justify-center lg:justify-end">
             {/* Coded app screen (real answer, see content/site/demos.ts). Text, so the H1 stays the LCP. */}
-            <TutorPhone d={tutorDemos[2]} />
+            <HeroTutor />
           </div>
         </div>
       </section>
@@ -181,7 +182,7 @@ export default function Home() {
         <div className="mt-12 grid gap-12 md:grid-cols-3 md:gap-8">
           {BEATS.map((b) => (
             <div key={b.word} className="flex flex-col">
-              <PhoneFrame src={b.img} alt={b.title} width={220} className="mx-auto md:mx-0" />
+              <AppScreen name={b.img} alt={b.title} width={230} className="mx-auto md:mx-0" />
               <p className="h2 mt-8 !text-[2rem] acc">{b.word}</p>
               <h3 className="h3 mt-2">{b.title}</h3>
               <p className="mt-2" style={{ color: "var(--body)" }}>

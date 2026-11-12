@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# app screen capture scratch (docs/v2/APP_SCREENS.md)
+/.kit/
+/app-captures/
