@@ -41,7 +41,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
             )}
           </div>
         )}
-        <h3 className="font-primary text-[1.35rem] font-medium text-dark mb-3 leading-[1.3] line-clamp-2 transition-colors duration-300 group-hover:text-orange">
+        <h3 className="font-primary text-[1.35rem] font-bold text-dark mb-3 leading-[1.3] line-clamp-2 transition-colors duration-300 group-hover:text-orange">
           {post.title}
         </h3>
         <p className="font-secondary text-[0.95rem] text-text-secondary leading-relaxed mb-6 line-clamp-2 flex-1">

@@ -73,18 +73,24 @@ export default function BlogIndexContent({
   };
 
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="v2 min-h-screen">
       {/* Hero Section */}
-      <div className="pt-32 pb-8 px-8 text-center border-b border-black/5 relative">
+      <div className="pt-40 pb-8 px-8 text-center border-b border-black/5 relative md:pt-44">
         <div className="max-w-[800px] mx-auto relative z-10 flex flex-col items-center">
-          <h1 className="font-primary text-[clamp(2.2rem,6vw,3.5rem)] font-semibold text-dark mb-6 tracking-[-0.03em] leading-[1.1] inline-block relative pb-5">
-            {selectedCategory !== "All"
-              ? `Category: ${selectedCategory}`
-              : "Blogs & Resources"}
-            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100px] h-[4px] bg-orange rounded-full opacity-90"></span>
+          <p className="kick mb-5">Articles</p>
+          <h1 className="h1 !text-[clamp(2.4rem,6vw,4rem)] mb-6">
+            {selectedCategory !== "All" ? (
+              <>
+                Category: <span className="acc">{selectedCategory}</span>
+              </>
+            ) : (
+              <>
+                Blogs &amp; <span className="acc">Resources</span>
+              </>
+            )}
           </h1>
 
-          <p className="font-secondary text-[clamp(1rem,2.5vw,1.2rem)] font-normal text-text-secondary leading-[1.6] mb-10 max-w-[600px] opacity-80">
+          <p className="lead mx-auto mb-10 max-w-[600px]">
             Clinical reasoning, study systems, CBME insights, and medical
             learning science.
           </p>
@@ -147,7 +153,7 @@ export default function BlogIndexContent({
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35" />
             </svg>
-            <h3 className="font-primary text-2xl font-medium text-dark mb-3">
+            <h3 className="font-primary text-2xl font-bold text-dark mb-3">
               No articles found
             </h3>
             <p className="font-secondary text-base text-text-muted">

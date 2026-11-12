@@ -36,7 +36,7 @@ const FeaturedPost = ({ post }: FeaturedPostProps) => {
           <span className="text-orange font-primary text-[0.75rem] font-bold uppercase tracking-widest block mb-4">
             {post.category}
           </span>
-          <h2 className="font-primary text-[clamp(1.75rem,3vw,2.5rem)] font-medium text-dark leading-[1.1] mb-6 tracking-[-0.03em] group-hover:text-orange transition-colors duration-300">
+          <h2 className="font-primary text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-dark leading-[1.1] mb-6 tracking-[-0.04em] group-hover:text-orange transition-colors duration-300">
             {post.title}
           </h2>
           <p className="font-secondary text-[clamp(1rem,1.5vw,1.15rem)] text-text-secondary leading-relaxed mb-8 line-clamp-3">

@@ -97,9 +97,9 @@ export default function BlogPostClient({
   };
 
   return (
-    <div className="min-h-screen bg-bg-primary blog-article-root">
+    <div className="v2 min-h-screen blog-article-root">
       {/* Breadcrumb */}
-      <div className="no-print bg-white/50 backdrop-blur-md border-b border-black/5 px-8 py-5 pt-28 max-[768px]:px-6 max-[768px]:pt-24">
+      <div className="no-print border-b border-black/5 px-8 py-5 pt-32 max-[768px]:px-6 max-[768px]:pt-28">
         <div className="max-w-[1240px] mx-auto flex items-center gap-3 font-primary text-[0.85rem] font-bold uppercase tracking-wider text-text-muted">
           <Link href="/blog" className="text-text-muted no-underline transition-colors duration-200 hover:text-orange">
             Blog
@@ -134,7 +134,7 @@ export default function BlogPostClient({
                 </span>
               )}
             </div>
-            <h1 className="font-primary text-[clamp(2.2rem,5.5vw,3.75rem)] font-medium text-dark leading-[1.08] mb-8 tracking-[-0.035em] text-balance">
+            <h1 className="font-primary text-[clamp(2.2rem,5.5vw,3.75rem)] font-bold text-dark leading-[1.08] mb-8 tracking-[-0.04em] text-balance">
               {post.title}
             </h1>
             <p className="font-secondary text-[clamp(1.15rem,2.2vw,1.5rem)] text-text-secondary leading-[1.55] mb-10 max-w-[720px]">
@@ -291,7 +291,7 @@ export default function BlogPostClient({
                 <div className="w-14 h-14 rounded-2xl bg-orange/10 border border-orange/20 flex items-center justify-center mb-6">
                   <ArrowUpRightIcon className="w-7 h-7 text-orange" strokeWidth={2.5} />
                 </div>
-                <h4 className="font-primary text-[1.4rem] font-medium text-white mb-3">Master Medicine <br/> with GalenAI</h4>
+                <h4 className="font-primary text-[1.4rem] font-bold text-white mb-3">Master Medicine <br/> with GalenAI</h4>
                 <p className="font-secondary text-[0.95rem] leading-relaxed text-white/60 mb-8">
                   Get personalized guidance and understanding for your medical journey.
                 </p>
@@ -311,7 +311,7 @@ export default function BlogPostClient({
       {relatedPosts.length > 0 && (
         <div className="no-print bg-white border-t border-black/5 px-8 py-24 mt-16 max-[768px]:px-6">
           <div className="max-w-[1240px] mx-auto">
-            <h3 className="font-primary text-[2rem] font-medium text-dark mb-12 tracking-[-0.02em]">Related Articles</h3>
+            <h3 className="font-primary text-[2rem] font-bold text-dark mb-12 tracking-[-0.04em]">Related Articles</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {relatedPosts.map((relatedPost) => (
                 <BlogCard key={relatedPost.slug} post={relatedPost} />

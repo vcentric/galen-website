@@ -79,3 +79,8 @@
 @media (prefers-reduced-motion: reduce) {
   .v2 * { animation: none !important; transition: none !important; }
 }
+
+/* Articles (/blog) on the landing theme: article body headings and text match .h2/.lead. */
+.v2 .blog-content h2 { font-weight: 700; letter-spacing: -0.035em; }
+.v2 .blog-content h3 { font-weight: 700; letter-spacing: -0.025em; }
+.v2 .blog-content p, .v2 .blog-content li { color: rgba(46, 46, 46, 0.82); }
