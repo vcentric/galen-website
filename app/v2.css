@@ -1,0 +1,67 @@
+/* ═══════════════════════════════════════════
+   V2 DESIGN SYSTEM (docs/v2/reference/DESIGN_SYSTEM.md)
+   Imported from globals.css. Everything new is scoped under .v2 so the legacy
+   pages keep rendering until they are rebuilt. When the last legacy page is gone,
+   delete the notebook-paper background on :root in globals.css.
+
+   Colour tokens already in globals.css @theme:
+     --color-orange #eb602d   accent only: one emphasis word, CTAs, numbers
+     --color-light  #fff0e4   CREAM: student / default warm background
+     --color-beige  #f6f4f1   NEUTRAL: institutional background
+     --color-dark   #2e2e2e   CHARCOAL: text and dark sections. Never pure black.
+   ═══════════════════════════════════════════ */
+
+.v2 {
+  --rule: rgba(46, 46, 46, 0.12);
+  --body: rgba(46, 46, 46, 0.8);
+  --orange-dark: #c94d20; /* orange TEXT on light where contrast matters */
+  background: var(--color-light);
+  color: var(--color-dark);
+  font-family: var(--font-raleway-var), sans-serif;
+  position: relative;
+}
+.v2[data-tone="neutral"] { background: var(--color-beige); }
+
+/* Charcoal with the faint square grid. Flat everywhere else: no gradients, no glows. */
+.v2 .tone-dark,
+.v2[data-tone="dark"] {
+  background:
+    linear-gradient(rgba(255, 240, 228, 0.05) 2px, transparent 2px) 0 0 / 80px 80px,
+    linear-gradient(90deg, rgba(255, 240, 228, 0.05) 2px, transparent 2px) 0 0 / 80px 80px,
+    #2e2e2e;
+  color: var(--color-light);
+  --body: rgba(255, 240, 228, 0.8);
+  --rule: rgba(255, 240, 228, 0.16);
+}
+
+.v2 .wrap { width: 100%; max-width: 1180px; margin-inline: auto; padding-inline: clamp(1rem, 5vw, 2.5rem); }
+.v2 .sec { padding-block: clamp(3rem, 8vw, 6rem); }
+
+/* Type. One orange word or phrase per headline, via .acc */
+.v2 .h1 { font: 700 clamp(2.4rem, 7.2vw, 4.75rem) / 0.95 var(--font-space-var), sans-serif; letter-spacing: -0.045em; text-wrap: balance; }
+.v2 .h2 { font: 700 clamp(1.75rem, 4.4vw, 3rem) / 1 var(--font-space-var), sans-serif; letter-spacing: -0.035em; text-wrap: balance; }
+.v2 .h3 { font: 700 1.25rem / 1.12 var(--font-space-var), sans-serif; letter-spacing: -0.015em; }
+.v2 .lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.45; font-weight: 500; color: var(--body); max-width: 62ch; }
+.v2 .acc { color: var(--color-orange); }
+.v2 .kick { display: flex; align-items: center; gap: 0.75rem; font: 700 0.75rem / 1 var(--font-raleway-var), sans-serif; letter-spacing: 0.17em; text-transform: uppercase; }
+.v2 .kick::before { content: ""; width: 2.25rem; height: 3px; background: var(--color-orange); }
+
+/* Buttons. Min 48px tap target. Primary is the only filled orange thing on a screen. */
+.v2 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 3.25rem; padding: 0 1.6rem; border-radius: 999px; font: 700 1.0625rem / 1 var(--font-space-var), sans-serif; letter-spacing: -0.01em; transition: transform 0.15s ease, background-color 0.15s ease; white-space: nowrap; }
+.v2 .btn:active { transform: scale(0.98); }
+.v2 .btn-primary { background: var(--color-orange); color: #fff; }
+.v2 .btn-primary:hover { background: #d14d1f; }
+.v2 .btn-ghost { border: 2px solid currentColor; }
+.v2 .btn:focus-visible, .v2 a:focus-visible, .v2 summary:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 3px; }
+
+.v2 .pill-soon { display: inline-block; font: 700 0.6875rem / 1 var(--font-raleway-var), sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange-dark); border: 2px solid var(--color-orange); border-radius: 999px; padding: 0.35rem 0.6rem; }
+
+.v2 .card { background: #fff; border-radius: 22px; box-shadow: 0 30px 80px rgba(46, 46, 46, 0.12); outline: 2px solid rgba(46, 46, 46, 0.08); }
+
+/* Skeleton placeholder. Shows the executor what belongs in each section. */
+.v2 .blueprint { border: 2px dashed rgba(46, 46, 46, 0.25); border-radius: 22px; padding: 1.25rem 1.5rem; background: rgba(255, 255, 255, 0.5); color: var(--color-dark); font-size: 0.9375rem; line-height: 1.5; }
+.v2 .blueprint b { font-family: var(--font-space-var), sans-serif; color: var(--orange-dark); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v2 * { animation: none !important; transition: none !important; }
+}

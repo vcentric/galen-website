@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 95.03 103.52">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="57.37" y1="8277.69" x2="57.37" y2="8375.14" gradientTransform="translate(0 8375.14) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffddca"/>
+      <stop offset="1" stop-color="#fff1e1"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="47.51" y1="8271.62" x2="47.51" y2="8369.08" gradientTransform="translate(0 8375.14) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#eb602d"/>
+      <stop offset=".34" stop-color="#f36f44"/>
+      <stop offset=".74" stop-color="#fc7c59"/>
+      <stop offset="1" stop-color="#ff8261"/>
+    </linearGradient>
+  </defs>
+  <g id="tidy_d_up" data-name="tidy&amp;apos;d up">
+    <g>
+      <path class="cls-2" d="M68.24,6.07h-17.19c-1.67,0-3.03-1.36-3.03-3.03s1.36-3.03,3.03-3.03h17.19c1.67,0,3.03,1.36,3.03,3.03s-1.36,3.03-3.03,3.03ZM71.78,12.13h-24.26c-1.67,0-3.03,1.36-3.03,3.03v36.39c0,1.67,1.36,3.03,3.03,3.03h24.26c1.67,0,3.03-1.36,3.03-3.03V15.16c0-1.67-1.36-3.03-3.03-3.03ZM39.93,72.79v24.67h15.16v-24.67h-15.16Z"/>
+      <path class="cls-1" d="M67.23,6.07v6.07h-15.16v-6.07h15.16ZM71.78,72.79h-16.68v6.07h16.68c1.67,0,3.03-1.36,3.03-3.03s-1.36-3.03-3.03-3.03ZM44.48,31.34h-12.64c-14.8,0-26.79,11.99-26.79,26.79s11.99,26.79,26.79,26.79h8.09v-12.13h-8.09c-8.1,0-14.66-6.56-14.66-14.66s6.56-14.66,14.66-14.66h12.64v-12.13ZM67.23,54.59h-15.16v9.1c0,1.67,1.36,3.03,3.03,3.03h9.1c1.67,0,3.03-1.36,3.03-3.03v-9.1ZM95.03,100.49c0-1.67-1.36-3.03-3.03-3.03H3.03c-1.67,0-3.03,1.36-3.03,3.03s1.36,3.03,3.03,3.03h88.96c1.67,0,3.03-1.36,3.03-3.03Z"/>
+    </g>
+  </g>
+</svg>

@@ -1,17 +1,39 @@
 import type { MetadataRoute } from "next";
+import { SITE } from "@/lib/site";
 
-const BASE_URL = "https://www.galenai.io";
+const PRIVATE = ["/keystatic", "/api/"];
 
-// Native Next.js robots.txt — regenerated on every build. Crawlers are welcome
-// everywhere except the Keystatic admin and its API routes (nothing to index there).
+/**
+ * Crawlers are welcome everywhere except the CMS and API routes. AI search and answer
+ * crawlers are named explicitly so the intent is unambiguous: we want GalenAI pages
+ * read and cited by AI engines.
+ *
+ * /go/* and /qr are NOT disallowed here on purpose. They carry a noindex meta tag, and
+ * a crawler has to be allowed to fetch a page to see that tag. Blocking them in
+ * robots.txt could leave the bare URL in the index.
+ */
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: ["/keystatic", "/api/"],
-    },
-    sitemap: `${BASE_URL}/sitemap.xml`,
-    host: BASE_URL,
+    rules: [
+      { userAgent: "*", allow: "/", disallow: PRIVATE },
+      {
+        userAgent: [
+          "Googlebot",
+          "Bingbot",
+          "OAI-SearchBot",
+          "ChatGPT-User",
+          "GPTBot",
+          "PerplexityBot",
+          "ClaudeBot",
+          "Claude-SearchBot",
+          "Google-Extended",
+          "Applebot-Extended",
+        ],
+        allow: "/",
+        disallow: PRIVATE,
+      },
+    ],
+    sitemap: `${SITE.url}/sitemap.xml`,
+    host: SITE.url,
   };
 }
