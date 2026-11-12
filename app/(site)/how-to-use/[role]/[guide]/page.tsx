@@ -47,7 +47,7 @@ export default async function HowToGuidePage({ params }: Props) {
   return (
     <div className="v2" data-tone="neutral">
       <JsonLd data={breadcrumbLd(trail)} />
-      <header className="wrap pt-32 md:pt-40 pb-6">
+      <header className="wrap pt-24 md:pt-32 pb-6">
         <Breadcrumbs trail={trail} />
         <Kicker>{r.label} guide</Kicker>
         <div className="mt-5">

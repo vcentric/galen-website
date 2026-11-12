@@ -40,6 +40,28 @@ export const staticRoutes: { path: string; live: boolean; priority: number }[] =
 /** How-to routes go live together, once the port from the source page is checked. */
 export const HOW_TO_LIVE = false;
 
+const BESPOKE_LABELS: Record<string, string> = {
+  "/": "GalenAI for students",
+  "/institutions": "GalenAI for medical colleges",
+  "/features": "All features",
+  "/how-to-use": "How to use GalenAI",
+  "/download": "Download the app",
+};
+
+/** Human label for an internal path, for related-link lists. */
+export function pageLabel(path: string): string {
+  if (BESPOKE_LABELS[path]) return BESPOKE_LABELS[path];
+  const spec = specPages.find((p) => p.path === path);
+  if (spec) return spec.kicker.replace(/ · Coming soon$/, "");
+  const m = path.match(/^\/how-to-use\/(\w+)(?:\/([\w-]+))?$/);
+  if (m) {
+    const role = howToRoles[m[1] as keyof typeof howToRoles];
+    const guide = role?.guides.find((g) => g.slug === m[2]);
+    if (role) return guide ? `${role.label} guide: ${guide.title}` : `${role.label} guide`;
+  }
+  return path;
+}
+
 export const howToPaths = () =>
   howToRoleKeys.flatMap((role) => [
     `/how-to-use/${role}`,

@@ -20,7 +20,7 @@ export default function HowToHub() {
   return (
     <div className="v2" data-tone="neutral">
       <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: "How to use", path: "/how-to-use" }])} />
-      <header className="wrap pt-32 md:pt-40 pb-6">
+      <header className="wrap pt-24 md:pt-32 pb-6">
         <Kicker>How to use</Kicker>
         <div className="mt-5">
           <Headline text="How to use" accent="GalenAI." />

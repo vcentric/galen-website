@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { PageSpec } from "@/content/site/types";
+import { pageLabel } from "@/content/site";
 import { breadcrumbLd, faqLd, softwareAppLd } from "@/lib/seo";
 import JsonLd from "./JsonLd";
 import CtaLink from "./CtaLink";
@@ -33,7 +34,7 @@ export default function SpecPage({
     <div className="v2" data-tone={tone}>
       <JsonLd data={ld} />
 
-      <header className="wrap pt-32 md:pt-40 pb-10">
+      <header className="wrap pt-24 md:pt-32 pb-10">
         <Breadcrumbs trail={fullTrail} />
         <Kicker>{spec.kicker}</Kicker>
         <div className="mt-5">
@@ -82,13 +83,12 @@ export default function SpecPage({
           <ul className="mt-4 flex flex-wrap gap-3">
             {spec.related.map((p) => (
               <li key={p}>
-                <Link href={p} className="btn btn-ghost !min-h-10 !text-sm">
-                  {p}
+                <Link href={p} className="btn btn-ghost !min-h-10 !text-sm !whitespace-normal text-center">
+                  {pageLabel(p)}
                 </Link>
               </li>
             ))}
           </ul>
-          {/* TODO(exec): replace raw paths with page titles (look up in the registry). */}
         </Section>
       ) : null}
 

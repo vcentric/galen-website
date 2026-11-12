@@ -10,7 +10,6 @@ export const trackEvent = (eventName: string, params?: Record<string, any>) => {
   const utms = getUtmParams();
   const eventParams = { ...utms, ...params };
 
-  console.log("📊 GA Event Tracked:", eventName, eventParams);
 
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
     window.gtag("event", eventName, eventParams);
@@ -83,7 +82,6 @@ export const trackCTAClick = (destination: string, params: CtaClickParams) => {
     return;
   }
 
-  console.log("🚀 GA CTA Click Tracked:", logicalDestination, params);
 
   trackEvent("cta_click", {
     destination: logicalDestination,
