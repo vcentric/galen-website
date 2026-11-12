@@ -24,11 +24,29 @@ export type SectionKind =
   | "cta" // closing CTA band
   | "links"; // internal link hub
 
+export type Screen = { src: string; alt: string; frame: "phone" | "desk" | "none"; caption?: string };
+
+/**
+ * Real content for a section. When present, the shared component for the section's
+ * kind renders it (app/components/v2/sections/kinds.tsx). When absent, the section
+ * shows its blueprint box. Fill `content` to finish a section.
+ */
+export type SectionContent = {
+  intro?: string; // one line under the heading
+  items?: { t: string; b?: string; href?: string }[]; // steps, features, links
+  paragraphs?: string[]; // explain
+  screens?: Screen[]; // screens, demo fallback
+  table?: { head: [string, string, string]; rows: [string, string, string][]; note?: string }; // compare
+  demo?: "tutor" | "modes" | "mcq"; // demo widget
+  pill?: string; // e.g. "Coming soon"
+};
+
 export type SectionSpec = {
   id: string; // anchor id
   kind: SectionKind;
   heading: string; // real H2, phrased the way people ask
   notes: string; // what goes here: copy direction, assets, source file
+  content?: SectionContent;
 };
 
 export type Faq = { q: string; a: string };

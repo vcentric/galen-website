@@ -1,10 +1,25 @@
-import type { PageSpec } from "./types";
+import type { PageSpec, Screen } from "./types";
 
 /**
  * /features/{slug}. One page per capability. Each answers "what is it, how does it
  * work, how is it different from what I do today" and ends in the download CTA.
- * Product facts come from docs/v2/reference/how-to-use-source/CONTEXT.md.
+ * Product facts: docs/v2/reference/how-to-use-source/CONTEXT.md.
+ * Screens: public/how-to-use/img (approved How to Use page captures).
  */
+
+const phone = (name: string, alt: string, caption?: string): Screen => ({
+  src: `/how-to-use/img/${name}.webp`,
+  alt,
+  frame: "phone",
+  caption,
+});
+const desk = (name: string, alt: string, caption?: string): Screen => ({
+  src: `/how-to-use/img/${name}.webp`,
+  alt,
+  frame: "desk",
+  caption,
+});
+
 export const features: PageSpec[] = [
   {
     slug: "ai-tutor",
@@ -19,23 +34,49 @@ export const features: PageSpec[] = [
     h1: "Ask anything. Get it",
     h1Accent: "explained.",
     answer:
-      "GalenAI's AI tutor is a medical tutor on your phone for MBBS students in India. You ask a doubt in your own words, and it answers step by step with references shown, then offers follow-up questions and a quick quiz so the concept sticks.",
+      "GalenAI's AI tutor is a medical tutor on your phone for MBBS students in India. You ask a doubt in your own words, and it answers step by step with references, related figures and teaching videos, then offers follow-up questions and a quick quiz so the concept sticks.",
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "demo", heading: "See a real answer", notes: "Phone frame, dark mode. Use public/brand/ui/phone_tutor_answer_cited.webp or how-to img s_explain. Sample question chips swap the answer (cardiac cycle, troponin, heart sounds). Medical content must be the faculty-checked text already in the collateral." },
-      { id: "how", kind: "steps", heading: "How the AI tutor works", notes: "3 steps: Ask in your words (or attach a PDF with the paperclip). Read the answer with References. Tap a follow-up chip or ask for a quiz. Source: how-to st-tutor." },
-      { id: "why", kind: "features", heading: "Why students use it instead of searching", notes: "Dot list: references on every reply; follow-up chips; feedback (thumbs, flag); chat history; works for college lessons and exam prep. Citations are supporting, not the headline." },
-      { id: "modes", kind: "links", heading: "Choose how it teaches", notes: "Teaser cards for the five modes, link to /features/tutor-modes." },
-      { id: "cta", kind: "cta", heading: "Ask your first question", notes: "Download CTA + try on web. Specific payoff, not 'Get started'." },
+      { id: "demo", kind: "demo", heading: "See a real answer", notes: "Tutor demo.", content: { demo: "tutor" } },
+      {
+        id: "how",
+        kind: "steps",
+        heading: "How the AI tutor works",
+        notes: "How-to st-tutor.",
+        content: {
+          items: [
+            { t: "Ask in your own words", b: "Type a doubt, or attach a PDF with the paperclip and ask about it." },
+            { t: "Read the answer", b: "Every reply has References you can open, plus related figures, tables and videos where they help." },
+            { t: "Keep going", b: "Tap a follow-up chip, ask for a quiz, or switch the tutor mode." },
+          ],
+        },
+      },
+      {
+        id: "why",
+        kind: "features",
+        heading: "Why students use it instead of searching",
+        notes: "",
+        content: {
+          items: [
+            { t: "References on every reply", b: "Open them to see where the answer came from." },
+            { t: "Watch next, from trusted teaching channels", b: "The right video for the topic, starting at the right minute." },
+            { t: "Follow-ups that push you further", b: "\"Quiz me on this\" and the next question you should be asking." },
+            { t: "Five tutor modes", b: "Explain, Socratic, Case-based, Quick Q&A or Auto.", href: "/features/tutor-modes" },
+            { t: "Your chat history", b: "Every conversation saved, so revision starts where you stopped." },
+          ],
+          screens: [phone("s_history", "Chat history in the GalenAI app")],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Ask your first question", notes: "" },
     ],
     faqs: [
-      { q: "Is the GalenAI AI tutor free?", a: "TODO(varun): confirm current pricing wording. The live site says free for a limited time." },
+      { q: "Is the GalenAI AI tutor free?", a: "GalenAI is currently free for a limited time while we gather feedback from students." },
       { q: "Where do the tutor's answers come from?", a: "Answers are written from standard medical references, and each reply lists its references so you can check them. In colleges that use GalenAI, the tutor also answers from the college's approved content." },
       { q: "Can I use it for NEET PG, INI-CET or FMGE?", a: "Yes. You can ask exam-style doubts, switch to Quick Q&A for rapid revision, and practise in the question bank in the same app." },
     ],
     related: ["/features/tutor-modes", "/features/question-bank", "/how-to-use/students/ai-tutor", "/vs/chatgpt"],
-    flags: ["Confirm pricing/free wording.", "Confirm what attachments are live today (PDF only, or images too)."],
+    flags: ["Confirm what attachments are live today (PDF only, or images too)."],
   },
   {
     slug: "tutor-modes",
@@ -50,16 +91,40 @@ export const features: PageSpec[] = [
     h1: "One tutor. Five ways to",
     h1Accent: "teach.",
     answer:
-      "GalenAI lets you choose how the tutor answers. Auto picks for you, Explain breaks the topic down, Socratic questions you until you reach the answer, Case-based teaches through a patient, and Quick Q&A fires short questions for revision. You can also build a Tutor Profile with your own instructions.",
+      "GalenAI lets you choose how the tutor answers. Auto picks for you, Explain breaks the topic down, Socratic questions you until you reach the answer, Case-based teaches through a patient, and Quick Q&A fires short answers for revision. You can also build a Tutor Profile with your own instructions.",
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "explorer", kind: "demo", heading: "Try each mode", notes: "Port the mode explorer from the How to Use page (#modeSeg segmented control + mode panels + modeImg map). Same question answered five ways." },
-      { id: "when", kind: "features", heading: "Which mode to use when", notes: "Table: mode, use it when, example prompt. Source: how-to st-modes 'use it when' chips." },
-      { id: "profile", kind: "explain", heading: "Build your own tutor with Tutor Profile", notes: "Student writes instructions: how it teaches, what it refers to, answer format (Manage profiles). Clinical Reasoning Coach and Memory Builder are example names only. Tutor Mode and a profile are mutually exclusive." },
-      { id: "cta", kind: "cta", heading: "Pick a mode and ask", notes: "Download CTA." },
+      { id: "explorer", kind: "demo", heading: "Try each mode", notes: "Mode explorer.", content: { demo: "modes" } },
+      {
+        id: "how",
+        kind: "steps",
+        heading: "How to switch modes",
+        notes: "How-to st-modes.",
+        content: {
+          items: [
+            { t: "Tap the pill next to Send", b: "It shows the mode you are in. Default is plain chat." },
+            { t: "Open Tutor Mode", b: "Pick Auto, Explain, Socratic, Case-based or Quick Q&A." },
+            { t: "Ask as usual", b: "Switch at any point in the chat if you want a different style." },
+          ],
+        },
+      },
+      {
+        id: "profile",
+        kind: "explain",
+        heading: "Build your own tutor with Tutor Profile",
+        notes: "How-to st-extras.",
+        content: {
+          paragraphs: [
+            "A Tutor Profile is a tutor you build yourself. In Manage profiles you write instructions for how it teaches, what it should refer to and how answers should be formatted.",
+            "Use one profile for clinical reasoning and another for memorising, then switch between them. A profile and Tutor Mode are used one at a time.",
+          ],
+          items: [{ t: "How to build a Tutor Profile", href: "/how-to-use/students/profiles-notes-sources" }],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Pick a mode and ask", notes: "" },
     ],
-    related: ["/features/ai-tutor", "/how-to-use/students/tutor-modes"],
+    related: ["/features/ai-tutor", "/how-to-use/students/tutor-modes", "/for/inicet"],
   },
   {
     slug: "question-bank",
@@ -74,16 +139,43 @@ export const features: PageSpec[] = [
     h1: "Practise until it",
     h1Accent: "sticks.",
     answer:
-      "The GalenAI question bank gives MBBS students clinical MCQs with step-by-step reasoning for every option. Questions are organised by subject and competency, so you can practise for university exams and for NEET PG, INI-CET and FMGE, then ask the tutor about anything you got wrong.",
+      "The GalenAI question bank gives MBBS students clinical MCQs with step-by-step reasoning for every answer. Questions are organised by subject and competency, so you can practise for university exams and for NEET PG, INI-CET and FMGE, then ask the tutor about anything you got wrong.",
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "demo", heading: "Try one question", notes: "Interactive MCQ: the S2 heart sound question from the brochure (PY5.7). Tap an option, see the explanation. This is the curiosity hook; keep it real and faculty-checked." },
-      { id: "how", kind: "steps", heading: "How practice works", notes: "Pick subject, answer, read reasoning, ask the tutor, see weak areas on the dashboard. Source: how-to st-qbank." },
-      { id: "exam", kind: "features", heading: "Built for college exams and PG entrance", notes: "Exam mode for university exams and PG exams. Do not name competitor question banks." },
-      { id: "cta", kind: "cta", heading: "Get 4 questions now", notes: "Mirror the pamphlet payoff 'Scan. Get 4 questions.' Download CTA." },
+      { id: "demo", kind: "demo", heading: "Try one question", notes: "MCQ demo.", content: { demo: "mcq", intro: "Pick an answer. You get the reasoning straight away." } },
+      {
+        id: "how",
+        kind: "steps",
+        heading: "How practice works",
+        notes: "How-to st-qbank.",
+        content: {
+          items: [
+            { t: "Pick a subject", b: "Every subject, with competencies shown on each question." },
+            { t: "Answer", b: "One question at a time, in practice or exam mode." },
+            { t: "Read the reasoning", b: "Why the right answer is right, and why yours was not." },
+            { t: "Close the gap", b: "Ask the tutor, then check your weak topics on the dashboard." },
+          ],
+        },
+      },
+      {
+        id: "screens",
+        kind: "screens",
+        heading: "Inside the question bank",
+        notes: "",
+        content: {
+          screens: [
+            phone("s_qb_subjects", "Question bank subjects", "Subjects"),
+            phone("s_qb_q", "A clinical MCQ", "Question"),
+            phone("s_qb_ans", "Answer with explanation", "Reasoning"),
+          ],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Get 4 questions now", notes: "" },
     ],
+    faqs: [{ q: "Does the question bank cover NEET PG and FMGE?", a: "Yes. You can practise clinical MCQs for university exams and PG entrance in the same app, including an exam mode." }],
     related: ["/features/dashboard", "/for/neet-pg", "/how-to-use/students/question-bank"],
+    flags: ["Confirm question bank size and PYQ coverage before any number is printed."],
   },
   {
     slug: "flashcards",
@@ -102,9 +194,32 @@ export const features: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "demo", heading: "Flip a card", notes: "Tap-to-flip sample deck (3 cards). Source: how-to st-flash screens." },
-      { id: "how", kind: "steps", heading: "How spaced revision works", notes: "Plain explanation of spaced revision; no invented retention statistics." },
-      { id: "cta", kind: "cta", heading: "Start your first deck", notes: "Download CTA." },
+      {
+        id: "screens",
+        kind: "screens",
+        heading: "Flip, rate, repeat",
+        notes: "",
+        content: {
+          screens: [
+            phone("s_fc_subjects", "Flashcard decks by subject", "Decks"),
+            phone("s_fc_front", "Flashcard front", "Front"),
+            phone("s_fc_back", "Flashcard back", "Back"),
+          ],
+        },
+      },
+      {
+        id: "how",
+        kind: "explain",
+        heading: "How spaced revision works",
+        notes: "No retention statistics.",
+        content: {
+          paragraphs: [
+            "After each card you say how well you knew it. Cards you knew well come back later; cards you struggled with come back sooner. Over a few days, your revision time goes to the facts you actually forget.",
+            "Faculty in colleges that use GalenAI can also publish their own decks to the class.",
+          ],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Start your first deck", notes: "" },
     ],
     related: ["/features/question-bank", "/how-to-use/students/flashcards"],
   },
@@ -121,13 +236,51 @@ export const features: PageSpec[] = [
     h1: "Think like a",
     h1Accent: "clinician.",
     answer:
-      "GalenAI clinical cases let medical students work through a patient from presentation to management. You choose what to ask, examine and order at each stage, and the AI responds and gives feedback, so you practise clinical reasoning and not only recall.",
+      "GalenAI clinical cases let medical students work through a patient from presentation to management. You decide what to ask, examine and order at each stage, and the AI responds and gives feedback, so you practise clinical reasoning and not only recall.",
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "demo", heading: "Open a case", notes: "Screens s_cc_subjects, s_cc_list, s_cc_intro, s_cc_stage as a stepped viewer." },
-      { id: "how", kind: "steps", heading: "How a case runs", notes: "Stages in order. Source: how-to st-cases." },
-      { id: "cta", kind: "cta", heading: "Take your first case", notes: "Download CTA. Mention house.galenai.io (Think Like HouseMD) as a related link, not a CTA." },
+      {
+        id: "screens",
+        kind: "screens",
+        heading: "Open a case",
+        notes: "",
+        content: {
+          screens: [
+            phone("s_cc_subjects", "Clinical case subjects", "Pick a subject"),
+            phone("s_cc_intro", "Case introduction", "Meet the patient"),
+            phone("s_cc_stage", "A case stage with a decision", "Decide, step by step"),
+          ],
+        },
+      },
+      {
+        id: "how",
+        kind: "steps",
+        heading: "How a case runs",
+        notes: "How-to st-cases.",
+        content: {
+          items: [
+            { t: "History", b: "Ask the questions you would ask on the ward." },
+            { t: "Examination and investigations", b: "Choose what to examine and what to order." },
+            { t: "Diagnosis and management", b: "Commit to a diagnosis and a plan." },
+            { t: "Feedback and score", b: "See what you missed and why it mattered." },
+          ],
+        },
+      },
+      {
+        id: "more",
+        kind: "explain",
+        heading: "Want quick cases inside a chat?",
+        notes: "",
+        content: {
+          paragraphs: ["Switch the tutor to Case-based mode and ask for a case on any topic, like chest pain or painless jaundice. It walks you through one decision at a time."],
+          items: [
+            { t: "Tutor modes", href: "/features/tutor-modes" },
+            { t: "How to use Clinical Cases", href: "/how-to-use/students/clinical-cases" },
+          ],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Take your first case", notes: "" },
     ],
     related: ["/features/ai-tutor", "/how-to-use/students/clinical-cases"],
   },
@@ -148,9 +301,22 @@ export const features: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "screens", heading: "Your progress at a glance", notes: "public/brand/ui/phone_dashboard.webp. Label clearly as sample data." },
-      { id: "what", kind: "features", heading: "What it tracks", notes: "Today, past 7 days, overall competencies, focus area, weekly activity, best subject. Source: how-to st-dashboard." },
-      { id: "cta", kind: "cta", heading: "Find your weak topic", notes: "Download CTA." },
+      {
+        id: "what",
+        kind: "features",
+        heading: "What it tracks",
+        notes: "How-to st-dashboard. Sample data.",
+        content: {
+          items: [
+            { t: "Questions, accuracy and completion", b: "Today, the past 7 days and overall." },
+            { t: "Your focus area", b: "The subject where your accuracy is lowest, with a Practise now button." },
+            { t: "Weekly activity and streak", b: "So consistency is visible." },
+            { t: "Competencies covered", b: "Progress across the CBME competencies." },
+          ],
+          screens: [phone("s_dash", "GalenAI dashboard (sample data)")],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Find your weak topic", notes: "" },
     ],
     related: ["/features/question-bank", "/how-to-use/students/dashboard"],
   },
@@ -171,9 +337,32 @@ export const features: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "screens", heading: "Inside a guided lesson", notes: "Screens d_lesson_must, d_lesson_good, d_quiz_q, d_quiz_res." },
-      { id: "college", kind: "explain", heading: "Lessons from your own faculty", notes: "Bridge to institutions: link /institutions. Source: how-to st-lessons." },
-      { id: "cta", kind: "cta", heading: "Start a guided lesson", notes: "Download CTA." },
+      {
+        id: "screens",
+        kind: "screens",
+        heading: "Inside a guided lesson",
+        notes: "",
+        content: {
+          screens: [
+            phone("d_lesson_must", "Must know section of a lesson", "Must know"),
+            phone("d_lesson_good", "Good to know section", "Good to know"),
+            phone("d_quiz_q", "End-of-lesson quiz", "Quick quiz"),
+          ],
+        },
+      },
+      {
+        id: "college",
+        kind: "explain",
+        heading: "Lessons from your own faculty",
+        notes: "How-to st-lessons.",
+        content: {
+          paragraphs: [
+            "When your college uses GalenAI, the lessons and materials your faculty publish arrive on your calendar, mapped to the competency, with slides, questions and files attached.",
+          ],
+          items: [{ t: "GalenAI for colleges", href: "/institutions" }],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Start a guided lesson", notes: "" },
     ],
     related: ["/institutions", "/how-to-use/students/guided-lessons"],
   },
@@ -183,8 +372,7 @@ export const features: PageSpec[] = [
     status: "skeleton",
     audience: "student",
     title: "Voice Viva Practice (Coming Soon)",
-    description:
-      "Practise viva questions out loud with an AI examiner. Voice viva is coming soon to GalenAI.",
+    description: "Practise viva questions out loud with an AI examiner. Voice viva is coming soon to GalenAI.",
     keywords: ["anatomy viva questions 260", "physiology viva questions 170", "ent viva questions 6,600"],
     kicker: "Voice viva · Coming soon",
     h1: "Practise your viva out",
@@ -193,18 +381,31 @@ export const features: PageSpec[] = [
       "Voice viva is a coming-soon GalenAI feature that lets medical students practise viva questions by speaking to an AI examiner. Until it launches, you can practise viva-style questions in text with the AI tutor's Socratic mode.",
     primaryCta: "download",
     sections: [
-      { id: "preview", kind: "screens", heading: "What it will look like", notes: "Screen d_viva. MUST carry the Coming soon pill everywhere. No launch date unless Varun gives one." },
-      { id: "now", kind: "explain", heading: "What you can do today", notes: "Socratic mode for viva-style practice. Link /features/tutor-modes." },
-      { id: "cta", kind: "cta", heading: "Practise in Socratic mode now", notes: "Download CTA." },
+      {
+        id: "preview",
+        kind: "screens",
+        heading: "What it will look like",
+        notes: "Coming soon pill everywhere.",
+        content: { pill: "Coming soon", screens: [phone("d_viva", "Voice viva preview (coming soon)")] },
+      },
+      {
+        id: "now",
+        kind: "explain",
+        heading: "What you can do today",
+        notes: "",
+        content: {
+          paragraphs: ["Socratic mode asks before it tells. Ask a \"why\" or \"how\" question and answer the tutor in your own words, the way a viva works. Tap Give me a hint when you are stuck."],
+          items: [{ t: "Tutor modes", href: "/features/tutor-modes" }],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Practise in Socratic mode now", notes: "" },
     ],
     related: ["/features/tutor-modes"],
-    flags: ["Is a waitlist wanted, or just the download CTA?"],
   },
 
-  /* ── Generator pages: keyword-led (9,900 / 3,600 / 2,900 / 2,400 monthly). ──
+  /* ── Generator pages: keyword-led (9,900 / 3,600 / 2,900 / 2,400 monthly).
      Blocked on a product answer: what can a logged-in STUDENT generate today?
-     In the faculty AI Workspace, Studio makes Slides, Assessment, Mind map, Flashcards.
-     If students cannot generate, these pages are faculty-facing and CTA = faculty-live. */
+     Content below describes the faculty AI Workspace, which is confirmed. */
   {
     slug: "ai-quiz-generator",
     path: "/features/ai-quiz-generator",
@@ -212,20 +413,40 @@ export const features: PageSpec[] = [
     audience: "all",
     title: "AI Quiz Generator for Medical Topics",
     description:
-      "Turn any medical topic or your own notes into a quiz with answers and reasoning. Built for MBBS students and medical faculty.",
+      "Turn any medical topic or your own references into a quiz with answers and reasoning. Built for MBBS students and medical faculty.",
     keywords: ["ai quiz generator 9,900", "ai mcq generator 390", "mcq generator from pdf 140", "ai assessment generator 110"],
     kicker: "AI quiz generator",
     h1: "Any topic. Quizzed in",
     h1Accent: "seconds.",
     answer:
-      "GalenAI's AI quiz generator makes multiple-choice questions on a medical topic, with the correct answer and reasoning for each option. Students use it in the tutor chat to test themselves; faculty use the AI Workspace to draft competency-based assessments from their own references.",
+      "GalenAI's AI quiz generator makes multiple-choice questions on a medical topic, with the correct answer and reasoning. Students ask the tutor to quiz them on any topic; faculty use the AI Workspace to draft competency-based assessments from their own references.",
     primaryCta: "download",
     secondaryCta: "faculty-live",
     sections: [
-      { id: "demo", kind: "demo", heading: "See a generated quiz", notes: "public/brand/ui/phone_tutor_quiz_references.webp (troponin quiz). " },
-      { id: "students", kind: "steps", heading: "For students: quiz yourself in the chat", notes: "Ask the tutor for a quiz on a topic." },
-      { id: "faculty", kind: "steps", heading: "For faculty: assessments from your references", notes: "AI Workspace, Studio, Assessment. AI drafts. Faculty review." },
-      { id: "cta", kind: "cta", heading: "Make your first quiz", notes: "Two CTAs by audience." },
+      {
+        id: "students",
+        kind: "steps",
+        heading: "For students: quiz yourself in the chat",
+        notes: "",
+        content: {
+          items: [
+            { t: "Ask about a topic", b: "Get the explanation first." },
+            { t: "Tap \"Quiz me on this\"", b: "Or type \"Give me 5 questions on heart sounds\"." },
+            { t: "Answer and learn", b: "Every question comes with the reasoning." },
+          ],
+        },
+      },
+      {
+        id: "faculty",
+        kind: "screens",
+        heading: "For faculty: assessments from your references",
+        notes: "",
+        content: {
+          intro: "In the AI Workspace Studio, choose Assessment. AI drafts competency-based questions with the answer and rationale. Faculty review, then schedule.",
+          screens: [desk("a_ws_assess", "Assessment draft in the AI Workspace")],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Make your first quiz", notes: "" },
     ],
     related: ["/features/question-bank", "/institutions/faculty"],
     flags: ["Confirm students can ask for a quiz from an attached PDF today."],
@@ -236,8 +457,7 @@ export const features: PageSpec[] = [
     status: "skeleton",
     audience: "all",
     title: "AI Flashcard Generator for Medical Students and Faculty",
-    description:
-      "Generate medical flashcards from a topic or your own references, then revise them with spaced revision in GalenAI.",
+    description: "Generate medical flashcards from a topic or your own references, then revise them with spaced revision in GalenAI.",
     keywords: ["ai flashcard generator 3,600"],
     kicker: "AI flashcard generator",
     h1: "Your notes, turned into",
@@ -247,9 +467,27 @@ export const features: PageSpec[] = [
     primaryCta: "faculty-live",
     secondaryCta: "download",
     sections: [
-      { id: "demo", kind: "screens", heading: "A generated deck", notes: "Faculty screen a_flash / f_ws_gallery." },
-      { id: "how", kind: "steps", heading: "How it works", notes: "Add sources, Studio, Flashcards, review, publish." },
-      { id: "cta", kind: "cta", heading: "Generate a deck", notes: "CTA depends on the flag below." },
+      {
+        id: "demo",
+        kind: "screens",
+        heading: "A generated deck",
+        notes: "",
+        content: { screens: [desk("a_flash", "Flashcards generated in the AI Workspace")] },
+      },
+      {
+        id: "how",
+        kind: "steps",
+        heading: "How it works",
+        notes: "",
+        content: {
+          items: [
+            { t: "Add your sources", b: "Your references, notes or slides." },
+            { t: "Studio, then Flashcards", b: "AI drafts the deck." },
+            { t: "Review and publish", b: "Students revise it with spaced revision." },
+          ],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Generate a deck", notes: "" },
     ],
     related: ["/features/flashcards", "/institutions/faculty"],
     flags: ["Can students generate their own flashcards, or faculty only?"],
@@ -271,9 +509,21 @@ export const features: PageSpec[] = [
     primaryCta: "faculty-live",
     secondaryCta: "demo",
     sections: [
-      { id: "demo", kind: "screens", heading: "A generated mind map", notes: "Screen a_mindmap." },
-      { id: "how", kind: "steps", heading: "How it works", notes: "Sources, Studio, Mind map, review, publish." },
-      { id: "cta", kind: "cta", heading: "Try it live", notes: "faculty.galenai.io." },
+      { id: "demo", kind: "screens", heading: "A generated mind map", notes: "", content: { screens: [desk("a_mindmap", "Mind map generated in the AI Workspace")] } },
+      {
+        id: "how",
+        kind: "steps",
+        heading: "How it works",
+        notes: "",
+        content: {
+          items: [
+            { t: "Add your sources", b: "Upload references for the topic." },
+            { t: "Studio, then Mind map", b: "AI drafts the map from your sources only." },
+            { t: "Review and publish", b: "Edit, then publish to your class." },
+          ],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Try it live", notes: "" },
     ],
     related: ["/institutions/faculty"],
   },
@@ -294,9 +544,30 @@ export const features: PageSpec[] = [
     primaryCta: "faculty-live",
     secondaryCta: "demo",
     sections: [
-      { id: "demo", kind: "screens", heading: "Generate lesson content", notes: "public/brand/ui/desktop_lesson_page.webp with panel_generate_lesson_content.webp overlaid (brochure page 2 layout)." },
-      { id: "how", kind: "steps", heading: "From timetable to published lesson", notes: "The six brochure steps: upload timetable, see every competency, create lessons, create with AI, review and publish, track and report." },
-      { id: "cta", kind: "cta", heading: "Try it live", notes: "faculty.galenai.io + Book a demo." },
+      {
+        id: "demo",
+        kind: "screens",
+        heading: "Generate lesson content",
+        notes: "",
+        content: { screens: [{ src: "/brand/ui/desktop_lesson_page.webp", alt: "Knee Joint lesson page with competencies", frame: "desk" }] },
+      },
+      {
+        id: "how",
+        kind: "steps",
+        heading: "From timetable to published lesson",
+        notes: "Brochure steps.",
+        content: {
+          items: [
+            { t: "Upload the timetable", b: "Your CBME timetable, validated on upload." },
+            { t: "See every competency", b: "A live calendar mapped to competencies." },
+            { t: "Create lessons", b: "Plan with your own references, material and notes." },
+            { t: "Create with AI", b: "Generate Must, Good and Nice to know content." },
+            { t: "Review and publish", b: "Edit anything, then publish to your class." },
+            { t: "Track and report", b: "Analytics by competency and student." },
+          ],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Try it live", notes: "" },
     ],
     related: ["/institutions/faculty", "/how-to-use/faculty/lesson-planning"],
   },

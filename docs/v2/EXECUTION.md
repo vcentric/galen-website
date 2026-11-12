@@ -22,7 +22,11 @@ Read first: `MASTERPLAN.md` (why), `PAGE_BLUEPRINTS.md` (bespoke pages), `refere
 | ✅ | P1 student home | |
 | ✅ | P2 institutions home | video id still pending |
 | ✅ | `/institutions/book-demo` | live; Netlify form `demo-request` needs a notification email |
-| ⏭ | Next | P3 remaining institution subpages, then P4 features |
+| ✅ | Section kinds (C1, C5-C9) | `sections/kinds.tsx`: a spec section renders real content when `content` is filled; otherwise the blueprint box shows |
+| ✅ | P3 institution subpages | faculty, administration, students, vs-lms, integrations: content filled, still `skeleton` (noindex) until Varun reviews |
+| ✅ | P4 features, P5 `/for`, `/vs` | all content filled; pages with `flags` still show the open-questions box |
+| ✅ | Review round 1 | real app answers in the tutor demo, video 3GjvIeQn9Yw, St. John's logo, team (Kavitha in, Dr. Sivaramakrishnan out), Team in nav |
+| ⏭ | Next | P6 how-to-use port (35 guides), P7 `/go/*` landing pages, `/features` hub polish; then flip reviewed pages to `live` |
 
 Gotchas learned: stop any `next start` server before `next build` (TaskStop does not always kill the node process; free port 3123 with `Stop-Process`). Check the build's exit code, not a grep's. Headless Chrome screenshots under 500 px wide are wrong; use Playwright with a mobile viewport.
 

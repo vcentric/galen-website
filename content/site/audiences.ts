@@ -1,4 +1,36 @@
-import type { PageSpec } from "./types";
+import type { PageSpec, SectionSpec } from "./types";
+
+/** The shared three-beat loop, reused on every exam page. */
+const LOOP: SectionSpec = {
+  id: "loop",
+  kind: "steps",
+  heading: "Ask. Practise. Revise.",
+  notes: "Shared loop.",
+  content: {
+    items: [
+      { t: "Ask", b: "Any doubt, answered with references, in the tutor mode that suits the topic." },
+      { t: "Practise", b: "Clinical MCQs with reasoning, and cases you work through one decision at a time." },
+      { t: "Revise", b: "Flashcards with spaced revision, and a dashboard that shows your weakest topic." },
+    ],
+  },
+};
+
+const HABIT: SectionSpec = {
+  id: "habit",
+  kind: "compare",
+  heading: "Asking beats watching at 2X",
+  notes: "Habits only, never a brand.",
+  content: {
+    table: {
+      head: ["", "The old way", "With GalenAI"],
+      rows: [
+        ["A doubt", "Waits for the next class or a long video", "Answered in seconds, with references"],
+        ["Practice", "Hours of questions, no idea why you got them wrong", "Reasoning on every answer, and a tutor to ask"],
+        ["Revision", "Re-reading notes you already know", "Spaced flashcards and your weakest topic first"],
+      ],
+    },
+  },
+};
 
 /** /for/{slug}: exam and stage landing pages for organic search. */
 export const audiences: PageSpec[] = [
@@ -19,15 +51,15 @@ export const audiences: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "demo", heading: "Try a NEET PG style question", notes: "Reuse the interactive MCQ section. Then 'Ask why' opens the tutor answer." },
-      { id: "loop", kind: "steps", heading: "Ask. Practise. Revise.", notes: "The three-beat loop with one phone screen each." },
-      { id: "habit", kind: "compare", heading: "Asking beats watching at 2X", notes: "Habit comparison from the pamphlets (WATCHING struck through, video subscription). Never name a competitor." },
-      { id: "proof", kind: "proof", heading: "Students already on it", notes: "Only approved proof points. See MASTERPLAN section 6." },
-      { id: "cta", kind: "cta", heading: "Start with 4 questions", notes: "Download CTA." },
+      { id: "demo", kind: "demo", heading: "Try a NEET PG style question", notes: "", content: { demo: "mcq", intro: "Answer it. Then imagine asking why, for every question you get wrong." } },
+      LOOP,
+      HABIT,
+      { id: "tutor", kind: "demo", heading: "Ask the tutor", notes: "", content: { demo: "tutor" } },
+      { id: "cta", kind: "cta", heading: "Start with 4 questions", notes: "" },
     ],
     faqs: [
-      { q: "Is GalenAI enough for NEET PG preparation?", a: "TODO(exec+varun): honest answer on what GalenAI covers today versus a full course. Do not overclaim." },
-      { q: "Does GalenAI have previous year questions?", a: "TODO(varun): confirm." },
+      { q: "Can GalenAI help me prepare for NEET PG?", a: "Yes. Use the question bank in exam mode, ask the tutor about every question you get wrong, revise with flashcards, and use the dashboard to find your weakest subject." },
+      { q: "Is GalenAI free?", a: "GalenAI is currently free for a limited time while we gather feedback from students." },
     ],
     related: ["/features/question-bank", "/features/ai-tutor", "/for/inicet", "/for/fmge"],
     flags: ["Confirm question bank size and PYQ coverage before any number is printed."],
@@ -49,9 +81,9 @@ export const audiences: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "demo", heading: "See Socratic mode on a concept", notes: "Mode explorer locked to Socratic." },
-      { id: "loop", kind: "steps", heading: "Ask. Practise. Revise.", notes: "Shared section." },
-      { id: "cta", kind: "cta", heading: "Ask your first question", notes: "Download CTA." },
+      { id: "modes", kind: "demo", heading: "Let the tutor question you", notes: "", content: { demo: "modes", intro: "Socratic mode answers your question with a question, the way a viva tests you." } },
+      LOOP,
+      { id: "cta", kind: "cta", heading: "Ask your first question", notes: "" },
     ],
     related: ["/for/neet-pg", "/features/tutor-modes"],
   },
@@ -68,13 +100,25 @@ export const audiences: PageSpec[] = [
     h1: "Clear the concepts. Clear",
     h1Accent: "FMGE.",
     answer:
-      "GalenAI helps foreign medical graduates prepare for FMGE with an AI tutor that explains any topic step by step, clinical MCQs with reasoning for every option, and flashcards with spaced revision, all in one app.",
+      "GalenAI helps foreign medical graduates prepare for FMGE with an AI tutor that explains any topic step by step, clinical MCQs with reasoning, and flashcards with spaced revision, all in one app.",
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "demo", kind: "demo", heading: "Try a question", notes: "Shared interactive MCQ." },
-      { id: "loop", kind: "steps", heading: "Ask. Practise. Revise.", notes: "Shared section." },
-      { id: "cta", kind: "cta", heading: "Start now", notes: "Download CTA." },
+      { id: "demo", kind: "demo", heading: "Try a question", notes: "", content: { demo: "mcq" } },
+      LOOP,
+      {
+        id: "why",
+        kind: "explain",
+        heading: "Built for studying on your own",
+        notes: "",
+        content: {
+          paragraphs: [
+            "Preparing for FMGE often means studying without a class around you. The tutor fills that gap: ask about any topic, in Explain mode for a clear walk-through or Quick Q&A for rapid revision, and get references with every answer.",
+          ],
+          items: [{ t: "Tutor modes", href: "/features/tutor-modes" }],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Start now", notes: "" },
     ],
     related: ["/for/neet-pg", "/features/question-bank"],
   },
@@ -95,16 +139,38 @@ export const audiences: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "year", kind: "features", heading: "What you use it for, year by year", notes: "Phase 1, 2, 3: subjects and the feature that helps most. Keep it factual." },
-      { id: "loop", kind: "steps", heading: "Ask. Practise. Revise.", notes: "Shared section." },
-      { id: "college", kind: "explain", heading: "If your college uses GalenAI", notes: "Faculty lessons on your calendar. Link /institutions." },
-      { id: "cta", kind: "cta", heading: "Ask anything", notes: "Download CTA." },
+      {
+        id: "year",
+        kind: "features",
+        heading: "What you use it for, phase by phase",
+        notes: "",
+        content: {
+          items: [
+            { t: "Phase 1: anatomy, physiology, biochemistry", b: "Explain mode for first reads, Socratic for vivas, guided lessons for structure.", href: "/features/guided-lessons" },
+            { t: "Phase 2: pathology, pharmacology, microbiology", b: "Question bank with reasoning and flashcards for the facts that need repetition.", href: "/features/question-bank" },
+            { t: "Phase 3: clinical subjects and postings", b: "Clinical cases and Case-based mode to practise decisions, not just recall.", href: "/features/clinical-cases" },
+            { t: "After MBBS: NEET PG, INI-CET, FMGE", b: "Exam mode and a dashboard that tracks your weakest subject.", href: "/for/neet-pg" },
+          ],
+        },
+      },
+      LOOP,
+      {
+        id: "college",
+        kind: "explain",
+        heading: "If your college uses GalenAI",
+        notes: "",
+        content: {
+          paragraphs: ["Your faculty's lessons and materials appear on your calendar in the same app, and the tutor answers from your college's approved content."],
+          items: [{ t: "GalenAI for colleges", href: "/institutions" }],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Ask anything", notes: "" },
     ],
     related: ["/features/ai-tutor", "/features/guided-lessons", "/how-to-use/students/start"],
   },
 ];
 
-/** /vs/{slug}: habit-level comparisons only. No named competitor products. */
+/** /vs/{slug}: habit-level comparisons only. No named competitor products beyond the general-AI category. */
 export const comparisons: PageSpec[] = [
   {
     slug: "chatgpt",
@@ -123,11 +189,29 @@ export const comparisons: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
-      { id: "table", kind: "compare", heading: "Side by side", notes: "Rows: source shown, curriculum mapping, tutor modes, practice (MCQ, flashcards, cases), progress tracking, college lessons. Describe general AI fairly and factually; no claims about a named product's accuracy. FLAG: brand rule says do not name competitors; Varun approved this slug in the structure, keep copy about the habit, not an attack." },
-      { id: "same-question", kind: "demo", heading: "The same question, the GalenAI way", notes: "Show only the GalenAI answer with references and follow-ups. Do not fabricate another product's output." },
-      { id: "cta", kind: "cta", heading: "Ask it your hardest doubt", notes: "Download CTA." },
+      {
+        id: "table",
+        kind: "compare",
+        heading: "Side by side",
+        notes: "Describe general AI fairly. No claims about a named product's accuracy.",
+        content: {
+          table: {
+            head: ["", "General AI chat", "GalenAI"],
+            rows: [
+              ["Built for", "Everyone and every topic", "Medical students, around the NMC CBME curriculum"],
+              ["Where answers come from", "Often not shown", "References on every reply"],
+              ["How it teaches", "Answers what you ask", "Explain, Socratic, Case-based, Quick Q&A, or your own Tutor Profile"],
+              ["Practice", "Only if you ask it to write questions", "Question bank with reasoning, clinical cases, flashcards"],
+              ["Progress", "Not tracked", "Dashboard by subject and competency"],
+              ["Your college", "Not connected", "Faculty lessons on your calendar, where your college uses GalenAI"],
+            ],
+          },
+        },
+      },
+      { id: "demo", kind: "demo", heading: "The same question, the GalenAI way", notes: "", content: { demo: "tutor" } },
+      { id: "cta", kind: "cta", heading: "Ask it your hardest doubt", notes: "" },
     ],
-    related: ["/features/ai-tutor", "/vs/lms"],
+    related: ["/features/ai-tutor", "/vs/lms", "/features/tutor-modes"],
   },
   {
     slug: "lms",
@@ -145,9 +229,39 @@ export const comparisons: PageSpec[] = [
       "A college LMS is a place to download files, submit work and see notices. GalenAI is a learning app: an AI tutor, question bank, flashcards and clinical cases, plus the lessons your faculty publish. Colleges can read the faculty and administration comparison on the institutions page.",
     primaryCta: "download",
     sections: [
-      { id: "table", kind: "compare", heading: "What students get", notes: "Student rows only from the comparison PDF. Link to /institutions/vs-lms for the full table." },
-      { id: "cta", kind: "cta", heading: "Try it", notes: "Download CTA + link 'Tell your college' to /institutions." },
+      {
+        id: "table",
+        kind: "compare",
+        heading: "What students get",
+        notes: "Student rows from the comparison PDF.",
+        content: {
+          table: {
+            head: ["", "Typical LMS", "GalenAI"],
+            rows: [
+              ["Day to day", "Download files, submit work, see notices", "Ask, practise and revise in one app"],
+              ["Doubts", "Read the files or post in a forum", "AI tutor with references, any time"],
+              ["Practice", "Quizzes your faculty write", "Question bank, clinical cases and flashcards, plus your faculty's assessments"],
+              ["Lessons", "Files uploaded to a course page", "Lessons on your calendar, mapped to the competency"],
+            ],
+            note: "For the faculty and administration comparison, see GalenAI vs your LMS for colleges.",
+          },
+        },
+      },
+      {
+        id: "college",
+        kind: "explain",
+        heading: "Want this at your college?",
+        notes: "",
+        content: {
+          paragraphs: ["Show your faculty how GalenAI works for colleges: lessons drafted from their own references, and CBME reports for the Medical Education Unit."],
+          items: [
+            { t: "GalenAI vs your LMS, for colleges", href: "/institutions/vs-lms" },
+            { t: "GalenAI for colleges", href: "/institutions" },
+          ],
+        },
+      },
+      { id: "cta", kind: "cta", heading: "Try it", notes: "" },
     ],
-    related: ["/institutions/vs-lms"],
+    related: ["/institutions/vs-lms", "/features/ai-tutor"],
   },
 ];

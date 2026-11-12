@@ -277,8 +277,21 @@ export default function InstitutionsPage() {
         <h2 className="h2 mt-5 max-w-3xl">
           Your LMS stores the syllabus. GalenAI <span className="acc">delivers it.</span>
         </h2>
-        <div className="mt-10 overflow-x-auto">
-          <table className="w-full min-w-[640px] border-collapse text-left">
+        <ul className="mt-10 space-y-3 md:hidden">
+          {LMS_ROWS.map(([area, lms, g]) => (
+            <li key={area} className="rounded-[18px] border-2 p-5" style={{ borderColor: "var(--rule)" }}>
+              <p className="h3 !text-lg">{area}</p>
+              <p className="mt-3 text-xs font-bold uppercase tracking-wider opacity-60">Typical LMS</p>
+              <p className="mt-1" style={{ color: "var(--body)" }}>
+                {lms}
+              </p>
+              <p className="mt-3 text-xs font-bold uppercase tracking-wider text-[#eb602d]">GalenAI</p>
+              <p className="mt-1 font-semibold">{g}</p>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-10 hidden md:block">
+          <table className="w-full border-collapse text-left">
             <thead>
               <tr className="text-sm uppercase tracking-wider opacity-70">
                 <th className="py-3 pr-6 font-semibold">Area</th>
