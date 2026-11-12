@@ -122,11 +122,37 @@ export const tutorModes = [
 ] as const;
 
 /**
- * Student testimonials, supplied by Varun (Nov 2026). Rose Joseph's quote says
- * "material" in place of "textbooks" at Varun's request, and "that fact" is
- * corrected to "the fact".
+ * Student testimonials. The first four are from the previous site
+ * (app/data/testimonials.ts, em dash replaced by a comma); the last three were
+ * supplied by Varun in Nov 2026 (Rose Joseph: "material" in place of "textbooks"
+ * at his request, "that fact" corrected to "the fact"). All seven are shown, in
+ * the auto-scrolling row on the home page.
  */
 export const testimonials = [
+  {
+    quote:
+      "What I like most about GalenAI is how it supports continuous learning. It has become my go-to platform for NEET PG. The AI truly understands what I'm looking for, and the clinical cases are both engaging and challenging, it has changed my perspective on how exam preparation should be approached.",
+    name: "Dr. Dhanya Rao",
+    meta: "MBBS, Father Muller Medical College · NEET PG aspirant",
+  },
+  {
+    quote:
+      "GalenAI has become a part of my day-to-day medical studies. It really helps with both pre-lecture preparation and post-lecture revision, especially for internals. The AI understands my syllabus well, and having all 19 subjects in one place makes it easy to query and learn. The clinical cases are challenging and push me to improve my clinical thinking and skills.",
+    name: "Dr. Navya Yalangi Rao",
+    meta: "MBBS, 3rd Year · Bharati Vidyapeeth Medical College",
+  },
+  {
+    quote:
+      "The AI Tutor, particularly with its various learning modes, has been a constant source of support throughout my studies. I have found the subject-wise Q-Banks to be exceptionally helpful; because they are aligned with specific competencies, they have made my revision process both structured and highly effective. GalenAI makes incorporating AI into serious medical preparation feel natural, reliable, and intuitive.",
+    name: "Dr. Varun Gopal Rajan",
+    meta: "MBBS · MRCS aspirant, Adichunchanagiri Institute of Medical Science",
+  },
+  {
+    quote:
+      "As a final year student, GalenAI is like my study buddy. I use it during my postings for fast reading and answering questions, and during my study sessions to keep things concise. As a person who learns through application, the case based learning and the different modes available in the tutor are my personal favourite. It helps me learn through cases, questions, flash cards and it truly feels like a buddy.",
+    name: "Siddhartha Kakani",
+    meta: "III MBBS Phase II, Bharati Vidyapeeth Medical College, Pune",
+  },
   {
     quote: "It was useful to revise before classes and I even used it before exam for quick revision.",
     name: "K Netanya Harriet",

@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { buildMetadata, faqLd, softwareAppLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
-import { studentFaqs, testimonials } from "@/content/site/demos";
+import { studentFaqs } from "@/content/site/demos";
+import TestimonialMarquee from "@/app/components/v2/TestimonialMarquee";
 import JsonLd from "@/app/components/v2/JsonLd";
 import CtaLink from "@/app/components/v2/CtaLink";
 import QrBlock from "@/app/components/v2/QrBlock";
@@ -248,20 +249,11 @@ export default function Home() {
         <h2 className="h2 mt-5">
           Built with medical <span className="acc">students.</span>
         </h2>
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <figure key={t.name} className="card flex flex-col p-7">
-              <blockquote className="flex-1 text-[1.05rem] leading-relaxed">&ldquo;{t.quote}&rdquo;</blockquote>
-              <figcaption className="mt-6">
-                <span className="block font-bold">{t.name}</span>
-                <span className="block text-sm" style={{ color: "var(--body)" }}>
-                  {t.meta}
-                </span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
       </Section>
+      {/* Full-bleed auto-scrolling row (all testimonials) */}
+      <div className="-mt-10 pb-6 md:-mt-14">
+        <TestimonialMarquee />
+      </div>
 
       {/* 7. Bridge to institutions: students as the referral channel */}
       <Section id="college">
