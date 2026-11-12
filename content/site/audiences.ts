@@ -32,6 +32,20 @@ const HABIT: SectionSpec = {
   },
 };
 
+/** Dedicated exam modules are not live yet (Varun, Nov 2026). Shown first on every exam page. */
+const examModulesSoon = (exam: string): SectionSpec => ({
+  id: "modules",
+  kind: "explain",
+  heading: `Dedicated ${exam} modules are coming soon`,
+  notes: "Coming soon notice.",
+  content: {
+    pill: "Coming soon",
+    paragraphs: [
+      `We are building AI modules made specifically for ${exam}. Until they launch, you can already prepare with everything in GalenAI today: the AI tutor for any doubt, the question bank with reasoning, flashcards and clinical cases.`,
+    ],
+  },
+});
+
 /** /for/{slug}: exam and stage landing pages for organic search. */
 export const audiences: PageSpec[] = [
   {
@@ -51,6 +65,7 @@ export const audiences: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
+      examModulesSoon("NEET PG"),
       { id: "demo", kind: "demo", heading: "Try a NEET PG style question", notes: "", content: { demo: "mcq", intro: "Answer it. Then imagine asking why, for every question you get wrong." } },
       LOOP,
       HABIT,
@@ -81,6 +96,7 @@ export const audiences: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
+      examModulesSoon("INI-CET"),
       { id: "modes", kind: "demo", heading: "Let the tutor question you", notes: "", content: { demo: "modes", intro: "Socratic mode answers your question with a question, the way a viva tests you." } },
       LOOP,
       { id: "cta", kind: "cta", heading: "Ask your first question", notes: "" },
@@ -104,6 +120,7 @@ export const audiences: PageSpec[] = [
     primaryCta: "download",
     secondaryCta: "try-web",
     sections: [
+      examModulesSoon("FMGE"),
       { id: "demo", kind: "demo", heading: "Try a question", notes: "", content: { demo: "mcq" } },
       LOOP,
       {

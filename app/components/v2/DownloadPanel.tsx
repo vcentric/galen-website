@@ -9,7 +9,7 @@ import { Headline, Kicker } from "./ui";
  */
 export default function DownloadPanel({ source }: { source: string }) {
   return (
-    <section className="wrap pt-32 pb-20 md:pt-40">
+    <section className="wrap pt-40 pb-20 md:pt-48">
       <div className="grid items-center gap-12 lg:grid-cols-[1.3fr_1fr]">
         <div>
           <Kicker>Get the app</Kicker>

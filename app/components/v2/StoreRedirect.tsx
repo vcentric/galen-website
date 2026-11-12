@@ -46,7 +46,7 @@ export default function StoreRedirect({
 
   if (!target) return null;
   return (
-    <div role="status" className="fixed inset-x-0 top-16 z-[110] bg-[#2e2e2e] px-4 py-3 text-center text-sm font-semibold text-[#fff0e4]">
+    <div role="status" className="fixed inset-x-0 top-24 z-[110] bg-[#2e2e2e] px-4 py-3 text-center text-sm font-semibold text-[#fff0e4]">
       Opening the store…{" "}
       <a href={target} className="underline">
         Tap here if nothing happens

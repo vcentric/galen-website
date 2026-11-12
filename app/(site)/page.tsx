@@ -74,14 +74,14 @@ const STAGES = [
   {
     tag: "NEET PG and INI-CET",
     who: "Interns and PG aspirants",
-    body: "Clinical MCQs with reasoning, exam mode, and a dashboard that shows your weakest subject.",
+    body: "Clinical MCQs with reasoning, exam mode, and a dashboard that shows your weakest subject. Dedicated PG modules coming soon.",
     href: "/for/neet-pg",
     link: "For NEET PG",
   },
   {
     tag: "FMGE",
     who: "Foreign medical graduates",
-    body: "A tutor for studying on your own, with a question bank and flashcards for fast revision.",
+    body: "A tutor for studying on your own, with a question bank and flashcards for fast revision. Dedicated FMGE modules coming soon.",
     href: "/for/fmge",
     link: "For FMGE",
   },
@@ -94,7 +94,7 @@ export default function Home() {
       <JsonLd data={[softwareAppLd(), faqLd(studentFaqs)]} />
 
       {/* 1. Hero: promise, proof, action. H1 + CTA fit one phone viewport. */}
-      <section className="wrap pt-24 pb-14 md:pt-32 md:pb-20">
+      <section className="wrap pt-32 pb-14 md:pt-40 md:pb-20">
         <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
           <div>
             <Kicker>For MBBS and medical students</Kicker>
@@ -105,7 +105,7 @@ export default function Home() {
             </h1>
             <p className="lead mt-6">
               GalenAI is the AI study app for medical students in India. Ask any doubt and get a clear answer with
-              references, then practise and revise until it sticks. From first-year MBBS to NEET PG.
+              references, then practise and revise until it sticks.
             </p>
             {/* Who it's for, at a glance */}
             <ul className="mt-6 flex flex-wrap gap-2" aria-label="Who GalenAI is for">
@@ -125,7 +125,10 @@ export default function Home() {
               <CtaLink intent="try-web" source="home_hero" variant="ghost" />
             </div>
             <p className="mt-5 text-sm font-semibold" style={{ color: "var(--body)" }}>
-              <span className="text-[#2e2e2e]">2,000+</span> medical students already on it. iPhone, Android and web.
+              <span className="mr-1 inline-flex items-center gap-1 rounded-full bg-[#eb602d]/10 px-2.5 py-0.5 font-bold text-[#c94d20]">
+                <span aria-hidden>✦</span> 2,000+
+              </span>
+              medical students already on it. iPhone, Android and web.
             </p>
             <QrBlock className="mt-10 hidden lg:flex" size={112} />
           </div>

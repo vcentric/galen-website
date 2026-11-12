@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import CtaLink from "./CtaLink";
+import { LINKS } from "@/lib/site";
 
 const STUDENT_LINKS = [
   { label: "Features", href: "/features" },
@@ -60,6 +61,18 @@ export default function Navbar() {
 
   return (
     <header className="v2 fixed inset-x-0 top-0 z-[120] !bg-[#fff0e4]/90 backdrop-blur border-b border-black/5">
+      {/* Top bar: Think Like HouseMD (house.galenai.io). 32px; page offsets in v2 pages account for it. */}
+      <a
+        href={LINKS.house}
+        rel="noopener"
+        className="flex h-8 items-center justify-center gap-2 bg-[#2e2e2e] px-4 text-[12.5px] font-semibold text-[#fff0e4] hover:bg-[#3a3a3a]"
+      >
+        <span className="rounded-full bg-[#eb602d] px-2 py-px text-[10px] font-bold uppercase tracking-wider text-white">Play</span>
+        <span className="truncate">
+          Think like <span className="text-[#ff9466]">HouseMD</span>: one patient, three clues, can you diagnose?
+        </span>
+        <span aria-hidden>→</span>
+      </a>
       <nav className="wrap flex h-16 items-center justify-between gap-4" aria-label="Main">
         <Link href={inst ? "/institutions" : "/"} aria-label="GalenAI home" className="shrink-0">
           <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} priority className="h-auto w-[104px] sm:w-[127px]" />

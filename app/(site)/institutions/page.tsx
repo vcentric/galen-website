@@ -113,7 +113,7 @@ export default function InstitutionsPage() {
 
       {/* 1. Hero, brochure-cover style */}
       <section className="tone-dark overflow-hidden">
-        <div className="wrap pt-28 pb-16 md:pt-36 md:pb-24">
+        <div className="wrap pt-36 pb-16 md:pt-44 md:pb-24">
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
             <div>
               <Kicker>For medical colleges</Kicker>
@@ -154,7 +154,39 @@ export default function InstitutionsPage() {
         </div>
       </section>
 
-      {/* 2. Video */}
+      {/* 2. Where we are (before the video, Varun Nov 2026): approved proof points only */}
+      <Section id="outcomes">
+        <Kicker>Where we are</Kicker>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="card flex flex-col justify-between gap-6 p-7">
+            {/* TODO(varun): swap for the logo file Varun sends, if different */}
+            <Image
+              src="/stjohns.webp"
+              alt="St. John's National Academy of Health Sciences"
+              width={1252}
+              height={210}
+              sizes="360px"
+              className="h-auto w-full max-w-[360px]"
+            />
+            <p className="font-semibold">
+              <span className="h3 text-[#eb602d]">MoU signed</span> with St. John&apos;s Medical College, Bengaluru.
+            </p>
+          </div>
+          <div className="card flex flex-col justify-between gap-6 p-7">
+            <p className="h1 !text-[clamp(3rem,7vw,4.5rem)] text-[#eb602d]">2,000+</p>
+            <p className="font-semibold">students signed up at launch.</p>
+          </div>
+        </div>
+        <p className="mt-8 max-w-3xl" style={{ color: "var(--body)" }}>
+          Founded by Dr. Arun Biju Oommen (MD Medicine; faculty at St. John&apos;s Medical College Hospital, Bengaluru)
+          and Varun Jagannathan, supported by senior faculty, CBME experts and medical students.{" "}
+          <Link href="/team" className="font-bold underline underline-offset-4">
+            Meet the team
+          </Link>
+        </p>
+      </Section>
+
+      {/* 3. Video */}
       <Section id="video">
         <div className="mx-auto max-w-4xl">
           <VideoLite youtubeId={VIDEO.youtubeId} title={VIDEO.name} />
@@ -319,38 +351,6 @@ export default function InstitutionsPage() {
             Your existing LMS content stays valuable
           </Link>
         </div>
-      </Section>
-
-      {/* 7. Proof: approved points only (MASTERPLAN section 6) */}
-      <Section id="outcomes">
-        <Kicker>Where we are</Kicker>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <div className="card flex flex-col justify-between gap-6 p-7">
-            {/* TODO(varun): swap for the logo file Varun sends, if different */}
-            <Image
-              src="/stjohns.webp"
-              alt="St. John's National Academy of Health Sciences"
-              width={1252}
-              height={210}
-              sizes="360px"
-              className="h-auto w-full max-w-[360px]"
-            />
-            <p className="font-semibold">
-              <span className="h3 text-[#eb602d]">MoU signed</span> with St. John&apos;s Medical College, Bengaluru.
-            </p>
-          </div>
-          <div className="card flex flex-col justify-between gap-6 p-7">
-            <p className="h1 !text-[clamp(3rem,7vw,4.5rem)] text-[#eb602d]">2,000+</p>
-            <p className="font-semibold">students signed up at launch.</p>
-          </div>
-        </div>
-        <p className="mt-8 max-w-3xl" style={{ color: "var(--body)" }}>
-          Founded by Dr. Arun Biju Oommen (MD Medicine; faculty at St. John&apos;s Medical College Hospital, Bengaluru)
-          and Varun Jagannathan, supported by senior faculty, CBME experts and medical students.{" "}
-          <Link href="/team" className="font-bold underline underline-offset-4">
-            Meet the team
-          </Link>
-        </p>
       </Section>
 
       {/* 8. FAQ */}

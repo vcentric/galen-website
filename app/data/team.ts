@@ -26,7 +26,7 @@ export const advisors = [
   {
     // From the 2026 pitch deck team slide.
     name: "Kavitha Vchalam",
-    title: "Advisor, CEO Entomo and Investor",
+    title: "Executive Advisor, CEO Entomo",
     bio: "Ex-HCL Technologies, Ex-Accenture | 30+ years in HR transformation, startup leadership and digital healthcare.",
     linkedin: "https://www.linkedin.com/in/kavithavchalam/",
     photo: "/Kavitha.webp", // cropped from the deck photo; swap for a higher-resolution one when available

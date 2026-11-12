@@ -28,7 +28,7 @@ export default function HowToShell({
   const r = howToRoles[role];
   return (
     <div className="v2" data-tone="neutral">
-      <div className="wrap pt-24 md:pt-28">
+      <div className="wrap pt-32 md:pt-36">
         <Breadcrumbs trail={trail} />
         <nav aria-label="Choose your role" className="-mx-1 flex gap-1.5 overflow-x-auto pb-1">
           {howToRoleKeys.map((k) => (
@@ -48,7 +48,7 @@ export default function HowToShell({
 
       <div className="wrap grid gap-10 pb-20 pt-8 lg:grid-cols-[232px_minmax(0,1fr)] lg:gap-12">
         <aside className="hidden lg:block">
-          <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-auto pr-2 text-sm">
+          <div className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-auto pr-2 text-sm">
             <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#6e655e]">{r.label} guides</p>
             <ol className="mt-3 border-l border-[#e7dfd6]">
               <li>

@@ -22,12 +22,12 @@
 }
 .v2[data-tone="neutral"] { background: var(--color-beige); }
 
-/* Charcoal with the faint square grid. Flat everywhere else: no gradients, no glows. */
+/* Charcoal with a very faint square grid (lightened Nov 2026: it fought tables). Flat everywhere else: no gradients, no glows. */
 .v2 .tone-dark,
 .v2[data-tone="dark"] {
   background:
-    linear-gradient(rgba(255, 240, 228, 0.05) 2px, transparent 2px) 0 0 / 80px 80px,
-    linear-gradient(90deg, rgba(255, 240, 228, 0.05) 2px, transparent 2px) 0 0 / 80px 80px,
+    linear-gradient(rgba(255, 240, 228, 0.022) 1px, transparent 1px) 0 0 / 80px 80px,
+    linear-gradient(90deg, rgba(255, 240, 228, 0.022) 1px, transparent 1px) 0 0 / 80px 80px,
     #2e2e2e;
   color: var(--color-light);
   --body: rgba(255, 240, 228, 0.8);
