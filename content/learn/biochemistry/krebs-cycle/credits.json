@@ -1,0 +1,54 @@
+[
+  {
+    "file": "images/krebs-cycle-overview-carbon-count.webp",
+    "slot": "krebs-cycle-overview-carbon-count",
+    "source": "https://commons.wikimedia.org/wiki/File:Citricacidcycle_ball.png",
+    "title": "File:Citricacidcycle ball.png",
+    "author": "en:User:TotoBaggins",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "en:User:TotoBaggins, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/krebs-cycle-enzymes-structures.webp",
+    "slot": "krebs-cycle-enzymes-structures",
+    "source": "https://commons.wikimedia.org/wiki/File:Citric_acid_cycle.png",
+    "title": "File:Citric acid cycle.png",
+    "author": "Theislikerice",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Theislikerice, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/etc-complexes-nadh-fadh2-entry.webp",
+    "slot": "etc-complexes-nadh-fadh2-entry",
+    "source": "https://commons.wikimedia.org/wiki/File:2508_The_Electron_Transport_Chain.jpg",
+    "title": "File:2508 The Electron Transport Chain.jpg",
+    "author": "OpenStax College",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "OpenStax College, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/pdh-complex-link-reaction.webp",
+    "slot": "pdh-complex-link-reaction",
+    "source": "https://commons.wikimedia.org/wiki/File:Pyruvate_Dehydrogenase_Mechanism.png",
+    "title": "File:Pyruvate Dehydrogenase Mechanism.png",
+    "author": "TstackPC",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "TstackPC, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  }
+]

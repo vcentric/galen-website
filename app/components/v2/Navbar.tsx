@@ -10,6 +10,7 @@ import { LINKS } from "@/lib/site";
 const STUDENT_LINKS = [
   { label: "Features", href: "/features" },
   { label: "For NEET PG", href: "/for/neet-pg" },
+  { label: "Learn", href: "/learn" },
   { label: "How to use", href: "/how-to-use" },
   { label: "Articles", href: "/blog" },
   { label: "Team", href: "/team" },
