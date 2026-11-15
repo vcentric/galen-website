@@ -211,6 +211,6 @@
 /* /learn accessibility and overflow fixes (audit) */
 .v2 .lmcq li:focus-visible, .v2 .lflash:focus-visible, .v2 .lesson-chip:focus-visible, .v2 .ltable:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 3px; }
 .v2 .lmcq li[aria-disabled="true"] { cursor: default; }
-.v2 .lesson-body { overflow-wrap: anywhere; }
-.v2 .lesson-body table { overflow-wrap: anywhere; }
+.v2 .lesson-body { overflow-wrap: break-word; }
+.v2 .lesson-body table { overflow-wrap: normal; word-break: normal; }
 .v2 .lmcq-stem:focus { outline: none; }
