@@ -1,0 +1,80 @@
+[
+  {
+    "file": null,
+    "slot": "action-potential-waveform-overview",
+    "source": "https://commons.wikimedia.org/wiki/File:Action_potential_vert.png",
+    "title": "File:Action potential vert.png",
+    "author": "Artwork by Synaptidude at en.wikipedia",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Artwork by Synaptidude at en.wikipedia, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "none (linked, not embedded)"
+  },
+  {
+    "file": "images/resting-potential-ion-gradients-pump.webp",
+    "slot": "resting-potential-ion-gradients-pump",
+    "source": "https://commons.wikimedia.org/wiki/File:Sodium-potassium_pump_and_diffusion.png",
+    "title": "File:Sodium-potassium pump and diffusion.png",
+    "author": "BruceBlaus. When using this image in external sources it can be cited as: Blausen.com staff (2014). \"Medical gallery of Blausen Medical 2014\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.010. ISSN 2002-4436. Derivative by Mikael H\u00e4ggstr\u00f6m",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "BruceBlaus, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/sodium-channel-gating-states.webp",
+    "slot": "sodium-channel-gating-states",
+    "source": "https://commons.wikimedia.org/wiki/File:Ball_and_Chain_Voltage-gated_Ion_Channel.png",
+    "title": "File:Ball and Chain Voltage-gated Ion Channel.png",
+    "author": "Tlunchman",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Tlunchman, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/threshold-subthreshold-stimuli.webp",
+    "slot": "threshold-subthreshold-stimuli",
+    "source": "https://commons.wikimedia.org/wiki/File:All-or-none_law_en.svg",
+    "title": "File:All-or-none law en.svg",
+    "author": "Blacktc",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Blacktc, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/local-circuit-propagation-unmyelinated.webp",
+    "slot": "local-circuit-propagation-unmyelinated",
+    "source": "https://commons.wikimedia.org/wiki/File:Propagation_of_action_potential_along_a_giant_axon_en.png",
+    "title": "File:Propagation of action potential along a giant axon en.png",
+    "author": "Qniemiec",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Qniemiec, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/saltatory-conduction-nodes-of-ranvier.webp",
+    "slot": "saltatory-conduction-nodes-of-ranvier",
+    "source": "https://commons.wikimedia.org/wiki/File:Propagation_of_action_potential_along_myelinated_nerve_fiber_en.svg",
+    "title": "File:Propagation of action potential along myelinated nerve fiber en.svg",
+    "author": "Helixitta",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Helixitta, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

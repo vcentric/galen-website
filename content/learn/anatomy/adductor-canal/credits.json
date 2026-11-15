@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/femoral-triangle-and-canal.webp",
+    "slot": "femoral-triangle-and-canal",
+    "source": "https://commons.wikimedia.org/wiki/File:Femoral-triangle-diagram.jpg",
+    "title": "File:Femoral-triangle-diagram.jpg",
+    "author": "Craig Hacking",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Craig Hacking, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/saphenous-nerve-course.webp",
+    "slot": "saphenous-nerve-course",
+    "source": "https://commons.wikimedia.org/wiki/File:Femoral_nerve_and_muscle_innervations_.jpg",
+    "title": "File:Femoral nerve and muscle innervations .jpg",
+    "author": "Kitkat0816",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Kitkat0816, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

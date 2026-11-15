@@ -1,0 +1,41 @@
+[
+  {
+    "file": "images/abo-groups-antigens-antibodies-overview.webp",
+    "slot": "abo-groups-antigens-antibodies-overview",
+    "source": "https://commons.wikimedia.org/wiki/File:1913_ABO_Blood_Groups.jpg",
+    "title": "File:1913 ABO Blood Groups.jpg",
+    "author": "OpenStax College",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "OpenStax College, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/red-cell-membrane-blood-group-antigens.webp",
+    "slot": "red-cell-membrane-blood-group-antigens",
+    "source": "https://commons.wikimedia.org/wiki/File:RBC_membrane_major_proteins.png",
+    "title": "File:RBC membrane major proteins.png",
+    "author": "RBC_membrane_major_proteins.jpg: Author is Ernst Hempelmann derivative work: TimVickers (talk)",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": null,
+    "slot": "abo-antigen-biosynthesis-h-antigen",
+    "source": "https://commons.wikimedia.org/wiki/File:Sugars_that_form_the_H,_A_and_B_antigens.png",
+    "title": "File:Sugars that form the H, A and B antigens.png",
+    "author": "Waffeln",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Waffeln, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "none (linked, not embedded)"
+  }
+]

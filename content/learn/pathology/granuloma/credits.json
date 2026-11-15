@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/granuloma-structure.webp",
+    "slot": "granuloma-structure",
+    "source": "https://commons.wikimedia.org/wiki/File:Fundamental_granuloma_types.png",
+    "title": "File:Fundamental granuloma types.png",
+    "author": "Ristow LC, Davis JM",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Ristow LC, Davis JM, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/giant-cell-types.webp",
+    "slot": "giant-cell-types",
+    "source": "https://commons.wikimedia.org/wiki/File:Schematic_representation_of_the_histopathological_features_of_multinucleated_giant_cell_subtypes.png",
+    "title": "File:Schematic representation of the histopathological features of multinucleated giant cell subtypes.png",
+    "author": "Eslami-Kaliji, F.; Hedayat Nia, N.; Lakey, J.R.T.; Smink, A.M.; Mohammadi, M.",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Eslami-Kaliji, F.; Hedayat Nia, N.; Lakey, J.R.T.; Smink, A.M.; Mohammadi, M, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

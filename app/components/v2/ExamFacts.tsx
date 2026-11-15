@@ -1,0 +1,45 @@
+import type { ReactNode } from "react";
+
+/** Shared pieces for the /exams guide pages. Every fact on these pages must come from the official bulletin cited in `source`. */
+export function ExamHeader({ kick, title, lead, children }: { kick: string; title: ReactNode; lead: string; children?: ReactNode }) {
+  return (
+    <header className="wrap pt-28 pb-8 md:pt-36">
+      <p className="kick">{kick}</p>
+      <h1 className="h1 mt-5 max-w-[20ch]">{title}</h1>
+      <p className="lead mt-6">{lead}</p>
+      {children}
+    </header>
+  );
+}
+
+export function FactTable({ rows }: { rows: [string, ReactNode][] }) {
+  return (
+    <div className="ltable">
+      <table>
+        <tbody>
+          {rows.map(([k, v]) => (
+            <tr key={k}>
+              <th scope="row">{k}</th>
+              <td>{v}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export function VerifiedBox({ source, href, pages, verified, note }: { source: string; href: string; pages: string; verified: string; note: string }) {
+  return (
+    <div className="lesson-sources">
+      <p className="lesson-toc-h">Source and last check</p>
+      <ul>
+        <li>
+          Official source: <a href={href} rel="noopener">{source}</a> ({pages}).
+        </li>
+        <li>Last verified against the bulletin: {verified}.</li>
+        <li>{note}</li>
+      </ul>
+    </div>
+  );
+}

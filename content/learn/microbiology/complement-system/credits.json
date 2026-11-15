@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/complement-cascade-overview.webp",
+    "slot": "complement-cascade-overview",
+    "source": "https://commons.wikimedia.org/wiki/File:Complement_Overview.png",
+    "title": "File:Complement Overview.png",
+    "author": "\u05e1\u05ea\u05d5 \u05db\u05e1\u05dc\u05d5",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "\u05e1\u05ea\u05d5 \u05db\u05e1\u05dc\u05d5, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/membrane-attack-complex.webp",
+    "slot": "membrane-attack-complex",
+    "source": "https://commons.wikimedia.org/wiki/File:Membrane_Attack_Complex_(Terminal_Complement_Complex_C5b-9).png",
+    "title": "File:Membrane Attack Complex (Terminal Complement Complex C5b-9).png",
+    "author": "SLiva2016",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "SLiva2016, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

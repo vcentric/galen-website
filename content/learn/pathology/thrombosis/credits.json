@@ -1,0 +1,41 @@
+[
+  {
+    "file": "images/virchow-triad.webp",
+    "slot": "virchow-triad",
+    "source": "https://commons.wikimedia.org/wiki/File:VIRCHOW%27S_TRIAD.png",
+    "title": "File:VIRCHOW'S TRIAD.png",
+    "author": "Dr.vishalkamalesan",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Dr.vishalkamalesan, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/coagulation-cascade.webp",
+    "slot": "coagulation-cascade",
+    "source": "https://commons.wikimedia.org/wiki/File:Coagulation_Cascade_Diagram.svg",
+    "title": "File:Coagulation Cascade Diagram.svg",
+    "author": "Jonathan Dyhr",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Jonathan Dyhr, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/lines-of-zahn.webp",
+    "slot": "lines-of-zahn",
+    "source": "https://commons.wikimedia.org/wiki/File:Pulmonary_thromboembolus,_recent_(3626658803).jpg",
+    "title": "File:Pulmonary thromboembolus, recent (3626658803).jpg",
+    "author": "Yale Rosen from USA",
+    "license": "CC BY-SA 2.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Yale Rosen from USA, CC BY-SA 2.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

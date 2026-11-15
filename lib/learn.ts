@@ -304,3 +304,46 @@ export function getLesson(subject: string, topic: string): Lesson | null {
   const imageCount = (html.match(/<figure class="lfig"/g) ?? []).length;
   return { meta, html, toc, imageCount, words };
 }
+
+export type PracticeMcq = {
+  id: string;
+  subject: string;
+  topic: string;
+  lesson: string;
+  lessonPath: string;
+  appUrl: string;
+  stem: string;
+  options: string[];
+  answer: string;
+  explanation: string;
+  reviewed: boolean;
+};
+
+/** Every MCQ from every lesson, for the practice page. Source of truth stays the lesson files. */
+export function getAllMcqs(): PracticeMcq[] {
+  const out: PracticeMcq[] = [];
+  for (const m of getAllLessons()) {
+    const file = path.join(ROOT, m.subject, m.topic, "index.mdoc");
+    const body = fs.readFileSync(file, "utf-8").split(/^---\s*$/m).slice(2).join("---");
+    const re = /\{% mcq answer="([A-E])" explanation="([^"]*)" %\}\s*\n([\s\S]*?)\n\{% \/mcq %\}/g;
+    let k = 0;
+    for (const x of body.matchAll(re)) {
+      const lines = x[3].split("\n").map((l) => l.trim()).filter(Boolean);
+      const options = lines.slice(1).map((l) => l.replace(/^- /, ""));
+      out.push({
+        id: `${m.subject}/${m.topic}#${++k}`,
+        subject: m.subject,
+        topic: m.topic,
+        lesson: m.title,
+        lessonPath: m.path,
+        appUrl: m.appPracticeUrl,
+        stem: lines[0],
+        options,
+        answer: x[1],
+        explanation: x[2],
+        reviewed: m.isPublished,
+      });
+    }
+  }
+  return out;
+}
