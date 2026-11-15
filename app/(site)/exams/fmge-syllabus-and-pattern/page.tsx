@@ -3,6 +3,7 @@ import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
 import { Breadcrumbs } from "@/app/components/v2/ui";
 import { ExamHeader, FactTable, VerifiedBox } from "@/app/components/v2/ExamFacts";
+import { EXAM_PAGES_LIVE } from "@/lib/exams";
 
 const path = "/exams/fmge-syllabus-and-pattern";
 export const metadata = buildMetadata({
@@ -10,7 +11,7 @@ export const metadata = buildMetadata({
   description:
     "FMGE exam pattern, pass mark and the official subject-wise marks blueprint from the NBEMS information bulletin: 300 MCQs in two parts, no negative marking, 150 out of 300 to pass.",
   path,
-  noindex: true, // hidden until the founder approves the exam pages
+  noindex: !EXAM_PAGES_LIVE,
 });
 
 const PRE: [string, number][] = [
@@ -24,7 +25,7 @@ const CLIN: [string, string, number][] = [
 ];
 
 export default function Page() {
-  const trail = [{ name: "Home", path: "/" }, { name: "Exams", path: "/for/fmge" }, { name: "FMGE syllabus and pattern", path }];
+  const trail = [{ name: "Home", path: "/" }, { name: "FMGE", path: "/for/fmge" }, { name: "FMGE syllabus and pattern", path }];
   return (
     <div className="v2 lesson">
       <JsonLd data={breadcrumbLd(trail)} />

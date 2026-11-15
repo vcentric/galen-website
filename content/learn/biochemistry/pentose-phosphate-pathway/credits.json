@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/ppp-pathway-overview.webp",
+    "slot": "ppp-pathway-overview",
+    "source": "https://commons.wikimedia.org/wiki/File:OPPP_stage2.png",
+    "title": "File:OPPP stage2.png",
+    "author": "C. Muessig",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "C. Muessig, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/ppp-oxidative-steps.webp",
+    "slot": "ppp-oxidative-steps",
+    "source": "https://commons.wikimedia.org/wiki/File:Ox_Pentose_phosphate_pathway.svg",
+    "title": "File:Ox Pentose phosphate pathway.svg",
+    "author": "Yikrazuul",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

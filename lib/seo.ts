@@ -159,7 +159,8 @@ export const learningResourceLd = (l: {
   subject: string;
   competencyCodes?: string[];
   reviewedBy?: string;
-  dateModified: string;
+  dateModified?: string;
+  datePublished?: string;
 }) => ({
   "@context": "https://schema.org",
   "@type": "LearningResource",
@@ -170,9 +171,12 @@ export const learningResourceLd = (l: {
   educationalLevel: "MBBS",
   learningResourceType: "Topic note",
   inLanguage: "en",
-  dateModified: l.dateModified,
+  headline: l.name,
+  author: { "@id": ORG_ID },
+  ...(l.dateModified ? { dateModified: l.dateModified } : {}),
+  ...(l.datePublished ? { datePublished: l.datePublished } : {}),
   ...(l.competencyCodes?.length ? { teaches: l.competencyCodes } : {}),
-  ...(l.reviewedBy ? { reviewedBy: { "@type": "Person", name: l.reviewedBy } } : {}),
+  ...(l.reviewedBy ? { contributor: { "@type": "Person", name: l.reviewedBy } } : {}),
   publisher: { "@id": ORG_ID },
 });
 

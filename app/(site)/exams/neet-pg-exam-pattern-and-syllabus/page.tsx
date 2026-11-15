@@ -2,7 +2,8 @@ import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
 import { Breadcrumbs } from "@/app/components/v2/ui";
-import { ExamHeader, FactTable, VerifiedBox } from "@/app/components/v2/ExamFacts";
+import { ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
+import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-exam-pattern-and-syllabus";
 export const metadata = buildMetadata({
@@ -10,7 +11,7 @@ export const metadata = buildMetadata({
   description:
     "NEET PG 2026 exam pattern and syllabus as printed in the NBEMS information bulletin: 180 MCQs, 3 hours 30 minutes, +4 and -1 marking, five timed sections, and how the syllabus is defined.",
   path,
-  noindex: true, // hidden until the founder approves the exam pages
+  noindex: !EXAM_PAGES_LIVE,
 });
 
 const SUBJECTS: [string, string][] = [
@@ -23,7 +24,7 @@ const SUBJECTS: [string, string][] = [
 ];
 
 export default function Page() {
-  const trail = [{ name: "Home", path: "/" }, { name: "Exams", path: "/for/neet-pg" }, { name: "NEET PG exam pattern and syllabus", path }];
+  const trail = [{ name: "Home", path: "/" }, { name: "NEET PG guide", path: "/exams/neet-pg" }, { name: "NEET PG exam pattern and syllabus", path }];
   return (
     <div className="v2 lesson">
       <JsonLd data={breadcrumbLd(trail)} />
@@ -33,6 +34,7 @@ export default function Page() {
         lead="Everything on this page is taken from the official NBEMS information bulletin for NEET PG 2026. Where the bulletin does not say something, this page does not either."
       >
         <div className="mt-6"><Breadcrumbs trail={trail} /></div>
+        <StatusBanner checked={NEET_PG_LAST_CHECKED} />
       </ExamHeader>
 
       <div className="wrap pb-16">
@@ -105,7 +107,7 @@ export default function Page() {
           source="NEET PG 2026 information bulletin, NBEMS"
           href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
           pages="section 5, Scheme of NEET-PG 2026, bulletin pages 32 and 33; tie-breaker criteria, pages 92 and 93"
-          verified="15 November 2026"
+          verified={NEET_PG_LAST_CHECKED}
           note="This is the bulletin for the 30 August 2026 exam. When NBEMS publishes the next bulletin, check it before relying on these numbers."
         />
       </section>

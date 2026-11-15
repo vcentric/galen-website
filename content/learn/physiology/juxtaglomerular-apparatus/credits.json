@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/jga-structure.webp",
+    "slot": "jga-structure",
+    "source": "https://commons.wikimedia.org/wiki/File:Juxtaglomerular_Apparatus_and_Glomerulus.jpg",
+    "title": "File:Juxtaglomerular Apparatus and Glomerulus.jpg",
+    "author": "OpenStax College",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "OpenStax College, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/jga-raas.webp",
+    "slot": "jga-raas",
+    "source": "https://commons.wikimedia.org/wiki/File:2712_Renin_Angiotensin_System-01.jpg",
+    "title": "File:2712 Renin Angiotensin System-01.jpg",
+    "author": "OpenStax College",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "OpenStax College, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  }
+]

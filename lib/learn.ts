@@ -90,7 +90,7 @@ function toMeta(subject: string, topic: string, fm: Record<string, unknown>, app
     region: str(fm.region),
     cbmeCodes: codes,
     competencyText: str(app.competency_text),
-    appPracticeUrl: str(app.app_link),
+    appPracticeUrl: safeUrl(str(app.app_link)),
     authorName: str(fm.author_name) || "Team GalenAI",
     publishDate: str(fm.publish_date),
     reviewedBy: str(fm.reviewed_by),
@@ -103,8 +103,23 @@ function toMeta(subject: string, topic: string, fm: Record<string, unknown>, app
   };
 }
 
-/** Every lesson on disk, published or not. */
+/** Allow only https, http and root-relative URLs in content-supplied links. */
+export function safeUrl(u: string): string {
+  const v = (u ?? "").trim();
+  return /^(https?:\/\/|\/(?!\/))/i.test(v) ? v : "";
+}
+
+let lessonCache: LessonMeta[] | null = null;
+
+/** Every lesson on disk, published or not. Cached for the lifetime of a production build. */
 export function getAllLessons(): LessonMeta[] {
+  if (process.env.NODE_ENV === "production" && lessonCache) return lessonCache;
+  const all = loadAllLessons();
+  if (process.env.NODE_ENV === "production") lessonCache = all;
+  return all;
+}
+
+function loadAllLessons(): LessonMeta[] {
   if (!fs.existsSync(ROOT)) return [];
   const out: LessonMeta[] = [];
   for (const subject of fs.readdirSync(ROOT)) {
@@ -197,11 +212,11 @@ function buildConfig(known: Map<string, string>): Config {
           if (a.credit)
             cap.push(
               T("span", { class: "lfig-credit" }, [
-                a.source ? T("a", { href: a.source, rel: "noopener", target: "_blank" }, [a.credit]) : a.credit,
+                safeUrl(String(a.source ?? "")) ? T("a", { href: safeUrl(String(a.source)), rel: "noopener noreferrer", target: "_blank" }, [a.credit]) : a.credit,
               ])
             );
           return T("figure", { class: "lfig" }, [
-            T("img", { src: a.src, alt: a.alt, width: a.width, height: a.height, loading: "lazy", decoding: "async" }),
+            T("img", { src: a.src, alt: a.alt, ...(a.width ? { width: a.width } : {}), ...(a.height ? { height: a.height } : {}), loading: "lazy", decoding: "async" }),
             T("figcaption", {}, cap),
           ]);
         },
@@ -298,7 +313,13 @@ export function getLesson(subject: string, topic: string): Lesson | null {
 
   const toc = [...html.matchAll(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g)].map((m) => ({
     id: m[1],
-    text: m[2].replace(/<[^>]+>/g, ""),
+    text: m[2]
+      .replace(/<[^>]+>/g, "")
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&amp;/g, "&"),
   }));
   const words = html.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
   const imageCount = (html.match(/<figure class="lfig"/g) ?? []).length;
@@ -320,9 +341,10 @@ export type PracticeMcq = {
 };
 
 /** Every MCQ from every lesson, for the practice page. Source of truth stays the lesson files. */
-export function getAllMcqs(): PracticeMcq[] {
+export function getAllMcqs(onlyReviewed = false): PracticeMcq[] {
   const out: PracticeMcq[] = [];
   for (const m of getAllLessons()) {
+    if (onlyReviewed && !m.isPublished) continue;
     const file = path.join(ROOT, m.subject, m.topic, "index.mdoc");
     const body = fs.readFileSync(file, "utf-8").split(/^---\s*$/m).slice(2).join("---");
     const re = /\{% mcq answer="([A-E])" explanation="([^"]*)" %\}\s*\n([\s\S]*?)\n\{% \/mcq %\}/g;

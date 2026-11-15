@@ -55,7 +55,8 @@ export default async function LessonPage({ params }: Params) {
           subject: subjectName(subject),
           competencyCodes: m.cbmeCodes,
           reviewedBy: m.reviewedBy || undefined,
-          dateModified: m.reviewedOn || m.publishDate,
+          dateModified: m.reviewedOn || undefined,
+          datePublished: m.publishDate || undefined,
         })}
       />
 

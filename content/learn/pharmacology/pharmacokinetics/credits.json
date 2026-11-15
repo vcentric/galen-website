@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/adme-overview.webp",
+    "slot": "adme-overview",
+    "source": "https://commons.wikimedia.org/wiki/File:ADME_Model.png",
+    "title": "File:ADME Model.png",
+    "author": "Daniel6201",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Daniel6201, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/auc-cmax-tmax.webp",
+    "slot": "auc-cmax-tmax",
+    "source": "https://commons.wikimedia.org/wiki/File:Linear_PK_Example.png",
+    "title": "File:Linear PK Example.png",
+    "author": "Alfie\u2191\u2193\u00a9 (Helmut Sch\u00fctz)",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Alfie\u2191\u2193\u00a9, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

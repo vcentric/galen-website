@@ -46,6 +46,8 @@ const BESPOKE_LABELS: Record<string, string> = {
   "/features": "All features",
   "/how-to-use": "How to use GalenAI",
   "/download": "Download the app",
+  "/exams/neet-pg": "NEET PG complete guide",
+  "/exams/fmge-syllabus-and-pattern": "FMGE syllabus and pattern",
 };
 
 /** Human label for an internal path, for related-link lists. */

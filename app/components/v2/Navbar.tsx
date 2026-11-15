@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { LEARN_NAV_LIVE } from "@/lib/exams";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,7 +11,7 @@ import { LINKS } from "@/lib/site";
 const STUDENT_LINKS = [
   { label: "Features", href: "/features" },
   { label: "For NEET PG", href: "/for/neet-pg" },
-  { label: "Learn", href: "/learn" },
+  ...(LEARN_NAV_LIVE ? [{ label: "Learn", href: "/learn" }] : []),
   { label: "How to use", href: "/how-to-use" },
   { label: "Articles", href: "/blog" },
   { label: "Team", href: "/team" },

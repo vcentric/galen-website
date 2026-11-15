@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/hmg-coa-reductase-step.webp",
+    "slot": "hmg-coa-reductase-step",
+    "source": "https://commons.wikimedia.org/wiki/File:HMG-CoA_reductase_reaction.svg",
+    "title": "File:HMG-CoA reductase reaction.svg",
+    "author": "Vaccinationist",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Vaccinationist, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/cholesterol-structure.webp",
+    "slot": "cholesterol-structure",
+    "source": "https://commons.wikimedia.org/wiki/File:Cholesterol_lettering_numbering.svg",
+    "title": "File:Cholesterol lettering numbering.svg",
+    "author": "User:Innerstream",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

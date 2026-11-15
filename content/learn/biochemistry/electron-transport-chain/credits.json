@@ -1,0 +1,41 @@
+[
+  {
+    "file": "images/etc-overview.webp",
+    "slot": "etc-overview",
+    "source": "https://commons.wikimedia.org/wiki/File:Electron_transport_chain.svg",
+    "title": "File:Electron transport chain.svg",
+    "author": "T-Fork",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/mitochondrion-structure.webp",
+    "slot": "mitochondrion-structure",
+    "source": "https://commons.wikimedia.org/wiki/File:Mitochondrion_structure.svg",
+    "title": "File:Mitochondrion structure.svg",
+    "author": "Kelvinsong; modified by Sowlos",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Kelvinsong; modified by Sowlos, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/chemiosmosis-atp-synthase.webp",
+    "slot": "chemiosmosis-atp-synthase",
+    "source": "https://commons.wikimedia.org/wiki/File:Chemiosmotic_coupling_mitochondrion.svg",
+    "title": "File:Chemiosmotic coupling mitochondrion.svg",
+    "author": "Chiswick Chap",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Chiswick Chap, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

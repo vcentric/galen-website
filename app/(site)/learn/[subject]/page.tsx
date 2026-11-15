@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Params) {
   const lessons = getAllLessons().filter((l) => l.subject === subject);
   return buildMetadata({
     title: `${subjectName(subject)} for MBBS: Free Lessons, MCQs and Viva`,
-    description: `Free ${subjectName(subject).toLowerCase()} lessons for MBBS students, mapped to NMC competencies, with diagrams, MCQs, viva questions and flashcards.`,
+    description: `Free ${subjectName(subject).toLowerCase()} lessons for MBBS students, with diagrams, MCQs, viva questions and flashcards.`,
     path: `/learn/${subject}`,
     noindex: !lessons.some((l) => l.isPublished) || lessons.length < 5,
   });

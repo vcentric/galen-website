@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/fs-ventricular-function-curve.webp",
+    "slot": "fs-ventricular-function-curve",
+    "source": "https://commons.wikimedia.org/wiki/File:Frank-Starling_Law_and_Inotropy.png",
+    "title": "File:Frank-Starling Law and Inotropy.png",
+    "author": "Bbosramek",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Bbosramek, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/fs-length-tension.webp",
+    "slot": "fs-length-tension",
+    "source": "https://commons.wikimedia.org/wiki/File:Sarcomere_length-tension_relationship.svg",
+    "title": "File:Sarcomere length-tension relationship.svg",
+    "author": "TommyN94",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "TommyN94, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  }
+]

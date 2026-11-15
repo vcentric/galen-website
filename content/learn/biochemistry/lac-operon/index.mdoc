@@ -25,7 +25,7 @@ generated_with: GalenAI textbook library (RAG), 8 passages, 2026-11-14
 sources:
   - Standard biochemistry and molecular biology references (retrieved from the GalenAI library; passage list in _rag/ for the reviewer)
 meta_title: "Lac Operon for MBBS: Repressor, Inducer, CAP-cAMP | GalenAI"
-meta_description: "Lac operon for MBBS in one page: genes, repressor and operator, induction by lactose, catabolite repression, CAP-cAMP, gratuitous inducers, MCQs and viva questions."
+meta_description: "Lac operon for MBBS in one page: genes, repressor and operator, induction by lactose, catabolite repression, CAP-cAMP, MCQs and viva questions."
 ---
 {% callout type="summary" %}
 **Quick answer:** The lac operon is the unit in E. coli that controls lactose metabolism. It has a regulatory gene (I), a promoter (P), an operator (O) and three structural genes (Z, Y, A). Without lactose, the repressor sits on the operator and switches the operon off. Lactose inactivates the repressor, so the three enzymes are made. Glucose lowers cAMP and reduces expression.
@@ -46,6 +46,8 @@ The operon idea was introduced in 1961 (Nobel Prize 1965). It came from studies 
 ## Structure of the lac operon
 
 The lac operon has these parts:
+
+{% figure src="/learn-images/biochemistry/lac-operon/lac-operon-structure.webp" alt="Diagram of the genes and regulatory sites of the lac operon." caption="Layout of the lac operon." credit="Kelvinsong, CC BY-SA 3.0, via Wikimedia Commons" license="CC BY-SA 3.0" source="https://commons.wikimedia.org/wiki/File:Operon.svg" width="960" height="509" /%}
 
 {% table %}
 - **Part**
@@ -120,9 +122,9 @@ This is an example of **negative regulation**: the regulator acts as a brake. Th
 
 ## Induction: when lactose is present
 
-If lactose (the **inducer**) is present in the medium, a small amount of it can enter the E. coli cell. The repressor has a high affinity for lactose. The sequence of events is:
+If lactose (the **inducer**) is present in the medium, a small amount of it can enter the E. coli cell. The repressor has a high affinity for the inducer. Inside the cell a small amount of lactose is converted to its isomer allolactose, which is the form that binds the repressor. The sequence of events is:
 
-1. Lactose binds to the repressor.
+1. The inducer (lactose, as allolactose) binds to the repressor.
 2. The binding causes a **conformational change** (a change in shape) in the repressor.
 3. The repressor is inactivated and can no longer bind to the operator.
 4. RNA polymerase attaches at the promoter and transcription proceeds.
@@ -187,7 +189,7 @@ The lacZ, lacY and lacA genes are expressed only when the operator site is empty
 - **Lactose and glucose both present**
 - Inactivated by lactose
 - Lacking, because glucose keeps cAMP low
-- Cells use glucose first; the operon is not induced to the maximal level until glucose is exhausted
+- Cells use glucose first; transcription is negligible until glucose is exhausted, even if lactose is plentiful
 {% /table %}
 
 **Maximal activity** of the operon occurs when glucose is low (so cAMP is high and CAP is active) and lactose is present (so the repressor cannot bind to the operator).
@@ -297,7 +299,7 @@ A structural analog of lactose that induces the lac operon but is not a substrat
 {% flashcard front="lacY codes for" back="Galactoside permease, which transports lactose into the cell" /%}
 {% flashcard front="lacA codes for" back="Galactoside acetylase, whose function remains a mystery" /%}
 {% flashcard front="Type of mRNA made from Z, Y and A" back="One large polycistronic mRNA, translated into separate proteins" /%}
-{% flashcard front="Inducer of the lac operon" back="Lactose, which binds the repressor and inactivates it" /%}
+{% flashcard front="Inducer of the lac operon" back="Lactose (as its isomer allolactose), which binds the repressor and inactivates it" /%}
 {% flashcard front="Repressor structure" back="Tetramer of four identical subunits; binds the operator through a helix-turn-helix motif" /%}
 {% flashcard front="Gratuitous inducer example" back="IPTG: induces the operon but is not a substrate of beta-galactosidase" /%}
 {% flashcard front="Why does glucose lower cAMP?" back="Glucose inhibits adenylyl cyclase, the enzyme that makes cAMP from ATP" /%}

@@ -3,6 +3,8 @@ import { getAllPostsMeta } from "@/lib/posts";
 import { getCategorySlug } from "@/lib/blogFilters";
 import { specPages, staticRoutes, howToPaths, HOW_TO_LIVE } from "@/content/site";
 import { SITE } from "@/lib/site";
+import { EXAM_PAGES, EXAM_PAGES_LIVE, mcqPageIndexable } from "@/lib/exams";
+import { getAllLessons } from "@/lib/learn";
 
 /**
  * Generated on every build from the page registry and live post data.
@@ -34,6 +36,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ? howToPaths().map((p) => ({ url: url(p), changeFrequency: "monthly", priority: 0.5 }))
     : [];
 
+  const lessons = getAllLessons();
+  const published = lessons.filter((l) => l.isPublished);
+  const anyReviewed = published.length > 0;
+  const learnEntries: MetadataRoute.Sitemap = [
+    ...(anyReviewed ? [{ url: url("/learn"), changeFrequency: "weekly" as const, priority: 0.8 }] : []),
+    ...[...new Set(lessons.map((l) => l.subject))]
+      .filter((sub) => lessons.filter((l) => l.subject === sub).length >= 5 && published.some((l) => l.subject === sub))
+      .map((sub) => ({ url: url(`/learn/${sub}`), changeFrequency: "weekly" as const, priority: 0.7 })),
+    ...published.map((l) => ({
+      url: url(l.path),
+      lastModified: l.reviewedOn || l.publishDate ? new Date(l.reviewedOn || l.publishDate) : undefined,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
+
+  const examEntries: MetadataRoute.Sitemap = EXAM_PAGES_LIVE
+    ? EXAM_PAGES.filter((p) => p !== "/exams/neet-pg-mcq-practice" || mcqPageIndexable(anyReviewed)).map((p) => ({ url: url(p), changeFrequency: "monthly", priority: 0.7 }))
+    : [];
+
   const postEntries: MetadataRoute.Sitemap = posts.map((post) => ({
     url: url(`/blog/${post.slug}`),
     lastModified: new Date(post.date),
@@ -49,5 +71,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }));
 
-  return [...staticEntries, ...specEntries, ...howToEntries, ...postEntries, ...categoryEntries];
+  return [...staticEntries, ...specEntries, ...howToEntries, ...learnEntries, ...examEntries, ...postEntries, ...categoryEntries];
 }

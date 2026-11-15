@@ -1,0 +1,41 @@
+[
+  {
+    "file": "images/cyp-reaction.webp",
+    "slot": "cyp-reaction",
+    "source": "https://commons.wikimedia.org/wiki/File:P450cycle.svg",
+    "title": "File:P450cycle.svg",
+    "author": "Slashme at English Wikipedia When using this image in external works, it may be cited as follows: Richfield, David. \"Medical gallery of David Richfield 2014\". Wikiversity Journal of Medicine 1 (2). DOI:10.15347/wjm/2014.009. ISSN 2001-8762.",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/phase-metabolism.webp",
+    "slot": "phase-metabolism",
+    "source": "https://commons.wikimedia.org/wiki/File:Hepatic_drug_metabolism.svg",
+    "title": "File:Hepatic drug metabolism.svg",
+    "author": "Drriad",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Drriad, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/cyp-structure.webp",
+    "slot": "cyp-structure",
+    "source": "https://commons.wikimedia.org/wiki/File:3EL3.png",
+    "title": "File:3EL3.png",
+    "author": "Boghog",
+    "license": "CC0",
+    "license_class": "CC0",
+    "license_url": null,
+    "credit": "CC0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

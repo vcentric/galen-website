@@ -1,4 +1,5 @@
 import type { PageSpec, SectionSpec } from "./types";
+import { EXAM_PAGES_LIVE } from "../../lib/exams";
 
 /** The shared three-beat loop, reused on every exam page. */
 const LOOP: SectionSpec = {
@@ -76,7 +77,7 @@ export const audiences: PageSpec[] = [
       { q: "Can GalenAI help me prepare for NEET PG?", a: "Yes. Use the question bank in exam mode, ask the tutor about every question you get wrong, revise with flashcards, and use the dashboard to find your weakest subject." },
       { q: "Is GalenAI free?", a: "GalenAI is currently free for a limited time while we gather feedback from students." },
     ],
-    related: ["/features/question-bank", "/features/ai-tutor", "/for/inicet", "/for/fmge"],
+    related: [...(EXAM_PAGES_LIVE ? ["/exams/neet-pg"] : []), "/features/question-bank", "/features/ai-tutor", "/for/inicet", "/for/fmge"],
     flags: ["Confirm question bank size and PYQ coverage before any number is printed."],
   },
   {
@@ -137,7 +138,7 @@ export const audiences: PageSpec[] = [
       },
       { id: "cta", kind: "cta", heading: "Start now", notes: "" },
     ],
-    related: ["/for/neet-pg", "/features/question-bank"],
+    related: [...(EXAM_PAGES_LIVE ? ["/exams/fmge-syllabus-and-pattern"] : []), "/for/neet-pg", "/features/question-bank"],
   },
   {
     slug: "mbbs-students",

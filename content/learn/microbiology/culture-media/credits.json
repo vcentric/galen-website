@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/blood-agar-haemolysis.webp",
+    "slot": "blood-agar-haemolysis",
+    "source": "https://commons.wikimedia.org/wiki/File:OSC_Microbio_09_02_listumbrel.jpg",
+    "title": "File:OSC Microbio 09 02 listumbrel.jpg",
+    "author": "CNX OpenStax",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "CNX OpenStax, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/macconkey-lactose-fermenters.webp",
+    "slot": "macconkey-lactose-fermenters",
+    "source": "https://commons.wikimedia.org/wiki/File:Lactose_fementing_(LF),_and_non-lactose_fermenting_(NLF)_colonies_on_MacConkey_agar.jpg",
+    "title": "File:Lactose fementing (LF), and non-lactose fermenting (NLF) colonies on MacConkey agar.jpg",
+    "author": "Ajay Kumar Chaurasiya",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Ajay Kumar Chaurasiya, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

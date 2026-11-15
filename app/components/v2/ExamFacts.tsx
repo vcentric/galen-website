@@ -43,3 +43,26 @@ export function VerifiedBox({ source, href, pages, verified, note }: { source: s
     </div>
   );
 }
+
+/** Shown on every NEET PG page: the 2027 bulletin is not out, so the 2026 bulletin is the latest official source. */
+export function StatusBanner({ checked }: { checked: string }) {
+  return (
+    <p className="lesson-draft" role="note">
+      <b>NEET PG 2027 status.</b> As of {checked}, we could not find an NBEMS information bulletin or exam date for NEET PG 2027. This page
+      uses the NEET PG 2026 bulletin, the latest official document, to show how a cycle works. Dates, fees and rules for 2027 may differ. Check
+      natboard.edu.in before you rely on any date.
+    </p>
+  );
+}
+
+export function GuideLinks({ items }: { items: [string, string][] }) {
+  return (
+    <ul>
+      {items.map(([label, href]) => (
+        <li key={href}>
+          <a href={href}>{label}</a>
+        </li>
+      ))}
+    </ul>
+  );
+}

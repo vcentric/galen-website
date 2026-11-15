@@ -9,7 +9,7 @@ const lessons = getAllLessons();
 export const metadata = buildMetadata({
   title: "Learn: Free MBBS Lessons Mapped to NMC Competencies",
   description:
-    "Free MBBS lessons in anatomy, physiology, biochemistry, pathology and microbiology, mapped to NMC competencies, with diagrams, MCQs, viva questions and flashcards.",
+    "Free MBBS lessons in anatomy, physiology, biochemistry, pathology, pharmacology and microbiology, with diagrams, MCQs, viva questions and flashcards.",
   path: "/learn",
   noindex: !lessons.some((l) => l.isPublished),
 });
@@ -26,8 +26,8 @@ export default function LearnHub() {
           Learn the topic, then <span className="acc">test yourself.</span>
         </h1>
         <p className="lead mt-6">
-          Each lesson covers one topic from the MBBS syllabus, mapped to its NMC competency, with diagrams, six MCQs,
-          viva questions and flashcards. Built from standard medical textbooks and checked by faculty.
+          Each lesson covers one topic from the MBBS syllabus, with diagrams where we have a good open one, six MCQs,
+          viva questions and flashcards.{lessons.some((l) => l.isPublished) ? " Reviewed by faculty." : " These lessons are drafts waiting for faculty review."}
         </p>
         <nav className="lesson-chips mt-8" aria-label="Subjects">
           {subjects.map((s) => (

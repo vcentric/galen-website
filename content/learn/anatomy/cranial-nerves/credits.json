@@ -9,7 +9,7 @@
     "license_class": "CC BY",
     "license_url": null,
     "credit": "OpenStax, CC BY 4.0, via Wikimedia Commons",
-    "retrieved": "2026-11-13",
+    "retrieved": "2026-11-15",
     "modification": "resized and converted to WebP"
   },
   {
@@ -22,11 +22,11 @@
     "license_class": "CC BY",
     "license_url": null,
     "credit": "OpenStax College, CC BY 3.0, via Wikimedia Commons",
-    "retrieved": "2026-11-13",
+    "retrieved": "2026-11-15",
     "modification": "resized and converted to WebP"
   },
   {
-    "file": null,
+    "file": "images/brainstem-cranial-nerve-nuclei.webp",
     "slot": "brainstem-cranial-nerve-nuclei",
     "source": "https://commons.wikimedia.org/wiki/File:Representative_illustration_of_the_brainstem_demonstrating_the_normal_configuration_of_the_cranial_nerves_and_their_associated_nuclei._The_vagus_nerve_originates_from_the_nucleus_ambiguus_of_the_medulla.webp",
     "title": "File:Representative illustration of the brainstem demonstrating the normal configuration of the cranial nerves and their associated nuclei. The vagus nerve originates from the nucleus ambiguus of the medulla.webp",
@@ -35,11 +35,11 @@
     "license_class": "CC BY",
     "license_url": null,
     "credit": "Nadezdha D. Kiriyak, CC BY 4.0, via Wikimedia Commons",
-    "retrieved": "2026-11-13",
-    "modification": "none (linked, not embedded)"
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
   },
   {
-    "file": null,
+    "file": "images/visual-pathway-diagram.webp",
     "slot": "visual-pathway-diagram",
     "source": "https://commons.wikimedia.org/wiki/File:Visual_Pathway_to_the_Brain.jpg",
     "title": "File:Visual Pathway to the Brain.jpg",
@@ -48,8 +48,8 @@
     "license_class": "CC BY-SA",
     "license_url": null,
     "credit": "Rachel Sanchez Thwing, CC BY-SA 4.0, via Wikimedia Commons",
-    "retrieved": "2026-11-13",
-    "modification": "none (linked, not embedded)"
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
   },
   {
     "file": "images/extraocular-muscles-nerve-supply.webp",
@@ -61,7 +61,7 @@
     "license_class": "CC BY",
     "license_url": null,
     "credit": "File:Eye orbit anterior.jpg: Patrick J. Lynch, medical illustrator derivative work: Shyhed, CC BY 2.5, via Wikimedia Commons",
-    "retrieved": "2026-11-13",
+    "retrieved": "2026-11-15",
     "modification": "resized and converted to WebP"
   },
   {
@@ -74,7 +74,7 @@
     "license_class": "CC BY",
     "license_url": null,
     "credit": "Patrick J. Lynch, medical illustrator, CC BY 2.5, via Wikimedia Commons",
-    "retrieved": "2026-11-13",
+    "retrieved": "2026-11-15",
     "modification": "resized and converted to WebP"
   }
 ]

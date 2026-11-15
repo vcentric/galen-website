@@ -1,6 +1,6 @@
 [
   {
-    "file": null,
+    "file": "images/action-potential-waveform-overview.webp",
     "slot": "action-potential-waveform-overview",
     "source": "https://commons.wikimedia.org/wiki/File:Action_potential_vert.png",
     "title": "File:Action potential vert.png",
@@ -10,7 +10,7 @@
     "license_url": null,
     "credit": "Artwork by Synaptidude at en.wikipedia, CC BY-SA 3.0, via Wikimedia Commons",
     "retrieved": "2026-11-15",
-    "modification": "none (linked, not embedded)"
+    "modification": "resized and converted to WebP"
   },
   {
     "file": "images/resting-potential-ion-gradients-pump.webp",
