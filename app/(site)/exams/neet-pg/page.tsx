@@ -7,9 +7,9 @@ import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg";
 export const metadata = buildMetadata({
-  title: "NEET PG: Complete Guide to the Exam, Dates, Application and Preparation",
+  title: "NEET PG Guide: Exam, Dates, Application, Prep",
   description:
-    "A plain guide to NEET PG: what it covers, how a cycle runs from application to counselling, the exam pattern, and where to start preparing. Built from the official NBEMS bulletin.",
+    "A plain guide to NEET PG: what it is, how a cycle runs from application to counselling, the exam pattern, and where to start preparing. From the NBEMS bulletin.",
   path,
   noindex: !EXAM_PAGES_LIVE,
 });

@@ -10,6 +10,16 @@ export function DemoFormSection({ section }: SectionProps) {
   return (
     <>
       <Headline as="h2" text={section.heading} />
+      {LINKS.booking && (
+        <div className="mt-8 flex flex-wrap items-center gap-4 rounded-[22px] border-[3px] border-[#2e2e2e] bg-white p-6">
+          <p className="h3 flex-1 min-w-[14rem]">
+            Prefer to pick a slot? <span className="acc">Book a 30-minute call.</span>
+          </p>
+          <a href={LINKS.booking} target="_blank" rel="noopener" className="btn btn-primary" data-cta="booking">
+            Pick a time
+          </a>
+        </div>
+      )}
       <div className="mt-8">
         <LeadForm source="book_demo" />
       </div>

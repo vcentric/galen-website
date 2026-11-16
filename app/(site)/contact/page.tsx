@@ -6,9 +6,8 @@ import { Headline, Kicker, Section } from "@/app/components/v2/ui";
 export const metadata = buildMetadata({
   title: "Contact GalenAI",
   description:
-    "Get in touch with GalenAI. Student support, college and faculty enquiries, and partnerships. Bengaluru, India.",
+    "Get in touch with GalenAI: student support, medical college and faculty enquiries, demos and partnerships. Email, phone and WhatsApp. Bengaluru, India.",
   path: "/contact",
-  noindex: true, // TODO(exec): remove when built and staticRoutes "/contact" is live
 });
 
 /** Contact block must match lib/site.ts exactly (design system section 8). */

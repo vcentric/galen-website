@@ -7,9 +7,9 @@ import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-result-and-counselling";
 export const metadata = buildMetadata({
-  title: "NEET PG Result, Percentile Cut-off and Counselling (from the NBEMS Bulletin)",
+  title: "NEET PG Result, Percentile Cut-off and Counselling",
   description:
-    "How NEET PG scores become rank and percentile, the qualifying percentile for each category, tie-breakers, and who runs counselling, as printed in the official NBEMS bulletin.",
+    "How NEET PG scores become rank and percentile, the qualifying percentile by category, tie-breakers, and who runs counselling, from the official NBEMS bulletin.",
   path,
   noindex: !EXAM_PAGES_LIVE,
 });

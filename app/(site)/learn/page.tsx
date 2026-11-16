@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getAllLessons, subjectName, SUBJECTS } from "@/lib/learn";
-import { buildMetadata, breadcrumbLd } from "@/lib/seo";
+import { buildMetadata, breadcrumbLd, itemListLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
 import LessonCard from "@/app/components/v2/LessonCard";
 
@@ -19,15 +19,20 @@ export default function LearnHub() {
   const subjects = Object.keys(SUBJECTS).filter((s) => lessons.some((l) => l.subject === s));
   return (
     <div className="v2 lesson">
-      <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: "Learn", path: "/learn" }])} />
-      <header className="wrap pt-28 pb-10 md:pt-36">
+      <JsonLd
+        data={[
+          breadcrumbLd([{ name: "Home", path: "/" }, { name: "Learn", path: "/learn" }]),
+          itemListLd("Free MBBS lessons", lessons.map((l) => ({ name: l.title, path: l.path }))),
+        ]}
+      />
+      <header className="wrap pt-28 pb-10 md:pt-32">
         <p className="kick">Free MBBS lessons</p>
         <h1 className="h1 mt-5 max-w-[16ch]">
           Learn the topic, then <span className="acc">test yourself.</span>
         </h1>
         <p className="lead mt-6">
           Each lesson covers one topic from the MBBS syllabus, with diagrams where we have a good open one, six MCQs,
-          viva questions and flashcards.{lessons.some((l) => l.isPublished) ? " Reviewed by faculty." : " These lessons are drafts waiting for faculty review."}
+          viva questions and flashcards.{lessons.some((l) => l.reviewedBy) ? " Reviewed by faculty." : ""}
         </p>
         <nav className="lesson-chips mt-8" aria-label="Subjects">
           {subjects.map((s) => (

@@ -7,9 +7,9 @@ import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-exam-pattern-and-syllabus";
 export const metadata = buildMetadata({
-  title: "NEET PG 2026 Exam Pattern and Syllabus (from the NBEMS Bulletin)",
+  title: "NEET PG Exam Pattern and Syllabus (2026 Bulletin)",
   description:
-    "NEET PG 2026 exam pattern and syllabus as printed in the NBEMS information bulletin: 180 MCQs, 3 hours 30 minutes, +4 and -1 marking, five timed sections, and how the syllabus is defined.",
+    "NEET PG exam pattern and syllabus from the NBEMS bulletin: 180 MCQs, 3 hours 30 minutes, +4 and -1 marking, five timed sections, and how the syllabus is set.",
   path,
   noindex: !EXAM_PAGES_LIVE,
 });

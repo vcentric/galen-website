@@ -20,11 +20,11 @@ export const institutionPages: PageSpec[] = [
   {
     slug: "faculty",
     path: "/institutions/faculty",
-    status: "skeleton",
+    status: "live",
     audience: "faculty",
     title: "AI Workspace for Medical Faculty",
     description:
-      "Upload your references and generate lessons, lecture presentations, assessments, SGD cases, mind maps and flashcards in minutes. Nothing reaches students until faculty review and publish.",
+      "Upload your references and generate lessons, slides, assessments, SGD cases and flashcards in minutes. Nothing reaches students until faculty review and publish.",
     keywords: ["ai lesson plan generator 2,900", "ai in medical education 1,300", "ai for medical faculty (GEO)"],
     kicker: "For faculty",
     h1: "Faculty teach",
@@ -103,9 +103,9 @@ export const institutionPages: PageSpec[] = [
   {
     slug: "administration",
     path: "/institutions/administration",
-    status: "skeleton",
+    status: "live",
     audience: "institution",
-    title: "CBME Reports and Analytics for the Medical Education Unit",
+    title: "CBME Reports and Analytics for Medical Colleges",
     description:
       "One connected view of CBME: lessons delivered against the plan, learning and assessment results per student and per competency, CO and PO outcomes, audit-ready.",
     keywords: ["medical education unit 320", "cbme 3,600", "nmc cbme curriculum 70", "cbme audit (GEO)"],
@@ -184,11 +184,11 @@ export const institutionPages: PageSpec[] = [
   {
     slug: "students",
     path: "/institutions/students",
-    status: "skeleton",
+    status: "live",
     audience: "institution",
     title: "What Your Students Get with GalenAI",
     description:
-      "An AI tutor on your college's approved content, with question banks, clinical cases and flashcards mapped to NMC competencies, and progress each student can see.",
+      "An AI tutor on your college's approved content, with question banks, clinical cases and flashcards mapped to NMC competencies, and progress students can see.",
     keywords: ["ai for medical colleges (GEO)"],
     kicker: "For your students",
     h1: "Students learn",
@@ -246,11 +246,11 @@ export const institutionPages: PageSpec[] = [
   {
     slug: "vs-lms",
     path: "/institutions/vs-lms",
-    status: "skeleton",
+    status: "live",
     audience: "institution",
     title: "GalenAI vs Your LMS for CBME",
     description:
-      "Your LMS stores the syllabus. GalenAI delivers it. A side-by-side comparison for medical colleges: lessons, assessments, competencies, AI depth and reports for the MEU.",
+      "Your LMS stores the syllabus. GalenAI delivers it. A side-by-side comparison for medical colleges: lessons, assessments, competencies, AI depth and MEU reports.",
     keywords: ["moodle vs canvas 720", "best lms for medical colleges (GEO)", "moodle cbme (GEO)"],
     kicker: "GalenAI versus your LMS",
     h1: "Your LMS stores the syllabus. GalenAI",
@@ -319,7 +319,7 @@ export const institutionPages: PageSpec[] = [
   {
     slug: "integrations",
     path: "/institutions/integrations",
-    status: "skeleton",
+    status: "live",
     audience: "institution",
     title: "Bring Your Existing LMS Content into GalenAI",
     description:
@@ -367,7 +367,7 @@ export const institutionPages: PageSpec[] = [
     audience: "institution",
     title: "Book a GalenAI Demo for Your Medical College",
     description:
-      "See GalenAI live on your own syllabus. Book a demo for your medical college, or try the faculty platform now.",
+      "See GalenAI live on your own syllabus. Book a demo for your medical college or teaching hospital, or try the faculty platform yourself right now.",
     keywords: [],
     kicker: "Get started",
     h1: "Bring GalenAI to your",

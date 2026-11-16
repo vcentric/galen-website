@@ -5,6 +5,7 @@ import { buildMetadata, breadcrumbLd, learningResourceLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
 import { Breadcrumbs } from "@/app/components/v2/ui";
 import LessonEnhancer from "@/app/components/v2/LessonEnhancer";
+import LessonCard from "@/app/components/v2/LessonCard";
 
 export const dynamicParams = false;
 
@@ -25,8 +26,12 @@ export async function generateMetadata({ params }: Params) {
     path: m.path,
     type: "article",
     noindex: !m.isPublished,
+    image: firstImage(lesson.html),
   });
 }
+
+/** First figure in the lesson, used for the social preview and the structured data. */
+const firstImage = (html: string) => html.match(/src="(\/learn-images\/[^"]+)"/)?.[1];
 
 const fmtDate = (d: string) =>
   d ? new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "";
@@ -43,6 +48,10 @@ export default async function LessonPage({ params }: Params) {
     { name: m.title, path: m.path },
   ];
   const minutes = Math.max(1, Math.round(lesson.words / 200));
+  // Other lessons in the same subject: the ones next to this one in the list, so every lesson is linked from several others.
+  const siblings = getAllLessons().filter((l) => l.subject === subject && l.isPublished);
+  const at = siblings.findIndex((l) => l.topic === topic);
+  const related = siblings.length > 1 ? Array.from({ length: Math.min(6, siblings.length - 1) }, (_, i) => siblings[(at + 1 + i) % siblings.length]) : [];
 
   return (
     <div className="v2 lesson">
@@ -55,12 +64,15 @@ export default async function LessonPage({ params }: Params) {
           subject: subjectName(subject),
           competencyCodes: m.cbmeCodes,
           reviewedBy: m.reviewedBy || undefined,
-          dateModified: m.reviewedOn || undefined,
+          dateModified: m.reviewedOn || m.publishDate || undefined,
           datePublished: m.publishDate || undefined,
+          image: firstImage(lesson.html),
+          minutes,
+          keywords: [m.primaryKeyword, ...m.cbmeCodes.map((c) => `NMC ${c}`)].filter(Boolean),
         })}
       />
 
-      <header className="wrap pt-28 pb-8 md:pt-36">
+      <header className="wrap pt-28 pb-8 md:pt-32">
         <Breadcrumbs trail={trail} />
         {!m.isPublished && (
           <p className="lesson-draft" role="note">
@@ -130,6 +142,35 @@ export default async function LessonPage({ params }: Params) {
           </div>
         </aside>
       </div>
+
+      {related.length > 0 && (
+        <section className="wrap pb-16" aria-labelledby="more-lessons">
+          <div className="flex items-end justify-between gap-4 mb-6">
+            <h2 id="more-lessons" className="h2 !text-[clamp(1.5rem,3vw,2.1rem)]">
+              More {subjectName(subject).toLowerCase()} <span className="acc">lessons.</span>
+            </h2>
+            <Link className="font-bold text-[#c94d20] hover:underline" href={`/learn/${subject}`}>
+              All {subjectName(subject).toLowerCase()} →
+            </Link>
+          </div>
+          <div className="lesson-cards">
+            {related.map((l) => (
+              <LessonCard key={l.path} lesson={l} />
+            ))}
+          </div>
+          <p className="mt-8 font-semibold" style={{ color: "var(--body)" }}>
+            Preparing for a PG entrance?{" "}
+            <Link href="/exams/neet-pg-mcq-practice" className="text-[#2e2e2e] underline decoration-[#eb602d] decoration-2 underline-offset-4">
+              Practise free MCQs
+            </Link>{" "}
+            or read the{" "}
+            <Link href="/exams/neet-pg" className="text-[#2e2e2e] underline decoration-[#eb602d] decoration-2 underline-offset-4">
+              NEET PG guide
+            </Link>
+            .
+          </p>
+        </section>
+      )}
 
       {m.sources.length > 0 && (
         <section className="wrap pb-20">

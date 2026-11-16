@@ -7,9 +7,9 @@ import { EXAM_PAGES_LIVE } from "@/lib/exams";
 
 const path = "/exams/fmge-syllabus-and-pattern";
 export const metadata = buildMetadata({
-  title: "FMGE Syllabus, Subject-wise Marks and Exam Pattern (from the NBEMS Bulletin)",
+  title: "FMGE Syllabus, Subject-wise Marks and Exam Pattern",
   description:
-    "FMGE exam pattern, pass mark and the official subject-wise marks blueprint from the NBEMS information bulletin: 300 MCQs in two parts, no negative marking, 150 out of 300 to pass.",
+    "FMGE exam pattern, pass mark and the official subject-wise marks from the NBEMS bulletin: 300 MCQs in two parts, no negative marking, 150 out of 300 to pass.",
   path,
   noindex: !EXAM_PAGES_LIVE,
 });

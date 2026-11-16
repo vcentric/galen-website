@@ -1,10 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Terms of Service | GalenAI',
-};
+export const metadata = buildMetadata({
+  title: 'Terms of Service',
+  description: 'The terms that apply when you use the GalenAI student app, faculty platform and website: accounts, acceptable use, content, payments and liability.',
+  path: '/terms',
+});
 
 export default function TermsPage() {
   return (

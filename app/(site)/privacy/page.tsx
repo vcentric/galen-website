@@ -1,10 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Privacy Policy | GalenAI',
-};
+export const metadata = buildMetadata({
+  title: 'Privacy Policy',
+  description: 'How GalenAI collects, uses, stores and protects your data in the student app, the faculty platform and this website, and the choices and rights you have.',
+  path: '/privacy',
+});
 
 export default function PrivacyPage() {
   return (

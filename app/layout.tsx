@@ -38,8 +38,13 @@ export const metadata: Metadata = {
   applicationName: SITE.name,
   // Smart App Banner on iOS Safari: a native "Open / Get" bar for the app.
   itunes: { appId: IDS.appStoreId },
-  // TODO(varun): paste the Search Console verification token.
-  // verification: { google: "..." },
+  // Search Console and Bing tokens come from IDS in lib/site.ts (empty = no tag; DNS verification needs none).
+  verification: {
+    ...(IDS.googleSiteVerification ? { google: IDS.googleSiteVerification } : {}),
+    ...(IDS.bingSiteVerification ? { other: { "msvalidate.01": IDS.bingSiteVerification } } : {}),
+  },
+  alternates: { types: { "application/rss+xml": [{ url: "/blog/rss.xml", title: "GalenAI articles" }] } },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {

@@ -3,7 +3,7 @@ import { buildMetadata } from "@/lib/seo";
 
 // Server layout so this client-rendered route gets its own title, description and canonical.
 export const metadata = buildMetadata({
-  title: "AI for Medical Colleges: Students, Faculty and CBME Reports",
+  title: "AI for Medical Colleges: Faculty, Students, CBME",
   description:
     "GalenAI brings students, faculty and college administration onto one platform built around the NMC CBME framework. Students learn smarter. Faculty teach easier.",
   path: "/institutions",

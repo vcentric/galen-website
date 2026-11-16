@@ -7,9 +7,9 @@ import HowToSearch from "@/app/components/v2/HowToSearch";
 import { Headline, Kicker, Section } from "@/app/components/v2/ui";
 
 export const metadata = buildMetadata({
-  title: "How to Use GalenAI: Guides for Students, Faculty and Administration",
+  title: "How to Use GalenAI: Student and Faculty Guides",
   description:
-    "Step-by-step guides to GalenAI for students, faculty and college administration, with screenshots for every feature.",
+    "Step-by-step guides to GalenAI for students, faculty and college administration, with screenshots for every feature, from the AI tutor to CBME analytics.",
   path: "/how-to-use",
   noindex: !HOW_TO_LIVE,
 });

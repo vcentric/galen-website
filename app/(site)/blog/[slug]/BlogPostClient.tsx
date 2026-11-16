@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
-import { formatDate, type PostMeta } from "@/lib/blogFilters";
+import { formatDate, type PostMeta, getCategorySlug } from "@/lib/blogFilters";
 import { trackEvent } from "@/lib/analytics";
 import BlogCard from "@/app/components/blog/BlogCard";
 
@@ -106,7 +106,7 @@ export default function BlogPostClient({
           </Link>
           <span className="text-black/10">/</span>
           <Link
-            href={`/blog/category/${post.category.toLowerCase().replace(/\s+/g, "-")}`}
+            href={`/blog/category/${getCategorySlug(post.category)}`}
             className="text-text-muted no-underline transition-colors duration-200 hover:text-orange"
           >
             {post.category}
@@ -172,7 +172,7 @@ export default function BlogPostClient({
           {post.coverImage && (
             <figure className="mb-16">
               <div className="rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-black/5">
-                <img src={post.coverImage} alt={post.title} className="w-full h-auto block" />
+                <img src={post.coverImage} alt={post.title} className="w-full h-auto block" fetchPriority="high" decoding="async" />
               </div>
               {(post.heroCaption || post.heroSource) && (
                 <figcaption className="mt-4 px-2 font-secondary text-[0.85rem] text-text-muted leading-relaxed">

@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const hit = find(role, guide);
   if (!hit) return {};
   return buildMetadata({
-    title: `${hit.g.title}: GalenAI ${hit.r.label} Guide`,
-    description: hit.g.description,
+    title: `${hit.g.title}: GalenAI ${hit.r.label === "Administration" ? "Admin" : hit.r.label} Guide`,
+    description: `${hit.g.description} A step-by-step GalenAI guide for ${hit.r.label.toLowerCase()}, with screenshots of every screen.`.slice(0, 160),
     path: `/how-to-use/${role}/${guide}`,
     noindex: !HOW_TO_LIVE,
   });

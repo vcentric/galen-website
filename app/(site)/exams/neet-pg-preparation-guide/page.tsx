@@ -7,9 +7,9 @@ import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-preparation-guide";
 export const metadata = buildMetadata({
-  title: "How to Start NEET PG Preparation: A Plan by Months Left",
+  title: "How to Start NEET PG Preparation: Monthly Plan",
   description:
-    "Where to start NEET PG preparation: set up around the real exam format, a plan for 12, 9, 6, 3 and 1 months left, a study loop for each topic, a sample week, mock test routine and common mistakes.",
+    "Where to start NEET PG preparation: a plan for 12, 9, 6, 3 and 1 months left, a study loop for each topic, a sample week, a mock test routine and common mistakes.",
   path,
   noindex: !EXAM_PAGES_LIVE,
 });

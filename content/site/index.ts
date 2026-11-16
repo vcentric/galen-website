@@ -31,9 +31,9 @@ export const staticRoutes: { path: string; live: boolean; priority: number }[] =
   { path: "/download", live: true, priority: 0.6 },
   { path: "/privacy", live: true, priority: 0.2 },
   { path: "/terms", live: true, priority: 0.2 },
-  { path: "/features", live: false, priority: 0.8 },
+  { path: "/features", live: true, priority: 0.8 },
   { path: "/how-to-use", live: true, priority: 0.7 },
-  { path: "/contact", live: false, priority: 0.4 },
+  { path: "/contact", live: true, priority: 0.4 },
   // /qr and /go/* are deliberately absent: noindex.
 ];
 

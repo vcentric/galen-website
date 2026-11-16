@@ -67,6 +67,19 @@ export const organizationLd = () => ({
   // sameAs ties the brand entity together for Google and AI engines
   // ("galen ai" is otherwise confused with the physician Galen).
   sameAs: [LINKS.linkedin, LINKS.instagram, LINKS.appStore, LINKS.playStore, LINKS.app, LINKS.faculty],
+  contactPoint: [
+    { "@type": "ContactPoint", contactType: "sales", email: CONTACT.corporate, telephone: CONTACT.phone, areaServed: "IN", availableLanguage: "en" },
+    { "@type": "ContactPoint", contactType: "customer support", email: CONTACT.support, availableLanguage: "en" },
+  ],
+  knowsAbout: [
+    "Medical education",
+    "MBBS",
+    "Competency-based medical education (CBME)",
+    "NEET PG",
+    "INI-CET",
+    "FMGE",
+    "AI tutoring",
+  ],
 });
 
 export const websiteLd = () => ({
@@ -101,6 +114,15 @@ export const faqLd = (faqs: { q: string; a: string }[]) => ({
     name: f.q,
     acceptedAnswer: { "@type": "Answer", text: f.a },
   })),
+});
+
+/** A hub page's list of child pages (lesson hubs, guide hubs). */
+export const itemListLd = (name: string, items: { name: string; path: string }[]) => ({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name,
+  numberOfItems: items.length,
+  itemListElement: items.map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, url: absoluteUrl(it.path) })),
 });
 
 export const breadcrumbLd = (trail: { name: string; path: string }[]) => ({
@@ -161,9 +183,28 @@ export const learningResourceLd = (l: {
   reviewedBy?: string;
   dateModified?: string;
   datePublished?: string;
+  image?: string;
+  minutes?: number;
+  keywords?: string[];
 }) => ({
   "@context": "https://schema.org",
-  "@type": "LearningResource",
+  "@type": ["LearningResource", "Article"],
+  mainEntityOfPage: absoluteUrl(l.path),
+  isAccessibleForFree: true,
+  audience: { "@type": "EducationalAudience", educationalRole: "student", audienceType: "Medical students" },
+  ...(l.image ? { image: absoluteUrl(l.image) } : {}),
+  ...(l.minutes ? { timeRequired: `PT${l.minutes}M` } : {}),
+  ...(l.keywords?.length ? { keywords: l.keywords.join(", ") } : {}),
+  ...(l.competencyCodes?.length
+    ? {
+        educationalAlignment: l.competencyCodes.map((c) => ({
+          "@type": "AlignmentObject",
+          alignmentType: "teaches",
+          educationalFramework: "NMC Competency Based Medical Education (CBME) curriculum",
+          targetName: c,
+        })),
+      }
+    : {}),
   name: l.name,
   description: l.description,
   url: absoluteUrl(l.path),

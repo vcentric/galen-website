@@ -11,10 +11,26 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Features", href: "/features" },
       { label: "AI Tutor", href: "/features/ai-tutor" },
       { label: "Question Bank", href: "/features/question-bank" },
-      { label: "For NEET PG", href: "/for/neet-pg" },
+      { label: "Flashcards", href: "/features/flashcards" },
+      { label: "Clinical Cases", href: "/features/clinical-cases" },
       { label: "For MBBS students", href: "/for/mbbs-students" },
+      { label: "GalenAI vs ChatGPT", href: "/vs/chatgpt" },
       { label: "How to use", href: "/how-to-use/students" },
       { label: "Download", href: "/download" },
+    ],
+  },
+  {
+    title: "Learn and exams",
+    links: [
+      { label: "Free MBBS lessons", href: "/learn" },
+      { label: "Anatomy", href: "/learn/anatomy" },
+      { label: "Physiology", href: "/learn/physiology" },
+      { label: "Biochemistry", href: "/learn/biochemistry" },
+      { label: "Pathology", href: "/learn/pathology" },
+      { label: "NEET PG guide", href: "/exams/neet-pg" },
+      { label: "NEET PG MCQ practice", href: "/exams/neet-pg-mcq-practice" },
+      { label: "FMGE guide", href: "/exams/fmge-syllabus-and-pattern" },
+      { label: "For NEET PG", href: "/for/neet-pg" },
     ],
   },
   {
@@ -49,7 +65,7 @@ export default function Footer() {
   return (
     <footer id="contact" className="v2 tone-dark">
       <div className="wrap py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
+        <div className="grid gap-12 lg:grid-cols-[1fr_2.6fr]">
           <div>
             <Image src="/brand/lockup.svg" alt="GalenAI" width={154} height={34} />
             <p className="h2 mt-8 max-w-sm">
@@ -64,7 +80,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
             {COLUMNS.map((col) => (
               <div key={col.title}>
                 <h2 className="kick text-[#eb602d]">{col.title}</h2>

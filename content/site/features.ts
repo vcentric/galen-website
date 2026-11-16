@@ -26,7 +26,7 @@ export const features: PageSpec[] = [
   {
     slug: "ai-tutor",
     path: "/features/ai-tutor",
-    status: "skeleton",
+    status: "live",
     audience: "student",
     title: "AI Tutor for MBBS Students",
     description:
@@ -84,11 +84,11 @@ export const features: PageSpec[] = [
   {
     slug: "tutor-modes",
     path: "/features/tutor-modes",
-    status: "skeleton",
+    status: "live",
     audience: "student",
-    title: "Tutor Modes: Explain, Socratic, Case-based, Quick Q&A",
+    title: "AI Tutor Modes: Explain, Socratic, Case-based",
     description:
-      "Pick how GalenAI teaches you. Explain for clarity, Socratic to be questioned, Case-based for clinical thinking, Quick Q&A for fast revision, or build your own Tutor Profile.",
+      "Pick how GalenAI teaches you: Explain for clarity, Socratic to be questioned, Case-based for clinical thinking, Quick Q&A for revision, or your own profile.",
     keywords: ["socratic tutor ai 40", "ai tutor for students 1,300"],
     kicker: "Tutor modes",
     h1: "One tutor. Five ways to",
@@ -132,11 +132,11 @@ export const features: PageSpec[] = [
   {
     slug: "question-bank",
     path: "/features/question-bank",
-    status: "skeleton",
+    status: "live",
     audience: "student",
     title: "MBBS and NEET PG Question Bank with Explanations",
     description:
-      "Clinical MCQs with step-by-step reasoning, mapped to subjects and competencies. Practise for university exams, NEET PG, INI-CET and FMGE in the same app as your tutor.",
+      "Clinical MCQs with step-by-step reasoning, mapped to subjects and competencies. Practise for university exams, NEET PG, INI-CET and FMGE in one app.",
     keywords: ["neet pg question bank 880", "mbbs question bank app 170", "pathology mcq 4,400", "microbiology mcq 2,900"],
     kicker: "Question bank",
     h1: "Practise until it",
@@ -178,12 +178,11 @@ export const features: PageSpec[] = [
     ],
     faqs: [{ q: "Does the question bank cover NEET PG and FMGE?", a: "Yes. You can practise clinical MCQs for university exams and PG entrance in the same app, including an exam mode." }],
     related: ["/features/dashboard", "/for/neet-pg", "/how-to-use/students/question-bank"],
-    flags: ["Confirm question bank size and PYQ coverage before any number is printed."],
   },
   {
     slug: "flashcards",
     path: "/features/flashcards",
-    status: "skeleton",
+    status: "live",
     audience: "student",
     title: "Medical Flashcards with Spaced Revision",
     description:
@@ -229,7 +228,7 @@ export const features: PageSpec[] = [
   {
     slug: "clinical-cases",
     path: "/features/clinical-cases",
-    status: "skeleton",
+    status: "live",
     audience: "student",
     title: "AI Clinical Cases for Medical Students",
     description:
@@ -288,9 +287,9 @@ export const features: PageSpec[] = [
   {
     slug: "dashboard",
     path: "/features/dashboard",
-    status: "skeleton",
+    status: "live",
     audience: "student",
-    title: "Study Dashboard: Progress by Subject and Competency",
+    title: "Study Dashboard: Progress by Subject and Topic",
     description:
       "See your accuracy, streak and weak topics by subject and CBME competency, so your next study session targets the gap.",
     keywords: ["mbbs study timetable 70"],
@@ -324,7 +323,7 @@ export const features: PageSpec[] = [
   {
     slug: "guided-lessons",
     path: "/features/guided-lessons",
-    status: "skeleton",
+    status: "live",
     audience: "student",
     title: "Guided Lessons and Lessons from Your Faculty",
     description:
@@ -370,10 +369,10 @@ export const features: PageSpec[] = [
   {
     slug: "voice-viva",
     path: "/features/voice-viva",
-    status: "skeleton",
+    status: "live",
     audience: "student",
     title: "Voice Viva Practice (Coming Soon)",
-    description: "Practise viva questions out loud with an AI examiner. Voice viva is coming soon to GalenAI.",
+    description: "Practise anatomy, physiology and clinical viva questions out loud with an AI examiner, in the same app as your tutor. Voice viva is coming soon to GalenAI.",
     keywords: ["anatomy viva questions 260", "physiology viva questions 170", "ent viva questions 6,600"],
     kicker: "Voice viva · Coming soon",
     h1: "Practise your viva out",
@@ -410,7 +409,7 @@ export const features: PageSpec[] = [
   {
     slug: "ai-quiz-generator",
     path: "/features/ai-quiz-generator",
-    status: "skeleton",
+    status: "live",
     audience: "all",
     title: "AI Quiz Generator for Medical Topics",
     description:
@@ -454,9 +453,9 @@ export const features: PageSpec[] = [
   {
     slug: "ai-flashcard-generator",
     path: "/features/ai-flashcard-generator",
-    status: "skeleton",
+    status: "live",
     audience: "all",
-    title: "AI Flashcard Generator for Medical Students and Faculty",
+    title: "AI Flashcard Generator for Medical Students",
     description: "Generate medical flashcards from a topic or your own references, then revise them with spaced revision in GalenAI.",
     keywords: ["ai flashcard generator 3,600"],
     kicker: "AI flashcard generator",
@@ -507,7 +506,7 @@ export const features: PageSpec[] = [
   {
     slug: "ai-mind-map-generator",
     path: "/features/ai-mind-map-generator",
-    status: "skeleton",
+    status: "live",
     audience: "faculty",
     title: "AI Mind Map Generator for Medical Teaching",
     description:
@@ -542,7 +541,7 @@ export const features: PageSpec[] = [
   {
     slug: "ai-lesson-plan-generator",
     path: "/features/ai-lesson-plan-generator",
-    status: "skeleton",
+    status: "live",
     audience: "faculty",
     title: "AI Lesson Plan Generator for CBME",
     description:

@@ -29,12 +29,18 @@ export const LINKS = {
   whatsapp: "https://wa.me/919741591110",
   linkedin: "https://www.linkedin.com/company/galenai-india",
   instagram: "https://www.instagram.com/galen_ai",
+  // TODO(varun): paste the meeting link (Calendly, Cal.com, Google Calendar booking page...).
+  // While this is empty the book-demo page shows the form only. Once set, a "Pick a time" button appears above the form.
+  booking: "",
 } as const;
 
 export const IDS = {
   appStoreId: "6755653561",
   playPackage: "com.galenai.galenai",
   ga4: "G-K3TH8HMZP6",
+  // Optional. Only needed if Search Console / Bing are verified by HTML tag instead of DNS.
+  googleSiteVerification: "",
+  bingSiteVerification: "",
 } as const;
 
 /** Contact block. Institution pages use `corporate`; student pages use `support`. */

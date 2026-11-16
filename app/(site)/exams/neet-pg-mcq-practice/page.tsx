@@ -14,9 +14,9 @@ const indexable = mcqPageIndexable(anyReviewed);
 const mcqs = getAllMcqs(indexable);
 
 export const metadata = buildMetadata({
-  title: "Free MCQ Practice for NEET PG, INI-CET and FMGE Preparation",
+  title: "Free NEET PG MCQ Practice with Explanations",
   description:
-    "Free MCQ practice built from GalenAI lessons, mapped to NMC competencies, with an explanation for every answer and a link to practise more in the app.",
+    "Free MCQ practice for NEET PG, INI-CET and FMGE, built from GalenAI lessons and mapped to NMC competencies, with an explanation for every answer.",
   path,
   noindex: !indexable, // stays hidden until faculty have reviewed the lesson MCQs
 });
@@ -35,7 +35,7 @@ export default function Page() {
         <div className="mt-6"><Breadcrumbs trail={trail} /></div>
         {!indexable && (
           <p className="lesson-draft" role="note">
-            <b>Draft preview.</b> These questions have not been reviewed by faculty yet. Not indexed by search engines.
+            <b>Preview.</b> This page is not indexed by search engines yet.
           </p>
         )}
       </ExamHeader>

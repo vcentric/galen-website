@@ -14,6 +14,8 @@ import ModeExplorer from "@/app/components/v2/ModeExplorer";
 import PhoneFrame from "@/app/components/v2/PhoneFrame";
 import AppScreen, { type AppScreenName } from "@/app/components/v2/AppScreen";
 import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
+import { getAllLessons, subjectName, SUBJECTS } from "@/lib/learn";
+import { EXAM_PAGES_LIVE } from "@/lib/exams";
 
 export const metadata = buildMetadata({
   title: "GalenAI: AI Tutor and Study App for MBBS Students",
@@ -88,14 +90,26 @@ const STAGES = [
   },
 ];
 
+const EXAM_GUIDES = [
+  { label: "NEET PG complete guide", href: "/exams/neet-pg" },
+  { label: "NEET PG pattern and syllabus", href: "/exams/neet-pg-exam-pattern-and-syllabus" },
+  { label: "NEET PG preparation guide", href: "/exams/neet-pg-preparation-guide" },
+  { label: "Free NEET PG MCQ practice", href: "/exams/neet-pg-mcq-practice" },
+  { label: "FMGE syllabus and pattern", href: "/exams/fmge-syllabus-and-pattern" },
+];
+
 /** Student home. Blueprint: docs/v2/PAGE_BLUEPRINTS.md section 1. */
 export default function Home() {
+  const published = getAllLessons().filter((l) => l.isPublished);
+  const learnSubjects = Object.keys(SUBJECTS)
+    .map((s) => ({ s, lessons: published.filter((l) => l.subject === s) }))
+    .filter((x) => x.lessons.length > 0);
   return (
     <div className="v2">
       <JsonLd data={[softwareAppLd(), faqLd(studentFaqs)]} />
 
       {/* 1. Hero: promise, proof, action. H1 + CTA fit one phone viewport. */}
-      <section className="wrap pt-32 pb-14 md:pt-40 md:pb-20">
+      <section className="wrap pt-32 pb-14 md:pt-36 md:pb-20">
         <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
           <div>
             <Kicker>For MBBS and medical students</Kicker>
@@ -131,7 +145,7 @@ export default function Home() {
               </span>
               medical students already on it. iPhone, Android and web.
             </p>
-            <QrBlock className="mt-10 hidden lg:flex" size={112} />
+            <QrBlock className="mt-10 hidden lg:flex" size={176} big />
           </div>
           <div className="flex justify-center lg:justify-end">
             {/* Coded app screen (real answer, see content/site/demos.ts). Text, so the H1 stays the LCP. */}
@@ -199,6 +213,66 @@ export default function Home() {
           ))}
         </div>
       </Section>
+
+      {/* 3b. Free lessons and exam guides: the public library that search and AI engines land on. */}
+      {learnSubjects.length > 0 && (
+        <section id="learn" className="sec bg-white/60">
+          <div className="wrap">
+            <Kicker>Free to read</Kicker>
+            <h2 className="h2 mt-5">
+              {published.length} MBBS lessons, each with MCQs and <span className="acc">viva questions.</span>
+            </h2>
+            <p className="lead mt-5">
+              One topic per page, mapped to its NMC competency, with diagrams, six MCQs, viva questions and flashcards. No sign-up.
+            </p>
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {learnSubjects.map(({ s, lessons }) => (
+                <li key={s}>
+                  <div className="card flex h-full flex-col p-6">
+                    <h3 className="h3 !text-[1.35rem]">
+                      <Link href={`/learn/${s}`} className="hover:text-[#c94d20]">
+                        {subjectName(s)}
+                      </Link>
+                    </h3>
+                    <p className="mt-1 text-sm font-semibold" style={{ color: "var(--body)" }}>
+                      {lessons.length} lessons
+                    </p>
+                    <ul className="mt-4 flex-1 space-y-1.5 text-[0.95rem] font-semibold">
+                      {lessons.slice(0, 4).map((l) => (
+                        <li key={l.path}>
+                          <Link href={l.path} className="underline decoration-[#2e2e2e]/20 underline-offset-4 hover:decoration-[#eb602d]">
+                            {l.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link href={`/learn/${s}`} className="mt-4 font-bold text-[#c94d20] hover:underline">
+                      All {subjectName(s).toLowerCase()} lessons →
+                    </Link>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            {EXAM_PAGES_LIVE && (
+              <div className="mt-10">
+                <h3 className="h3">Exam guides, built from the official bulletins</h3>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {EXAM_GUIDES.map((g) => (
+                    <li key={g.href}>
+                      <Link
+                        href={g.href}
+                        className="inline-block rounded-full border-2 border-[#2e2e2e]/15 bg-white px-3.5 py-1.5 text-sm font-bold hover:border-[#eb602d]"
+                      >
+                        {g.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* 4. Asking beats watching (dark). Habit, never a brand. */}
       <Section id="ask-dont-watch" tone="dark">

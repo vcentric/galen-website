@@ -1,16 +1,24 @@
+import fs from "node:fs";
+import path from "node:path";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getAllPostsMeta, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import type { PostMeta } from "@/lib/blogFilters";
 import BlogPostClient from "./BlogPostClient";
+import { buildMetadata } from "@/lib/seo";
 
 const BASE_URL = "https://www.galenai.io";
 
 // Absolute, crawlable URL for the cover image (Keystatic stores it root-relative).
+// Social previews and structured data use the JPEG copy written by scripts/optimize_blog_images.py when
+// it exists, because some platforms do not read WebP.
 function absoluteImageUrl(coverImage: string): string | null {
   if (!coverImage) return null;
   if (coverImage.startsWith("http")) return coverImage;
-  return `${BASE_URL}${coverImage.startsWith("/") ? "" : "/"}${coverImage}`;
+  let rel = coverImage.startsWith("/") ? coverImage : `/${coverImage}`;
+  const og = rel.replace(/\.webp$/i, ".og.jpg");
+  if (og !== rel && fs.existsSync(path.join(process.cwd(), "public", og))) rel = og;
+  return `${BASE_URL}${encodeURI(rel)}`;
 }
 
 // BlogPosting structured data (schema.org) — makes the post eligible for Google's
@@ -72,18 +80,18 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return {};
-  const title = post.meta.metaTitle || `${post.meta.title} | GalenAI`;
-  const description = post.meta.metaDescription || post.meta.excerpt;
-  return {
-    title,
+  // Long headlines keep their full wording but drop the brand suffix, so less of the title is cut in results.
+  const base = (post.meta.metaTitle || post.meta.title).replace(/\s*\|\s*GalenAI\s*$/, "").trim();
+  const raw = (post.meta.metaDescription || post.meta.excerpt || "").trim();
+  const description = raw.length > 160 ? `${raw.slice(0, 157).replace(/\s+\S*$/, "")}...` : raw;
+  const md = buildMetadata({
+    title: base,
     description,
-    openGraph: {
-      title: post.meta.metaTitle || post.meta.title,
-      description,
-      type: "article",
-      images: post.meta.coverImage ? [post.meta.coverImage] : undefined,
-    },
-  };
+    path: `/blog/${slug}`,
+    type: "article",
+    image: absoluteImageUrl(post.meta.coverImage) ?? undefined,
+  });
+  return base.length > 50 ? { ...md, title: { absolute: base } } : md;
 }
 
 export default async function BlogPostPage({

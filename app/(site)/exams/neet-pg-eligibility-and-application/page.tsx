@@ -7,9 +7,9 @@ import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-eligibility-and-application";
 export const metadata = buildMetadata({
-  title: "NEET PG Eligibility, Fee and How to Apply (from the NBEMS Bulletin)",
+  title: "NEET PG Eligibility, Fee and How to Apply",
   description:
-    "Who can apply for NEET PG, the exam fee, the four application steps, documents and photo rules, and how test cities are chosen, as printed in the official NBEMS bulletin.",
+    "Who can apply for NEET PG, the exam fee, the four application steps, document and photo rules, and how test cities are chosen, from the official NBEMS bulletin.",
   path,
   noindex: !EXAM_PAGES_LIVE,
 });

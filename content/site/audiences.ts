@@ -52,9 +52,9 @@ export const audiences: PageSpec[] = [
   {
     slug: "neet-pg",
     path: "/for/neet-pg",
-    status: "skeleton",
+    status: "live",
     audience: "student",
-    title: "NEET PG Preparation App with AI Tutor and Question Bank",
+    title: "NEET PG Preparation App: AI Tutor and Question Bank",
     description:
       "Prepare for NEET PG with an AI tutor that explains every doubt, a clinical question bank with reasoning, flashcards and a dashboard that shows your weak topics.",
     keywords: ["neet pg preparation app 320", "neet pg app 170", "neet pg question bank 880", "how to prepare for neet pg 320"],
@@ -78,12 +78,11 @@ export const audiences: PageSpec[] = [
       { q: "Is GalenAI free?", a: "GalenAI is currently free for a limited time while we gather feedback from students." },
     ],
     related: [...(EXAM_PAGES_LIVE ? ["/exams/neet-pg"] : []), "/features/question-bank", "/features/ai-tutor", "/for/inicet", "/for/fmge"],
-    flags: ["Confirm question bank size and PYQ coverage before any number is printed."],
   },
   {
     slug: "inicet",
     path: "/for/inicet",
-    status: "skeleton",
+    status: "live",
     audience: "student",
     title: "INI-CET Preparation with an AI Tutor",
     description:
@@ -107,7 +106,7 @@ export const audiences: PageSpec[] = [
   {
     slug: "fmge",
     path: "/for/fmge",
-    status: "skeleton",
+    status: "live",
     audience: "student",
     title: "FMGE Preparation App for Foreign Medical Graduates",
     description:
@@ -143,9 +142,9 @@ export const audiences: PageSpec[] = [
   {
     slug: "mbbs-students",
     path: "/for/mbbs-students",
-    status: "skeleton",
+    status: "live",
     audience: "student",
-    title: "The Study App for MBBS Students, First Year to Final Year",
+    title: "Study App for MBBS Students, First to Final Year",
     description:
       "One app for MBBS: an AI tutor for doubts, guided lessons, question bank, flashcards and clinical cases, mapped to the NMC CBME curriculum.",
     keywords: ["medical student app 390", "mbbs study app 40", "how to study pharmacology 590", "ai for mbbs students 30"],
@@ -193,7 +192,7 @@ export const comparisons: PageSpec[] = [
   {
     slug: "chatgpt",
     path: "/vs/chatgpt",
-    status: "skeleton",
+    status: "live",
     audience: "student",
     title: "GalenAI vs ChatGPT for Medical Students",
     description:
@@ -234,7 +233,7 @@ export const comparisons: PageSpec[] = [
   {
     slug: "lms",
     path: "/vs/lms",
-    status: "skeleton",
+    status: "live",
     audience: "student",
     title: "GalenAI vs Your College LMS: What Students Get",
     description:

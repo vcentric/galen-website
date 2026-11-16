@@ -7,9 +7,9 @@ import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-test-day-guide";
 export const metadata = buildMetadata({
-  title: "NEET PG Test Day Guide: Reporting Time, Documents and Rules",
+  title: "NEET PG Test Day: Reporting Time, Documents, Rules",
   description:
-    "What to carry, when to reach the centre and what is not allowed on NEET PG test day, from the official NBEMS bulletin, plus how to use the 42 minutes in each timed section.",
+    "What to carry, when to reach the centre and what is not allowed on NEET PG test day, from the NBEMS bulletin, plus how to use the 42 minutes in each section.",
   path,
   noindex: !EXAM_PAGES_LIVE,
 });

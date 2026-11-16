@@ -53,7 +53,7 @@ export const howToRoles: Record<
   administration: {
     label: "Administration",
     title: "How to Use GalenAI: Administration Guide",
-    description: "Set up and run GalenAI for your college: roles, courses, batches, people, the CBME timetable and analytics.",
+    description: "Set up and run GalenAI for your medical college: roles, courses, years, batches, people, the CBME timetable and institute analytics.",
     appUrl: "https://faculty.galenai.io",
     guides: [
       { slug: "roles", title: "Roles and permissions", sourceId: "ad-roles", description: "What Super Admin and Secretary can do." },

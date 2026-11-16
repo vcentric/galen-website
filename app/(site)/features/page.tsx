@@ -6,11 +6,10 @@ import CtaLink from "@/app/components/v2/CtaLink";
 import { Headline, Kicker, Section } from "@/app/components/v2/ui";
 
 export const metadata = buildMetadata({
-  title: "Features: AI Tutor, Question Bank, Flashcards, Clinical Cases",
+  title: "Features: AI Tutor, Question Bank, Flashcards",
   description:
-    "Everything in GalenAI: an AI tutor with five teaching modes, question bank, flashcards, clinical cases, guided lessons and a dashboard that shows your weak topics.",
+    "Everything in GalenAI: an AI tutor with five teaching modes, question bank, flashcards, clinical cases, guided lessons and a dashboard for your weak topics.",
   path: "/features",
-  noindex: true, // TODO(exec): remove when the hub is built and staticRoutes "/features" is live
 });
 
 /** Features hub. Skeleton: links every feature page so nothing is orphaned. */
@@ -47,7 +46,6 @@ export default function FeaturesHub() {
             </li>
           ))}
         </ul>
-        {/* TODO(exec): group as Ask / Practise / Revise / For faculty, with a screen per card. */}
       </Section>
     </div>
   );
