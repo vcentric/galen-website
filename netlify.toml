@@ -1,4 +1,4 @@
-# Headers only. Build command, publish directory and the Next.js runtime stay as set in the Netlify UI.
+# Headers and two redirects. Build command, publish directory and the Next.js runtime stay as set in the Netlify UI.
 
 # Security headers on every response.
 [[headers]]
@@ -41,3 +41,17 @@
   for = "/qr/*"
   [headers.values]
     Cache-Control = "public, max-age=604800, stale-while-revalidate=2592000"
+
+# The download page lives in the app: app.galenai.io/download sends each phone to its store.
+# Old links to galenai.io/download keep any UTM the link already carries (Netlify passes the query string through).
+[[redirects]]
+  from = "/download"
+  to = "https://app.galenai.io/download"
+  status = 301
+  force = true
+# Printed QR codes that point at /qr.
+[[redirects]]
+  from = "/qr"
+  to = "https://app.galenai.io/download?utm_source=website&utm_medium=qr_print&utm_campaign=galenweb"
+  status = 301
+  force = true

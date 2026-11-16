@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SiInstagram, SiLinkedin } from "react-icons/si";
 import { CONTACT, LINKS, SITE } from "@/lib/site";
 import StoreBadges from "./StoreBadges";
+import { AppLink } from "./CtaLink";
 
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -16,7 +17,7 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "For MBBS students", href: "/for/mbbs-students" },
       { label: "GalenAI vs ChatGPT", href: "/vs/chatgpt" },
       { label: "How to use", href: "/how-to-use/students" },
-      { label: "Download", href: "/download" },
+      { label: "Download", href: "https://app.galenai.io/download" },
     ],
   },
   {
@@ -41,7 +42,7 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "For administration", href: "/institutions/administration" },
       { label: "GalenAI vs your LMS", href: "/institutions/vs-lms" },
       { label: "Book a demo", href: "/institutions/book-demo" },
-      { label: "Faculty platform", href: LINKS.faculty },
+      { label: "Faculty platform", href: `${LINKS.faculty}/?utm_source=website&utm_medium=footer_link&utm_campaign=galenweb` },
     ],
   },
   {
@@ -76,7 +77,7 @@ export default function Footer() {
               {SITE.subTagline}
             </p>
             <div className="mt-8">
-              <StoreBadges tone="dark" />
+              <StoreBadges tone="dark" source="footer_badge" />
             </div>
           </div>
 
@@ -87,7 +88,11 @@ export default function Footer() {
                 <ul className="mt-5 space-y-3 text-[0.95rem] font-medium">
                   {col.links.map((l) => (
                     <li key={l.href}>
-                      {l.href.startsWith("http") ? (
+                      {l.label === "Download" ? (
+                        <AppLink intent="download" source="footer_link" className="hover:text-[#eb602d]">
+                          {l.label}
+                        </AppLink>
+                      ) : l.href.startsWith("http") ? (
                         <a href={l.href} rel="noopener" className="hover:text-[#eb602d]">
                           {l.label}
                         </a>

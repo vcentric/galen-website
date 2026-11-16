@@ -1,3 +1,4 @@
+import CtaLink from "@/app/components/v2/CtaLink";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllLessons, getLesson, subjectName } from "@/lib/learn";
@@ -134,9 +135,7 @@ export default async function LessonPage({ params }: Params) {
                   Practise {m.cbmeCodes[0] ?? "this topic"}
                 </a>
               ) : (
-                <Link className="btn btn-primary mt-5 w-full" href="/download">
-                  Get the app
-                </Link>
+                <CtaLink intent="download" source={`learn_${subject}_${topic}_sidebar`} label="Get the app" className="mt-5 w-full" />
               )}
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { AppLink } from "@/app/components/v2/CtaLink";
 import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
@@ -124,7 +125,7 @@ export default function Page() {
           <ul>
             <li>Browse <Link href="/learn">lessons</Link> by subject. Each one maps to an NMC competency and ends with 6 MCQs, viva questions and flashcards. More subjects are being added.</li>
             <li>Use the <Link href="/exams/neet-pg-mcq-practice">free practice questions</Link> for quick sets by subject.</li>
-            <li>In the <Link href="/download">GalenAI app</Link>, practise the full question bank by competency, and use the AI tutor to go through the questions you got wrong.</li>
+            <li>In the <AppLink intent="download" source="exam_neet_pg_preparation_guide_inline">GalenAI app</AppLink>, practise the full question bank by competency, and use the AI tutor to go through the questions you got wrong.</li>
           </ul>
 
           <h2>Mistakes to avoid</h2>

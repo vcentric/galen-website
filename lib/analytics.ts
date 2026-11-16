@@ -19,7 +19,7 @@ export const trackEvent = (eventName: string, params?: Record<string, any>) => {
 export const getDestinationFromHref = (href: string): string => {
   if (!href) return "unknown";
   if (href.startsWith("#")) return href.substring(1);
-  if (href === "/qr") return "qr";
+  if (href.includes("app.galenai.io/download")) return "app_download";
   if (href.includes("app.galenai.io")) return "web_app";
   if (href.includes("apps.apple.com")) return "app_store";
   if (href.includes("play.google.com")) return "play_store";

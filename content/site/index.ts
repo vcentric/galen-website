@@ -28,13 +28,12 @@ export const staticRoutes: { path: string; live: boolean; priority: number }[] =
   { path: "/institutions", live: true, priority: 0.9 },
   { path: "/blog", live: true, priority: 0.8 },
   { path: "/team", live: true, priority: 0.5 },
-  { path: "/download", live: true, priority: 0.6 },
   { path: "/privacy", live: true, priority: 0.2 },
   { path: "/terms", live: true, priority: 0.2 },
   { path: "/features", live: true, priority: 0.8 },
   { path: "/how-to-use", live: true, priority: 0.7 },
   { path: "/contact", live: true, priority: 0.4 },
-  // /qr and /go/* are deliberately absent: noindex.
+  // /go/* is deliberately absent: noindex. /download and /qr redirect to the app (netlify.toml).
 ];
 
 /** How-to routes go live together, once the port from the source page is checked. */
@@ -45,7 +44,6 @@ const BESPOKE_LABELS: Record<string, string> = {
   "/institutions": "GalenAI for medical colleges",
   "/features": "All features",
   "/how-to-use": "How to use GalenAI",
-  "/download": "Download the app",
   "/exams/neet-pg": "NEET PG complete guide",
   "/exams/fmge-syllabus-and-pattern": "FMGE syllabus and pattern",
 };

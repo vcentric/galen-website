@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { AppLink } from "./CtaLink";
 import type { PracticeMcq } from "@/lib/learn";
 
 type Subject = { key: string; name: string };
@@ -120,7 +121,7 @@ export default function McqPractice({ mcqs, subjects }: { mcqs: PracticeMcq[]; s
                       Practise more in the app
                     </a>
                   ) : (
-                    <Link href="/download">Practise more in the app</Link>
+                    <AppLink intent="download" source="mcq_practice_inline">Practise more in the app</AppLink>
                   )}
                 </p>
               </div>

@@ -1,5 +1,7 @@
 "use client";
 
+import { AppLink } from "@/app/components/v2/CtaLink";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
@@ -295,12 +297,13 @@ export default function BlogPostClient({
                 <p className="font-secondary text-[0.95rem] leading-relaxed text-white/60 mb-8">
                   Get personalized guidance and understanding for your medical journey.
                 </p>
-                <Link
-                  href="/qr"
-                  className="w-full bg-orange text-white font-primary text-[0.95rem] font-bold py-4 rounded-2xl no-underline transition-all duration-300 hover:bg-orange/90 hover:scale-[1.02] shadow-xl shadow-orange/20"
+                <AppLink
+                  intent="download"
+                  source="blog_post_sidebar"
+                  className="w-full bg-orange text-white font-primary text-[0.95rem] font-bold py-4 rounded-2xl no-underline transition-all duration-300 hover:bg-orange/90 hover:scale-[1.02] shadow-xl shadow-orange/20 text-center"
                 >
                   Try GalenAI Free
-                </Link>
+                </AppLink>
               </div>
             </div>
           </div>

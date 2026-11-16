@@ -1,3 +1,4 @@
+import { AppLink } from "@/app/components/v2/CtaLink";
 import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
@@ -81,7 +82,7 @@ export default function Page() {
           <ul>
             <li><Link href="/learn">Lessons</Link> mapped to NMC competencies, each with MCQs, viva questions and flashcards.</li>
             <li><Link href="/exams/neet-pg-mcq-practice">Free practice questions</Link> with an explanation for every answer.</li>
-            <li><Link href="/download">The GalenAI app</Link> for the full question bank and the AI tutor.</li>
+            <li><AppLink intent="download" source="exam_neet_pg_inline">The GalenAI app</AppLink> for the full question bank and the AI tutor.</li>
           </ul>
         </article>
       </div>

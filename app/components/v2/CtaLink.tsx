@@ -1,9 +1,48 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CTA, type CtaIntent } from "@/lib/cta";
+import { CTA, ctaHref, type CtaIntent } from "@/lib/cta";
 import { trackCTAClick } from "@/lib/analytics";
-import { decorateUrl } from "@/lib/utm";
+import { decorateUrl, getUtmParams } from "@/lib/utm";
+
+/**
+ * href for an intent: website UTM on the server render; on the client, a visitor who arrived with their
+ * own UTM keeps theirs (nothing is overridden) and gets them on the bare link instead.
+ */
+export function useCtaHref(intent: CtaIntent, source: string): string {
+  const tagged = ctaHref(intent, source);
+  const [href, setHref] = useState<string>(tagged);
+  useEffect(() => {
+    setHref(Object.keys(getUtmParams()).length ? decorateUrl(CTA[intent].href) : decorateUrl(tagged));
+  }, [intent, tagged]);
+  return href;
+}
+
+/** A text link (not a button) to an app intent, with the same UTM and click tracking as CtaLink. */
+export function AppLink({
+  intent,
+  source,
+  children,
+  className,
+}: {
+  intent: CtaIntent;
+  source: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const href = useCtaHref(intent, source);
+  return (
+    <a
+      href={href}
+      className={className}
+      data-cta={intent}
+      rel="noopener"
+      onClick={() => trackCTAClick(CTA[intent].href, { source, button_type: "link", button_text: String(children), intent })}
+    >
+      {children}
+    </a>
+  );
+}
 
 /**
  * The only way a v2 page links to an app, a store or the demo form.
@@ -24,8 +63,7 @@ export default function CtaLink({
   className?: string;
 }) {
   const cta = CTA[intent];
-  const [href, setHref] = useState<string>(cta.href);
-  useEffect(() => setHref(decorateUrl(cta.href)), [cta.href]);
+  const href = useCtaHref(intent, source);
   const text = label ?? cta.label;
   const external = cta.href.startsWith("http");
   return (

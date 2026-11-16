@@ -6,6 +6,7 @@ import type { HowToRole } from "@/content/site/howto";
 import { faqsFromHtml, guideSection } from "@/content/howto";
 import { buildMetadata, breadcrumbLd, faqLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
+import CtaLink from "@/app/components/v2/CtaLink";
 import HowToShell from "@/app/components/v2/HowToShell";
 
 type Props = { params: Promise<{ role: string; guide: string }> };
@@ -76,9 +77,11 @@ export default async function HowToGuidePage({ params }: Props) {
             ) : null}
           </nav>
           <p className="mt-8">
-            <a className="btn btn-primary" href={r.appUrl} rel="noopener">
-              Open GalenAI {role === "students" ? "" : "for faculty"}
-            </a>
+            <CtaLink
+              intent={role === "students" ? "try-web" : "faculty-live"}
+              source={`howto_${role}_${guide}_open`}
+              label={role === "students" ? "Open GalenAI" : "Open GalenAI for faculty"}
+            />
           </p>
         </div>
       }

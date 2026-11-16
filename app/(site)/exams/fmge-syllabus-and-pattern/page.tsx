@@ -1,3 +1,4 @@
+import { AppLink } from "@/app/components/v2/CtaLink";
 import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
@@ -93,7 +94,7 @@ export default function Page() {
             <li><Link href="/learn/biochemistry">Biochemistry lessons</Link></li>
           </ul>
           <p>
-            Test yourself with the <Link href="/exams/neet-pg-mcq-practice">practice questions</Link>, or <Link href="/download">get the app</Link>.
+            Test yourself with the <Link href="/exams/neet-pg-mcq-practice">practice questions</Link>, or <AppLink intent="download" source="exam_fmge_syllabus_and_pattern_inline">get the app</AppLink>.
           </p>
         </article>
       </div>

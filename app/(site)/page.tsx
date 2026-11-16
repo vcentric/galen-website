@@ -374,7 +374,7 @@ export default function Home() {
             <CtaLink intent="try-web" source="home_final" variant="ghost" />
           </div>
           <div className="mt-8">
-            <StoreBadges tone="dark" />
+            <StoreBadges tone="dark" source="home_final_badge" />
           </div>
           <Image
             src="/brand/mascots/dr-mira.svg"
