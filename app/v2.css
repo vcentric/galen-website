@@ -42,6 +42,7 @@
 .v2 .h2 { font: 700 clamp(1.75rem, 4.4vw, 3rem) / 1 var(--font-space-var), sans-serif; letter-spacing: -0.035em; text-wrap: balance; }
 .v2 .h3 { font: 700 1.25rem / 1.12 var(--font-space-var), sans-serif; letter-spacing: -0.015em; }
 .v2 .lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.45; font-weight: 500; color: var(--body); max-width: 62ch; }
+@media (max-width: 640px) { .v2 .lead { font-size: 0.95rem; line-height: 1.5; } }
 .v2 .acc { color: var(--color-orange); }
 .v2 .kick { display: flex; align-items: center; gap: 0.75rem; font: 700 0.75rem / 1 var(--font-raleway-var), sans-serif; letter-spacing: 0.17em; text-transform: uppercase; }
 .v2 .kick::before { content: ""; width: 2.25rem; height: 3px; background: var(--color-orange); }
