@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "file": "images/brachial-plexus-schematic.webp",
+    "slot": "brachial-plexus-schematic",
+    "source": "https://commons.wikimedia.org/wiki/File:Brachialplexusdetaileddiagram.jpg",
+    "title": "File:Brachialplexusdetaileddiagram.jpg",
+    "author": "Patrick John Duggan",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  }
+]

@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "file": "images/brachial-plexus-overview-in-situ.webp",
+    "slot": "brachial-plexus-overview-in-situ",
+    "source": "https://commons.wikimedia.org/wiki/File:Brachial_plexus_2.svg",
+    "title": "File:Brachial plexus 2.svg",
+    "author": "Brachial_plexus.jpg: Original uploader was Mattopaedia at en.wikipedia derivative work: Captain-n00dle (talk), MissMJ",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/brachial-plexus-rtdcb-schematic.webp",
+    "slot": "brachial-plexus-rtdcb-schematic",
+    "source": "https://commons.wikimedia.org/wiki/File:Brachialplexusdetaileddiagram.jpg",
+    "title": "File:Brachialplexusdetaileddiagram.jpg",
+    "author": "Patrick John Duggan",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/brachial-plexus-branches-by-origin.webp",
+    "slot": "brachial-plexus-branches-by-origin",
+    "source": "https://commons.wikimedia.org/wiki/File:Brachial_plexus_color.svg",
+    "title": "File:Brachial plexus color.svg",
+    "author": "Brachial plexus.svg: Selket derivative work: mcstrother (Marshall Strother)",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Brachial plexus.svg: Selket derivative work: mcstrother, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  }
+]

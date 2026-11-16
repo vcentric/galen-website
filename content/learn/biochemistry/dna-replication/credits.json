@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "file": "images/leading-lagging-okazaki.webp",
+    "slot": "leading-lagging-okazaki",
+    "source": "https://commons.wikimedia.org/wiki/File:DNA_replication.png",
+    "title": "File:DNA replication.png",
+    "author": "VWALevi2020",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "VWALevi2020, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  }
+]
