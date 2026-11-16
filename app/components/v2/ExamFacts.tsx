@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 /** Shared pieces for the /exams guide pages. Every fact on these pages must come from the official bulletin cited in `source`. */
 export function ExamHeader({ kick, title, lead, children }: { kick: string; title: ReactNode; lead: string; children?: ReactNode }) {
   return (
-    <header className="wrap pt-28 pb-8 md:pt-32">
+    <header className="wrap pt-24 pb-8 md:pt-28">
       <p className="kick">{kick}</p>
       <h1 className="h1 mt-5 max-w-[20ch]">{title}</h1>
       <p className="lead mt-6">{lead}</p>

@@ -109,7 +109,7 @@ export default function Home() {
       <JsonLd data={[softwareAppLd(), faqLd(studentFaqs)]} />
 
       {/* 1. Hero: promise, proof, action. H1 + CTA fit one phone viewport. */}
-      <section className="wrap pt-32 pb-14 md:pt-36 md:pb-20">
+      <section className="wrap pt-24 pb-14 md:pt-28 md:pb-20">
         <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
           <div>
             <Kicker>For MBBS and medical students</Kicker>

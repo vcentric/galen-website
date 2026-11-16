@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import CtaLink from "./CtaLink";
 import { LINKS } from "@/lib/site";
+import { trackCTAClick } from "@/lib/analytics";
 
 type NavLink = { label: string; href: string; menu?: { label: string; href: string; note?: string }[] };
 
@@ -85,18 +86,6 @@ export default function Navbar() {
 
   return (
     <header className="v2 fixed inset-x-0 top-0 z-[120] !bg-[#fff0e4]/90 backdrop-blur border-b border-black/5">
-      {/* Top bar: Think Like HouseMD (house.galenai.io). 32px; page offsets in v2 pages account for it. */}
-      <a
-        href={LINKS.house}
-        rel="noopener"
-        className="flex h-8 items-center justify-center gap-2 bg-[#2e2e2e] px-4 text-[12.5px] font-semibold text-[#fff0e4] hover:bg-[#3a3a3a]"
-      >
-        <span className="rounded-full bg-[#eb602d] px-2 py-px text-[10px] font-bold uppercase tracking-wider text-white">Play</span>
-        <span className="truncate">
-          Think like <span className="text-[#ff9466]">HouseMD</span>: one patient, three clues, can you diagnose?
-        </span>
-        <span aria-hidden>→</span>
-      </a>
       <nav className="wrap flex h-16 items-center justify-between gap-4" aria-label="Main">
         <Link href={inst ? "/institutions" : "/"} aria-label="GalenAI home" className="shrink-0">
           <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} priority className="h-auto w-[104px] sm:w-[127px]" />
@@ -135,7 +124,18 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 lg:gap-3">
+          {/* Think Like HouseMD (house.galenai.io): top-right, left of the main button. */}
+          <a
+            href={LINKS.house}
+            rel="noopener"
+            onClick={() => trackCTAClick("house_md", { source: "nav", button_type: "link", button_text: "Think Like HouseMD" })}
+            className="hidden lg:inline-flex items-center gap-1.5 whitespace-nowrap text-[0.9rem] font-semibold text-[#2e2e2e]/85 hover:text-[#c94d20]"
+          >
+            <span className="hidden xl:inline">Think Like HouseMD</span>
+            <span className="xl:hidden">HouseMD</span>
+            <span className="badge-shimmer rounded px-1.5 py-[4px] text-[7px] font-bold uppercase leading-none tracking-wide text-white">New</span>
+          </a>
           <AudienceToggle inst={inst} />
           <CtaLink
             intent={inst ? "demo" : "download"}
@@ -159,7 +159,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="lg:hidden max-h-[calc(100dvh-6rem)] overflow-y-auto border-t border-black/5 bg-[#fff0e4]">
+        <div id="mobile-menu" className="lg:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-black/5 bg-[#fff0e4]">
           <div className="wrap pt-4 sm:hidden">
             <CtaLink
               intent={inst ? "demo" : "download"}
@@ -194,7 +194,7 @@ export default function Navbar() {
             </li>
             <li>
               <a href={LINKS.house} rel="noopener" className="block py-3 h3">
-                Think Like HouseMD
+                Think Like HouseMD <span className="badge-shimmer ml-1 rounded px-1.5 py-[4px] align-middle text-[7px] font-bold uppercase leading-none tracking-wide text-white">New</span>
               </a>
             </li>
           </ul>

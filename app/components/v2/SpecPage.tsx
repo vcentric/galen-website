@@ -34,7 +34,7 @@ export default function SpecPage({
     <div className="v2" data-tone={tone}>
       <JsonLd data={ld} />
 
-      <header className="wrap pt-32 md:pt-40 pb-10">
+      <header className="wrap pt-24 md:pt-32 pb-10">
         <Breadcrumbs trail={fullTrail} />
         <Kicker>{spec.kicker}</Kicker>
         <div className="mt-5">

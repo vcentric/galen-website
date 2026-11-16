@@ -113,7 +113,7 @@ export default function InstitutionsPage() {
 
       {/* 1. Hero, brochure-cover style */}
       <section className="tone-dark overflow-hidden">
-        <div className="wrap pt-36 pb-16 md:pt-44 md:pb-24">
+        <div className="wrap pt-28 pb-16 md:pt-36 md:pb-24">
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
             <div>
               <Kicker>For medical colleges</Kicker>

@@ -25,7 +25,7 @@ export default function LearnHub() {
           itemListLd("Free MBBS lessons", lessons.map((l) => ({ name: l.title, path: l.path }))),
         ]}
       />
-      <header className="wrap pt-28 pb-10 md:pt-32">
+      <header className="wrap pt-24 pb-10 md:pt-28">
         <p className="kick">Free MBBS lessons</p>
         <h1 className="h1 mt-5 max-w-[16ch]">
           Learn the topic, then <span className="acc">test yourself.</span>

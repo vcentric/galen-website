@@ -36,7 +36,7 @@ export default async function SubjectHub({ params }: Params) {
   return (
     <div className="v2 lesson">
       <JsonLd data={[breadcrumbLd(trail), itemListLd(`${subjectName(subject)} lessons for MBBS`, lessons.map((l) => ({ name: l.title, path: l.path })))]} />
-      <header className="wrap pt-28 pb-10 md:pt-32">
+      <header className="wrap pt-24 pb-10 md:pt-28">
         <Breadcrumbs trail={trail} />
         <p className="kick">Learn</p>
         <h1 className="h1 mt-5">

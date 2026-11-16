@@ -73,7 +73,7 @@ export default async function LessonPage({ params }: Params) {
         })}
       />
 
-      <header className="wrap pt-28 pb-8 md:pt-32">
+      <header className="wrap pt-24 pb-8 md:pt-28">
         <Breadcrumbs trail={trail} />
         {!m.isPublished && (
           <p className="lesson-draft" role="note">

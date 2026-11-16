@@ -14,7 +14,7 @@ export const metadata = buildMetadata({
 export default function ContactPage() {
   return (
     <div className="v2" data-tone="neutral">
-      <header className="wrap pt-32 md:pt-40 pb-6">
+      <header className="wrap pt-24 md:pt-32 pb-6">
         <Kicker>Contact</Kicker>
         <div className="mt-5">
           <Headline text="Talk to" accent="us." />

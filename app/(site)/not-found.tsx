@@ -17,7 +17,7 @@ const LINKS = [
 export default function NotFound() {
   return (
     <div className="v2">
-      <section className="wrap pt-36 pb-24 md:pt-44">
+      <section className="wrap pt-28 pb-24 md:pt-36">
         <Kicker>404</Kicker>
         <h1 className="h1 mt-5">
           This page is not <span className="acc">here.</span>
