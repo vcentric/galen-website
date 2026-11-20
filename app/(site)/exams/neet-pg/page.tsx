@@ -71,7 +71,7 @@ export default function Page() {
 
           <h2>Your path, step by step</h2>
           <ol>
-            {STEPS.map(([n, label, href]) => (
+            {STEPS.map(([, label, href]) => (
               <li key={href}>
                 <Link href={href}>{label}</Link>
               </li>

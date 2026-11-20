@@ -1,7 +1,6 @@
 "use client";
 
 import { SiAppstore, SiGoogleplay } from "react-icons/si";
-import { LINKS } from "@/lib/site";
 import { appStoreUrl, playStoreUrl, websiteUtm } from "@/lib/cta";
 import { getVisitorUtm } from "@/lib/utm";
 import { useHydrated } from "@/lib/useHydrated";

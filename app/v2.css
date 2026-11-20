@@ -1,8 +1,7 @@
 /* ═══════════════════════════════════════════
    V2 DESIGN SYSTEM (docs/v2/reference/DESIGN_SYSTEM.md)
-   Imported from globals.css. Everything new is scoped under .v2 so the legacy
-   pages keep rendering until they are rebuilt. When the last legacy page is gone,
-   delete the notebook-paper background on :root in globals.css.
+   Imported from globals.css. Everything is scoped under .v2: every page wraps its
+   content in a .v2 element, which sets the background and text colour.
 
    Colour tokens already in globals.css @theme:
      --color-orange #eb602d   accent only: one emphasis word, CTAs, numbers

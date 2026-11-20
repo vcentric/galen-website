@@ -16,6 +16,7 @@ const FeaturedPost = ({ post }: FeaturedPostProps) => {
     >
       <div className="w-full lg:w-1/2 relative aspect-video lg:aspect-auto overflow-hidden bg-beige">
         {post.coverImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={post.coverImage}
             alt={post.title}
@@ -23,6 +24,7 @@ const FeaturedPost = ({ post }: FeaturedPostProps) => {
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/galenai-icon.webp" alt="" className="w-20 h-20 opacity-20" />
           </div>
         )}

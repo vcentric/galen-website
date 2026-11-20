@@ -39,9 +39,6 @@ export const decorateUrl = (url: string): string => {
   if (typeof window === "undefined") return url;
   if (!url) return url;
   
-  // Only decorate relative links or links to our own domains/stores
-  const isExternal = url.startsWith("http") && !url.includes("galenai.io") && !url.includes("apple.com") && !url.includes("google.com") && !url.includes("wa.me");
-  
   // If it's a hash link on the same page, don't decorate
   if (url.startsWith("#")) return url;
 

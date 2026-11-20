@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
 import { Breadcrumbs } from "@/app/components/v2/ui";

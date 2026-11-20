@@ -13,6 +13,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
     >
       <div className="relative w-full pt-[56.25%] bg-beige overflow-hidden">
         {post.coverImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={post.coverImage}
             alt={post.title}
@@ -21,6 +22,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center bg-beige">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/galenai-icon.webp" alt="" className="w-14 h-14 opacity-20" />
           </div>
         )}

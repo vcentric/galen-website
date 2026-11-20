@@ -176,6 +176,7 @@ export default function BlogPostClient({
           {post.coverImage && (
             <figure className="mb-16">
               <div className="rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-black/5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={post.coverImage} alt={post.title} className="w-full h-auto block" fetchPriority="high" decoding="async" />
               </div>
               {(post.heroCaption || post.heroSource) && (
@@ -220,7 +221,7 @@ export default function BlogPostClient({
 
           {/* Share Buttons */}
           <div className="no-print mt-20 pt-12 border-t border-black/5">
-            <h4 className="font-primary text-[1rem] font-bold text-dark uppercase tracking-widest mb-6">Share this insights</h4>
+            <h4 className="font-primary text-[1rem] font-bold text-dark uppercase tracking-widest mb-6">Share this article</h4>
             <div className="flex gap-3 flex-wrap">
               {[
                 { id: 'copy', label: 'Copy Link', icon: (

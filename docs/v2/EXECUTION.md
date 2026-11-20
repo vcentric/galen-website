@@ -13,11 +13,11 @@ Read first: `MASTERPLAN.md` (why), `PAGE_BLUEPRINTS.md` (bespoke pages), `refere
 | ✅ | F1 skeleton | |
 | ✅ | F2, F3 images | Image optimisation left OFF (Netlify image runtime unverified); screens pre-converted to WebP |
 | ✅ | F4, F6 nav and footer | `app/components/v2/Navbar.tsx`, `Footer.tsx`. Legacy v1 components deleted |
-| ✅ | F5 `/download`, `/qr` | `StoreRedirect`, `DownloadPanel`, QR at `public/qr/download.svg` (segno) |
+| ✅ | F5 `/download`, `/qr` | Pages removed: both are Netlify redirects to `app.galenai.io/download` (`netlify.toml`). QR art at `public/qr/download.svg` (segno) |
 | ✅ | F7 OG image | `public/og/default.png` |
 | ✅ | F9 analytics | debug logs removed; `demo_interaction`, `generate_lead` events added |
-| ⏳ | F8 team and FAQ data | blocked on Varun (team changes). Student FAQs already rewritten in `content/site/demos.ts` |
-| ⏳ | F10 remove notebook background | after `/team` and `/blog` are restyled |
+| ✅ | F8 team and FAQ data | Team page is on the v2 design (data in `app/data/team.ts`), with new photos for Varun and Kavitha. To change a photo, replace the file in `public/` and keep its name (3:4 portrait). Student FAQs already rewritten in `content/site/demos.ts` |
+| ✅ | F10 remove notebook background | Done with `/team`, `/privacy` and `/terms` on v2. Unused v1 CSS, media and packages removed |
 | ✅ | C2, C3, C4, C10, C11, C12 | `PhoneFrame`, `QrBlock`, `TutorDemo`, `LeadForm` (+ `public/__forms.html`), `ModeExplorer`, `StoreBadges` |
 | ✅ | P1 student home | |
 | ✅ | P2 institutions home | video id still pending |
@@ -26,7 +26,8 @@ Read first: `MASTERPLAN.md` (why), `PAGE_BLUEPRINTS.md` (bespoke pages), `refere
 | ✅ | P3 institution subpages | faculty, administration, students, vs-lms, integrations: content filled, still `skeleton` (noindex) until Varun reviews |
 | ✅ | P4 features, P5 `/for`, `/vs` | all content filled; pages with `flags` still show the open-questions box |
 | ✅ | Review round 1 | real app answers in the tutor demo, video 3GjvIeQn9Yw, St. John's logo, team (Kavitha in, Dr. Sivaramakrishnan out), Team in nav |
-| ⏭ | Next | P6 how-to-use port (35 guides), P7 `/go/*` landing pages, `/features` hub polish; then flip reviewed pages to `live` |
+| ✅ | P6 how-to-use, `/learn` lessons, `/exams` guides | Live. Lessons are indexable only with `is_published: true` |
+| ⏭ | Next | P7 `/go/*` landing pages (still show "To build" boxes), P9 `/institutions/resources/*` (skeleton, needs Dr. Arun), Netlify form notification email |
 
 Gotchas learned: stop any `next start` server before `next build` (TaskStop does not always kill the node process; free port 3123 with `Stop-Process`). Check the build's exit code, not a grep's. Headless Chrome screenshots under 500 px wide are wrong; use Playwright with a mobile viewport.
 
@@ -52,12 +53,13 @@ Skeleton pages show dashed "To build" boxes with the build notes for that sectio
 4. **Every route calls `buildMetadata()`.** Client pages get it from a sibling `layout.tsx`.
 5. **Publish gate:** a spec page stays `status: "skeleton"` until its checklist passes and its `flags` are cleared by Varun. Do not flip pages live in bulk.
 6. **Server components by default.** `"use client"` only for real interaction, and keep those components small.
-7. **Do not build `/learn` topic pages.** That is the last phase, after the RAG integration.
+7. **Do not write `/learn` lesson content by hand.** Lessons come from the RAG lesson generator and are copied in after review.
 8. **Change only what the task asks.** Approved copy in the how-to source is ported verbatim.
 9. **Do not push, merge or deploy.** Commit locally on `v2-redesign`. Varun decides when it goes to the remote.
 
 Check before each commit:
 ```bash
+npm run lint                                                                                   # must report 0 errors
 grep -rn "—" app content lib --include=*.ts --include=*.tsx | grep -v "^.*//" | grep -v "/\*"   # em dashes in copy
 grep -rniE "faculties|pilot|marrow|prepladder|guyton" app content --include=*.ts --include=*.tsx
 ```
@@ -113,7 +115,7 @@ Build once, register in `sections/index.ts` under `byKind`, and every spec page 
 | P8 | The four generator feature pages | Blocked on open decision 3 |
 | P9 | `/institutions/resources/*` (five) and a `/institutions/resources` hub page | Needs Dr. Arun's review. Note: the hub route does not exist yet; add `app/(site)/institutions/resources/page.tsx` |
 | P10 | `/contact`, `/team` refresh | |
-| — | `/learn/*` | **Not in this phase.** After RAG |
+| ✅ | `/learn/*` | Built from the RAG lesson files in `content/learn/` |
 
 ### Checklist to flip any page to live
 

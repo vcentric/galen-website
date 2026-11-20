@@ -64,7 +64,7 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
  */
 export default function Footer() {
   return (
-    <footer id="contact" className="v2 tone-dark">
+    <footer id="contact" className="v2">
       <div className="wrap py-16">
         <div className="grid gap-12 lg:grid-cols-[1fr_2.6fr]">
           <div>
@@ -77,7 +77,7 @@ export default function Footer() {
               {SITE.subTagline}
             </p>
             <div className="mt-8">
-              <StoreBadges tone="dark" source="footer_badge" />
+              <StoreBadges source="footer_badge" />
             </div>
           </div>
 
