@@ -26,6 +26,13 @@ export const getUtmParams = (): Record<string, string> => {
 };
 
 /**
+ * The campaign the visitor arrived with: utm_* only. A click id alone (gclid, fbclid) is not a campaign,
+ * so it must not replace the website's own UTM on links to the apps and stores.
+ */
+export const getVisitorUtm = (): Record<string, string> =>
+  Object.fromEntries(Object.entries(getUtmParams()).filter(([key]) => key.startsWith("utm_")));
+
+/**
  * Appends current UTM parameters to a given URL.
  */
 export const decorateUrl = (url: string): string => {

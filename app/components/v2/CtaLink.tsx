@@ -2,7 +2,7 @@
 
 import { CTA, ctaHref, type CtaIntent } from "@/lib/cta";
 import { trackCTAClick } from "@/lib/analytics";
-import { decorateUrl, getUtmParams } from "@/lib/utm";
+import { decorateUrl, getVisitorUtm } from "@/lib/utm";
 import { useHydrated } from "@/lib/useHydrated";
 
 /**
@@ -13,7 +13,7 @@ export function useCtaHref(intent: CtaIntent, source: string): string {
   const tagged = ctaHref(intent, source);
   const hydrated = useHydrated();
   if (!hydrated) return tagged;
-  return Object.keys(getUtmParams()).length ? decorateUrl(CTA[intent].href) : decorateUrl(tagged);
+  return Object.keys(getVisitorUtm()).length ? decorateUrl(CTA[intent].href) : decorateUrl(tagged);
 }
 
 /** A text link (not a button) to an app intent, with the same UTM and click tracking as CtaLink. */

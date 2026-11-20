@@ -3,7 +3,7 @@
 import { SiAppstore, SiGoogleplay } from "react-icons/si";
 import { LINKS } from "@/lib/site";
 import { appStoreUrl, playStoreUrl, websiteUtm } from "@/lib/cta";
-import { getUtmParams } from "@/lib/utm";
+import { getVisitorUtm } from "@/lib/utm";
 import { useHydrated } from "@/lib/useHydrated";
 import { trackCTAClick } from "@/lib/analytics";
 
@@ -14,7 +14,7 @@ import { trackCTAClick } from "@/lib/analytics";
  */
 export default function StoreBadges({ tone = "light", source }: { tone?: "light" | "dark"; source: string }) {
   const own = websiteUtm(source);
-  const visitor = useHydrated() ? getUtmParams() : {};
+  const visitor = useHydrated() ? getVisitorUtm() : {};
   const utm = Object.keys(visitor).length ? visitor : own;
   const urls = { ios: appStoreUrl(utm), android: playStoreUrl(utm) };
   const cls =
