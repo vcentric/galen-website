@@ -1,300 +1,115 @@
-"use client";
-import { useEffect } from "react";
+import Image from "next/image";
+import { SiLinkedin } from "react-icons/si";
 import { founders, advisors, timelineItems } from "@/app/data/team";
+import { breadcrumbLd } from "@/lib/seo";
+import JsonLd from "@/app/components/v2/JsonLd";
+import { Kicker, Section } from "@/app/components/v2/ui";
 
-const TeamPage = () => {
+/** Team page. Metadata comes from team/layout.tsx; people and story are data in app/data/team.ts. */
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            observer.unobserve(entry.target); // Run once per element
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px", // Trigger slightly before it comes into view
-      }
-    );
+type Person = { name: string; title: string; photo: string; linkedin?: string; subTitle?: string; quote?: string; bio?: string };
 
-    const revealElements = document.querySelectorAll(".reveal");
-    revealElements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
-  const LinkedInIcon = ({ className }: { className?: string }) => (
-    <svg className={`w-4 h-4 transition-transform duration-300 group-hover:scale-110 ${className || ""}`} viewBox="0 0 24 24" fill="currentColor">
-      <path fill="currentColor" d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
-    </svg>
-  );
-
-
-
+function PersonCard({ p, priority = false }: { p: Person; priority?: boolean }) {
   return (
-    <div className="min-h-screen">
-
-      {/* ── Hero ─────────────────────────────────── */}
-      <section className="pt-32 pb-12 px-6 text-center">
-        <div className="max-w-[780px] mx-auto">
-          {/* Eyebrow */}
-          <span className="inline-block mb-5 text-[0.75rem] font-primary font-semibold uppercase tracking-[0.12em] text-orange">
-            The People
-          </span>
-
-          <h1 className="font-primary text-[clamp(2.2rem,6vw,3.5rem)] font-semibold text-dark leading-[1.1] tracking-[-0.03em] mb-5">
-            Meet the Minds Behind <span className="text-orange">GalenAI</span>
-          </h1>
-
-          {/* Decorative rule */}
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-px w-12 bg-orange/30" />
-            <div className="w-1.5 h-1.5 rounded-full bg-orange" />
-            <div className="h-px w-12 bg-orange/30" />
-          </div>
-
-          <p className="font-secondary text-[clamp(1rem,2.5vw,1.2rem)] text-dark/60 leading-[1.7] m-0">
-            Built by medicos, engineers, and industry veterans.
-          </p>
-        </div>
-      </section>
-
-      <style jsx global>{`
-        .reveal {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.active {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      `}</style>
-
-      {/* ── Founders ─────────────────────────────── */}
-      <section className="pt-8 pb-16 px-6 bg-[linear-gradient(to_bottom,#ffffff,#fff0e4_20%,#fff0e4_80%,#ffffff)]">
-        <div className="max-w-[1100px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
-            {founders.map((founder, i) => (
-              <div
-                key={founder.name}
-                className="group relative rounded-3xl overflow-hidden cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-orange/50"
-                style={{ aspectRatio: "3/4" }}
-                tabIndex={0}
-              >
-                {/* Full-bleed portrait photo */}
-                <img
-                  src={
-                    i === 0
-                      ? "/Dr.%20Arun%20Biju.webp"
-                      : "/Varun.webp"
-                  }
-                  alt={founder.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-focus:scale-105 group-active:scale-105"
-                />
-
-                {/* Warm orange gradient overlay — transparent top → solid bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#eb602d]/40 via-transparent to-transparent pointer-events-none" />
-                
-                {/* Dark dim overlay on hover so text is readable */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 group-focus:opacity-100 group-active:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                {/* Content Container */}
-                <div className="absolute bottom-0 left-0 right-0 p-7 flex flex-col justify-end z-10 pointer-events-none">
-                  {/* Name + title */}
-                  <div className="transform transition-transform duration-500 ease-out translate-y-2 group-hover:translate-y-0 group-focus:translate-y-0 group-active:translate-y-0">
-                    <h2 className="font-primary text-white text-[1.6rem] font-bold leading-[1.2] tracking-[-0.02em] mb-1.5 drop-shadow-sm group-hover:drop-shadow-none group-focus:drop-shadow-none group-active:drop-shadow-none transition-all duration-300">
-                      {founder.name}
-                    </h2>
-                    <div className="flex flex-col gap-1">
-                      <p className="font-primary text-white/90 text-[0.9rem] font-bold tracking-[0.04em] drop-shadow-sm group-hover:drop-shadow-none group-hover:text-white transition-all duration-500">
-                        {founder.title}
-                      </p>
-                      {founder.subTitle && (
-                        <p className="font-primary text-white/65 text-[0.72rem] font-medium leading-relaxed tracking-[0.02em] drop-shadow-sm group-hover:drop-shadow-none group-hover:text-white/80 transition-all duration-500">
-                          {founder.subTitle}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Hidden Quote + LinkedIn */}
-                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] group-focus:grid-rows-[1fr] group-active:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
-                    <div className="overflow-hidden opacity-0 group-hover:opacity-100 group-focus:opacity-100 group-active:opacity-100 transition-opacity duration-500 delay-100 pointer-events-none group-hover:pointer-events-auto group-focus:pointer-events-auto group-active:pointer-events-auto">
-                      <div className="pt-5 pb-1 flex flex-col gap-4">
-                        <blockquote className="font-primary text-white/95 text-[0.85rem] font-medium leading-[1.4] tracking-[-0.01em]">
-                          {founder.quote}
-                        </blockquote>
-                        <div className="flex justify-end w-full">
-                          {founder.linkedin && (
-                            <a
-                              href={founder.linkedin}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-[#ffffff] opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-110 outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm drop-shadow-sm pointer-events-auto relative z-20"
-                              aria-label={`${founder.name} LinkedIn`}
-                            >
-                              <LinkedInIcon className="w-6 h-6 text-[#ffffff]" />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* ── Divider ──────────────────────────────── */}
-      <div className="max-w-[1100px] mx-auto px-6">
-        <div className="h-px bg-gradient-to-r from-transparent via-dark/10 to-transparent" />
+    <li className="card flex flex-col gap-6 p-6 sm:flex-row sm:p-7">
+      {/* 3:4 portrait. The frame is fixed, so a new photo of any size drops in without shifting the layout. */}
+      <div className="relative aspect-[3/4] w-36 shrink-0 self-start overflow-hidden rounded-[18px] bg-[#2e2e2e]/5 sm:w-[200px]">
+        <Image src={p.photo} alt={p.name} fill sizes="(min-width: 640px) 200px, 144px" priority={priority} className="object-cover object-top" />
       </div>
+      <div className="flex min-w-0 flex-1 flex-col">
+        <h3 className="h3 !text-[1.5rem]">{p.name}</h3>
+        <p className="mt-2 font-bold text-[#c94d20]">{p.title}</p>
+        {p.subTitle && (
+          <p className="mt-2 text-sm font-semibold" style={{ color: "var(--body)" }}>
+            {p.subTitle}
+          </p>
+        )}
+        {p.quote && <blockquote className="mt-4 flex-1 border-l-[3px] border-[#eb602d] pl-4 font-semibold leading-snug">{p.quote}</blockquote>}
+        {p.bio && (
+          <p className="mt-4 flex-1 leading-relaxed" style={{ color: "var(--body)" }}>
+            {p.bio}
+          </p>
+        )}
+        {p.linkedin && (
+          <a
+            href={p.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 self-start text-sm font-bold underline decoration-[#eb602d] decoration-2 underline-offset-4"
+          >
+            <SiLinkedin className="h-4 w-4" aria-hidden />
+            LinkedIn<span className="sr-only">: {p.name}</span>
+          </a>
+        )}
+      </div>
+    </li>
+  );
+}
 
-      {/* ── Strategic Advisors ──────────────────── */}
-      <section className="py-16 px-6">
-        <div className="max-w-[1100px] mx-auto">
-          {/* Section header */}
-          <div className="mb-12 text-center">
-            <span className="inline-block mb-3 text-[0.75rem] font-primary font-semibold uppercase tracking-[0.12em] text-orange">
-              Guidance
-            </span>
-            <h2 className="font-primary text-[clamp(1.6rem,4vw,2.2rem)] font-semibold text-dark tracking-[-0.025em]">
-              Strategic Advisors
-            </h2>
-          </div>
+export default function TeamPage() {
+  const trail = [
+    { name: "Home", path: "/" },
+    { name: "Team", path: "/team" },
+  ];
+  return (
+    <div className="v2" data-tone="neutral">
+      <JsonLd data={breadcrumbLd(trail)} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
-            {advisors.map((advisor) => (
-              <div
-                key={advisor.name}
-                className="group relative rounded-3xl overflow-hidden cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-orange/50"
-                style={{ aspectRatio: "3/4" }}
-                tabIndex={0}
-              >
-                {/* Full-bleed photo */}
-                <img
-                  src={advisor.photo}
-                  alt={advisor.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-focus:scale-105 group-active:scale-105"
-                />
+      <header className="wrap pt-24 pb-6 md:pt-32">
+        <Kicker>The people</Kicker>
+        <h1 className="h1 mt-5">
+          Meet the minds behind <span className="acc">GalenAI.</span>
+        </h1>
+        <p className="lead mt-6">Built by medicos, engineers, and industry veterans.</p>
+      </header>
 
-                {/* Warm orange gradient overlay — transparent top → solid bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#eb602d]/40 via-transparent to-transparent pointer-events-none" />
+      <Section id="founders">
+        <Kicker>Founders</Kicker>
+        <ul className="mt-8 grid gap-4 lg:grid-cols-2">
+          {founders.map((p) => (
+            <PersonCard key={p.name} p={p} priority />
+          ))}
+        </ul>
+      </Section>
 
-                {/* Dark dim overlay on hover so text is readable */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 group-focus:opacity-100 group-active:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <Section id="advisors">
+        <Kicker>Guidance</Kicker>
+        <h2 className="h2 mt-5">
+          Strategic <span className="acc">advisors.</span>
+        </h2>
+        <ul className="mt-10 grid gap-4 lg:grid-cols-2">
+          {advisors.map((p) => (
+            <PersonCard key={p.name} p={p} />
+          ))}
+        </ul>
+      </Section>
 
-                {/* Content Container */}
-                <div className="absolute bottom-0 left-0 right-0 p-7 flex flex-col justify-end z-10 pointer-events-none">
-                  {/* Name + title */}
-                  <div className="transform transition-transform duration-500 ease-out translate-y-2 group-hover:translate-y-0 group-focus:translate-y-0 group-active:translate-y-0">
-                    <h3 className="font-primary text-white text-[1.25rem] font-bold leading-tight tracking-[-0.02em] mb-1 drop-shadow-sm group-hover:drop-shadow-none group-focus:drop-shadow-none group-active:drop-shadow-none">
-                      {advisor.name}
-                    </h3>
-                    <p className="font-primary text-white/80 text-[0.8rem] font-semibold tracking-[0.06em] uppercase drop-shadow-sm group-hover:drop-shadow-none group-focus:drop-shadow-none group-active:drop-shadow-none group-hover:text-white group-focus:text-white group-active:text-white transition-colors duration-500">
-                      {advisor.title}
-                    </p>
-                  </div>
-
-                  {/* Hidden Bio */}
-                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] group-focus:grid-rows-[1fr] group-active:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
-                    <div className="overflow-hidden opacity-0 group-hover:opacity-100 group-focus:opacity-100 group-active:opacity-100 transition-opacity duration-500 delay-100 pointer-events-none group-hover:pointer-events-auto group-focus:pointer-events-auto group-active:pointer-events-auto">
-                      <div className="pt-5 pb-1 flex flex-col gap-4">
-                        <p className="font-primary text-white/95 text-[0.85rem] font-medium leading-[1.4] tracking-[-0.01em]">
-                          {advisor.bio}
-                        </p>
-                        <div className="flex justify-end w-full">
-                          {advisor.linkedin && (
-                            <a
-                              href={advisor.linkedin}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-[#ffffff] opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-110 outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm drop-shadow-sm pointer-events-auto relative z-20"
-                              aria-label={`${advisor.name} LinkedIn`}
-                            >
-                              <LinkedInIcon className="w-6 h-6 text-[#ffffff]" />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+      <Section id="story" tone="dark">
+        <Kicker>Our story</Kicker>
+        <h2 className="h2 mt-5">
+          How it all <span className="acc">started.</span>
+        </h2>
+        <p className="lead mt-5">
+          From a simple realization that medical training wasn&apos;t evolving, to a fast-growing platform serving students nationwide. Here is our
+          journey so far.
+        </p>
+        <ol className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
+          {timelineItems.map((item, i) => (
+            <li key={item.title} className="border-t-[3px] pt-5" style={{ borderColor: "var(--rule)" }}>
+              <div className="flex items-baseline gap-4">
+                <span className="font-[family-name:var(--font-space-var)] text-3xl font-bold text-[#eb602d]">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-xs font-bold uppercase tracking-[0.14em]" style={{ color: "var(--body)" }}>
+                  {item.date}
+                </span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Custom Vertical Timeline ──────────────── */}
-      <section className="py-24 px-6 bg-[linear-gradient(to_bottom,#ffffff,#fff0e4_20%,#fff0e4_80%,#ffffff)] relative overflow-hidden">
-        <div className="max-w-[1000px] mx-auto relative z-10">
-          
-          {/* Header */}
-          <div className="text-center mb-20">
-            <span className="inline-block mb-3 text-[0.75rem] font-primary font-semibold uppercase tracking-[0.12em] text-orange">
-              Our Story
-            </span>
-            <h2 className="font-primary text-[clamp(2rem,4vw,2.8rem)] font-semibold text-dark leading-tight tracking-[-0.03em] mb-4">
-              How It All Started.
-            </h2>
-            <p className="font-secondary text-dark/60 leading-relaxed text-[1.05rem] max-w-[600px] mx-auto">
-              From a simple realization that medical training wasn&apos;t evolving, to a fast-growing platform serving students nationwide. Here is our journey so far.
-            </p>
-          </div>
-
-          {/* Timeline Container */}
-          <div className="relative w-full pb-10">
-            {/* The Central Line (hidden on mobile, centered on md+) */}
-            <div className="absolute left-[24px] md:left-1/2 top-4 bottom-0 w-px bg-dark/10 transform md:-translate-x-1/2" />
-            
-            <div className="flex flex-col gap-12 md:gap-24">
-              {timelineItems.map((item, index) => {
-                const isEven = index % 2 === 0;
-                return (
-                  <div key={index} className="reveal relative flex flex-col md:flex-row items-center justify-between group">
-                    
-                    {/* Content Box (Left or Right) */}
-                    <div className={`w-full md:w-[45%] pl-16 md:pl-0 ${isEven ? 'md:text-right md:pr-12' : 'md:order-3 md:pl-12'}`}>
-                      <div className={`flex flex-col gap-1.5 mb-3 ${isEven ? 'md:items-end' : 'md:items-start'}`}>
-                        <span className="inline-block bg-white px-3 py-1 rounded-full border border-black/5 shadow-sm font-primary text-[0.7rem] font-bold uppercase tracking-[0.1em] text-orange">
-                          {item.date}
-                        </span>
-                        <h3 className="font-primary text-[1.4rem] font-bold text-dark tracking-[-0.01em]">
-                          {item.title}
-                        </h3>
-                      </div>
-                      <p className="font-secondary text-[1rem] text-dark/70 leading-[1.6]">
-                        {item.description}
-                      </p>
-                    </div>
-
-                    {/* Center Node / Icon */}
-                    <div className={`absolute left-[0px] md:left-1/2 transform translate-x-[4px] md:-translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full border-[3px] bg-white transition-all duration-500 ease-out md:order-2 z-10 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(235,96,45,0.2)]
-                                    ${item.accent === "orange" ? "border-orange text-orange" : "border-dark/10 text-dark/60 group-hover:border-orange/50 group-hover:text-orange"}`}>
-                      <svg className="w-5 h-5 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
-                        <path d={item.icon} />
-                      </svg>
-                    </div>
-
-                    {/* Empty Spacer for alternating layout */}
-                    <div className={`hidden md:block w-[45%] ${isEven ? 'md:order-3' : 'md:order-1'}`} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
+              <h3 className="h3 mt-3 !text-[1.35rem]">{item.title}</h3>
+              <p className="mt-2 leading-relaxed" style={{ color: "var(--body)" }}>
+                {item.description}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </Section>
     </div>
   );
-};
-
-export default TeamPage;
+}
