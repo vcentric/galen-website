@@ -19,7 +19,10 @@ export type AppScreenName =
   | "flashcard-front"
   | "flashcard-back"
   | "dashboard"
-  | "clinical-cases"
+  | "clinical-case-list"
+  | "clinical-case-intro"
+  | "clinical-case-step"
+  | "guided-lesson-picker"
   | "viva";
 
 export default function AppScreen({

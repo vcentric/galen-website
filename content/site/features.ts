@@ -249,7 +249,9 @@ export const features: PageSpec[] = [
         notes: "",
         content: {
           screens: [
-            app("clinical-cases", "Clinical cases by system", "Pick a system, then a case"),
+            app("clinical-case-list", "Cardiology cases in GalenAI, with attempts and scores", "Pick a case"),
+            app("clinical-case-intro", "Case introduction: the patient, the competencies assessed and the stages", "Meet the patient"),
+            app("clinical-case-step", "History and examination step: choosing the key positives", "Decide, one step at a time"),
           ],
         },
       },
