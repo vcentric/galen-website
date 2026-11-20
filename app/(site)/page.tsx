@@ -10,9 +10,9 @@ import StickyMobileCta from "@/app/components/v2/StickyMobileCta";
 import StoreBadges from "@/app/components/v2/StoreBadges";
 import TutorDemo from "@/app/components/v2/TutorDemo";
 import HomeHero from "@/app/components/v2/HomeHero";
+import BeatStage, { type Beat } from "@/app/components/v2/BeatStage";
 import ModeExplorer from "@/app/components/v2/ModeExplorer";
 import PhoneFrame from "@/app/components/v2/PhoneFrame";
-import AppScreen, { type AppScreenName } from "@/app/components/v2/AppScreen";
 import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
 import { getAllLessons, subjectName, SUBJECTS } from "@/lib/learn";
 import { EXAM_PAGES_LIVE } from "@/lib/exams";
@@ -24,12 +24,12 @@ export const metadata = buildMetadata({
   path: "/",
 });
 
-const BEATS = [
+const BEATS: Beat[] = [
   {
     word: "Ask.",
     title: "An AI tutor for every doubt",
     body: "Ask in your own words. Get a clear answer with references, in the mode that suits the topic.",
-    img: "tutor-s2" as AppScreenName,
+    img: "tutor-s2",
     href: "/features/ai-tutor",
     link: "How the tutor works",
   },
@@ -37,7 +37,7 @@ const BEATS = [
     word: "Practise.",
     title: "Questions and cases that test you",
     body: "Clinical MCQs with step-by-step reasoning, and patient cases you work through one decision at a time.",
-    img: "question-bank-answer" as AppScreenName,
+    img: "question-bank-answer",
     href: "/features/question-bank",
     link: "See the question bank",
   },
@@ -45,7 +45,7 @@ const BEATS = [
     word: "Revise.",
     title: "Flashcards and a map of your gaps",
     body: "Spaced revision brings hard cards back sooner. Your dashboard shows the weakest topic so you know what's next.",
-    img: "flashcard-back" as AppScreenName,
+    img: "dashboard",
     href: "/features/dashboard",
     link: "See the dashboard",
   },
@@ -149,26 +149,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. Ask. Practise. Revise. (verbatim heading) */}
+      {/* 3. Ask. Practise. Revise. The approved line, as three words you can open (BeatStage.tsx). */}
       <Section id="features">
         <Kicker>One app</Kicker>
-        <h2 className="h2 mt-5">
-          Ask. Practise. <span className="acc">Revise.</span>
-        </h2>
-        <div className="mt-12 grid gap-12 md:grid-cols-3 md:gap-8">
-          {BEATS.map((b) => (
-            <div key={b.word} className="flex flex-col">
-              <AppScreen name={b.img} alt={b.title} width={230} className="mx-auto md:mx-0" />
-              <p className="h2 mt-8 !text-[2rem] acc">{b.word}</p>
-              <h3 className="h3 mt-2">{b.title}</h3>
-              <p className="mt-2" style={{ color: "var(--body)" }}>
-                {b.body}
-              </p>
-              <Link href={b.href} className="mt-3 font-bold underline decoration-[#eb602d] decoration-2 underline-offset-4">
-                {b.link}
-              </Link>
-            </div>
-          ))}
+        <h2 className="sr-only">Ask. Practise. Revise.</h2>
+        <div className="mt-6">
+          <BeatStage beats={BEATS} />
         </div>
       </Section>
 

@@ -58,6 +58,23 @@
 
 .v2 .pill-soon { display: inline-block; font: 700 0.6875rem / 1 var(--font-raleway-var), sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange-dark); border: 2px solid var(--color-orange); border-radius: 999px; padding: 0.35rem 0.6rem; }
 
+/* Ask / Practise / Revise stage (BeatStage.tsx). Three phones on one stage: the chosen one whole and in front,
+   the other two smaller and faded behind it, left and right. --off is -1, 0 or 1. */
+.v2 .beat-phones { position: relative; height: 31rem; --w: 14.75rem; --shift: 6.6rem; --side: 0.26; margin-inline: calc(-1 * clamp(1rem, 5vw, 2.5rem)); overflow: hidden; }
+.v2 .beat-phone { position: absolute; left: 50%; top: 0.25rem; width: var(--w); margin-left: calc(var(--w) / -2); translate: calc(var(--off) * var(--shift)) 0; scale: 0.8; opacity: var(--side); z-index: 1; cursor: pointer; transition: translate 0.7s cubic-bezier(0.16, 1, 0.3, 1), scale 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s; }
+.v2 .beat-phone img { width: 100%; height: auto; filter: drop-shadow(0 22px 34px rgba(46, 46, 46, 0.22)); }
+.v2 .beat-phone:hover { opacity: calc(var(--side) + 0.2); }
+.v2 .beat-phone-front, .v2 .beat-phone-front:hover { scale: 1; opacity: 1; z-index: 2; cursor: default; }
+.v2 .beat-fill { animation: beatFill 5.5s linear forwards; }
+.v2 .beat-stage:hover .beat-fill { animation-play-state: paused; }
+@keyframes beatFill { from { width: 0; } to { width: 100%; } }
+@media (min-width: 1024px) {
+  .v2 .beat-phones { height: 39.5rem; --w: 18.75rem; --shift: 12rem; --side: 0.4; margin-inline: 0; overflow: visible; }
+}
+@media (min-width: 1024px) and (max-height: 860px) {
+  .v2 .beat-phones { height: 34rem; --w: 16rem; --shift: 10.5rem; }
+}
+
 /* Index card (home "Who it's for"). Paper feel from the print pieces: charcoal border, a file tab,
    and a hard offset shadow. Flat on purpose: no gradients, no soft glow. Cards sit slightly askew
    on desktop and straighten when picked up. */
