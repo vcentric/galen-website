@@ -50,46 +50,51 @@ export default function SpecPage({
         </div>
       </header>
 
-      {spec.sections.map((s) => {
+      {/* Tighter than the home page sections, and every other one sits on a lighter band so the page has a rhythm. */}
+      {spec.sections.map((s, i) => {
         const Cmp = resolveSection(spec, s);
         return (
-          <Section key={s.id} id={s.id}>
-            {Cmp ? (
-              <Cmp spec={spec} section={s} />
-            ) : (
-              <>
-                <Headline as="h2" text={s.heading} />
-                <div className="mt-6">
-                  <Blueprint kind={s.kind} notes={s.notes} />
-                </div>
-              </>
-            )}
-          </Section>
+          <section key={s.id} id={s.id} className={`spec-sec ${i % 2 === 1 && s.kind !== "cta" ? "bg-white/60" : ""}`}>
+            <div className="wrap">
+              {Cmp ? (
+                <Cmp spec={spec} section={s} />
+              ) : (
+                <>
+                  <Headline as="h2" text={s.heading} />
+                  <div className="mt-6">
+                    <Blueprint kind={s.kind} notes={s.notes} />
+                  </div>
+                </>
+              )}
+            </div>
+          </section>
         );
       })}
 
       {spec.faqs?.length ? (
-        <Section id="faq">
-          <Headline as="h2" text="Questions, answered" />
-          <div className="mt-6">
+        <section id="faq" className="spec-sec">
+          <div className="wrap grid gap-x-16 gap-y-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+            <Headline as="h2" text="Questions, answered" />
             <FaqBlock faqs={spec.faqs} />
           </div>
-        </Section>
+        </section>
       ) : null}
 
       {spec.related?.length ? (
-        <Section id="related">
-          <h2 className="h3">Keep exploring</h2>
-          <ul className="mt-4 flex flex-wrap gap-3">
-            {spec.related.map((p) => (
-              <li key={p}>
-                <Link href={p} className="btn btn-ghost !min-h-10 !text-sm !whitespace-normal text-center">
-                  {pageLabel(p)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Section>
+        <section id="related" className="spec-sec !pt-0">
+          <div className="wrap">
+            <h2 className="h3">Keep exploring</h2>
+            <ul className="mt-4 flex flex-wrap gap-3">
+              {spec.related.map((p) => (
+                <li key={p}>
+                  <Link href={p} className="btn btn-ghost !min-h-10 !text-sm !whitespace-normal text-center">
+                    {pageLabel(p)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
       ) : null}
 
       {spec.status === "skeleton" && spec.flags?.length ? (

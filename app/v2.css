@@ -35,6 +35,8 @@
 
 .v2 .wrap { width: 100%; max-width: 1180px; margin-inline: auto; padding-inline: clamp(1rem, 5vw, 2.5rem); }
 .v2 .sec { padding-block: clamp(3rem, 8vw, 6rem); }
+/* Spec pages (SpecPage.tsx): shorter sections than the home page, so a few lines of content do not float in space. */
+.v2 .spec-sec { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
 
 /* Type. One orange word or phrase per headline, via .acc */
 .v2 .h1 { font: 700 clamp(2.4rem, 7.2vw, 4.75rem) / 0.95 var(--font-space-var), sans-serif; letter-spacing: -0.045em; text-wrap: balance; }

@@ -44,19 +44,21 @@ function ScreenView({ s, width = 240 }: { s: Screen; width?: number }) {
 
 export function StepsSection(props: SectionProps) {
   const items = props.section.content?.items ?? [];
+  // Steps run as one row across the page: four in a row, otherwise threes (or a pair).
+  const cols = items.length === 2 ? "sm:grid-cols-2" : items.length === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-2 lg:grid-cols-3";
   return (
     <>
       <Head {...props} />
-      <ol className={`mt-10 grid gap-x-12 gap-y-8 ${items.length > 3 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
+      <ol className={`mt-10 grid gap-x-8 gap-y-10 ${cols}`}>
         {items.map((it, i) => (
-          <li key={it.t} className="flex gap-5">
-            <span className="font-[family-name:var(--font-space-var)] text-3xl font-bold text-[#eb602d]">
+          <li key={it.t} className="flex gap-5 border-t-[3px] pt-5 sm:block" style={{ borderColor: "var(--rule)" }}>
+            <span className="block w-14 shrink-0 font-[family-name:var(--font-space-var)] text-[2.25rem] font-bold leading-none tracking-[-0.04em] text-[#eb602d] sm:w-auto sm:text-[2.75rem]">
               {String(i + 1).padStart(2, "0")}
             </span>
             <div>
-              <h3 className="h3">{it.t}</h3>
+              <h3 className="h3 !text-[1.35rem] sm:mt-4">{it.t}</h3>
               {it.b && (
-                <p className="mt-1" style={{ color: "var(--body)" }}>
+                <p className="mt-2 leading-relaxed" style={{ color: "var(--body)" }}>
                   {it.b}
                 </p>
               )}
@@ -76,7 +78,8 @@ export function FeaturesSection(props: SectionProps) {
     <div className={side ? "grid items-center gap-10 lg:grid-cols-[1fr_auto] lg:gap-16" : ""}>
       <div>
         <Head {...props} />
-        <ul className="mt-8 space-y-5">
+        {/* With a phone beside it the list is one column; on its own it runs in two so it fills the row. */}
+        <ul className={`mt-8 ${side ? "space-y-5" : "grid gap-x-12 gap-y-6 md:grid-cols-2"}`}>
           {(c.items ?? []).map((it) => (
             <li key={it.t} className="flex gap-4">
               <span aria-hidden className="mt-2 h-3 w-3 shrink-0 rounded-full bg-[#eb602d]" />
@@ -101,29 +104,50 @@ export function FeaturesSection(props: SectionProps) {
         </ul>
       </div>
       {screen && (
-        <div className={side ? "flex justify-center" : "mt-10 max-w-4xl"}>
-          <ScreenView s={screen} width={260} />
+        <div className={side ? "flex justify-center" : "mt-10"}>
+          <ScreenView s={screen} width={280} />
         </div>
       )}
     </div>
   );
 }
 
+function Caption({ text }: { text?: string }) {
+  if (!text) return null;
+  return (
+    <figcaption className="mt-4 text-center text-sm font-bold" style={{ color: "var(--body)" }}>
+      {text}
+    </figcaption>
+  );
+}
+
 export function ScreensSection(props: SectionProps) {
   const screens = props.section.content?.screens ?? [];
-  const phones = screens.every((s) => s.frame === "phone" || s.frame === "app");
+  const phones = screens.length > 0 && screens.every((s) => s.frame === "phone" || s.frame === "app");
+  // One phone: heading on the left, phone on the right.
+  if (phones && screens.length === 1) {
+    return (
+      <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto] lg:gap-20">
+        <div>
+          <Head {...props} />
+        </div>
+        <figure className="mx-auto">
+          <ScreenView s={screens[0]} width={290} />
+          <Caption text={screens[0].caption} />
+        </figure>
+      </div>
+    );
+  }
+  // Three phones: spread across the row, the middle one larger and set higher (design system section 6).
+  const trio = phones && screens.length === 3;
   return (
     <>
       <Head {...props} />
-      <div className={`mt-10 ${phones ? "flex flex-wrap justify-center gap-8 md:justify-start" : "grid gap-8"}`}>
-        {screens.map((s) => (
-          <figure key={s.src} className={phones ? "" : "max-w-4xl"}>
-            <ScreenView s={s} width={screens.length > 3 ? 200 : 240} />
-            {s.caption && (
-              <figcaption className="mt-3 text-center text-sm font-semibold" style={{ color: "var(--body)" }}>
-                {s.caption}
-              </figcaption>
-            )}
+      <div className={`mt-10 ${phones ? "flex flex-wrap items-start justify-center gap-x-[clamp(1.5rem,5vw,4.5rem)] gap-y-10" : "grid gap-8"}`}>
+        {screens.map((s, i) => (
+          <figure key={s.src} className={trio && i !== 1 ? "lg:mt-14" : ""}>
+            <ScreenView s={s} width={trio ? (i === 1 ? 300 : 250) : screens.length > 3 ? 200 : 260} />
+            <Caption text={s.caption} />
           </figure>
         ))}
       </div>
@@ -185,27 +209,32 @@ export function CompareSection(props: SectionProps) {
 
 export function ExplainSection(props: SectionProps) {
   const c = props.section.content!;
+  // Heading on the left, text on the right, so a prose section uses the full row.
   return (
-    <div className="max-w-[68ch]">
-      <Head {...props} />
-      <div className="mt-5 space-y-4 text-[1.05rem] leading-relaxed" style={{ color: "var(--body)" }}>
-        {(c.paragraphs ?? []).map((p) => (
-          <p key={p}>{p}</p>
-        ))}
+    <div className="grid gap-x-16 gap-y-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+      <div>
+        <Head {...props} />
       </div>
-      {c.items && (
-        <ul className="mt-6 flex flex-wrap gap-3">
-          {c.items.map((it) =>
-            it.href ? (
-              <li key={it.t}>
-                <Link href={it.href} className="btn btn-ghost !min-h-10 !text-sm">
-                  {it.t}
-                </Link>
-              </li>
-            ) : null,
-          )}
-        </ul>
-      )}
+      <div>
+        <div className="space-y-4 text-[1.1rem] leading-relaxed" style={{ color: "var(--body)" }}>
+          {(c.paragraphs ?? []).map((p) => (
+            <p key={p}>{p}</p>
+          ))}
+        </div>
+        {c.items && (
+          <ul className="mt-6 flex flex-wrap gap-3">
+            {c.items.map((it) =>
+              it.href ? (
+                <li key={it.t}>
+                  <Link href={it.href} className="btn btn-ghost !min-h-10 !text-sm">
+                    {it.t}
+                  </Link>
+                </li>
+              ) : null,
+            )}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
