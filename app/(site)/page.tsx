@@ -63,6 +63,7 @@ const STAGES = [
   {
     tag: "Phase 1 and 2",
     who: "First and second year",
+    icon: "microscope",
     body: "Anatomy, physiology, biochemistry, then pathology, pharmacology and microbiology. Doubts explained, vivas practised, facts revised.",
     href: "/for/mbbs-students",
     link: "For MBBS students",
@@ -70,6 +71,7 @@ const STAGES = [
   {
     tag: "Phase 3",
     who: "Final years and postings",
+    icon: "stethoscope",
     body: "Clinical cases you work through one decision at a time, and quick answers between ward rounds.",
     href: "/features/clinical-cases",
     link: "Clinical cases",
@@ -77,6 +79,7 @@ const STAGES = [
   {
     tag: "NEET PG and INI-CET",
     who: "Interns and PG aspirants",
+    icon: "checklist",
     body: "Clinical MCQs with reasoning, exam mode, and a dashboard that shows your weakest subject. Dedicated PG modules coming soon.",
     href: "/for/neet-pg",
     link: "For NEET PG",
@@ -84,6 +87,7 @@ const STAGES = [
   {
     tag: "FMGE",
     who: "Foreign medical graduates",
+    icon: "stopwatch",
     body: "A tutor for studying on your own, with a question bank and flashcards for fast revision. Dedicated FMGE modules coming soon.",
     href: "/for/fmge",
     link: "For FMGE",
@@ -160,17 +164,22 @@ export default function Home() {
         <h2 className="h2 mt-5">
           Built for every stage of medical <span className="acc">school.</span>
         </h2>
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Index cards: the stage on a file tab, a brand icon, and the hard offset shadow from the print pieces (styles: .paper in v2.css). */}
+        <ul className="paper-row mt-16 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
           {STAGES.map((st) => (
             <li key={st.who}>
-              <Link href={st.href} className="card group flex h-full flex-col p-6">
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#c94d20]">{st.tag}</p>
-                <h3 className="h3 mt-3 !text-[1.35rem]">{st.who}</h3>
-                <p className="mt-2 flex-1" style={{ color: "var(--body)" }}>
+              <Link href={st.href} className="paper group">
+                <span className="paper-tab">{st.tag}</span>
+                <Image src={`/brand/icons/${st.icon}.svg`} alt="" width={56} height={56} className="h-14 w-14 self-end" />
+                <h3 className="h3 mt-3 !text-[1.4rem]">{st.who}</h3>
+                <p className="mt-4 flex-1 border-t-2 border-[#eb602d] pt-4" style={{ color: "var(--body)" }}>
                   {st.body}
                 </p>
-                <span className="mt-4 font-bold underline decoration-2 underline-offset-4 group-hover:decoration-[#eb602d]">
-                  {st.link}
+                <span className="mt-5 font-[family-name:var(--font-space-var)] font-bold">
+                  {st.link}{" "}
+                  <span aria-hidden className="inline-block text-[#eb602d] transition-transform duration-200 group-hover:translate-x-1">
+                    →
+                  </span>
                 </span>
               </Link>
             </li>

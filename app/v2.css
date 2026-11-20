@@ -58,6 +58,18 @@
 
 .v2 .pill-soon { display: inline-block; font: 700 0.6875rem / 1 var(--font-raleway-var), sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange-dark); border: 2px solid var(--color-orange); border-radius: 999px; padding: 0.35rem 0.6rem; }
 
+/* Index card (home "Who it's for"). Paper feel from the print pieces: charcoal border, a file tab,
+   and a hard offset shadow. Flat on purpose: no gradients, no soft glow. Cards sit slightly askew
+   on desktop and straighten when picked up. */
+.v2 .paper { position: relative; display: flex; flex-direction: column; height: 100%; padding: 1.25rem 1.4rem 1.4rem; background: #fffaf5; border: 3px solid var(--color-dark); border-radius: 0 18px 18px 18px; box-shadow: 7px 7px 0 var(--color-dark); transition: translate 0.2s cubic-bezier(0.22, 1, 0.36, 1), rotate 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s; }
+.v2 .paper-tab { position: absolute; left: -3px; bottom: 100%; padding: 0.5rem 0.85rem 0.4rem; background: var(--color-dark); color: var(--color-light); border-radius: 10px 10px 0 0; font: 700 0.6875rem / 1 var(--font-raleway-var), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; }
+.v2 .paper:hover, .v2 .paper:focus-visible { translate: -3px -3px; box-shadow: 10px 10px 0 var(--color-orange); }
+@media (min-width: 1024px) {
+  .v2 .paper-row > li:nth-child(odd) .paper { rotate: -0.9deg; }
+  .v2 .paper-row > li:nth-child(even) .paper { rotate: 0.9deg; }
+  .v2 .paper-row .paper:hover, .v2 .paper-row .paper:focus-visible { rotate: 0deg; }
+}
+
 .v2 .card { background: #fff; border-radius: 22px; box-shadow: 0 30px 80px rgba(46, 46, 46, 0.12); outline: 2px solid rgba(46, 46, 46, 0.08); }
 
 /* Skeleton placeholder. Shows the executor what belongs in each section. */
