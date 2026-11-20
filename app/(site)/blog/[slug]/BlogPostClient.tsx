@@ -80,17 +80,19 @@ export default function BlogPostClient({
     }
   };
 
-  const generateTOC = (): TOCItem[] => {
-    if (typeof window === "undefined") return [];
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(contentHtml, "text/html");
-    const headings = doc.querySelectorAll("h2, h3");
-    return Array.from(headings).map((heading, index) => ({
+  // Parsed from the HTML string, not the DOM, so the server and the browser render the same list.
+  const generateTOC = (): TOCItem[] =>
+    [...contentHtml.matchAll(/<(h[23])\b[^>]*>([\s\S]*?)<\/\1>/g)].map((m, index) => ({
       id: `heading-${index}`,
-      text: heading.textContent || "",
-      level: heading.tagName.toLowerCase(),
+      text: m[2]
+        .replace(/<[^>]+>/g, "")
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&amp;/g, "&"),
+      level: m[1],
     }));
-  };
 
   const toc = generateTOC();
 
