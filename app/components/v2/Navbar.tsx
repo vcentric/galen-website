@@ -4,7 +4,7 @@ import Image from "next/image";
 import { EXAM_PAGES_LIVE, LEARN_NAV_LIVE } from "@/lib/exams";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CtaLink from "./CtaLink";
 import { LINKS } from "@/lib/site";
 import { trackCTAClick } from "@/lib/analytics";
@@ -77,11 +77,12 @@ function AudienceToggle({ inst, className = "" }: { inst: boolean; className?: s
  */
 export default function Navbar() {
   const pathname = usePathname() ?? "/";
-  const [open, setOpen] = useState(false);
+  // The phone menu remembers the page it was opened on, so it closes by itself on navigation.
+  const [openOn, setOpenOn] = useState<string | null>(null);
+  const open = openOn === pathname;
   const inst = isCollegePath(pathname);
   const links = inst ? INSTITUTION_LINKS : STUDENT_LINKS;
 
-  useEffect(() => setOpen(false), [pathname]);
   if (pathname.startsWith("/keystatic")) return null;
 
   return (
@@ -149,7 +150,7 @@ export default function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpenOn(open ? null : pathname)}
           >
             <span aria-hidden className="text-lg leading-none">
               {open ? "×" : "≡"}

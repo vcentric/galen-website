@@ -157,7 +157,7 @@ export default function PrivacyPage() {
 
           <h2 className="text-xl font-semibold mt-10 mb-4 text-dark">7. Responsibilities of Institutions</h2>
           <h3 className="text-lg font-medium mt-6 mb-2 text-dark">7.1</h3>
-          <p>Where Services are provided to an institution, the institution acts as the primary data controller with respect to its Authorised Users. GalenAI acts as a data processor and will process Customer Data only on the institution's documented instructions, as per the SaaS Agreement and this Privacy Policy.</p>
+          <p>Where Services are provided to an institution, the institution acts as the primary data controller with respect to its Authorised Users. GalenAI acts as a data processor and will process Customer Data only on the institution&apos;s documented instructions, as per the SaaS Agreement and this Privacy Policy.</p>
           <h3 className="text-lg font-medium mt-6 mb-2 text-dark">7.2</h3>
           <p>All Users, including individual subscribers and institutions, shall take all necessary measures to ensure lawful and ethical use of the Services. Without limitation, Users shall:</p>
           <ul className="list-disc pl-6 space-y-2">
@@ -178,7 +178,7 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-semibold mt-10 mb-4 text-dark">9. International Data Transfers</h2>
           <p>Although data is primarily processed and stored in India, if cross-border transfers are necessary (e.g., for cloud hosting or analytics), GalenAI shall ensure that equivalent contractual and technical safeguards are applied in line with Indian legal requirements.</p>
 
-          <h2 className="text-xl font-semibold mt-10 mb-4 text-dark">10. Children's Data</h2>
+          <h2 className="text-xl font-semibold mt-10 mb-4 text-dark">10. Children&apos;s Data</h2>
           <p>The Services are designed for medical students, faculty, and professionals. We do not knowingly collect data from individuals under 15 years of age. If such data is identified, GalenAI will delete it promptly.</p>
 
           <h2 className="text-xl font-semibold mt-10 mb-4 text-dark">11. Policy Updates</h2>

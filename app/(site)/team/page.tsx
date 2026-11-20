@@ -246,7 +246,7 @@ const TeamPage = () => {
               How It All Started.
             </h2>
             <p className="font-secondary text-dark/60 leading-relaxed text-[1.05rem] max-w-[600px] mx-auto">
-              From a simple realization that medical training wasn't evolving, to a fast-growing platform serving students nationwide. Here is our journey so far.
+              From a simple realization that medical training wasn&apos;t evolving, to a fast-growing platform serving students nationwide. Here is our journey so far.
             </p>
           </div>
 

@@ -2,11 +2,11 @@ import { getUtmParams } from "./utm";
 
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
-export const trackEvent = (eventName: string, params?: Record<string, any>) => {
+export const trackEvent = (eventName: string, params?: Record<string, unknown>) => {
   const utms = getUtmParams();
   const eventParams = { ...utms, ...params };
 
@@ -34,7 +34,7 @@ export interface CtaClickParams {
   source: string;
   button_type: CtaButtonType;
   button_text: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const isNonEmptyString = (value: unknown): value is string =>

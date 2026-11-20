@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { AppLink } from "./CtaLink";
 import type { PracticeMcq } from "@/lib/learn";
@@ -21,18 +21,21 @@ function shuffled<T>(arr: T[], seed: number): T[] {
 
 const letterOf = (o: string) => o.match(/^([A-E])[.)]/)?.[1] ?? "";
 
+// Shuffle seed for this page load: 0 on the server and during hydration (unshuffled), a fixed random value afterwards.
+let loadSeed = 0;
+const getLoadSeed = () => (loadSeed ||= Date.now() % 100000 || 1);
+const noSubscribe = () => () => {};
+
 /** Practice runner: pick a subject, answer one MCQ at a time, see the explanation and a running score. */
 export default function McqPractice({ mcqs, subjects }: { mcqs: PracticeMcq[]; subjects: Subject[] }) {
   const [subject, setSubject] = useState("all");
-  const [seed, setSeed] = useState(0); // 0 = unshuffled first paint
+  const base = useSyncExternalStore(noSubscribe, getLoadSeed, () => 0); // 0 = unshuffled first paint
+  const [reshuffles, setReshuffles] = useState(0);
+  const seed = base ? base + reshuffles : 0;
   const [i, setI] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
   const [score, setScore] = useState({ right: 0, done: 0 });
   const heading = useRef<HTMLParagraphElement>(null);
-
-  useEffect(() => {
-    setSeed(Date.now() % 100000 || 1);
-  }, []);
 
   const deck = useMemo(() => {
     const pool = mcqs.filter((q) => subject === "all" || q.subject === subject);
@@ -47,7 +50,7 @@ export default function McqPractice({ mcqs, subjects }: { mcqs: PracticeMcq[]; s
     setI(0);
     setPicked(null);
     setScore({ right: 0, done: 0 });
-    setSeed((x) => (x % 100000) + 1);
+    setReshuffles((n) => n + 1);
   };
   const pick = (l: string) => {
     if (picked !== null || !q || !l) return;

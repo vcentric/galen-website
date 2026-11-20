@@ -93,7 +93,7 @@ export default function TermsPage() {
           <ul className="list-disc pl-6 space-y-2">
             <li>Some materials may be provided by institutional partners.</li>
             <li>Credit or certification is not guaranteed unless explicitly stated.</li>
-            <li>GalenAI's use of copyrighted works (e.g., referencing for AI processing) falls under fair use/fair dealing where legally applicable.</li>
+            <li>GalenAI&apos;s use of copyrighted works (e.g., referencing for AI processing) falls under fair use/fair dealing where legally applicable.</li>
             <li>The platform does not reproduce copyrighted works in full.</li>
           </ul>
 
@@ -156,7 +156,7 @@ export default function TermsPage() {
           <p>The Services are educational aids and do not replace professional medical training or clinical decision-making.</p>
 
           <h3 className="text-lg font-medium mt-6 mb-2 text-dark">General Disclaimer</h3>
-          <p>The Services are provided "as is", without warranties of any kind.</p>
+          <p>The Services are provided &quot;as is&quot;, without warranties of any kind.</p>
 
           <h3 className="text-lg font-medium mt-6 mb-2 text-dark">Limitation of Liability</h3>
           <p>GalenAI is not liable for:</p>
@@ -185,7 +185,7 @@ export default function TermsPage() {
           <p>Maintenance or outages may temporarily affect service availability.</p>
 
           <h3 className="text-lg font-medium mt-6 mb-2 text-dark">Feature Modification</h3>
-          <p>Features may change or be discontinued, with 7 days' notice when possible.</p>
+          <p>Features may change or be discontinued, with 7 days&apos; notice when possible.</p>
 
           <h2 className="text-xl font-semibold mt-10 mb-4 text-dark">7. Suspension and Termination</h2>
           <p>GalenAI may suspend or terminate access for violations of:</p>

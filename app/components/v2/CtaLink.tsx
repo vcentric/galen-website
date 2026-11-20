@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { CTA, ctaHref, type CtaIntent } from "@/lib/cta";
 import { trackCTAClick } from "@/lib/analytics";
 import { decorateUrl, getUtmParams } from "@/lib/utm";
+import { useHydrated } from "@/lib/useHydrated";
 
 /**
  * href for an intent: website UTM on the server render; on the client, a visitor who arrived with their
@@ -11,11 +11,9 @@ import { decorateUrl, getUtmParams } from "@/lib/utm";
  */
 export function useCtaHref(intent: CtaIntent, source: string): string {
   const tagged = ctaHref(intent, source);
-  const [href, setHref] = useState<string>(tagged);
-  useEffect(() => {
-    setHref(Object.keys(getUtmParams()).length ? decorateUrl(CTA[intent].href) : decorateUrl(tagged));
-  }, [intent, tagged]);
-  return href;
+  const hydrated = useHydrated();
+  if (!hydrated) return tagged;
+  return Object.keys(getUtmParams()).length ? decorateUrl(CTA[intent].href) : decorateUrl(tagged);
 }
 
 /** A text link (not a button) to an app intent, with the same UTM and click tracking as CtaLink. */

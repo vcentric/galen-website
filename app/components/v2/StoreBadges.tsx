@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { SiAppstore, SiGoogleplay } from "react-icons/si";
 import { LINKS } from "@/lib/site";
 import { appStoreUrl, playStoreUrl, websiteUtm } from "@/lib/cta";
 import { getUtmParams } from "@/lib/utm";
+import { useHydrated } from "@/lib/useHydrated";
 import { trackCTAClick } from "@/lib/analytics";
 
 /**
@@ -14,13 +14,9 @@ import { trackCTAClick } from "@/lib/analytics";
  */
 export default function StoreBadges({ tone = "light", source }: { tone?: "light" | "dark"; source: string }) {
   const own = websiteUtm(source);
-  const [urls, setUrls] = useState({ ios: appStoreUrl(own), android: playStoreUrl(own) });
-  useEffect(() => {
-    const visitor = getUtmParams();
-    const utm = Object.keys(visitor).length ? visitor : own;
-    setUrls({ ios: appStoreUrl(utm), android: playStoreUrl(utm) });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [source]);
+  const visitor = useHydrated() ? getUtmParams() : {};
+  const utm = Object.keys(visitor).length ? visitor : own;
+  const urls = { ios: appStoreUrl(utm), android: playStoreUrl(utm) };
   const cls =
     tone === "dark"
       ? "border-[#fff0e4]/40 text-[#fff0e4] hover:border-[#fff0e4]"
