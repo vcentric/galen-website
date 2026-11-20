@@ -6,10 +6,10 @@ import { studentFaqs } from "@/content/site/demos";
 import TestimonialMarquee from "@/app/components/v2/TestimonialMarquee";
 import JsonLd from "@/app/components/v2/JsonLd";
 import CtaLink from "@/app/components/v2/CtaLink";
-import QrBlock from "@/app/components/v2/QrBlock";
 import StickyMobileCta from "@/app/components/v2/StickyMobileCta";
 import StoreBadges from "@/app/components/v2/StoreBadges";
-import TutorDemo, { HeroTutor } from "@/app/components/v2/TutorDemo";
+import TutorDemo from "@/app/components/v2/TutorDemo";
+import HomeHero from "@/app/components/v2/HomeHero";
 import ModeExplorer from "@/app/components/v2/ModeExplorer";
 import PhoneFrame from "@/app/components/v2/PhoneFrame";
 import AppScreen, { type AppScreenName } from "@/app/components/v2/AppScreen";
@@ -49,14 +49,6 @@ const BEATS = [
     href: "/features/dashboard",
     link: "See the dashboard",
   },
-];
-
-const AUDIENCE_CHIPS = [
-  { label: "MBBS 1st to final year", href: "/for/mbbs-students" },
-  { label: "Interns", href: "/for/neet-pg" },
-  { label: "NEET PG", href: "/for/neet-pg" },
-  { label: "INI-CET", href: "/for/inicet" },
-  { label: "FMGE", href: "/for/fmge" },
 ];
 
 const STAGES = [
@@ -112,51 +104,8 @@ export default function Home() {
     <div className="v2">
       <JsonLd data={[softwareAppLd(), faqLd(studentFaqs)]} />
 
-      {/* 1. Hero: promise, proof, action. H1 + CTA fit one phone viewport. */}
-      <section className="wrap pt-24 pb-14 md:pt-28 md:pb-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
-          <div>
-            <Kicker>For MBBS and medical students</Kicker>
-            <h1 className="h1 mt-5">
-              Ask anything.
-              <br />
-              Get it <span className="acc">explained.</span>
-            </h1>
-            <p className="lead mt-6">
-              GalenAI is the AI study app for medical students around the world. Ask any doubt and get a clear answer with
-              references, then practise and revise until it sticks.
-            </p>
-            {/* Who it's for, at a glance */}
-            <ul className="mt-6 flex flex-wrap gap-2" aria-label="Who GalenAI is for">
-              {AUDIENCE_CHIPS.map((c) => (
-                <li key={c.label}>
-                  <Link
-                    href={c.href}
-                    className="inline-block rounded-full border-2 border-[#2e2e2e]/15 bg-white/60 px-3.5 py-1.5 text-sm font-bold hover:border-[#eb602d]"
-                  >
-                    {c.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <CtaLink intent="download" source="home_hero" />
-              <CtaLink intent="try-web" source="home_hero" variant="ghost" />
-            </div>
-            <p className="mt-5 text-sm font-semibold" style={{ color: "var(--body)" }}>
-              <span className="mr-1 inline-flex items-center gap-1 rounded-full bg-[#eb602d]/10 px-2.5 py-0.5 font-bold text-[#c94d20]">
-                <span aria-hidden>✦</span> 2,000+
-              </span>
-              medical students already on it. iPhone, Android and web.
-            </p>
-            <QrBlock className="mt-10 hidden lg:flex" size={176} big />
-          </div>
-          <div className="flex justify-center lg:justify-end">
-            {/* Coded app screen (real answer, see content/site/demos.ts). Text, so the H1 stays the LCP. */}
-            <HeroTutor />
-          </div>
-        </div>
-      </section>
+      {/* 1. Hero: the promise, and the ask bar that shows it happening (HomeHero.tsx). */}
+      <HomeHero />
 
       {/* 1b. Who it's for: every stage of medical school, one card each. */}
       <Section id="who">

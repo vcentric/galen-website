@@ -125,7 +125,7 @@ function StatusBar() {
 }
 
 /** The thread body: question bubble, answer, extras, references, actions, follow-ups. */
-function Thread({ d, answer = true }: { d: DemoAnswer; answer?: boolean }) {
+export function Thread({ d, answer = true }: { d: DemoAnswer; answer?: boolean }) {
   return (
     <>
       <div className="ml-auto max-w-[86%] rounded-[18px] bg-gradient-to-r from-[#FF7A3D] to-[#B9471A] px-3.5 py-2.5 text-[13px] font-medium leading-[1.4] text-white">
@@ -225,89 +225,105 @@ export function TutorPhone({ d, live = false, answer = true }: { d: DemoAnswer; 
 }
 
 /**
- * Hero phone: plays the three real answers in turn (question, a beat of
- * "thinking", answer). Pauses on hover or focus; static for reduced motion.
+ * The same exchange as a chat card, for phones and tablets where a full phone frame would be
+ * cut in half by the bottom of the screen. Fixed height, so the page never jumps as answers change.
  */
-export function HeroTutor() {
-  const [i, setI] = useState(2);
-  const [answer, setAnswer] = useState(true);
-  const paused = useRef(false);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let t2: ReturnType<typeof setTimeout>;
-    const id = setInterval(() => {
-      if (paused.current || document.hidden) return;
-      setAnswer(false);
-      setI((n) => (n + 1) % tutorDemos.length);
-      t2 = setTimeout(() => setAnswer(true), 900);
-    }, 7000);
-    return () => {
-      clearInterval(id);
-      clearTimeout(t2);
-    };
-  }, []);
-
+export function ChatCard({ d, live = false, answer = true, className = "" }: { d: DemoAnswer; live?: boolean; answer?: boolean; className?: string }) {
   return (
     <div
-      onMouseEnter={() => (paused.current = true)}
-      onMouseLeave={() => (paused.current = false)}
-      onFocus={() => (paused.current = true)}
-      onBlur={() => (paused.current = false)}
+      className={`relative h-[27rem] overflow-hidden rounded-[28px] px-4 pt-5 text-[#e9e4df] ${className}`}
+      style={{ background: "linear-gradient(180deg,#14110F 0%,#0D0B0A 100%)", fontFamily: APP_FONT }}
+      {...(live ? { role: "tabpanel", "aria-live": "polite" as const } : { "aria-hidden": true })}
     >
-      <TutorPhone d={tutorDemos[i]} answer={answer} />
+      <Thread d={d} answer={answer} />
+      <span className="pointer-events-none absolute inset-x-0 bottom-0 h-20" style={{ background: "linear-gradient(180deg,rgba(13,11,10,0),#0D0B0A)" }} />
     </div>
   );
 }
 
+/** What a stored answer contains, in plain words, for the "In this answer" line. */
+const partsOf = (d: DemoAnswer) => [
+  `${d.referenceCount} references`,
+  d.extra?.kind === "table" ? "A related table" : d.extra?.kind === "video" ? "A video to watch next" : "",
+  `${d.followUps.length} follow-up questions`,
+].filter(Boolean);
+
 /**
- * "Try it here": tap a question, the real app answer appears in the coded screen.
- * Stored text, not a live model call: instant and always the reviewed wording.
+ * "Try it here": tap a question, the app thinks for a beat, then the real answer appears, in the
+ * phone on desktop and in a chat card on phones. Stored text, not a live model call: instant and
+ * always the reviewed wording. The questions are tabs; the screen is their panel.
  */
 export default function TutorDemo({ source = "home_try" }: { source?: string }) {
   const [active, setActive] = useState(0);
+  const [answer, setAnswer] = useState(true);
   const [tapped, setTapped] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const card = useRef<HTMLDivElement>(null);
   const d = tutorDemos[active];
 
+  useEffect(() => () => clearTimeout(timer.current), []);
+
   const pick = (i: number) => {
-    setActive(i);
     setTapped(true);
     trackEvent("demo_interaction", { source, demo: tutorDemos[i].id });
+    if (i === active && answer) return;
+    setActive(i);
+    setAnswer(false);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setAnswer(true), 750);
+    // On a phone the chat card can be below the screen: bring it into view, without moving more than needed.
+    if (card.current?.offsetParent) card.current.scrollIntoView({ block: "nearest", behavior: "smooth" });
   };
 
   return (
-    <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto] lg:gap-16">
+    <div className="grid items-center gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,1fr)_auto]">
       <div>
         <p className="kick">Try it here</p>
         <h2 className="h2 mt-5">
           Go on. Ask it <span className="acc">something.</span>
         </h2>
         <p className="lead mt-5">Tap a question. These are real answers from the GalenAI app.</p>
-        <div className="mt-8 flex flex-col gap-3" role="tablist" aria-label="Sample questions">
+        <div className="mt-8 flex max-w-[38rem] flex-col gap-3.5" role="tablist" aria-label="Sample questions">
           {tutorDemos.map((q, i) => (
-            <button
-              key={q.id}
-              type="button"
-              role="tab"
-              aria-selected={i === active}
-              onClick={() => pick(i)}
-              className={`rounded-2xl border-2 px-5 py-4 text-left font-semibold transition-colors ${
-                i === active
-                  ? "border-[#eb602d] bg-white text-[#2e2e2e]"
-                  : "border-[#2e2e2e]/15 bg-white/50 hover:border-[#2e2e2e]/40"
-              }`}
-            >
-              {q.question}
+            <button key={q.id} type="button" role="tab" aria-selected={i === active} onClick={() => pick(i)} className={`ask-q ${i === active ? "ask-q-on" : ""}`}>
+              <span aria-hidden className="ask-q-n">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="min-w-0 flex-1">{q.question}</span>
+              <span aria-hidden className="ask-q-send">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                  <path d="M9 14.5v-11M4.5 7.5 9 3l4.5 4.5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
             </button>
           ))}
         </div>
-        <div className="mt-8">
-          <CtaLink intent="download" source={source} label={tapped ? "Ask your own question" : "Get the app"} />
+      </div>
+
+      <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
+        <div className="phone-fit hidden justify-center lg:flex">
+          <TutorPhone d={d} live answer={answer} />
+        </div>
+        <div ref={card} className="scroll-mb-24 lg:hidden">
+          <ChatCard d={d} live answer={answer} />
         </div>
       </div>
 
-      <div className="flex justify-center">
-        <TutorPhone d={d} live />
+      <div className="lg:col-start-1">
+        <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-bold">
+          <span className="uppercase tracking-[0.14em]" style={{ color: "var(--body)" }}>
+            In this answer
+          </span>
+          {partsOf(d).map((part) => (
+            <span key={part} className="inline-flex items-center gap-2">
+              <span aria-hidden className="h-2 w-2 rounded-full bg-[#eb602d]" />
+              {part}
+            </span>
+          ))}
+        </p>
+        <div className="mt-7">
+          <CtaLink intent="download" source={source} label={tapped ? "Ask your own question" : "Get the app"} />
+        </div>
       </div>
     </div>
   );

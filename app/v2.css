@@ -34,7 +34,7 @@
 }
 
 .v2 .wrap { width: 100%; max-width: 1180px; margin-inline: auto; padding-inline: clamp(1rem, 5vw, 2.5rem); }
-.v2 .sec { padding-block: clamp(3rem, 8vw, 6rem); }
+.v2 .sec { padding-block: clamp(2.75rem, 6.5vw, 4.75rem); }
 /* Spec pages (SpecPage.tsx): shorter sections than the home page, so a few lines of content do not float in space. */
 .v2 .spec-sec { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
 
@@ -83,6 +83,37 @@
 .htu h1, .htu h2, .htu h3, .htu h4 { font-weight: 700; } /* Tailwind preflight resets heading weight */
 .htu .guide > header h1 { font-size: clamp(30px, 4.2vw, 46px); letter-spacing: -0.04em; line-height: 1; }
 .htu .hero h1 { font-size: clamp(36px, 5.4vw, 60px); }
+
+/* Home hero (HomeHero.tsx): load-in, the ask bar and its caret. */
+.v2 .rise { animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--d, 0ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.v2 .line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.v2 .line > span { display: block; animation: lineUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--d, 0ms); }
+@keyframes lineUp { from { transform: translateY(105%); } to { transform: none; } }
+.v2 .ask-bar { display: flex; align-items: center; gap: 0.9rem; min-height: 5rem; padding: 0.7rem 0.7rem 0.7rem 1.35rem; background: #fffaf5; border: 3px solid var(--color-dark); border-radius: 22px; box-shadow: 6px 6px 0 var(--color-dark); font-size: 1.02rem; }
+/* Tall enough for the longest question on a phone (three lines), so nothing below moves as questions change. */
+@media (max-width: 639px) { .v2 .ask-bar { min-height: 6.1rem; font-size: 0.95rem; padding-left: 1.1rem; } }
+.v2 .ask-caret { display: inline-block; width: 2.5px; height: 1.15em; margin-left: 2px; vertical-align: -0.2em; background: var(--color-orange); }
+.v2 .ask-caret-rest { animation: caret 1.05s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+.v2 .ask-send { display: grid; place-items: center; flex-shrink: 0; width: 2.85rem; height: 2.85rem; border-radius: 999px; background: var(--color-orange); color: #fff; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s; }
+.v2 .ask-send-on { transform: scale(0.86); background: var(--color-dark); }
+.v2 .ask-arrow { position: absolute; left: calc(100% + 0.9rem); top: -1.1rem; }
+/* The coded tutor phone is 704px tall: shrink it on shorter windows so it is never cut off by the screen. */
+@media (max-height: 880px) { .v2 .phone-fit { zoom: 0.88; } }
+@media (max-height: 790px) { .v2 .phone-fit { zoom: 0.78; } }
+@media (max-height: 700px) { .v2 .phone-fit { zoom: 0.68; } }
+
+/* "Try it here" questions (TutorDemo.tsx): paper rows. The chosen one is lifted on the hard shadow, like the ask bar. */
+.v2 .ask-q { display: flex; align-items: center; gap: 1rem; width: 100%; min-height: 4.25rem; padding: 0.65rem 0.7rem 0.65rem 1.1rem; text-align: left; background: rgba(255, 250, 245, 0.7); border: 3px solid rgba(46, 46, 46, 0.16); border-radius: 20px; font: 600 1.02rem / 1.35 var(--font-raleway-var), sans-serif; color: var(--color-dark); transition: translate 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s, border-color 0.2s, background-color 0.2s; }
+.v2 .ask-q:hover { border-color: var(--color-dark); }
+.v2 .ask-q:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 3px; }
+.v2 .ask-q-on { background: #fffaf5; border-color: var(--color-dark); box-shadow: 6px 6px 0 var(--color-dark); translate: -2px -2px; }
+.v2 .ask-q-n { font: 700 1.05rem / 1 var(--font-space-var), sans-serif; color: var(--color-orange); }
+.v2 .ask-q-send { display: grid; place-items: center; flex-shrink: 0; width: 2.5rem; height: 2.5rem; border-radius: 999px; border: 2px solid rgba(46, 46, 46, 0.2); color: rgba(46, 46, 46, 0.45); transition: background-color 0.2s, color 0.2s, border-color 0.2s; }
+.v2 .ask-q:hover .ask-q-send { border-color: var(--color-dark); color: var(--color-dark); }
+.v2 .ask-q-on .ask-q-send, .v2 .ask-q-on:hover .ask-q-send { background: var(--color-orange); border-color: var(--color-orange); color: #fff; }
+@media (max-width: 639px) { .v2 .ask-q { font-size: 0.95rem; gap: 0.75rem; padding-left: 0.9rem; } }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
