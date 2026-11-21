@@ -75,6 +75,48 @@
   .v2 .beat-phones { height: 34rem; --w: 16rem; --shift: 10.5rem; }
 }
 
+/* FAQ rows (FaqBlock in ui.tsx): native <details>. The answer slides open where the browser supports
+   ::details-content; elsewhere it simply opens. */
+.v2 .faq-item { border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent); interpolate-size: allow-keywords; }
+.v2 .faq-item:first-child { border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent); }
+.v2 .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.15rem 0; cursor: pointer; list-style: none; transition: color 0.2s; }
+.v2 .faq-q::-webkit-details-marker { display: none; }
+.v2 .faq-q:hover, .v2 .faq-item[open] .faq-q { color: var(--color-orange); }
+.v2 .faq-q:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 4px; border-radius: 6px; }
+.v2 .faq-plus { position: relative; flex-shrink: 0; width: 2rem; height: 2rem; border-radius: 999px; background: color-mix(in srgb, var(--color-orange) 14%, transparent); color: var(--color-orange); transition: background-color 0.25s, color 0.25s; }
+.v2 .faq-plus::before, .v2 .faq-plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 0.8rem; height: 2.5px; border-radius: 2px; background: currentColor; translate: -50% -50%; transition: rotate 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.v2 .faq-plus::after { rotate: 90deg; }
+.v2 .faq-q:hover .faq-plus, .v2 .faq-item[open] .faq-plus { background: var(--color-orange); color: #fff; }
+.v2 .faq-item[open] .faq-plus::after { rotate: 0deg; }
+.v2 .faq-a { max-width: 62ch; padding: 0 3rem 1.35rem 0; color: var(--body); font-size: 1.05rem; line-height: 1.65; }
+.v2 .faq-item::details-content { block-size: 0; overflow: clip; opacity: 0; transition: block-size 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s, content-visibility 0.3s allow-discrete; }
+.v2 .faq-item[open]::details-content { block-size: auto; opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .v2 .faq-item::details-content, .v2 .faq-plus::before, .v2 .faq-plus::after { transition: none; }
+}
+
+/* "For your college" panel (home): dark, with the faculty Content Bank behind (its Publish button in view) and the
+   student phone standing in front of it. Two paper tags and a hand-drawn arrow name the hand-off. */
+.v2 .college { display: grid; gap: 2.5rem; overflow: hidden; border-radius: 28px; padding: 2rem 1.5rem 0; }
+.v2 .college-art { position: relative; height: 27rem; margin-inline: -1.5rem; }
+.v2 .college-desk { position: absolute; right: 1rem; top: 2.5rem; width: 150%; max-width: none; height: auto; border-radius: 14px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4); transition: translate 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.v2 .college-phone { position: absolute; left: 1.5rem; bottom: 1.75rem; transition: translate 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.v2 .college:hover .college-desk { translate: 0.75rem 0; }
+.v2 .college:hover .college-phone { translate: 0 -0.75rem; }
+.v2 .college-tag { position: absolute; z-index: 2; padding: 0.5rem 0.85rem; border: 2px solid var(--color-dark); border-radius: 999px; background: var(--color-light); color: var(--color-dark); font: 700 0.8rem / 1 var(--font-space-var), sans-serif; white-space: nowrap; box-shadow: 3px 3px 0 var(--color-orange); }
+.v2 .college-tag-from { right: 1.75rem; top: 0.9rem; rotate: 3deg; }
+.v2 .college-tag-to { left: 2.6rem; bottom: -0.6rem; rotate: -4deg; }
+.v2 .college-arrow { position: absolute; z-index: 1; left: 11.5rem; top: 9.5rem; }
+@media (min-width: 1024px) {
+  .v2 .college { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: 2rem; padding: 3.5rem 0 3.5rem 3.5rem; }
+  .v2 .college-art { height: 25rem; margin: -3.5rem 0; }
+  /* Kept inside its column (never over the text): cropped from the left, so the Publish button stays in view. */
+  .v2 .college-desk { left: 2.5rem; right: auto; top: 5.75rem; width: calc(100% - 4.5rem); height: 17rem; object-fit: cover; object-position: right top; }
+  .v2 .college-phone { left: 0.5rem; bottom: 1.5rem; }
+  .v2 .college-tag-from { right: 2.75rem; top: 4rem; }
+  .v2 .college-arrow { left: 12.5rem; top: 13.25rem; }
+}
+
 /* Tutor mode explorer (ModeExplorer.tsx): a numbered tab rail, then a three-part sheet around the phone. */
 .v2 .mode-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem 0.6rem; }
 .v2 .mode-tab { display: flex; flex-direction: column; gap: 0.45rem; padding: 0.85rem 0 0.2rem; text-align: left; border-top: 3px solid var(--rule); font: 700 1.05rem / 1.1 var(--font-space-var), sans-serif; letter-spacing: -0.02em; color: rgba(46, 46, 46, 0.45); transition: color 0.2s, border-color 0.2s; }
@@ -225,18 +267,38 @@
 .v2 .blog-content h3 { font-weight: 700; letter-spacing: -0.025em; }
 .v2 .blog-content p, .v2 .blog-content li { color: rgba(46, 46, 46, 0.82); }
 
-/* Testimonial marquee (TestimonialMarquee.tsx): seamless auto-scroll, pause on hover/focus. */
-.v2 .marquee { overflow: hidden; padding-block: 1.5rem 2.5rem; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
-.v2 .marquee:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 4px; }
-.v2 .marquee-track { display: flex; width: max-content; animation: marquee 70s linear infinite; }
-.v2 .marquee:hover .marquee-track, .v2 .marquee:focus-within .marquee-track { animation-play-state: paused; }
-.v2 .marquee-group { display: flex; gap: 1rem; padding-right: 1rem; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* Testimonial wall (TestimonialWall.tsx): columns of cards drifting in a window, looping without a seam.
+   The window fades out at the top and bottom (a mask, not a painted gradient). */
+.v2 .wall { display: grid; gap: 1rem; height: 34rem; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(180deg, transparent, #000 9%, #000 91%, transparent); }
+.v2 .wall:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 4px; }
+.v2 .wall-track { animation: wallUp 62s linear infinite; }
+.v2 .wall-col-down .wall-track { animation-name: wallDown; animation-duration: 54s; }
+.v2 .wall:hover .wall-track, .v2 .wall:focus-within .wall-track { animation-play-state: paused; }
+@keyframes wallUp { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+@keyframes wallDown { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+.v2 .wall-list { display: flex; flex-direction: column; gap: 1rem; padding-bottom: 1rem; }
+.v2 .wall-card { padding: 1.4rem 1.4rem 1.3rem; background: #fffaf5; border: 2px solid var(--color-dark); border-radius: 20px; rotate: -0.5deg; transition: rotate 0.3s cubic-bezier(0.16, 1, 0.3, 1), translate 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s; }
+.v2 .wall-list > li:nth-child(even) .wall-card { rotate: 0.6deg; }
+.v2 .wall-card:hover { rotate: 0deg; translate: -3px -3px; box-shadow: 6px 6px 0 var(--color-dark); }
+.v2 .wall-mark { display: block; height: 1.95rem; font-size: 3.25rem; font-weight: 700; line-height: 1; color: var(--color-orange); }
+.v2 .wall-who { display: grid; place-items: center; flex-shrink: 0; width: 2.5rem; height: 2.5rem; border-radius: 999px; background: var(--color-dark); color: var(--color-light); font-size: 0.75rem; font-weight: 700; }
+.v2 .wall-meta { color: var(--body); }
+.v2 .wall-cream { background: #f4e2d2; }
+.v2 .wall-dark { background: var(--color-dark); color: var(--color-light); }
+.v2 .wall-dark .wall-meta { color: rgba(255, 240, 228, 0.75); }
+.v2 .wall-dark .wall-who { background: var(--color-light); color: var(--color-dark); }
+.v2 .wall-dark:hover { box-shadow: 6px 6px 0 var(--color-orange); }
+.v2 .wall-orange { background: var(--color-orange); color: #fff; }
+.v2 .wall-orange .wall-mark { color: #fff; }
+.v2 .wall-orange .wall-meta { color: rgba(255, 255, 255, 0.88); }
+@media (min-width: 640px) {
+  .v2 .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); height: 38rem; }
+  .v2 .wall-track { animation-duration: 44s; }
+  .v2 .wall-col-down .wall-track { animation-duration: 36s; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .v2 .marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; scroll-snap-type: x mandatory; }
-  .v2 .marquee-track { animation: none; }
-  .v2 .marquee-dupe { display: none; }
-  .v2 .marquee-group > li { scroll-snap-align: start; }
+  .v2 .wall { height: auto; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+  .v2 .wall-list[aria-hidden] { display: none; }
 }
 
 /* ═══════════ /learn lessons (lib/learn.ts, app/(site)/learn) ═══════════ */

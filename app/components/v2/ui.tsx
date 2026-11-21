@@ -52,21 +52,17 @@ export function Breadcrumbs({ trail }: { trail: { name: string; path: string }[]
   );
 }
 
-/** Native <details>: zero JS, accessible, and the answer text is in the HTML for crawlers. */
+/** Native <details>: zero JS, accessible, and the answer text is in the HTML for crawlers. Styles: .faq-* in v2.css. */
 export function FaqBlock({ faqs }: { faqs: Faq[] }) {
   return (
     <div className="max-w-3xl">
       {faqs.map((f) => (
-        <details key={f.q} className="border-b border-black/10 py-4 group">
-          <summary className="h3 cursor-pointer list-none flex justify-between gap-4">
+        <details key={f.q} className="faq-item">
+          <summary className="faq-q h3">
             {f.q}
-            <span aria-hidden className="acc group-open:rotate-45 transition-transform">
-              +
-            </span>
+            <span aria-hidden className="faq-plus" />
           </summary>
-          <p className="mt-3" style={{ color: "var(--body)" }}>
-            {f.a}
-          </p>
+          <p className="faq-a">{f.a}</p>
         </details>
       ))}
     </div>

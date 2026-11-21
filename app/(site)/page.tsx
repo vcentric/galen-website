@@ -3,7 +3,7 @@ import Link from "next/link";
 import { buildMetadata, faqLd, softwareAppLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import { studentFaqs } from "@/content/site/demos";
-import TestimonialMarquee from "@/app/components/v2/TestimonialMarquee";
+import TestimonialWall from "@/app/components/v2/TestimonialWall";
 import JsonLd from "@/app/components/v2/JsonLd";
 import CtaLink from "@/app/components/v2/CtaLink";
 import StickyMobileCta from "@/app/components/v2/StickyMobileCta";
@@ -259,21 +259,29 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* 6. Proof */}
+      {/* 6. Proof: the testimonials as an endless wall of cards (TestimonialWall.tsx). */}
       <Section id="students">
-        <Kicker>Students on GalenAI</Kicker>
-        <h2 className="h2 mt-5">
-          Built with medical <span className="acc">students.</span>
-        </h2>
+        <TestimonialWall>
+          <Kicker>Students on GalenAI</Kicker>
+          <h2 className="h2 mt-5">
+            Built with medical <span className="acc">students.</span>
+          </h2>
+          <p className="mt-6 text-sm font-semibold" style={{ color: "var(--body)" }}>
+            <span className="mr-1 inline-flex items-center gap-1 rounded-full bg-[#eb602d]/10 px-2.5 py-0.5 font-bold text-[#c94d20]">
+              <span aria-hidden>✦</span> 2,000+
+            </span>
+            medical students already on it.
+          </p>
+          <div className="mt-6">
+            <CtaLink intent="download" source="home_students" />
+          </div>
+        </TestimonialWall>
       </Section>
-      {/* Full-bleed auto-scrolling row (all testimonials) */}
-      <div className="-mt-10 pb-6 md:-mt-14">
-        <TestimonialMarquee />
-      </div>
 
-      {/* 7. Bridge to institutions: students as the referral channel */}
+      {/* 7. Bridge to institutions: students as the referral channel.
+          A dark panel that shows the hand-off: the faculty workspace behind, the student calendar in front (.college in v2.css). */}
       <Section id="college">
-        <div className="card grid items-center gap-8 p-8 md:grid-cols-[1fr_auto] md:p-12">
+        <div className="college tone-dark">
           <div>
             <Kicker>For your college</Kicker>
             <h2 className="h2 mt-5">
@@ -283,21 +291,42 @@ export default function Home() {
               When a college uses GalenAI, lessons your faculty publish appear on your calendar, and the tutor answers
               from your college&apos;s approved content.
             </p>
-            <Link href="/institutions" className="btn btn-ghost mt-6">
+            <Link href="/institutions" className="btn btn-primary mt-7">
               Show your college
             </Link>
           </div>
-          <PhoneFrame src="/how-to-use/img/d_cal.webp" alt="Faculty lessons on the student calendar" width={200} className="mx-auto" />
+          <div className="college-art">
+            <Image
+              src="/brand/ui/desktop_content_bank.webp"
+              alt="A lecture deck in the GalenAI faculty Content Bank, with the Publish to students button"
+              width={1597}
+              height={728}
+              sizes="(min-width: 1024px) 620px, 92vw"
+              className="college-desk"
+            />
+            <span className="college-tag college-tag-from">Faculty publish</span>
+            <svg className="college-arrow" width="92" height="74" viewBox="0 0 92 74" fill="none" aria-hidden>
+              <path d="M86 6C70 2 44 8 28 30c-6 8-10 18-11 28" stroke="#eb602d" strokeWidth="3.5" strokeLinecap="round" />
+              <path d="M5 46l12 14 13-12" stroke="#eb602d" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <div className="college-phone">
+              <PhoneFrame src="/brand/ui/phone_calendar.webp" alt="Faculty lessons on the student calendar" width={176} notch={false} />
+              <span className="college-tag college-tag-to">On your calendar</span>
+            </div>
+          </div>
         </div>
       </Section>
 
       {/* 8. FAQ */}
       <Section id="faq">
-        <Kicker>FAQ</Kicker>
-        <h2 className="h2 mt-5">
-          Questions, <span className="acc">answered.</span>
-        </h2>
-        <div className="mt-8">
+        {/* Heading beside the list on desktop; it stays in view while the list scrolls. */}
+        <div className="grid gap-x-14 gap-y-6 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)]">
+          <div className="self-start lg:sticky lg:top-28">
+            <Kicker>FAQ</Kicker>
+            <h2 className="h2 mt-5">
+              Questions, <span className="acc">answered.</span>
+            </h2>
+          </div>
           <FaqBlock faqs={studentFaqs} />
         </div>
       </Section>
