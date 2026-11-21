@@ -87,6 +87,14 @@ const STAGES = [
   },
 ];
 
+const OLD_WAY = ["A video subscription you watch at 2X", "Doubts that wait for the next class", "Hours of notes, no idea what you missed"];
+// Brand icon (public/brand/icons) and line.
+const NEW_WAY: [string, string][] = [
+  ["chat", "A tutor that answers the doubt you have right now"],
+  ["checklist", "Questions that check you understood it"],
+  ["graph", "A dashboard that shows exactly what is weak"],
+];
+
 const EXAM_GUIDES = [
   { label: "NEET PG complete guide", href: "/exams/neet-pg" },
   { label: "NEET PG pattern and syllabus", href: "/exams/neet-pg-exam-pattern-and-syllabus" },
@@ -198,26 +206,44 @@ export default function Home() {
           <br />
           Start <span className="acc">asking.</span>
         </h2>
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
-          <div className="rounded-[22px] border-2 p-7" style={{ borderColor: "var(--rule)" }}>
+        {/* The old way is a dull video player racing at 2X; the GalenAI note is slapped on top of it, bright and askew (.versus in v2.css). */}
+        <div className="versus mt-12">
+          <div className="versus-old">
             <p className="kick opacity-70">The old way</p>
-            <ul className="mt-5 space-y-3 text-lg" style={{ color: "var(--body)" }}>
-              <li>A video subscription you watch at 2X</li>
-              <li>Doubts that wait for the next class</li>
-              <li>Hours of notes, no idea what you missed</li>
+            <div className="oldplay" aria-hidden>
+              <span className="oldplay-speed">
+                <small>At</small>
+                <b>2X</b>
+              </span>
+              <span className="oldplay-bar">
+                <i />
+              </span>
+            </div>
+            <ul className="mt-6 space-y-3 text-[1.05rem]" style={{ color: "var(--body)" }}>
+              {OLD_WAY.map((t) => (
+                <li key={t} className="flex gap-3">
+                  <span aria-hidden className="mt-[0.65em] h-[2px] w-4 shrink-0 bg-current opacity-60" />
+                  {t}
+                </li>
+              ))}
             </ul>
           </div>
-          <div className="rounded-[22px] bg-[#fff0e4] p-7 text-[#2e2e2e]">
+          <div className="versus-new">
             <p className="kick">With GalenAI</p>
-            <ul className="mt-5 space-y-3 text-lg font-semibold">
-              <li>A tutor that answers the doubt you have right now</li>
-              <li>Questions that check you understood it</li>
-              <li>A dashboard that shows exactly what is weak</li>
+            <ul className="mt-6 space-y-4">
+              {NEW_WAY.map(([icon, t]) => (
+                <li key={t} className="flex items-center gap-4">
+                  <span className="grid h-[3.25rem] w-[3.25rem] shrink-0 place-items-center rounded-[14px] border-2 border-[#2e2e2e]/10 bg-white">
+                    <Image src={`/brand/icons/${icon}.svg`} alt="" width={30} height={30} className="h-[1.9rem] w-[1.9rem]" />
+                  </span>
+                  <span className="h3 !text-[1.2rem] !leading-snug">{t}</span>
+                </li>
+              ))}
             </ul>
+            <div className="mt-8">
+              <CtaLink intent="download" source="home_habit" label="Ask your first question" />
+            </div>
           </div>
-        </div>
-        <div className="mt-10">
-          <CtaLink intent="download" source="home_habit" label="Ask your first question" />
         </div>
       </Section>
 
