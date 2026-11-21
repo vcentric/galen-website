@@ -11,6 +11,7 @@ import StoreBadges from "@/app/components/v2/StoreBadges";
 import TutorDemo from "@/app/components/v2/TutorDemo";
 import HomeHero from "@/app/components/v2/HomeHero";
 import BeatStage, { type Beat } from "@/app/components/v2/BeatStage";
+import LibraryShelf, { type ShelfBook } from "@/app/components/v2/LibraryShelf";
 import ModeExplorer from "@/app/components/v2/ModeExplorer";
 import PhoneFrame from "@/app/components/v2/PhoneFrame";
 import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
@@ -100,6 +101,19 @@ export default function Home() {
   const learnSubjects = Object.keys(SUBJECTS)
     .map((s) => ({ s, lessons: published.filter((l) => l.subject === s) }))
     .filter((x) => x.lessons.length > 0);
+  const books: ShelfBook[] = [
+    ...learnSubjects.map(({ s, lessons }) => ({
+      key: s,
+      name: subjectName(s),
+      count: lessons.length,
+      blurb: SUBJECTS[s].blurb,
+      items: lessons.slice(0, 6).map((l) => ({ title: l.title, href: l.path, code: l.cbmeCodes[0] })),
+      more: { label: `All ${subjectName(s).toLowerCase()} lessons`, href: `/learn/${s}` },
+    })),
+    ...(EXAM_PAGES_LIVE
+      ? [{ key: "exams", name: "Exam guides", blurb: "Built from the official bulletins.", items: EXAM_GUIDES.map((g) => ({ title: g.label, href: g.href })), kind: "exams" as const }]
+      : []),
+  ];
   return (
     <div className="v2">
       <JsonLd data={[softwareAppLd(), faqLd(studentFaqs)]} />
@@ -162,58 +176,16 @@ export default function Home() {
       {learnSubjects.length > 0 && (
         <section id="learn" className="sec bg-white/60">
           <div className="wrap">
-            <Kicker>Free to read</Kicker>
-            <h2 className="h2 mt-5">
-              {published.length} MBBS lessons, each with MCQs and <span className="acc">viva questions.</span>
-            </h2>
-            <p className="lead mt-5">
-              One topic per page, mapped to its NMC competency, with diagrams, six MCQs, viva questions and flashcards. No sign-up.
-            </p>
-            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {learnSubjects.map(({ s, lessons }) => (
-                <li key={s}>
-                  <div className="card flex h-full flex-col p-6">
-                    <h3 className="h3 !text-[1.35rem]">
-                      <Link href={`/learn/${s}`} className="hover:text-[#c94d20]">
-                        {subjectName(s)}
-                      </Link>
-                    </h3>
-                    <p className="mt-1 text-sm font-semibold" style={{ color: "var(--body)" }}>
-                      {lessons.length} lessons
-                    </p>
-                    <ul className="mt-4 flex-1 space-y-1.5 text-[0.95rem] font-semibold">
-                      {lessons.slice(0, 4).map((l) => (
-                        <li key={l.path}>
-                          <Link href={l.path} className="underline decoration-[#2e2e2e]/20 underline-offset-4 hover:decoration-[#eb602d]">
-                            {l.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link href={`/learn/${s}`} className="mt-4 font-bold text-[#c94d20] hover:underline">
-                      All {subjectName(s).toLowerCase()} lessons →
-                    </Link>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            {EXAM_PAGES_LIVE && (
-              <div className="mt-10">
-                <h3 className="h3">Exam guides, built from the official bulletins</h3>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {EXAM_GUIDES.map((g) => (
-                    <li key={g.href}>
-                      <Link
-                        href={g.href}
-                        className="inline-block rounded-full border-2 border-[#2e2e2e]/15 bg-white px-3.5 py-1.5 text-sm font-bold hover:border-[#eb602d]"
-                      >
-                        {g.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {/* The library as a shelf: one spine per subject, as thick as its lesson count; the chosen book is open beside it. */}
+            <LibraryShelf books={books}>
+              <Kicker>Free to read</Kicker>
+              <h2 className="h2 mt-5">
+                {published.length} MBBS lessons, each with MCQs and <span className="acc">viva questions.</span>
+              </h2>
+              <p className="lead mt-5">
+                One topic per page, mapped to its NMC competency, with diagrams, six MCQs, viva questions and flashcards. No sign-up.
+              </p>
+            </LibraryShelf>
           </div>
         </section>
       )}

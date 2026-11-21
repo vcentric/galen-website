@@ -75,6 +75,45 @@
   .v2 .beat-phones { height: 34rem; --w: 16rem; --shift: 10.5rem; }
 }
 
+/* The library shelf (LibraryShelf.tsx): book spines on a plank, the chosen book open beside them.
+   Flat paper colours only (charcoal, cream, white, one orange spine). Spine thickness is flex-grow = lesson count. */
+.v2 .shelf-wrap { display: grid; gap: 2.25rem; }
+.v2 .shelf-side { display: flex; flex-direction: column; justify-content: space-between; gap: 2.75rem; }
+/* The top padding is headroom for the raised book; overflow is hidden so a raised spine's extension never shows below the plank. */
+.v2 .shelf { display: flex; align-items: flex-end; gap: 5px; height: 15.75rem; padding: 1.25rem 0.4rem 0; overflow: hidden; border-bottom: 5px solid var(--color-dark); }
+.v2 .spine { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; flex-basis: 0; min-width: 2.15rem; height: 100%; padding: 0.9rem 0 0.7rem; border: 3px solid var(--color-dark); border-bottom: 0; border-radius: 7px 7px 0 0; background: #fffaf5; color: var(--color-dark); cursor: pointer; transition: translate 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+.v2 .spine::before { content: ""; position: absolute; inset: 0.45rem 0 auto; height: 0.55rem; border-block: 2px solid currentColor; opacity: 0.28; }
+/* Each spine continues below itself, so when it is lifted it still stands on the plank. */
+.v2 .spine::after { content: ""; position: absolute; inset: 100% -3px auto; height: 1.4rem; background: inherit; border-inline: 3px solid var(--color-dark); }
+.v2 .spine:nth-child(3n + 1) { background: var(--color-dark); color: var(--color-light); }
+.v2 .spine:nth-child(3n + 2) { background: #f4e2d2; }
+.v2 .spine-exams, .v2 .spine-exams:nth-child(n) { background: var(--color-orange); color: #fff; }
+.v2 .spine:nth-child(1) { height: 100%; } .v2 .spine:nth-child(2) { height: 89%; } .v2 .spine:nth-child(3) { height: 95%; } .v2 .spine:nth-child(4) { height: 84%; }
+.v2 .spine:nth-child(5) { height: 92%; } .v2 .spine:nth-child(6) { height: 87%; } .v2 .spine:nth-child(7) { height: 97%; }
+.v2 .spine-name { writing-mode: vertical-rl; margin-top: 1rem; font: 700 0.95rem / 1 var(--font-space-var), sans-serif; letter-spacing: -0.01em; white-space: nowrap; }
+.v2 .spine-count { font: 700 0.8rem / 1 var(--font-space-var), sans-serif; opacity: 0.75; }
+.v2 .spine:hover { translate: 0 -0.4rem; }
+.v2 .spine-open, .v2 .spine-open:hover { translate: 0 -1.1rem; }
+.v2 .spine:focus-visible { outline: 3px solid var(--color-orange); outline-offset: -7px; }
+/* The open book: a paper page with the hard shadow. Fixed minimum height so switching subjects does not move the page. */
+.v2 .page { min-height: 27rem; padding: 1.5rem 1.4rem 1.6rem; background: #fffaf5; border: 3px solid var(--color-dark); border-radius: 18px; box-shadow: 7px 7px 0 var(--color-dark); }
+.v2 .page[hidden] { display: none; }
+.v2 .page-list { margin-top: 1rem; border-top: 2px solid var(--color-orange); }
+.v2 .page-list > li + li { border-top: 1px solid var(--rule); }
+.v2 .page-code { flex-shrink: 0; min-width: 4.1rem; padding: 0.3rem 0.5rem; border-radius: 999px; background: var(--color-dark); color: var(--color-light); font: 700 0.72rem / 1 var(--font-raleway-var), sans-serif; letter-spacing: 0.04em; text-align: center; }
+@media (min-width: 640px) {
+  .v2 .shelf { height: 18.25rem; gap: 7px; }
+  .v2 .spine { min-width: 3rem; }
+  .v2 .spine-name { font-size: 1.1rem; }
+  .v2 .page { padding: 1.9rem 2rem 2rem; }
+}
+@media (min-width: 1024px) {
+  .v2 .shelf-wrap { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr); gap: 3.5rem; }
+  .v2 .shelf { height: 22.25rem; }
+  .v2 .spine-name { font-size: 1.25rem; }
+  .v2 .page { min-height: 28.5rem; }
+}
+
 /* Index card (home "Who it's for"). Paper feel from the print pieces: charcoal border, a file tab,
    and a hard offset shadow. Flat on purpose: no gradients, no soft glow. Cards sit slightly askew
    on desktop and straighten when picked up. */
