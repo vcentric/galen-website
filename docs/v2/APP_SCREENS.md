@@ -15,7 +15,7 @@ Two ways the site uses it:
 
 ## Content rules for captures
 
-The kit's sample data names textbooks (Harrison's, Barash, Miller's) and uses unreviewed questions. `prepare-kit.py` replaces the tutor, question bank and flashcard samples with approved content before capture. Do not capture any kit screen that shows medical content not on the approved list. Clinical cases use three screens from the kit's own sample case (the case list, the case introduction and the first History / Examination step, before any answer is revealed): have faculty check that case before it is relied on. Voice viva is captured, but the site always labels it "Coming soon".
+The kit's sample data names textbooks (Harrison's, Barash, Miller's) and uses unreviewed questions. `prepare-kit.py` replaces the tutor, question bank and flashcard samples with approved content before capture. The kit gives the same reply in every tutor mode, so `prepare-kit.py` also carries one reply per mode (`demo=explain|socratic|case|quick`, wording from the approved How to Use screens) and a `mode=` parameter that switches Tutor Mode on. Do not capture any kit screen that shows medical content not on the approved list. Clinical cases use three screens from the kit's own sample case (the case list, the case introduction and the first History / Examination step, before any answer is revealed): have faculty check that case before it is relied on. Voice viva is captured, but the site always labels it "Coming soon".
 
 ## Recapture (when the app UI changes)
 
@@ -39,6 +39,10 @@ py scripts/app-screens/capture.py k_case_list    "theme=dark&nav=cases" "General
 py scripts/app-screens/capture.py k_case_intro   "theme=dark&nav=cases" "General Medicine|wait:600|Cardiology|wait:600|Acute breathlessness|wait:1500"
 py scripts/app-screens/capture.py k_case_step    "theme=dark&nav=cases" "General Medicine|wait:600|Cardiology|wait:600|Acute breathlessness|wait:1500|Start Case|wait:1500|Irregular, rapid palpitations|Breathlessness on exertion|wait:600"
 py scripts/app-screens/capture.py k_guided       "theme=dark" "Start a guided lesson|wait:1800"
+py scripts/app-screens/capture.py k_mode_explain  "theme=dark&demo=explain&mode=explain"
+py scripts/app-screens/capture.py k_mode_socratic "theme=dark&demo=socratic&mode=socratic"
+py scripts/app-screens/capture.py k_mode_case     "theme=dark&demo=case&mode=case_based"
+py scripts/app-screens/capture.py k_mode_quick    "theme=dark&demo=quick&mode=quick_qa"
 py scripts/app-screens/capture.py k_viva         "theme=dark&nav=viva"
 ```
 

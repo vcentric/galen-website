@@ -72,7 +72,8 @@ export const tutorDemos: DemoAnswer[] = [
   },
 ];
 
-/** Tutor modes, copy from the How to Use page (st-modes). Screens in public/how-to-use/img. */
+/** Tutor modes, copy from the How to Use page (st-modes). `img` is the How to Use screenshot (public/how-to-use/img);
+ * `screen` is the dark app capture of the tutor replying in that mode (public/app, see docs/v2/APP_SCREENS.md). */
 export const tutorModes = [
   {
     id: "explain",
@@ -82,6 +83,7 @@ export const tutorModes = [
     bestFor: ["First read of a new topic", "A lecture that didn't click", "Cycles, pathways, phases"],
     tryAsking: "Explain the coagulation cascade step by step",
     img: "s_explain_web",
+    screen: "mode-explain",
   },
   {
     id: "socratic",
@@ -91,6 +93,7 @@ export const tutorModes = [
     bestFor: ["Mechanisms and physiology", "Viva and ward-round prep", "Topics you've read but can't explain"],
     tryAsking: "How does furosemide cause hypokalaemia?",
     img: "s_socratic",
+    screen: "mode-socratic",
   },
   {
     id: "case",
@@ -100,6 +103,7 @@ export const tutorModes = [
     bestFor: ["Clinical postings and phase III", "NEET PG style reasoning", "Linking theory to a patient"],
     tryAsking: "Give me a case on chest pain",
     img: "s_case",
+    screen: "mode-case-based",
   },
   {
     id: "quick",
@@ -109,6 +113,7 @@ export const tutorModes = [
     bestFor: ["Last-minute revision", "Normal values, drugs of choice", "Rapid-fire self testing"],
     tryAsking: "Nerve supply of the diaphragm?",
     img: "s_quick",
+    screen: "mode-quick-qa",
   },
   {
     id: "auto",
@@ -118,6 +123,7 @@ export const tutorModes = [
     bestFor: ["Mixed study sessions", "When you're not sure which mode fits"],
     tryAsking: "Ask as you normally would",
     img: "s_modes",
+    screen: "tutor-modes",
   },
 ] as const;
 

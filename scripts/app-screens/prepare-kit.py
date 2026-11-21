@@ -8,7 +8,8 @@ then:   py -m http.server 8765 --bind 127.0.0.1   (run inside <out_dir>)
 
 Patches (website copy only, the source file is never modified):
   - URL params: ?app=1 (skip login) &theme=dark &nav=qbank|flash|cases|dash|viva
-                &demo=iso|s2|trop (preload a tutor conversation) &clean=1 (hide dev panel)
+                &demo=iso|s2|trop|explain|socratic|case|quick (preload a tutor conversation)
+                &mode=explain|socratic|case_based|quick_qa (Tutor Mode on) &clean=1 (hide dev panel)
   - Tutor, question bank and flashcard sample data replaced with approved content
     (the kit's samples cite textbooks by name, which the website must never show).
 """
@@ -55,6 +56,22 @@ DEMO = r"""
       trop: { q: 'How long does cardiac troponin T stay raised after an MI?',
         a: 'Cardiac troponin T (cTnT) typically remains elevated for <strong>10 to 14 days</strong> after an acute myocardial infarction (MI).<br/><br/>Depending on the assay and the size of the infarct, it can sometimes be detected for 5 to 21 days.',
         f: ['Compare troponin and CK-MB', 'Quiz me on cardiac markers'] },
+      // One reply per tutor mode: wording from the approved How to Use screens (public/how-to-use/img/s_*.webp).
+      explain: { q: 'Explain the phases of the cardiac cycle simply',
+        a: 'Think of one heartbeat as four steps:<br/><br/>1. <strong>Isovolumetric contraction</strong>: mitral closes (S1), pressure rises, volume stays the same.<br/>2. <strong>Ejection</strong>: aortic valve opens once LV pressure passes aortic pressure (~80 mmHg).<br/>3. <strong>Isovolumetric relaxation</strong>: aortic closes (S2), pressure falls, volume stays the same.<br/>4. <strong>Filling</strong>: mitral reopens and the ventricle fills.<br/><br/><strong>Quick check:</strong> in which two phases are both valves closed?',
+        f: [], r: 2 },
+      socratic: { r: 2, msgs: [
+        { user: true, text: 'Why does volume stay the same during isovolumetric contraction?' },
+        { user: false, text: 'Good question. Let\'s reason it out together.<br/><br/>At the very start of systole the ventricle begins to contract. <strong>Which two valves are closed at that moment?</strong> Think about which way blood would have to go to leave the ventricle.', references: ['Standard medical reference', 'Standard medical reference'], followups: ['Give me a hint', 'Show me the answer'] },
+        { user: true, text: 'Mitral and aortic? Mitral just shut and aortic has not opened yet.' },
+        { user: false, text: 'Exactly. Both exits are shut, so blood has nowhere to go. Pressure climbs, but <strong>volume cannot change</strong>.' },
+      ] },
+      case: { q: 'Give me a case on chest pain',
+        a: '<strong>Case:</strong> A 55-year-old smoker arrives with 40 minutes of crushing central chest pain radiating to the jaw. He is sweaty. BP 100/70 mmHg, pulse 104/min.<br/><br/><strong>Step 1:</strong> What is the first investigation you order, and why?',
+        f: ['Give me a hint', 'Reveal the next step'], r: 2 },
+      quick: { q: 'Normal GFR in adults?',
+        a: '<strong>About 90 to 120 mL/min/1.73 m<sup>2</sup></strong> in healthy young adults.<br/><br/>&bull; Falls gradually with age<br/>&bull; Below 60 for 3 months or more = CKD stage 3<br/>&bull; Usually estimated from serum creatinine (eGFR)',
+        f: ['Why does GFR fall with age?', 'Quiz me on CKD staging'], r: 2 },
     };
     const DEMO = DEMOS[QS.get('demo')];
     const DEMO_REFS = ['Standard medical reference', 'Standard medical reference', 'Standard medical reference'];
@@ -64,9 +81,12 @@ t = t.replace("React.useState('light');", "React.useState(QS.get('theme') || 'li
 t = t.replace("const [screen, setScreen] = React.useState(() => {", "const [screen, setScreen] = React.useState(() => { if (QS.get('app')) return 'app';", 1)
 t = t.replace("const [nav, setNav] = React.useState('tutor');", "const [nav, setNav] = React.useState(QS.get('nav') || 'tutor');", 1)
 t = t.replace("const [messages, setMessages] = React.useState([]);",
-              "const [messages, setMessages] = React.useState(DEMO ? [{ user: true, text: DEMO.q }, { user: false, text: DEMO.a, references: DEMO_REFS, followups: DEMO.f }] : []);", 1)
+              "const [messages, setMessages] = React.useState(DEMO ? (DEMO.msgs || [{ user: true, text: DEMO.q }, { user: false, text: DEMO.a, references: DEMO_REFS.slice(0, DEMO.r || 3), followups: DEMO.f }]) : []);", 1)
+# &mode=explain|socratic|case_based|quick_qa|auto turns Tutor Mode on, so the composer pill shows the mode.
+t = t.replace("const [tutorEnabled, setTutorEnabled] = React.useState(false);", "const [tutorEnabled, setTutorEnabled] = React.useState(!!QS.get('mode'));", 1)
+t = t.replace("const [tutorMode, setTutorMode] = React.useState('auto');", "const [tutorMode, setTutorMode] = React.useState(QS.get('mode') || 'auto');", 1)
 t = t.replace("const devPanel = ReactDOM.createPortal(", "const devPanel = QS.get('clean') ? null : ReactDOM.createPortal(", 1)
-if t.count("QS.get") < 5:
+if t.count("QS.get") < 7:
     raise SystemExit("App shell patch did not apply; the kit structure changed. Re-check the replacements.")
 (out / "index.html").write_text(t, encoding="utf-8")
 

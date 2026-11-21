@@ -75,6 +75,45 @@
   .v2 .beat-phones { height: 34rem; --w: 16rem; --shift: 10.5rem; }
 }
 
+/* Tutor mode explorer (ModeExplorer.tsx): a numbered tab rail, then a three-part sheet around the phone. */
+.v2 .mode-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem 0.6rem; }
+.v2 .mode-tab { display: flex; flex-direction: column; gap: 0.45rem; padding: 0.85rem 0 0.2rem; text-align: left; border-top: 3px solid var(--rule); font: 700 1.05rem / 1.1 var(--font-space-var), sans-serif; letter-spacing: -0.02em; color: rgba(46, 46, 46, 0.45); transition: color 0.2s, border-color 0.2s; }
+.v2 .mode-tab:hover { color: var(--color-dark); border-top-color: rgba(46, 46, 46, 0.45); }
+.v2 .mode-tab-on, .v2 .mode-tab-on:hover { color: var(--color-dark); border-top-color: var(--color-orange); }
+.v2 .mode-tab-n { font-size: 0.8rem; letter-spacing: 0; color: var(--color-orange); }
+.v2 .mode-tab:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 4px; }
+.v2 .mode-sheet { display: grid; gap: 2rem; margin-top: 2.25rem; }
+.v2 .mode-what { min-height: 10.5rem; }
+.v2 .mode-fade:not([hidden]) { animation: fadeUp 0.4s ease-out; }
+@media (min-width: 640px) {
+  .v2 .mode-rail { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; }
+  .v2 .mode-tab { font-size: 1.3rem; padding-top: 1rem; }
+}
+@media (min-width: 1024px) {
+  .v2 .mode-sheet { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 3.5rem; margin-top: 2.75rem; }
+  .v2 .mode-what { min-height: 0; }
+  .v2 .mode-tab { font-size: 1.5rem; }
+}
+
+/* "Ask, don't watch" (home). Old way: a dull video player with the progress bar racing at 2X. With GalenAI: a
+   bright paper note laid over its corner, slightly askew, on an orange hard shadow. Flat colours only. */
+.v2 .versus { display: grid; }
+.v2 .versus-old { padding: 1.5rem 1.4rem 4.5rem; border: 2px solid var(--rule); border-radius: 22px; }
+.v2 .versus-new { position: relative; margin: -3rem 0.6rem 0 0.2rem; padding: 1.6rem 1.4rem 1.8rem; background: var(--color-light); color: var(--color-dark); border: 3px solid var(--color-dark); border-radius: 22px; box-shadow: 8px 8px 0 var(--color-orange); rotate: 1.2deg; --body: rgba(46, 46, 46, 0.8); }
+.v2 .oldplay { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 6.5; margin-top: 1.25rem; border-radius: 14px; background: rgba(255, 240, 228, 0.05); color: rgba(255, 240, 228, 0.55); }
+.v2 .oldplay-speed { display: flex; align-items: center; gap: 0.7rem; }
+.v2 .oldplay-speed small { font: 700 0.7rem / 1 var(--font-raleway-var), sans-serif; letter-spacing: 0.2em; text-transform: uppercase; }
+.v2 .oldplay-speed b { padding: 0.15em 0.4em 0.1em; border: 3px solid currentColor; border-radius: 0.3em; font: 700 clamp(2rem, 6vw, 3.25rem) / 1 var(--font-space-var), sans-serif; letter-spacing: -0.04em; }
+.v2 .oldplay-bar { position: absolute; inset: auto 1rem 0.9rem; height: 4px; border-radius: 999px; background: rgba(255, 240, 228, 0.14); overflow: hidden; }
+.v2 .oldplay-bar i { display: block; width: 62%; height: 100%; background: currentColor; animation: race 3.4s linear infinite; }
+@keyframes race { from { width: 0; } to { width: 100%; } }
+@media (min-width: 768px) {
+  .v2 .versus { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; }
+  .v2 .versus-old { padding: 2rem 5.5rem 2rem 2rem; }
+  .v2 .versus-new { margin: 0 0 0 -3.5rem; padding: 2.25rem 2.25rem 2.4rem; rotate: 1.6deg; transition: rotate 0.3s cubic-bezier(0.16, 1, 0.3, 1), translate 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+  .v2 .versus-new:hover { rotate: 0deg; translate: -3px -3px; }
+}
+
 /* The library shelf (LibraryShelf.tsx): book spines on a plank, the chosen book open beside them.
    Flat paper colours only (charcoal, cream, white, one orange spine). Spine thickness is flex-grow = lesson count. */
 .v2 .shelf-wrap { display: grid; gap: 2.25rem; }
@@ -155,7 +194,7 @@
 .v2 .ask-send { display: grid; place-items: center; flex-shrink: 0; width: 2.85rem; height: 2.85rem; border-radius: 999px; background: var(--color-orange); color: #fff; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s; }
 .v2 .ask-send-on { transform: scale(0.86); background: var(--color-dark); }
 .v2 .ask-arrow { position: absolute; left: calc(100% + 0.9rem); top: -1.1rem; }
-/* The coded tutor phone is 704px tall: shrink it on shorter windows so it is never cut off by the screen. */
+/* Tall phones (the coded tutor phone is 704px): shrink them on shorter windows so they are never cut off by the screen. */
 @media (max-height: 880px) { .v2 .phone-fit { zoom: 0.88; } }
 @media (max-height: 790px) { .v2 .phone-fit { zoom: 0.78; } }
 @media (max-height: 700px) { .v2 .phone-fit { zoom: 0.68; } }
