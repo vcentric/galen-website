@@ -4,6 +4,8 @@ import { faqLd, videoLd } from "@/lib/seo";
 import { CONTACT, LINKS, SITE } from "@/lib/site";
 import JsonLd from "@/app/components/v2/JsonLd";
 import CtaLink from "@/app/components/v2/CtaLink";
+import FacultySteps from "@/app/components/v2/FacultySteps";
+import { FACULTY_STEPS } from "@/content/site/faculty-steps";
 import VideoLite from "@/app/components/v2/VideoLite";
 import AppScreen from "@/app/components/v2/AppScreen";
 import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
@@ -60,24 +62,6 @@ const PARTS = [
     line: SITE.lmsLine,
     href: "/institutions/administration",
   },
-];
-
-const STEPS = [
-  ["Upload the timetable", "Your CBME timetable, validated on upload."],
-  ["See every competency", "A live calendar mapped to competencies."],
-  ["Create lessons", "Plan and build lessons with your own references, material and notes."],
-  ["Create with AI", "Slides, assessments, SGD cases, mind maps, flashcards."],
-  ["Review and publish", "Edit anything, then publish to your class."],
-  ["Track and report", "Analytics by competency and student. Audit-ready."],
-];
-
-// Output chip tints: the only place secondary hues appear (design system section 3).
-const OUTPUTS = [
-  ["Lecture PPT", "#d4482a", "#fde6e1"],
-  ["Assessment", "#3a5bd9", "#e8eefc"],
-  ["SGD case", "#c27c0e", "#fbefd9"],
-  ["Mind map", "#7048d6", "#efe8fc"],
-  ["Flashcards", "#2f7a4f", "#e3f4ea"],
 ];
 
 const LMS_ROWS = [
@@ -320,50 +304,7 @@ export default function InstitutionsPage() {
           Faculty teach <span className="acc">easier.</span>
         </h2>
         <p className="lead mt-4">CBME gives you the framework. GalenAI runs the delivery, from timetable to analytics.</p>
-        <div className="relative mt-10">
-          <Image
-            src="/brand/ui/desktop_lesson_page.webp"
-            alt="A Cardiac cycle lesson page with Must know, Good to know and Nice to know sections"
-            width={1800}
-            height={1125}
-            sizes="(min-width: 1024px) 900px, 92vw"
-            className="h-auto w-full rounded-[22px] shadow-[0_30px_80px_rgba(46,46,46,0.22)] lg:w-[78%]"
-          />
-          <Image
-            src="/brand/ui/panel_generate_lesson_content.webp"
-            alt="New lesson form: choose a topic and what to prepare, then generate a draft from your own references"
-            width={900}
-            height={1002}
-            sizes="300px"
-            className="absolute bottom-[-8%] right-0 hidden h-auto w-[30%] rounded-[18px] shadow-[0_30px_80px_rgba(46,46,46,0.28)] lg:block"
-          />
-        </div>
-        <ul className="mt-14 flex flex-wrap gap-2.5">
-          {OUTPUTS.map(([label, fg, bg], i) => (
-            <li
-              key={label}
-              className="rounded-full px-4 py-2 text-sm font-bold"
-              style={{ color: fg, background: bg, transform: `translateY(${i % 2 ? 4 : 0}px)` }}
-            >
-              {label}
-            </li>
-          ))}
-        </ul>
-        <ol className="mt-12 grid gap-x-12 gap-y-8 md:grid-cols-2">
-          {STEPS.map(([t, b], i) => (
-            <li key={t} className="flex gap-5">
-              <span className="font-[family-name:var(--font-space-var)] text-3xl font-bold text-[#eb602d]">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <h3 className="h3">{t}</h3>
-                <p className="mt-1" style={{ color: "var(--body)" }}>
-                  {b}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <FacultySteps steps={FACULTY_STEPS} />
         <div className="mt-12 border-t-[3px] pt-6" style={{ borderColor: "var(--rule)" }}>
           <p className="h3 text-[#eb602d]">AI drafts. Faculty review.</p>
           <p className="mt-1" style={{ color: "var(--body)" }}>
@@ -378,49 +319,57 @@ export default function InstitutionsPage() {
         <h2 className="h2 mt-5 max-w-3xl">
           Your LMS stores the syllabus. GalenAI <span className="acc">delivers it.</span>
         </h2>
-        <ul className="mt-10 space-y-3 md:hidden">
+        {/* Phones: one block per area, the GalenAI answer larger and marked by the same orange rule. */}
+        <ul className="vs-cards md:hidden">
           {LMS_ROWS.map(([area, lms, g]) => (
-            <li key={area} className="rounded-[18px] border-2 p-5" style={{ borderColor: "var(--rule)" }}>
-              <p className="h3 !text-lg">{area}</p>
-              <p className="mt-3 text-xs font-bold uppercase tracking-wider opacity-60">Typical LMS</p>
+            <li key={area}>
+              <p className="vs-area">{area}</p>
+              <p className="vs-label">Typical LMS</p>
               <p className="mt-1" style={{ color: "var(--body)" }}>
                 {lms}
               </p>
-              <p className="mt-3 text-xs font-bold uppercase tracking-wider text-[#eb602d]">GalenAI</p>
-              <p className="mt-1 font-semibold">{g}</p>
+              <div className="vs-ours">
+                <p className="vs-label vs-label-ours">GalenAI</p>
+                <p className="vs-ours-text">{g}</p>
+              </div>
             </li>
           ))}
         </ul>
-        <div className="mt-10 hidden md:block">
-          <table className="w-full border-collapse text-left">
+        {/* Tablet and up: a real table set like a ledger. No panels or ticks: the LMS side is small and quiet,
+            the GalenAI side is set large in the heading face, and one orange rule divides them. */}
+        <div className="mt-12 hidden md:block">
+          <table className="vs-table">
             <thead>
-              <tr className="text-sm uppercase tracking-wider opacity-70">
-                <th className="py-3 pr-6 font-semibold">Area</th>
-                <th className="py-3 pr-6 font-semibold">Typical LMS</th>
-                <th className="py-3 font-semibold text-[#eb602d]">GalenAI</th>
+              <tr>
+                <th scope="col">
+                  <span className="sr-only">Area</span>
+                </th>
+                <th scope="col">Typical LMS</th>
+                <th scope="col">
+                  <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} className="h-auto w-[104px]" />
+                </th>
               </tr>
             </thead>
             <tbody>
-              {LMS_ROWS.map(([area, lms, g]) => (
-                <tr key={area} className="border-t align-top" style={{ borderColor: "var(--rule)" }}>
-                  <th scope="row" className="py-5 pr-6 font-bold">
+              {LMS_ROWS.map(([area, lms, g], i) => (
+                <tr key={area}>
+                  <th scope="row">
+                    <span>{String(i + 1).padStart(2, "0")}</span>
                     {area}
                   </th>
-                  <td className="py-5 pr-6" style={{ color: "var(--body)" }}>
-                    {lms}
-                  </td>
-                  <td className="py-5 font-semibold">{g}</td>
+                  <td>{lms}</td>
+                  <td>{g}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-bold">
-          <Link href="/institutions/vs-lms" className="underline decoration-[#eb602d] decoration-2 underline-offset-4">
+        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <Link href="/institutions/vs-lms" className="btn btn-primary">
             See the full comparison
           </Link>
-          <Link href="/institutions/integrations" className="underline decoration-[#eb602d] decoration-2 underline-offset-4">
-            Your existing LMS content stays valuable
+          <Link href="/institutions/integrations" className="vs-link">
+            Your existing LMS content stays valuable <span aria-hidden>→</span>
           </Link>
         </div>
       </Section>
@@ -436,48 +385,49 @@ export default function InstitutionsPage() {
         </div>
       </Section>
 
-      {/* 9. Bring GalenAI to your campus */}
-      <Section id="contact">
-        <h2 className="h1 !text-[clamp(2.2rem,6vw,4.25rem)]">
-          Bring GalenAI to your <span className="acc">campus.</span>
+      {/* 9. Bring GalenAI to your campus. One main action (book a demo) with the contact details under it;
+          the two live products sit beside it as a ruled list, not as boxes. */}
+      <Section id="contact" tone="dark">
+        <h2 className="h1 !text-[clamp(2.4rem,7vw,5.25rem)]">
+          Bring GalenAI to
+          <br className="hidden sm:block" /> your <span className="acc">campus.</span>
         </h2>
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          <div className="tone-dark rounded-[22px] p-8">
-            <h3 className="h2 !text-[2rem]">
-              Try it out for <span className="acc">faculty</span>
-            </h3>
-            <p className="mt-3" style={{ color: "var(--body)" }}>
-              The AI Workspace, lesson planning and assessments, live.
-            </p>
-            <div className="mt-6">
-              <CtaLink intent="faculty-live" source="inst_final" label="faculty.galenai.io" />
-            </div>
+        <div className="closing">
+          <div>
+            <CtaLink intent="demo" source="inst_final" className="!min-h-14 !px-8 !text-lg" />
+            <address className="closing-contact">
+              <a href={`mailto:${CONTACT.corporate}`}>{CONTACT.corporate}</a>
+              <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+              <span>{CONTACT.address}</span>
+              <a href={LINKS.linkedin} rel="noopener">
+                LinkedIn <span aria-hidden>↗</span>
+              </a>
+            </address>
           </div>
-          <div className="rounded-[22px] border-[3px] border-[#2e2e2e] bg-white p-8">
-            <h3 className="h2 !text-[2rem]">
-              Try it out for <span className="acc">students</span>
-            </h3>
-            <p className="mt-3" style={{ color: "var(--body)" }}>
-              The AI tutor, question bank, flashcards and cases.
-            </p>
-            <div className="mt-6">
+          <ul className="closing-try">
+            <li>
+              <div>
+                <h3 className="h3 !text-[1.6rem]">
+                  Try it out for <span className="acc">faculty</span>
+                </h3>
+                <p className="mt-2" style={{ color: "var(--body)" }}>
+                  The AI Workspace, lesson planning and assessments, live.
+                </p>
+              </div>
+              <CtaLink intent="faculty-live" source="inst_final" label="faculty.galenai.io" variant="ghost" />
+            </li>
+            <li>
+              <div>
+                <h3 className="h3 !text-[1.6rem]">
+                  Try it out for <span className="acc">students</span>
+                </h3>
+                <p className="mt-2" style={{ color: "var(--body)" }}>
+                  The AI tutor, question bank, flashcards and cases.
+                </p>
+              </div>
               <CtaLink intent="try-web" source="inst_final" label="app.galenai.io" variant="ghost" />
-            </div>
-          </div>
-        </div>
-        <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <CtaLink intent="demo" source="inst_final" />
-          <address className="not-italic text-sm" style={{ color: "var(--body)" }}>
-            <a href={`mailto:${CONTACT.corporate}`} className="font-semibold text-[#2e2e2e]">
-              {CONTACT.corporate}
-            </a>
-            {" · "}
-            <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
-            {" · "}
-            {CONTACT.address}
-            {" · "}
-            <a href={LINKS.linkedin} rel="noopener">LinkedIn</a>
-          </address>
+            </li>
+          </ul>
         </div>
       </Section>
     </div>

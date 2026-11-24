@@ -87,16 +87,28 @@ export default async function LessonPage({ params }: Params) {
         </p>
         <h1 className="h1 mt-5 max-w-[18ch]">{m.title}</h1>
         {m.subtitle && <p className="lead mt-6">{m.subtitle}</p>}
-        <div className="lesson-chips mt-7">
-          {m.cbmeCodes.map((c) => (
-            <span key={c} className="lesson-chip lesson-chip-code" title={m.competencyText || "NMC CBME competency"}>
-              NMC {c}
-            </span>
-          ))}
-          {m.region && <span className="lesson-chip">{m.region}</span>}
-          <span className="lesson-chip">{minutes} min read</span>
-          <span className="lesson-chip">6 MCQs · viva · flashcards</span>
-        </div>
+        <dl className="lesson-meta">
+          {m.cbmeCodes.length > 0 && (
+            <div>
+              <dt>NMC competency</dt>
+              <dd title={m.competencyText || "NMC CBME competency"}>{m.cbmeCodes.join(", ")}</dd>
+            </div>
+          )}
+          {m.region && (
+            <div>
+              <dt>Region</dt>
+              <dd>{m.region}</dd>
+            </div>
+          )}
+          <div>
+            <dt>Reading time</dt>
+            <dd>{minutes} min</dd>
+          </div>
+          <div>
+            <dt>Comes with</dt>
+            <dd>6 MCQs · viva · flashcards</dd>
+          </div>
+        </dl>
         <p className="lesson-byline mt-6">
           {m.authorName}
           {m.publishDate ? ` · ${fmtDate(m.publishDate)}` : ""}

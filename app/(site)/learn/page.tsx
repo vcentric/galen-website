@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { getAllLessons, subjectName, SUBJECTS } from "@/lib/learn";
 import { buildMetadata, breadcrumbLd, itemListLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import LessonCard from "@/app/components/v2/LessonCard";
+import LessonIndex from "@/app/components/v2/LessonIndex";
 
 const lessons = getAllLessons();
 
@@ -25,7 +24,7 @@ export default function LearnHub() {
           itemListLd("Free MBBS lessons", lessons.map((l) => ({ name: l.title, path: l.path }))),
         ]}
       />
-      <header className="wrap pt-24 pb-10 md:pt-28">
+      <header className="wrap pt-28 pb-10 md:pt-36">
         <p className="kick">Free MBBS lessons</p>
         <h1 className="h1 mt-5 max-w-[16ch]">
           Learn the topic, then <span className="acc">test yourself.</span>
@@ -34,31 +33,17 @@ export default function LearnHub() {
           Each lesson covers one topic from the MBBS syllabus, with diagrams where we have a good open one, six MCQs,
           viva questions and flashcards.{lessons.some((l) => l.reviewedBy) ? " Reviewed by faculty." : ""}
         </p>
-        <nav className="lesson-chips mt-8" aria-label="Subjects">
-          {subjects.map((s) => (
-            <a key={s} className="lesson-chip" href={`#${s}`}>
-              {subjectName(s)}
-            </a>
-          ))}
-        </nav>
       </header>
-      {subjects.map((s) => (
-        <section key={s} id={s} className="wrap pb-16">
-          <div className="flex items-end justify-between gap-4 mb-6">
-            <h2 className="h2">{subjectName(s)}</h2>
-            <Link className="font-bold text-[#c94d20] hover:underline" href={`/learn/${s}`}>
-              All {subjectName(s).toLowerCase()} →
-            </Link>
-          </div>
-          <div className="lesson-cards">
-            {lessons
-              .filter((l) => l.subject === s)
-              .map((l) => (
-                <LessonCard key={l.path} lesson={l} />
-              ))}
-          </div>
-        </section>
-      ))}
+      <LessonIndex
+        subjects={subjects.map((s) => ({
+          id: s,
+          name: subjectName(s),
+          blurb: SUBJECTS[s]?.blurb ?? "",
+          lessons: lessons
+            .filter((l) => l.subject === s)
+            .map((l) => ({ path: l.path, title: l.title, subtitle: l.subtitle, code: l.cbmeCodes[0], draft: !l.isPublished })),
+        }))}
+      />
     </div>
   );
 }

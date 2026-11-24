@@ -1,6 +1,17 @@
 import type { ComponentType } from "react";
 import type { PageSpec, SectionSpec } from "@/content/site/types";
 import { DemoContactSection, DemoFormSection, DemoTrySection, DemoWhySection } from "./bookDemo";
+import { FacultyOutputsSection, FacultyScreenSection, FacultyStepsSection, FacultyWorkspaceSection } from "./faculty";
+import {
+  FlashDeckSection,
+  FlashHowSection,
+  FlashStudentsSection,
+  LessonFormSection,
+  LessonStepsSection,
+  MindMapHowSection,
+  MindMapSection,
+} from "./generators";
+import { QuizFacultySection, QuizStudentsSection } from "./quiz";
 import {
   CompareSection,
   CtaBandSection,
@@ -40,6 +51,19 @@ export const byPage: Record<string, ComponentType<SectionProps>> = {
   "/institutions/book-demo#why": DemoWhySection,
   "/institutions/book-demo#try": DemoTrySection,
   "/institutions/book-demo#contact": DemoContactSection,
+  "/institutions/faculty#workspace": FacultyWorkspaceSection,
+  "/institutions/faculty#steps": FacultyStepsSection,
+  "/institutions/faculty#outputs": FacultyOutputsSection,
+  "/institutions/faculty#lessons": FacultyScreenSection,
+  "/features/ai-quiz-generator#students": QuizStudentsSection,
+  "/features/ai-quiz-generator#faculty": QuizFacultySection,
+  "/features/ai-flashcard-generator#students": FlashStudentsSection,
+  "/features/ai-flashcard-generator#demo": FlashDeckSection,
+  "/features/ai-flashcard-generator#how": FlashHowSection,
+  "/features/ai-mind-map-generator#demo": MindMapSection,
+  "/features/ai-mind-map-generator#how": MindMapHowSection,
+  "/features/ai-lesson-plan-generator#demo": LessonFormSection,
+  "/features/ai-lesson-plan-generator#how": LessonStepsSection,
 };
 
 export const resolveSection = (spec: PageSpec, section: SectionSpec) => {

@@ -9,7 +9,7 @@ import CtaLink from "./CtaLink";
  * from the approved How to Use page (screen s_qb_ans, PY5.7). After answering, the
  * CTA invites the student to the rest of the bank.
  */
-const Q = {
+export const SAMPLE_MCQ = {
   code: "PY5.7",
   stem: "The second heart sound (S2) is produced by:",
   options: ["Closure of semilunar valves", "Closure of AV valves", "Opening of semilunar valves", "Rapid ventricular filling"],
@@ -17,6 +17,8 @@ const Q = {
   explanation:
     "S2 marks the end of systole: the aortic and pulmonary (semilunar) valves close as ventricular pressure falls below arterial pressure.",
 };
+
+const Q = SAMPLE_MCQ;
 
 export default function McqDemo({ source }: { source: string }) {
   const [pick, setPick] = useState<number | null>(null);

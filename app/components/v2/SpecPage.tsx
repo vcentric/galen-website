@@ -21,7 +21,6 @@ export default function SpecPage({
   trail: { name: string; path: string }[];
 }) {
   const fullTrail = [{ name: "Home", path: "/" }, ...trail, { name: spec.kicker, path: spec.path }];
-  const tone = spec.audience === "student" || spec.audience === "all" ? undefined : "neutral";
   const realFaqs = spec.faqs?.filter((f) => !f.a.startsWith("TODO")) ?? [];
   const ld: object[] = [breadcrumbLd(fullTrail)];
   if (realFaqs.length) ld.push(faqLd(realFaqs));
@@ -31,7 +30,7 @@ export default function SpecPage({
   const src = spec.path.replace(/\//g, "_").slice(1);
 
   return (
-    <div className="v2" data-tone={tone}>
+    <div className="v2">
       <JsonLd data={ld} />
 
       <header className="wrap pt-24 md:pt-32 pb-10">
