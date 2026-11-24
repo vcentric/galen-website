@@ -4,7 +4,7 @@ import Image from "next/image";
 import { EXAM_PAGES_LIVE, LEARN_NAV_LIVE } from "@/lib/exams";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CtaLink from "./CtaLink";
 import { LINKS } from "@/lib/site";
 import { trackCTAClick } from "@/lib/analytics";
@@ -54,134 +54,208 @@ const isCollegePath = (p: string) =>
 
 /**
  * Students / Colleges switch. Plain links (prefetched, instant client navigation),
- * styled as a segmented control so the two audiences are one tap apart everywhere.
+ * styled as a segmented control whose thumb slides between the two audiences.
  */
-function AudienceToggle({ inst, className = "" }: { inst: boolean; className?: string }) {
-  const item = (active: boolean) =>
-    `rounded-full px-3 py-1.5 sm:px-4 transition-colors ${active ? "bg-[#2e2e2e] text-[#fff0e4]" : "text-[#2e2e2e]/70 hover:text-[#2e2e2e]"}`;
+function AudienceToggle({ inst }: { inst: boolean }) {
   return (
-    <nav aria-label="Choose audience" className={`flex shrink-0 items-center rounded-full border border-[#2e2e2e]/15 bg-white/70 p-1 text-[13px] font-bold sm:text-sm ${className}`}>
-      <Link href="/" aria-current={!inst ? "page" : undefined} className={item(!inst)}>
+    <nav aria-label="Choose audience" className="nav-aud" data-side={inst ? "colleges" : "students"}>
+      <span aria-hidden className="nav-aud-thumb" />
+      <Link href="/" aria-current={!inst ? "page" : undefined}>
         Students
       </Link>
-      <Link href="/institutions" aria-current={inst ? "page" : undefined} className={item(inst)}>
+      <Link href="/institutions" aria-current={inst ? "page" : undefined}>
         Colleges
       </Link>
     </nav>
   );
 }
 
+const Chevron = () => (
+  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden className="nav-chev">
+    <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const NewBadge = () => (
+  <span className="badge-shimmer rounded px-1.5 py-[4px] text-[7px] font-bold uppercase leading-none tracking-wide text-white">New</span>
+);
+
 /**
- * Site navigation. Small client island (pathname + phone menu), no animation library.
- * Institution nav on every /institutions path; student nav everywhere else.
+ * Site navigation: a floating bar. Small client island (pathname, phone menu, scroll shadow),
+ * no animation library. Institution nav on every college path; student nav everywhere else.
  */
 export default function Navbar() {
   const pathname = usePathname() ?? "/";
   // The phone menu remembers the page it was opened on, so it closes by itself on navigation.
   const [openOn, setOpenOn] = useState<string | null>(null);
+  // "top": transparent, part of the hero. "hidden": scrolled away. "pinned": slid back in on scroll up.
+  const [state, setState] = useState<"top" | "hidden" | "pinned">("top");
+  // Read from the page: is the hero under the bar dark, and what is the page's own background.
+  const [page, setPage] = useState<{ dark: boolean; bg: string }>({ dark: false, bg: "" });
   const open = openOn === pathname;
   const inst = isCollegePath(pathname);
   const links = inst ? INSTITUTION_LINKS : STUDENT_LINKS;
 
+  useEffect(() => {
+    // What sits under the bar is only the hero when the page is at the top, so read it there
+    // (a reload can restore the page part-way down) and again after every navigation.
+    const readPage = () => {
+      if (window.scrollY > 8) return;
+      const under = document.elementsFromPoint(window.innerWidth / 2, 40).find((el) => !el.closest(".nav"));
+      const root = document.querySelector<HTMLElement>(".v2:not(.nav)");
+      const next = { dark: !!under?.closest(".tone-dark"), bg: root ? getComputedStyle(root).backgroundColor : "" };
+      setPage((p) => (p.dark === next.dark && p.bg === next.bg ? p : next));
+    };
+    // Distance travelled in the current direction. Trackpads scroll a pixel or two per event,
+    // so the direction is judged on the running total, never on a single event.
+    let last = window.scrollY;
+    let run = 0;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const d = y - last;
+      last = y;
+      run = d > 0 === run > 0 ? run + d : d;
+      if (y <= 8) {
+        setState("top");
+        readPage();
+      } else if (y > 72 && run > 6) setState("hidden");
+      else if (run < -6) setState("pinned");
+      // Past the hero's top edge the bar is never left transparent over content.
+      else if (y > 72) setState((s) => (s === "top" ? "hidden" : s));
+    };
+    const id = requestAnimationFrame(() => {
+      // Loaded or restored part-way down the page: start out of the way, not transparent over content.
+      if (window.scrollY > 72) setState("hidden");
+      else onScroll();
+      readPage();
+    });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(id);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [pathname]);
+
   if (pathname.startsWith("/keystatic")) return null;
 
-  return (
-    <header className="v2 fixed inset-x-0 top-0 z-[120] !bg-[#fff0e4]/90 backdrop-blur border-b border-black/5">
-      <nav className="wrap flex h-16 items-center justify-between gap-4" aria-label="Main">
-        <Link href={inst ? "/institutions" : "/"} aria-label="GalenAI home" className="shrink-0">
-          <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} priority className="h-auto w-[104px] sm:w-[127px]" />
-        </Link>
+  const houseClick = () => trackCTAClick("house_md", { source: "nav", button_type: "link", button_text: "Think Like HouseMD" });
 
-        <ul className="hidden lg:flex items-center gap-6 xl:gap-7 text-[0.95rem] font-semibold">
-          {links.map((l) => (
-            <li key={l.href} className={l.menu ? "group relative" : undefined}>
-              <Link
-                href={l.href}
-                aria-current={pathname === l.href ? "page" : undefined}
-                aria-haspopup={l.menu ? "true" : undefined}
-                className={`inline-flex items-center gap-1 py-5 hover:text-[#c94d20] ${isActive(pathname, l) ? "text-[#c94d20]" : ""}`}
-              >
-                {l.label}
+  return (
+    <header
+      className="v2 nav"
+      data-state={open ? "pinned" : state}
+      data-ink={page.dark && state === "top" && !open ? "light" : undefined}
+      style={page.bg ? ({ "--nav-bg": page.bg } as React.CSSProperties) : undefined}
+    >
+      <nav className="wrap nav-bar" aria-label="Main">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3 lg:gap-4">
+          <Link href={inst ? "/institutions" : "/"} aria-label="GalenAI home" className="shrink-0">
+            <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} priority className="nav-logo h-auto w-[98px] sm:w-[116px]" />
+          </Link>
+          <AudienceToggle inst={inst} />
+        </div>
+
+        <ul className="nav-links">
+          {links.map((l) => {
+            const guides = l.menu?.filter((m) => m.note) ?? [];
+            const rest = l.menu?.filter((m) => !m.note) ?? [];
+            return (
+              <li key={l.href} className={l.menu ? "group relative" : undefined}>
+                <Link
+                  href={l.href}
+                  aria-current={pathname === l.href ? "page" : undefined}
+                  aria-haspopup={l.menu ? "true" : undefined}
+                  data-active={isActive(pathname, l) ? "" : undefined}
+                  className="nav-link"
+                >
+                  {l.label}
+                  {l.menu && <Chevron />}
+                </Link>
+                {/* Opens on hover and on keyboard focus. Plain links, so crawlers and screen readers see every item. */}
                 {l.menu && (
-                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden className="mt-px transition-transform group-hover:rotate-180 group-focus-within:rotate-180">
-                    <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <div className="nav-menu" data-cols={guides.length ? 2 : 1}>
+                    {guides.length > 0 && (
+                      <div>
+                        <p className="nav-menu-title">Free guides</p>
+                        <ul>
+                          {guides.map((m) => (
+                            <li key={m.href}>
+                              <Link href={m.href} className="nav-menu-item" data-active={pathname === m.href ? "" : undefined}>
+                                <span className="block text-[0.95rem] font-bold leading-tight">{m.label}</span>
+                                <span className="mt-1 block text-[0.8rem] font-medium leading-snug text-[#2e2e2e]/65">{m.note}</span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    <div>
+                      <p className="nav-menu-title">In the app</p>
+                      <ul>
+                        {rest.map((m) => (
+                          <li key={m.href}>
+                            <Link href={m.href} className="nav-menu-item" data-active={pathname === m.href ? "" : undefined}>
+                              <span className="flex items-center justify-between gap-3 text-[0.95rem] font-bold leading-tight">
+                                {m.label}
+                                <span aria-hidden className="nav-menu-arrow">
+                                  →
+                                </span>
+                              </span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 )}
-              </Link>
-              {/* Opens on hover and on keyboard focus. Plain links, so crawlers and screen readers see every item. */}
-              {l.menu && (
-                <ul className="invisible absolute left-1/2 top-full z-10 w-[19rem] -translate-x-1/2 rounded-[18px] border border-black/10 bg-white p-2 opacity-0 shadow-[0_24px_60px_rgba(46,46,46,0.16)] transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                  {l.menu.map((m) => (
-                    <li key={m.href}>
-                      <Link href={m.href} className={`block rounded-xl px-3.5 py-2.5 hover:bg-[#fff0e4] ${pathname === m.href ? "text-[#c94d20]" : ""}`}>
-                        <span className="block text-[0.95rem] font-bold leading-tight">{m.label}</span>
-                        {m.note && <span className="mt-0.5 block text-[0.8rem] font-medium leading-snug text-[#2e2e2e]/65">{m.note}</span>}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
 
-        <div className="flex items-center gap-2 lg:gap-3">
+        <div className="flex shrink-0 items-center gap-2">
           {/* Think Like HouseMD (house.galenai.io): top-right, left of the main button. */}
-          <a
-            href={LINKS.house}
-            rel="noopener"
-            onClick={() => trackCTAClick("house_md", { source: "nav", button_type: "link", button_text: "Think Like HouseMD" })}
-            className="hidden lg:inline-flex items-center gap-1.5 whitespace-nowrap text-[0.9rem] font-semibold text-[#2e2e2e]/85 hover:text-[#c94d20]"
-          >
+          <a href={LINKS.house} rel="noopener" onClick={houseClick} className="nav-house">
             <span className="hidden xl:inline">Think Like HouseMD</span>
             <span className="xl:hidden">HouseMD</span>
-            <span className="badge-shimmer rounded px-1.5 py-[4px] text-[7px] font-bold uppercase leading-none tracking-wide text-white">New</span>
+            <NewBadge />
           </a>
-          <AudienceToggle inst={inst} />
           <CtaLink
             intent={inst ? "demo" : "download"}
             source="nav"
             label={inst ? "Book a demo" : "Get the app"}
-            className="!hidden !min-h-10 !px-4 !text-sm sm:!inline-flex"
+            className="!hidden !min-h-10 !px-5 !text-sm sm:!inline-flex lg:ml-2"
           />
           <button
             type="button"
-            className="lg:hidden grid h-10 w-10 place-items-center rounded-full border-2 border-[#2e2e2e]"
+            className="nav-burger"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpenOn(open ? null : pathname)}
           >
-            <span aria-hidden className="text-lg leading-none">
-              {open ? "×" : "≡"}
-            </span>
+            <span aria-hidden />
+            <span aria-hidden />
           </button>
         </div>
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="lg:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-black/5 bg-[#fff0e4]">
-          <div className="wrap pt-4 sm:hidden">
-            <CtaLink
-              intent={inst ? "demo" : "download"}
-              source="nav_menu"
-              label={inst ? "Book a demo" : "Get the app"}
-              className="w-full"
-            />
-          </div>
-          <ul className="wrap py-4 flex flex-col">
+        <div id="mobile-menu" className="nav-sheet">
+          <div className="wrap">
+          <CtaLink intent={inst ? "demo" : "download"} source="nav_menu" label={inst ? "Book a demo" : "Get the app"} className="mb-2 w-full sm:!hidden" />
+          <ul>
             {links.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="block py-3 h3">
+                <Link href={l.href} className="nav-sheet-link" data-active={isActive(pathname, l) ? "" : undefined}>
                   {l.label}
+                  <span aria-hidden>→</span>
                 </Link>
                 {l.menu && (
-                  <ul className="mb-2 ml-1 border-l-2 border-[#eb602d]/40 pl-4">
+                  <ul className="nav-sheet-sub">
                     {l.menu.map((m) => (
                       <li key={m.href}>
-                        <Link href={m.href} className="block py-2 text-[1rem] font-semibold text-[#2e2e2e]/85">
-                          {m.label}
-                        </Link>
+                        <Link href={m.href}>{m.label}</Link>
                       </li>
                     ))}
                   </ul>
@@ -189,16 +263,21 @@ export default function Navbar() {
               </li>
             ))}
             <li>
-              <Link href="/team" className="block py-3 h3">
+              <Link href="/team" className="nav-sheet-link">
                 Team
+                <span aria-hidden>→</span>
               </Link>
             </li>
             <li>
-              <a href={LINKS.house} rel="noopener" className="block py-3 h3">
-                Think Like HouseMD <span className="badge-shimmer ml-1 rounded px-1.5 py-[4px] align-middle text-[7px] font-bold uppercase leading-none tracking-wide text-white">New</span>
+              <a href={LINKS.house} rel="noopener" onClick={houseClick} className="nav-sheet-link">
+                <span className="flex items-center gap-2">
+                  Think Like HouseMD <NewBadge />
+                </span>
+                <span aria-hidden>→</span>
               </a>
             </li>
           </ul>
+          </div>
         </div>
       )}
     </header>

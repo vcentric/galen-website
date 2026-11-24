@@ -13,7 +13,6 @@ import HomeHero from "@/app/components/v2/HomeHero";
 import BeatStage, { type Beat } from "@/app/components/v2/BeatStage";
 import LibraryShelf, { type ShelfBook } from "@/app/components/v2/LibraryShelf";
 import ModeExplorer from "@/app/components/v2/ModeExplorer";
-import PhoneFrame from "@/app/components/v2/PhoneFrame";
 import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
 import { getAllLessons, subjectName, SUBJECTS } from "@/lib/learn";
 import { EXAM_PAGES_LIVE } from "@/lib/exams";
@@ -104,6 +103,15 @@ const EXAM_GUIDES = [
 ];
 
 /** Student home. Blueprint: docs/v2/PAGE_BLUEPRINTS.md section 1. */
+// Day strip on the calendar in the "For your college" picture (same sample week as the How to Use calendar).
+const COLLEGE_DAYS: [string, number][] = [
+  ["Mon", 28],
+  ["Tue", 29],
+  ["Wed", 30],
+  ["Thu", 1],
+  ["Fri", 2],
+];
+
 export default function Home() {
   const published = getAllLessons().filter((l) => l.isPublished);
   const learnSubjects = Object.keys(SUBJECTS)
@@ -279,7 +287,7 @@ export default function Home() {
       </Section>
 
       {/* 7. Bridge to institutions: students as the referral channel.
-          A dark panel that shows the hand-off: the faculty workspace behind, the student calendar in front (.college in v2.css). */}
+          A dark panel that shows the hand-off: the faculty workspace, then the student calendar (.college in v2.css). */}
       <Section id="college">
         <div className="college tone-dark">
           <div>
@@ -295,24 +303,70 @@ export default function Home() {
               Show your college
             </Link>
           </div>
-          <div className="college-art">
-            <Image
-              src="/brand/ui/desktop_content_bank.webp"
-              alt="A lecture deck in the GalenAI faculty Content Bank, with the Publish to students button"
-              width={1597}
-              height={728}
-              sizes="(min-width: 1024px) 620px, 92vw"
-              className="college-desk"
-            />
-            <span className="college-tag college-tag-from">Faculty publish</span>
-            <svg className="college-arrow" width="92" height="74" viewBox="0 0 92 74" fill="none" aria-hidden>
-              <path d="M86 6C70 2 44 8 28 30c-6 8-10 18-11 28" stroke="#eb602d" strokeWidth="3.5" strokeLinecap="round" />
-              <path d="M5 46l12 14 13-12" stroke="#eb602d" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <div className="college-phone">
-              <PhoneFrame src="/brand/ui/phone_calendar.webp" alt="Faculty lessons on the student calendar" width={176} notch={false} />
-              <span className="college-tag college-tag-to">On your calendar</span>
+          {/* The hand-off, drawn in the site's own UI (no screenshots): a lecture in the faculty workspace, its Publish
+              button, and the same lecture arriving on the student's calendar. One picture for screen readers. */}
+          <div className="college-art" role="img" aria-label="A faculty member publishes a lecture, and it appears on the student's calendar">
+            <p className="college-cap college-cap-from">Faculty workspace</p>
+            <div className="college-window">
+              <div className="college-bar">
+                <i />
+                <i />
+                <i />
+                <span>faculty.galenai.io</span>
+              </div>
+              <div className="college-doc">
+                <p className="college-crumb">Content Bank / Cardiac cycle</p>
+                <p className="college-title">Cardiac cycle</p>
+                <p className="college-meta">Lecture · 12 slides</p>
+                <div className="college-actions">
+                  <span className="college-btn">Edit deck</span>
+                  <span className="college-btn college-publish">Publish to students</span>
+                </div>
+                <div className="college-slide">
+                  <p>Slide 3 · Phases</p>
+                  <b>Isovolumetric contraction</b>
+                  <i />
+                  <i />
+                </div>
+              </div>
             </div>
+            <div className="college-phone">
+              <span className="college-island" />
+              <p className="college-cal">Calendar</p>
+              <ol className="college-days">
+                {COLLEGE_DAYS.map(([d, n], i) => (
+                  <li key={d} className={i === 0 ? "on" : undefined}>
+                    {d}
+                    <b>{n}</b>
+                  </li>
+                ))}
+              </ol>
+              <p className="college-today">Today</p>
+              <div className="college-row college-row-new">
+                <span>9:00</span>
+                <div>
+                  <b>Cardiac cycle</b>
+                  <small>Lecture · Dr. Meera Iyer</small>
+                  <small className="college-files">12 slides · 20 Qs · 3 files</small>
+                </div>
+                <em>New</em>
+              </div>
+              <div className="college-row">
+                <span>11:00</span>
+                <div>
+                  <b>Cardiac output and venous return</b>
+                  <small>SGD · Room 114</small>
+                </div>
+              </div>
+              <div className="college-row">
+                <span>2:00</span>
+                <div>
+                  <b>Regulation of blood pressure</b>
+                  <small>Lecture · Room 114</small>
+                </div>
+              </div>
+            </div>
+            <p className="college-cap college-cap-to">Your calendar</p>
           </div>
         </div>
       </Section>
@@ -331,29 +385,50 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* 9. Final CTA */}
+      {/* 9. Final CTA. Left: the ask and the two actions. Right, on desktop: a raised dark card that gets the app onto the
+          visitor's phone (the QR code), with the mascot looking over it. Phones get the store links inline. */}
       <Section tone="dark">
-        <div className="relative">
-          <h2 className="h1 !text-[clamp(2.2rem,6vw,4.25rem)]">
-            Your next doubt,
-            <br />
-            answered in <span className="acc">seconds.</span>
-          </h2>
-          <p className="lead mt-5">{SITE.studentLine} All in one app.</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <CtaLink intent="download" source="home_final" />
-            <CtaLink intent="try-web" source="home_final" variant="ghost" />
+        <div className="grid items-center gap-x-16 gap-y-10 lg:grid-cols-[minmax(0,1fr)_auto]">
+          <div>
+            <h2 className="h1 !text-[clamp(2.2rem,6vw,3.9rem)]">
+              Your next doubt,
+              <br />
+              answered in <span className="acc">seconds.</span>
+            </h2>
+            <p className="lead mt-5">{SITE.studentLine} All in one app.</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <CtaLink intent="download" source="home_final" />
+              <CtaLink intent="try-web" source="home_final" variant="ghost" />
+            </div>
+            <p className="mt-6 text-sm font-semibold text-[#fff0e4]/70">
+              <span className="mr-1 inline-flex items-center gap-1 rounded-full bg-[#eb602d]/20 px-2.5 py-0.5 font-bold text-[#ff9d76]">
+                <span aria-hidden>✦</span> 2,000+
+              </span>
+              medical students already on it. iPhone, Android and web.
+            </p>
+            <div className="mt-8 flex items-end justify-between gap-6 lg:hidden">
+              <StoreBadges tone="dark" source="home_final_badge" />
+              <Image src="/brand/mascots/dr-mira.svg" alt="" width={96} height={96} className="pointer-events-none -mb-2 hidden h-auto w-24 shrink-0 sm:block" />
+            </div>
           </div>
-          <div className="mt-8">
-            <StoreBadges tone="dark" source="home_final_badge" />
+
+          <div className="final-card-wrap hidden lg:block">
+            <Image src="/brand/mascots/dr-mira.svg" alt="" width={176} height={176} className="final-mascot" />
+            <div className="final-card">
+              <div className="shrink-0 rounded-[16px] bg-white p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/qr/download.svg" alt="QR code to download GalenAI" width={128} height={128} />
+              </div>
+              <div>
+                <p className="h3 !text-[1.75rem] !leading-[1.02]">
+                  Scan.
+                  <br />
+                  Ask <span className="acc">anything.</span>
+                </p>
+                <p className="mt-3 text-sm font-semibold text-[#fff0e4]/65">For iPhone and Android.</p>
+              </div>
+            </div>
           </div>
-          <Image
-            src="/brand/mascots/dr-mira.svg"
-            alt=""
-            width={150}
-            height={150}
-            className="pointer-events-none absolute -bottom-6 right-0 hidden h-auto w-[150px] md:block"
-          />
         </div>
       </Section>
 

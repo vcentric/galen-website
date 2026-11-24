@@ -87,6 +87,46 @@ const LMS_ROWS = [
   ["What students get", "A course page to download files, submit work and see notices.", "An app for exams and college life: tutor, practice, revision and the college's own lessons, together."],
 ];
 
+/** Small drawn pictures for the three parts (decorative, in site colours): tutor answer, lesson draft, results by competency. */
+const PART_ART = [
+  <div key="s" className="pa pa-tutor">
+    <span className="pa-q">Why does volume stay the same?</span>
+    <i style={{ width: "92%" }} />
+    <i style={{ width: "78%" }} />
+    <i style={{ width: "56%" }} />
+    <span className="pa-src">Source: your college&apos;s lesson</span>
+  </div>,
+  <div key="f" className="pa pa-draft">
+    <div className="pa-row">
+      <b>Cardiac cycle</b>
+      <span className="pa-tag">Draft</span>
+    </div>
+    <i style={{ width: "94%" }} />
+    <i style={{ width: "82%" }} />
+    <i style={{ width: "64%" }} />
+    <div className="pa-row pa-actions">
+      <span>Edit</span>
+      <span className="pa-publish">Publish</span>
+    </div>
+  </div>,
+  <div key="c" className="pa pa-report">
+    <b>Results by competency</b>
+    {[
+      ["PY5.1", "86%"],
+      ["PY5.4", "64%"],
+      ["PY5.7", "42%"],
+      ["PY5.8", "73%"],
+    ].map(([code, w]) => (
+      <div key={code} className="pa-bar">
+        <span>{code}</span>
+        <em>
+          <u style={{ width: w }} />
+        </em>
+      </div>
+    ))}
+  </div>,
+];
+
 const FAQS = [
   {
     q: "Does AI-generated content reach students automatically?",
@@ -108,112 +148,125 @@ const FAQS = [
 
 export default function InstitutionsPage() {
   return (
-    <div className="v2" data-tone="neutral">
+    <div className="v2">
       <JsonLd data={[faqLd(FAQS), videoLd(VIDEO)]} />
 
       {/* 1. Hero, brochure-cover style */}
       <section className="tone-dark overflow-hidden">
         <div className="wrap pt-28 pb-16 md:pt-36 md:pb-24">
-          <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
+          <div className="grid items-center gap-14 xl:grid-cols-[32rem_minmax(0,1fr)] xl:gap-12">
             <div>
               <Kicker>For medical colleges</Kicker>
-              <h1 className="h1 mt-5">
+              <h1 className="h1 mt-5 lg:!text-[clamp(3.5rem,5vw,4.4rem)]">
                 AI for medical
                 <br />
                 <span className="acc">colleges.</span>
               </h1>
-              <p className="h3 mt-6 !text-[clamp(1.2rem,2.2vw,1.6rem)] opacity-90">{SITE.subTagline}</p>
-              <ul className="mt-7 flex flex-wrap gap-2">
-                {["Institution", "Faculty", "Student", "CBME"].map((c) => (
-                  <li key={c} className="rounded-full border-2 border-[#fff0e4]/30 px-4 py-1.5 text-sm font-semibold">
-                    {c}
-                  </li>
-                ))}
-              </ul>
+              <p className="h3 mt-6 !text-[clamp(1.15rem,2vw,1.35rem)] opacity-90">{SITE.subTagline}</p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <CtaLink intent="faculty-live" source="inst_hero" />
                 <CtaLink intent="demo" source="inst_hero" variant="ghost" />
               </div>
             </div>
-            <div className="relative">
-              <Image
-                src="/brand/ui/desktop_ai_workspace.webp"
-                alt="GalenAI AI Workspace: faculty sources, chat with citations and the Studio"
-                width={1800}
-                height={1125}
-                priority
-                sizes="(min-width: 1024px) 600px, 92vw"
-                className="h-auto w-full rounded-[18px] shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
-              />
-              {/* Real student app screen (dark theme), overlapping the workspace like the brochure cover. */}
-              <div className="absolute -bottom-12 -left-4 hidden sm:block">
-                <AppScreen name="tutor-isovolumetric" alt="" width={165} />
+            <figure className="inst-hero-art">
+              <div className="inst-hero-window">
+                <div className="inst-hero-bar" aria-hidden>
+                  <i />
+                  <i />
+                  <i />
+                  <span>faculty.galenai.io</span>
+                </div>
+                <Image
+                  src="/brand/ui/desktop_ai_workspace.webp"
+                  alt="GalenAI AI Workspace: faculty sources, chat with citations and the Studio"
+                  width={1800}
+                  height={1125}
+                  priority
+                  sizes="(min-width: 1024px) 900px, 92vw"
+                  className="h-auto w-full"
+                />
               </div>
-            </div>
+              {/* Real student app screen (dark theme), in front of the faculty workspace. */}
+              <div className="inst-hero-phone">
+                <AppScreen name="tutor-isovolumetric" alt="The GalenAI student app answering a question on the same topic" width={160} />
+              </div>
+            </figure>
           </div>
         </div>
       </section>
 
-      {/* 2. Where we are (before the video, Varun Nov 2026): approved proof points only */}
+      {/* 2. Where we are: the demo video beside the approved proof points (before everything else, Varun Nov 2026) */}
       <Section id="outcomes">
         <Kicker>Where we are</Kicker>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <div className="card flex flex-col justify-between gap-6 p-7">
-            {/* TODO(varun): swap for the logo file Varun sends, if different */}
-            <Image
-              src="/stjohns.webp"
-              alt="St. John's National Academy of Health Sciences"
-              width={1252}
-              height={210}
-              sizes="360px"
-              className="h-auto w-full max-w-[360px]"
-            />
-            <p className="font-semibold">
-              <span className="h3 text-[#eb602d]">MoU signed</span> with St. John&apos;s Medical College, Bengaluru.
+        <div className="mt-9 grid items-start gap-12 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-14">
+          <div id="video" className="scroll-mt-24">
+            <VideoLite youtubeId={VIDEO.youtubeId} title={VIDEO.name} />
+            <p className="mt-5 max-w-2xl text-[0.98rem]" style={{ color: "var(--body)" }}>
+              In under two minutes: {VIDEO.description.charAt(0).toLowerCase() + VIDEO.description.slice(1)}
             </p>
           </div>
-          <div className="card flex flex-col justify-between gap-6 p-7">
-            <p className="h1 !text-[clamp(3rem,7vw,4.5rem)] text-[#eb602d]">2,000+</p>
-            <p className="font-semibold">students signed up at launch.</p>
-          </div>
+          <ul className="proof">
+            <li>
+              <p className="h1 !text-[clamp(3.2rem,6vw,4.4rem)] text-[#eb602d]">2,000+</p>
+              <p className="mt-2 font-semibold">students signed up at launch.</p>
+            </li>
+            <li>
+              {/* TODO(varun): swap for the logo file Varun sends, if different */}
+              <Image
+                src="/stjohns.webp"
+                alt="St. John's National Academy of Health Sciences"
+                width={1252}
+                height={210}
+                sizes="300px"
+                className="h-auto w-full max-w-[300px]"
+              />
+              <p className="mt-4 font-semibold">
+                <span className="text-[#c94d20]">MoU signed</span> with St. John&apos;s Medical College, Bengaluru.
+              </p>
+            </li>
+            <li>
+              <p className="text-[0.98rem]" style={{ color: "var(--body)" }}>
+                Founded by Dr. Arun Biju Oommen (MD Medicine; faculty at St. John&apos;s Medical College Hospital, Bengaluru)
+                and Varun Jagannathan, supported by senior faculty, CBME experts and medical students.
+              </p>
+              <Link href="/team" className="proof-link">
+                Meet the team <span aria-hidden>→</span>
+              </Link>
+            </li>
+          </ul>
         </div>
-        <p className="mt-8 max-w-3xl" style={{ color: "var(--body)" }}>
-          Founded by Dr. Arun Biju Oommen (MD Medicine; faculty at St. John&apos;s Medical College Hospital, Bengaluru)
-          and Varun Jagannathan, supported by senior faculty, CBME experts and medical students.{" "}
-          <Link href="/team" className="font-bold underline underline-offset-4">
-            Meet the team
-          </Link>
-        </p>
       </Section>
 
-      {/* 3. Video */}
-      <Section id="video">
-        <div className="mx-auto max-w-4xl">
-          <VideoLite youtubeId={VIDEO.youtubeId} title={VIDEO.name} />
-          <p className="mt-5 text-center" style={{ color: "var(--body)" }}>
-            In under two minutes: {VIDEO.description.charAt(0).toLowerCase() + VIDEO.description.slice(1)}
-          </p>
-        </div>
-      </Section>
-
-      {/* 3. What is happening */}
+      {/* 3. What is happening: two things true today, then the change they lead to (which the next section answers) */}
       <Section id="overview">
         <Kicker>What is happening</Kicker>
         <h2 className="h2 mt-5 max-w-4xl">
           Students are already learning with AI. Colleges have no part in it, <span className="acc">yet.</span>
         </h2>
-        <ol className="mt-12 grid gap-10 md:grid-cols-3">
-          {HAPPENING.map((h, i) => (
-            <li key={h.t} className="border-t-4 border-[#eb602d] pt-6">
-              <span className="font-[family-name:var(--font-space-var)] text-5xl font-bold text-[#eb602d]">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="h3 mt-4">{h.t}</h3>
-              <p className="mt-3" style={{ color: "var(--body)" }}>
+        <ol className="happening">
+          {HAPPENING.slice(0, 2).map((h, i) => (
+            <li key={h.t} className="happening-now">
+              <span className="happening-n">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="h3 mt-5 !text-[clamp(1.35rem,2.2vw,1.7rem)]">{h.t}</h3>
+              <p className="mt-4" style={{ color: "var(--body)" }}>
                 {h.b}
               </p>
             </li>
           ))}
+          <li className="happening-next tone-dark">
+            <div>
+              <span className="happening-n">03</span>
+              <h3 className="h2 mt-5 !text-[clamp(1.9rem,4vw,3rem)]">
+                The classroom will become <span className="acc">AI-connected.</span>
+              </h3>
+            </div>
+            <div className="happening-next-side">
+              <p className="lead">{HAPPENING[2].b}</p>
+              <a href="#solution" aria-label="See the solution: the AI Connected Classroom" className="happening-go">
+                <span aria-hidden>↓</span>
+              </a>
+            </div>
+          </li>
         </ol>
       </Section>
 
@@ -224,20 +277,39 @@ export default function InstitutionsPage() {
           The AI Connected <span className="acc">Classroom.</span>
         </h2>
         <p className="lead mt-4">Three parts, working together.</p>
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {PARTS.map((p) => (
-            <Link key={p.who} href={p.href} className="card group flex flex-col p-7">
-              <p className="kick">{p.who}</p>
-              <h3 className="h3 mt-5 !text-2xl">{p.title}</h3>
-              <p className="mt-3 flex-1" style={{ color: "var(--body)" }}>
-                {p.body}
-              </p>
-              <p className="mt-6 font-bold text-[#c94d20]">{p.line}</p>
-              <span className="mt-4 font-bold underline decoration-2 underline-offset-4 group-hover:decoration-[#eb602d]">
-                Learn more
-              </span>
-            </Link>
-          ))}
+        {/* No cards: three drawn screens sit straight on the page, joined by one flowing line.
+            Shown in the order the work travels: faculty publish, students learn, the college sees results. */}
+        <div className="loop">
+          <svg className="loop-line" viewBox="0 0 1000 165" preserveAspectRatio="none" aria-hidden>
+            <path d="M105 65 C 260 65, 300 100, 453 100 S 650 65, 800 65" />
+          </svg>
+          <span className="loop-tag loop-tag-a" aria-hidden>
+            Lessons go out
+          </span>
+          <span className="loop-tag loop-tag-b" aria-hidden>
+            Results come back
+          </span>
+          {[1, 0, 2].map((idx, i) => {
+            const p = PARTS[idx];
+            return (
+              <Link key={p.who} href={p.href} className="loop-part group">
+                <div className="loop-art" aria-hidden>
+                  {PART_ART[idx]}
+                </div>
+                <div className="loop-text">
+                  <span className="happening-n">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="loop-who">{p.who}</h3>
+                  <p className="loop-title">{p.title}</p>
+                  <p className="loop-body">{p.body}</p>
+                  <p className="loop-more">
+                    {p.line}
+                    <span className="sr-only"> Learn more</span>
+                    <span aria-hidden>→</span>
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </Section>
 
@@ -251,7 +323,7 @@ export default function InstitutionsPage() {
         <div className="relative mt-10">
           <Image
             src="/brand/ui/desktop_lesson_page.webp"
-            alt="A Knee Joint lesson page with competencies AN18.4 and AN18.5"
+            alt="A Cardiac cycle lesson page with Must know, Good to know and Nice to know sections"
             width={1800}
             height={1125}
             sizes="(min-width: 1024px) 900px, 92vw"
@@ -259,9 +331,9 @@ export default function InstitutionsPage() {
           />
           <Image
             src="/brand/ui/panel_generate_lesson_content.webp"
-            alt="Generate lesson content panel: written only from your reference library, drafts only"
+            alt="New lesson form: choose a topic and what to prepare, then generate a draft from your own references"
             width={900}
-            height={1226}
+            height={1002}
             sizes="300px"
             className="absolute bottom-[-8%] right-0 hidden h-auto w-[30%] rounded-[18px] shadow-[0_30px_80px_rgba(46,46,46,0.28)] lg:block"
           />

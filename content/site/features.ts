@@ -562,7 +562,7 @@ export const features: PageSpec[] = [
         kind: "screens",
         heading: "Generate lesson content",
         notes: "",
-        content: { screens: [{ src: "/brand/ui/desktop_lesson_page.webp", alt: "Knee Joint lesson page with competencies", frame: "desk" }] },
+        content: { screens: [{ src: "/brand/ui/desktop_lesson_page.webp", alt: "Cardiac cycle lesson page with Must know, Good to know and Nice to know sections", frame: "desk" }] },
       },
       {
         id: "how",

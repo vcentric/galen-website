@@ -149,9 +149,9 @@ export default function FeaturesHub() {
               />
               <Image
                 src="/brand/ui/panel_generate_lesson_content.webp"
-                alt="Generate lesson content panel: written only from your reference library, drafts only"
+                alt="New lesson form: choose a topic and what to prepare, then generate a draft from your own references"
                 width={900}
-                height={1226}
+                height={1002}
                 sizes="220px"
                 className="absolute -bottom-10 -left-6 hidden h-auto w-[34%] rounded-[16px] shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:block"
               />

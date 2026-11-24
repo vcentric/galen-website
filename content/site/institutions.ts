@@ -75,7 +75,7 @@ export const institutionPages: PageSpec[] = [
         notes: "Lesson page + generate panel.",
         content: {
           intro: "Competencies are prefilled from the classes attached to the lesson. Generate content level by level, written only from your reference library.",
-          screens: [{ src: "/brand/ui/desktop_lesson_page.webp", alt: "Knee Joint lesson page with competencies AN18.4 and AN18.5", frame: "desk" }],
+          screens: [{ src: "/brand/ui/desktop_lesson_page.webp", alt: "Cardiac cycle lesson page with Must know, Good to know and Nice to know sections", frame: "desk" }],
         },
       },
       {
