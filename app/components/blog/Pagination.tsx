@@ -42,68 +42,25 @@ const Pagination = ({
   };
 
   return (
-    <div className="flex justify-center items-center gap-4 mt-16 py-8">
-      <button
-        className="flex items-center gap-2 font-primary text-[0.85rem] font-bold text-orange bg-white border border-orange/20 rounded-xl px-5 py-3 cursor-pointer transition-all duration-300 hover:bg-orange hover:text-white disabled:opacity-40 disabled:cursor-not-allowed shadow-sm shadow-orange/5"
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        aria-label="Previous page"
-      >
-        <svg
-          className="w-[18px] h-[18px]"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-        >
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-        <span className="max-sm:hidden uppercase tracking-wider">Previous</span>
+    <nav className="post-pages" aria-label="Pages">
+      <button type="button" onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} aria-label="Previous page">
+        <span aria-hidden>←</span> <span className="max-sm:hidden">Previous</span>
       </button>
-
-      <div className="flex items-center gap-2">
+      <div>
         {getPageNumbers().map((page, index) =>
           page === "..." ? (
-            <span
-              key={`ellipsis-${index}`}
-              className="font-primary text-text-muted px-2"
-            >
-              ...
-            </span>
+            <span key={`ellipsis-${index}`}>…</span>
           ) : (
-            <button
-              key={page}
-              className={`font-primary text-[0.85rem] font-bold border rounded-xl w-10 h-10 flex items-center justify-center cursor-pointer transition-all duration-300 ${
-                currentPage === page
-                  ? "bg-orange border-orange text-white shadow-md scale-110"
-                  : "bg-white border-black/5 text-text-secondary hover:border-orange/40 hover:text-orange"
-              }`}
-              onClick={() => onPageChange(page as number)}
-            >
+            <button key={page} type="button" aria-current={currentPage === page ? "page" : undefined} onClick={() => onPageChange(page as number)}>
               {page}
             </button>
-          )
+          ),
         )}
       </div>
-
-      <button
-        className="flex items-center gap-2 font-primary text-[0.85rem] font-bold text-orange bg-white border border-orange/20 rounded-xl px-5 py-3 cursor-pointer transition-all duration-300 hover:bg-orange hover:text-white disabled:opacity-40 disabled:cursor-not-allowed shadow-sm shadow-orange/5"
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        aria-label="Next page"
-      >
-        <span className="max-sm:hidden uppercase tracking-wider">Next</span>
-        <svg
-          className="w-[18px] h-[18px]"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-        >
-          <path d="M9 18l6-6-6-6" />
-        </svg>
+      <button type="button" onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages} aria-label="Next page">
+        <span className="max-sm:hidden">Next</span> <span aria-hidden>→</span>
       </button>
-    </div>
+    </nav>
   );
 };
 

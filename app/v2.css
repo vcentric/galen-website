@@ -1295,3 +1295,160 @@ main > .v2 { min-height: 100vh; }
 .v2 .go-proof figcaption b { color: var(--color-dark); }
 .v2 .go-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; padding-block: 2rem 6rem; font-size: 0.85rem; color: var(--body); }
 .v2 .go-foot a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ═══════ Lesson pages: the article on the paper tone, quiet blocks ═══════ */
+.v2 .lesson-read { padding-top: 3rem; padding-bottom: clamp(3.5rem, 7vw, 5.5rem); }
+.v2.lesson-page .lesson-side-inner { top: 5.5rem; max-height: calc(100vh - 7rem); overflow-y: auto; gap: 1.75rem; }
+.v2.lesson-page .lesson-body, .v2 .post-band .blog-content { font-weight: 500; color: rgba(46, 46, 46, 0.9); }
+.v2.lesson-page .lesson-body > :first-child { margin-top: 0; }
+.v2.lesson-page .lesson-body h2 { margin-top: 3.25rem; padding-top: 1.75rem; border-top: 1px solid rgba(46, 46, 46, 0.16); scroll-margin-top: 5.5rem; }
+.v2.lesson-page .lesson-body li + li { margin-top: 0.5rem; }
+.v2.lesson-page .lesson-byline { margin-top: 1.5rem; }
+/* callouts: a quiet note with an orange edge; the summary stays dark */
+.v2.lesson-page .lcallout { padding: 1.1rem 1.3rem; border: 0; border-left: 3px solid var(--color-orange); border-radius: 0 14px 14px 0; outline: 0; background: var(--color-light); }
+.v2.lesson-page .lcallout-summary { padding: 1.4rem 1.5rem; border-left: 0; border-radius: 18px; background: var(--color-dark); }
+/* figures: the diagram keeps a white ground, without the outlined box */
+.v2.lesson-page .lfig img { border-radius: 14px; outline: 0; box-shadow: 0 0 0 1px rgba(46, 46, 46, 0.1); }
+.v2.lesson-page .lfig figcaption { margin-top: 0.8rem; padding-left: 0.9rem; border-left: 2px solid var(--color-orange); }
+/* practice questions (static lesson markup) */
+.v2.lesson-page .lmcq > p:first-child { font: 600 1.15rem / 1.4 var(--font-space-var), sans-serif; letter-spacing: -0.015em; }
+.v2.lesson-page .lmcq + .lmcq { margin-top: 1rem; }
+/* viva questions: a ruled accordion */
+.v2.lesson-page .lviva { border-radius: 0; outline: 0; background: none; border-bottom: 1px solid var(--rule); }
+.v2.lesson-page .lviva + .lviva { margin-top: 0; }
+.v2.lesson-page h2 + .lviva, .v2.lesson-page p + .lviva { border-top: 1px solid rgba(46, 46, 46, 0.22); }
+.v2.lesson-page .lviva summary { padding: 1.05rem 2.75rem 1.05rem 0; font: 700 1.05rem / 1.35 var(--font-space-var), sans-serif; letter-spacing: -0.01em; }
+.v2.lesson-page .lviva summary::after { right: 0.25rem; }
+.v2.lesson-page .lviva-a { padding: 0 2.5rem 1.1rem 0; }
+/* flashcards */
+.v2.lesson-page .lflash { border: 1px solid #ead9ca; border-radius: 16px; outline: 0; background: var(--color-light); transition: background-color 0.2s ease, border-color 0.2s ease; }
+.v2.lesson-page .lflash:hover { border-color: var(--color-orange); }
+.v2.lesson-page .lflash-front { font-family: var(--font-space-var), sans-serif; letter-spacing: -0.01em; }
+/* related topics and the closing note */
+.v2.lesson-page .lrelated ul { gap: 0.6rem 1.75rem; }
+.v2.lesson-page .lrelated a { padding: 0; border-radius: 0; outline: 0; background: none; text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.v2.lesson-page .lcta { padding: 1.25rem 1.4rem; border-left: 3px solid var(--color-orange); border-radius: 0 14px 14px 0; outline: 0; background: var(--color-light); }
+.v2.lesson-page .lesson-sources { margin-top: 3rem; border-top: 1px solid rgba(46, 46, 46, 0.22); }
+.v2 .legal-toc a[data-here] { border-left-color: var(--color-orange); color: var(--color-dark); }
+
+/* ═══════ Articles ═══════ */
+.v2 .post-bar { display: grid; gap: 1rem; padding: 1.25rem 0 0; border-top: 2px solid var(--color-dark); }
+.v2 .post-filter { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; border-bottom: 1px solid rgba(46, 46, 46, 0.18); }
+.v2 .post-tabs { display: flex; gap: 0.25rem 1.5rem; overflow-x: auto; scrollbar-width: none; }
+.v2 .post-tabs::-webkit-scrollbar { display: none; }
+.v2 .post-tabs button { flex-shrink: 0; margin-bottom: -1px; padding: 0.8rem 0; border-bottom: 2px solid transparent; font: 700 0.92rem / 1 var(--font-space-var), sans-serif; letter-spacing: -0.01em; color: rgba(46, 46, 46, 0.7); cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease; }
+.v2 .post-tabs button:hover { color: var(--color-dark); }
+.v2 .post-tabs button[aria-pressed="true"] { border-bottom-color: var(--color-orange); color: var(--color-dark); }
+.v2 .post-sort { flex-shrink: 0; display: inline-flex; align-items: baseline; gap: 0.5rem; padding: 0.8rem 0; font: 700 0.85rem / 1 var(--font-space-var), sans-serif; cursor: pointer; }
+.v2 .post-sort span { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(46, 46, 46, 0.7); }
+.v2 .post-sort:hover { color: #c94d20; }
+.v2 .post-main { padding-top: 2.5rem; padding-bottom: clamp(3.5rem, 7vw, 5.5rem); }
+.v2 .post-leads { display: grid; gap: 2.5rem; margin-bottom: 3rem; }
+.v2 .post-lead { display: grid; gap: 1.75rem; align-items: center; }
+.v2 .post-lead-cover, .v2 .post-cover { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 16px; background: #f3d9c6; }
+.v2 .post-lead-cover img, .v2 .post-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.v2 .post-cover-blank { width: 3.5rem !important; height: 3.5rem !important; position: absolute; inset: 0; margin: auto; opacity: 0.25; object-fit: contain !important; }
+.v2 .post-lead:hover .post-lead-cover img, .v2 .post-card:hover .post-cover img { transform: scale(1.04); }
+.v2 .post-lead-text { display: grid; gap: 1rem; }
+.v2 .post-cat { font: 700 0.68rem / 1.2 var(--font-space-var), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #b3411a; }
+.v2 .post-cat i { font-style: normal; margin: 0 0.3em; color: rgba(46, 46, 46, 0.5); }
+.v2 .post-lead-title { font: 700 clamp(1.8rem, 3.4vw, 2.8rem) / 1.05 var(--font-space-var), sans-serif; letter-spacing: -0.04em; text-wrap: balance; transition: color 0.2s ease; }
+.v2 .post-lead:hover .post-lead-title { color: #c94d20; }
+.v2 .post-lead-excerpt { max-width: 34rem; font-size: 1.05rem; line-height: 1.6; color: var(--body); }
+.v2 .post-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: auto; padding-top: 1.1rem; font-size: 0.8rem; font-weight: 600; color: rgba(46, 46, 46, 0.7); }
+.v2 .post-lead .post-foot { margin-top: 0.5rem; padding-top: 1.1rem; border-top: 1px solid var(--rule); }
+.v2 .post-lead:hover .lesson-card-go, .v2 .post-card:hover .lesson-card-go { border-color: var(--color-orange); background: var(--color-orange); color: #fff; transform: translateX(3px); }
+/* the grid: cells share hairlines */
+.v2 .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); border-top: 1px solid rgba(46, 46, 46, 0.22); border-left: 1px solid var(--rule); }
+.v2 .post-card { display: flex; flex-direction: column; gap: 0.8rem; padding: 1.4rem 1.4rem 1.2rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); transition: background-color 0.25s ease; }
+.v2 .post-card:hover { background: #fffaf5; }
+.v2 .post-card .post-cover { margin-bottom: 0.4rem; border-radius: 12px; }
+.v2 .post-title { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; font: 700 1.3rem / 1.15 var(--font-space-var), sans-serif; letter-spacing: -0.025em; transition: color 0.2s ease; }
+.v2 .post-card:hover .post-title { color: #c94d20; }
+.v2 .post-excerpt { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; font-size: 0.93rem; line-height: 1.55; color: var(--body); }
+.v2 .post-case { display: grid; gap: 0.3rem; font: 700 0.7rem / 1.3 var(--font-space-var), sans-serif; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(46, 46, 46, 0.7); }
+.v2 .post-case b { font: 700 0.85rem / 1.3 var(--font-raleway-var), sans-serif; letter-spacing: 0; text-transform: none; color: #c94d20; }
+.v2 .post-pages { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 3rem; font: 700 0.9rem / 1 var(--font-space-var), sans-serif; }
+.v2 .post-pages > div { display: flex; align-items: center; gap: 0.25rem; }
+.v2 .post-pages button { min-width: 2.6rem; height: 2.6rem; padding: 0 0.9rem; border-radius: 999px; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; }
+.v2 .post-pages button:hover:not(:disabled) { background: rgba(46, 46, 46, 0.07); }
+.v2 .post-pages button[aria-current] { background: var(--color-dark); color: var(--color-light); }
+.v2 .post-pages button:disabled { opacity: 0.35; cursor: not-allowed; }
+@media (min-width: 900px) {
+  .v2 .post-lead { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 3rem; }
+}
+@media (max-width: 767px) { .v2 .post-sort { display: none; } }
+/* article page */
+.v2 .post-band { margin-top: 1.5rem; }
+.v2 .post-band .blog-article-grid { padding-top: 3rem; }
+@media (max-width: 1023px) { .v2 .post-band aside nav { display: none; } }
+@media (prefers-reduced-motion: reduce) { .v2 .post-cover img, .v2 .post-lead-cover img { transition: none; } }
+.v2 .post-bar > *, .v2 .post-filter > * { min-width: 0; }
+.v2 .post-bar { grid-template-columns: minmax(0, 1fr); }
+/* sort sits on the search line, so the category tabs get the whole row */
+.v2 .post-bar { grid-template-columns: minmax(0, 1fr) auto; column-gap: 1.5rem; align-items: center; }
+.v2 .post-filter { display: contents; }
+.v2 .post-sort { grid-column: 2; grid-row: 1; }
+.v2 .post-tabs { grid-column: 1 / -1; grid-row: 2; border-bottom: 1px solid rgba(46, 46, 46, 0.18); }
+@media (max-width: 767px) { .v2 .post-search { grid-column: 1 / -1; } }
+.v2 .post-tabs { gap: 0.25rem 1.15rem; }
+.v2 .post-tabs button { font-size: 0.88rem; }
+.v2 .post-band .blog-content .action-box { background: var(--color-light); border: 1px solid #ead9ca; box-shadow: none; }
+
+/* ═══════ Footer: a shade darker than the dark sections, so it reads as its own block ═══════ */
+.v2.foot { background: #222; padding-block: clamp(2.75rem, 6vw, 4rem) 1.75rem; font-size: 0.92rem; }
+.v2 .foot-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem 3rem; padding-bottom: 2.25rem; }
+.v2 .foot-line { margin-top: 1.1rem; font: 600 1.2rem / 1.3 var(--font-space-var), sans-serif; letter-spacing: -0.02em; }
+.v2 .foot-act { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.v2 .foot-cols { border-top: 1px solid rgba(255, 240, 228, 0.16); }
+.v2 .foot-col { border-bottom: 1px solid rgba(255, 240, 228, 0.16); }
+.v2 .foot-col h2 button { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 1.1rem 0; font: 700 0.74rem / 1 var(--font-space-var), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #ff9166; cursor: pointer; }
+.v2 .foot-col .faq-plus { color: var(--color-light); }
+.v2 .foot-col[data-open] .faq-plus::after { transform: rotate(90deg); opacity: 0; }
+.v2 .foot-col ul { display: none; padding-bottom: 0.9rem; }
+.v2 .foot-col[data-open] ul { display: grid; }
+/* links are full tap height on touch screens */
+.v2 .foot-col a { display: inline-flex; align-items: center; min-height: 2.75rem; font-weight: 500; color: rgba(255, 240, 228, 0.84); transition: color 0.2s ease; }
+.v2 .foot-col a:hover { color: var(--color-light); text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
+.v2 .foot-col a[aria-current] { color: var(--color-light); font-weight: 700; }
+.v2 .foot-contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 3rem; padding-block: 1.25rem; border-bottom: 1px solid rgba(255, 240, 228, 0.16); }
+.v2 .foot-contact address { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.75rem; font-style: normal; color: var(--body); }
+.v2 .foot-contact address a, .v2 .foot-switch a, .v2 .foot-legal a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.v2 .foot-contact address a { font-weight: 700; color: var(--color-light); }
+.v2 .foot-contact address a:hover, .v2 .foot-switch a:hover { color: #ff9166; }
+.v2 .foot-switch { display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.75rem; color: var(--body); }
+.v2 .foot-switch a { gap: 0.45rem; font-weight: 700; color: var(--color-light); text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.v2 .foot-legal { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 2rem; padding-top: 0.75rem; font-size: 0.85rem; color: rgba(255, 240, 228, 0.72); }
+.v2 .foot-legal-links { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+.v2 .foot-legal-links a { gap: 0.4rem; }
+.v2 .foot-legal a:hover { color: var(--color-light); }
+/* from 900px the groups are five columns; below that they fold */
+@media (min-width: 900px) {
+  .v2 .foot-cols { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0 1.5rem; padding-top: 2.25rem; padding-bottom: 2rem; }
+  .v2 .foot-main { border-bottom: 1px solid rgba(255, 240, 228, 0.16); }
+  .v2 .foot-col { border-bottom: 0; }
+  .v2 .foot-col h2 button { padding: 0 0 0.6rem; cursor: default; pointer-events: none; }
+  .v2 .foot-col .faq-plus { display: none; }
+  .v2 .foot-col ul { display: grid; padding-bottom: 0; }
+  .v2 .foot-col a { min-height: 2rem; }
+  .v2 .foot-contact address a, .v2 .foot-switch a, .v2 .foot-legal a { min-height: 2.25rem; }
+}
+/* wide screens: the brand block sits beside the groups, which keeps the footer short */
+@media (min-width: 1200px) {
+  .v2 .foot-main { display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); gap: 3.5rem; padding-bottom: 2.25rem; }
+  .v2 .foot-top { display: grid; align-content: start; justify-content: start; gap: 1.75rem; padding-bottom: 0; }
+  .v2 .foot-act { flex-direction: column; align-items: flex-start; }
+  .v2 .foot-cols { padding: 0; border-top: 0; }
+}
+/* each group takes the width of its longest link, so no link wraps */
+@media (min-width: 900px) {
+  .v2 .foot-cols { grid-template-columns: repeat(5, auto); justify-content: space-between; }
+  .v2 .foot-col a { white-space: nowrap; }
+}
+
+/* Sticky call to action on phones: a floating button with no strip behind it, so it sits on light and dark alike */
+.sticky-cta { position: fixed; inset: auto 0 0; z-index: 50; padding: 0.75rem 0.9rem max(0.9rem, env(safe-area-inset-bottom)); pointer-events: none; transform: translateY(110%); transition: transform 0.25s ease; }
+.sticky-cta[data-show] { transform: none; }
+.sticky-cta > a { pointer-events: auto; box-shadow: 0 0 0 1px rgba(255, 240, 228, 0.35), 0 12px 28px rgba(0, 0, 0, 0.32); }
+@media (min-width: 768px) { .sticky-cta { display: none; } }
+@media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }

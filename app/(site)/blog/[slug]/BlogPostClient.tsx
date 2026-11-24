@@ -4,7 +4,6 @@ import { AppLink } from "@/app/components/v2/CtaLink";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { formatDate, type PostMeta, getCategorySlug } from "@/lib/blogFilters";
 import { trackEvent } from "@/lib/analytics";
 import BlogCard from "@/app/components/blog/BlogCard";
@@ -103,33 +102,27 @@ export default function BlogPostClient({
   return (
     <div className="v2 min-h-screen blog-article-root">
       {/* Breadcrumb */}
-      <div className="no-print border-b border-black/5 px-8 py-5 pt-32 max-[768px]:px-6 max-[768px]:pt-28">
-        <div className="max-w-[1240px] mx-auto flex items-center gap-3 font-primary text-[0.85rem] font-bold uppercase tracking-wider text-text-muted">
-          <Link href="/blog" className="text-text-muted no-underline transition-colors duration-200 hover:text-orange">
-            Blog
-          </Link>
-          <span className="text-black/10">/</span>
-          <Link
-            href={`/blog/category/${getCategorySlug(post.category)}`}
-            className="text-text-muted no-underline transition-colors duration-200 hover:text-orange"
-          >
-            {post.category}
-          </Link>
-          <span className="text-black/10">/</span>
-          <span className="text-orange whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] md:max-w-[400px]">
-            {post.title}
-          </span>
-        </div>
+      <div className="no-print wrap pt-28 md:pt-32">
+        <nav aria-label="Breadcrumb" className="text-sm font-semibold opacity-70">
+          <ol className="flex flex-wrap gap-x-2">
+            <li>
+              <Link href="/blog">Articles</Link>
+            </li>
+            <li className="flex gap-x-2">
+              <span aria-hidden>/</span>
+              <Link href={`/blog/category/${getCategorySlug(post.category)}`}>{post.category}</Link>
+            </li>
+          </ol>
+        </nav>
       </div>
 
-      <div className="blog-article-grid max-w-[1240px] mx-auto px-[clamp(1.5rem,5vw,3rem)] py-16 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16">
+      <div className="exam-band post-band">
+      <div className="blog-article-grid wrap pt-8 pb-16 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_17rem] gap-14">
         <article className="min-w-0">
           {/* Header */}
           <header className="mb-12">
             <div className="flex flex-wrap items-center gap-3 mb-8">
-              <span className="inline-block bg-orange/10 text-orange font-primary text-[0.7rem] font-bold px-4 py-2 rounded-full uppercase tracking-widest border border-orange/10">
-                {post.category}
-              </span>
+              <span className="kick">{post.category}</span>
               {post.isPressRelease && (
                 <span className="inline-flex items-center gap-2 bg-dark text-white font-primary text-[0.7rem] font-bold px-4 py-2 rounded-full uppercase tracking-widest">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange" />
@@ -161,7 +154,7 @@ export default function BlogPostClient({
               {post.isB2B && (
                 <button
                   onClick={handlePrint}
-                  className="no-print ml-auto flex items-center gap-2 font-primary text-[0.78rem] font-bold text-text-secondary bg-white border border-black/5 rounded-xl px-4 py-2.5 hover:border-orange/30 hover:text-orange transition-all duration-300 shadow-sm"
+                  className="no-print btn btn-ghost ml-auto !min-h-10 !gap-2 !px-4 !text-sm"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z" />
@@ -175,7 +168,7 @@ export default function BlogPostClient({
           {/* Cover Image */}
           {post.coverImage && (
             <figure className="mb-16">
-              <div className="rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-black/5">
+              <div className="rounded-[20px] overflow-hidden shadow-[0_0_0_1px_rgba(46,46,46,0.1),0_24px_50px_-20px_rgba(46,46,46,0.3)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={post.coverImage} alt={post.title} className="w-full h-auto block" fetchPriority="high" decoding="async" />
               </div>
@@ -221,7 +214,7 @@ export default function BlogPostClient({
 
           {/* Share Buttons */}
           <div className="no-print mt-20 pt-12 border-t border-black/5">
-            <h4 className="font-primary text-[1rem] font-bold text-dark uppercase tracking-widest mb-6">Share this article</h4>
+            <h4 className="exam-nav-h !mb-4">Share this article</h4>
             <div className="flex gap-3 flex-wrap">
               {[
                 { id: 'copy', label: 'Copy Link', icon: (
@@ -243,7 +236,7 @@ export default function BlogPostClient({
                 <button
                   key={btn.id}
                   onClick={() => handleShare(btn.id)}
-                  className="flex items-center gap-2.5 font-primary text-[0.8rem] font-bold text-text-secondary bg-white border border-black/5 rounded-xl px-5 py-3 hover:border-orange/30 hover:text-orange transition-all duration-300 shadow-sm"
+                  className="btn btn-ghost !min-h-11 !gap-2.5 !px-5 !text-sm"
                 >
                   {btn.icon}
                   {btn.label}
@@ -255,74 +248,61 @@ export default function BlogPostClient({
 
         {/* Sidebar */}
         <aside className="no-print lg:block">
-          <div className="sticky top-28 flex flex-col gap-8">
+          <div className="sticky top-24 flex flex-col gap-8">
             {/* Table of Contents */}
             {toc.length > 0 && (
-              <div className="bg-white rounded-3xl p-8 border border-black/5 shadow-[0_8px_24px_rgba(0,0,0,0.02)]">
-                <h4 className="font-primary text-[0.7rem] font-bold text-dark uppercase tracking-widest mb-6 pb-4 border-b border-black/5">
-                  Table of Contents
-                </h4>
-                <nav className="flex flex-col gap-1">
+              <nav aria-label="On this page">
+                <p className="exam-nav-h">On this page</p>
+                <ol className="legal-toc">
                   {toc.map((item) => (
-                    <a
-                      key={item.id}
-                      href={`#${item.id}`}
-                      className={`font-primary text-[0.85rem] no-underline py-2.5 px-4 rounded-xl transition-all duration-300 ${
-                        item.level === "h3" ? "ml-4 text-[0.8rem]" : ""
-                      } ${
-                        activeHeading === item.id
-                          ? "bg-orange/5 text-orange font-bold"
-                          : "text-text-muted hover:text-orange hover:bg-orange/5"
-                      }`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        const element = document.getElementById(item.id);
-                        if (element) {
-                          window.scrollTo({ top: element.offsetTop - 120, behavior: "smooth" });
-                        }
-                      }}
-                    >
-                      {item.text}
-                    </a>
+                    <li key={item.id}>
+                      <a
+                        href={`#${item.id}`}
+                        data-here={activeHeading === item.id ? "" : undefined}
+                        className={item.level === "h3" ? "!pl-7 !text-[0.82rem]" : undefined}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const element = document.getElementById(item.id);
+                          if (element) {
+                            window.scrollTo({ top: element.offsetTop - 120, behavior: "smooth" });
+                          }
+                        }}
+                      >
+                        {item.text}
+                      </a>
+                    </li>
                   ))}
-                </nav>
-              </div>
+                </ol>
+              </nav>
             )}
 
-            {/* Premium CTA Card */}
-            <div className="relative group overflow-hidden bg-dark rounded-[2rem] p-8 text-center border border-white/5 shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange/20 to-transparent opacity-50"></div>
-              <div className="relative z-10 flex flex-col items-center">
-                <div className="w-14 h-14 rounded-2xl bg-orange/10 border border-orange/20 flex items-center justify-center mb-6">
-                  <ArrowUpRightIcon className="w-7 h-7 text-orange" strokeWidth={2.5} />
-                </div>
-                <h4 className="font-primary text-[1.4rem] font-bold text-white mb-3">Master Medicine <br/> with GalenAI</h4>
-                <p className="font-secondary text-[0.95rem] leading-relaxed text-white/60 mb-8">
-                  Get personalized guidance and understanding for your medical journey.
-                </p>
-                <AppLink
-                  intent="download"
-                  source="blog_post_sidebar"
-                  className="w-full bg-orange text-white font-primary text-[0.95rem] font-bold py-4 rounded-2xl no-underline transition-all duration-300 hover:bg-orange/90 hover:scale-[1.02] shadow-xl shadow-orange/20 text-center"
-                >
-                  Try GalenAI Free
-                </AppLink>
-              </div>
+            {/* App card */}
+            <div className="lesson-appcard tone-dark">
+              <p className="h3">
+                Master Medicine <span className="acc">with GalenAI.</span>
+              </p>
+              <p className="mt-3 text-[0.95rem] leading-relaxed" style={{ color: "var(--body)" }}>
+                Get personalized guidance and understanding for your medical journey.
+              </p>
+              <AppLink intent="download" source="blog_post_sidebar" className="btn btn-primary mt-5 w-full">
+                Try GalenAI Free
+              </AppLink>
             </div>
           </div>
         </aside>
       </div>
+      </div>
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
-        <div className="no-print bg-white border-t border-black/5 px-8 py-24 mt-16 max-[768px]:px-6">
-          <div className="max-w-[1240px] mx-auto">
-            <h3 className="font-primary text-[2rem] font-bold text-dark mb-12 tracking-[-0.04em]">Related Articles</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {relatedPosts.map((relatedPost) => (
-                <BlogCard key={relatedPost.slug} post={relatedPost} />
-              ))}
-            </div>
+        <div className="no-print wrap pt-14 pb-20">
+          <h3 className="h2 !text-[clamp(1.5rem,3vw,2.1rem)]">
+            Related <span className="acc">articles.</span>
+          </h3>
+          <div className="post-grid mt-8">
+            {relatedPosts.map((relatedPost) => (
+              <BlogCard key={relatedPost.slug} post={relatedPost} />
+            ))}
           </div>
         </div>
       )}

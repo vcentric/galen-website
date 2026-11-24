@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { CtaIntent } from "@/lib/cta";
+import { findClosingCta } from "@/lib/closing";
 import CtaLink from "./CtaLink";
 
 /**
@@ -20,16 +21,29 @@ export default function StickyMobileCta({
 }) {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 520);
+    // Shown once the hero's own button has scrolled away, and hidden again when the page's closing
+    // call to action or the footer is on screen: they carry the same button, so two would be noise.
+    let scrolled = false;
+    const near = new Set<Element>();
+    const update = () => setShow(scrolled && near.size === 0);
+    const onScroll = () => {
+      scrolled = window.scrollY > 520;
+      update();
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? near.add(e.target) : near.delete(e.target)));
+      update();
+    });
+    [document.querySelector("footer"), findClosingCta()].forEach((el) => el && io.observe(el));
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      io.disconnect();
+    };
   }, []);
   return (
-    <div
-      className={`md:hidden fixed inset-x-0 bottom-0 z-50 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-[#fff0e4]/95 backdrop-blur border-t border-black/10 transition-transform duration-200 ${show ? "translate-y-0" : "translate-y-full"}`}
-      aria-hidden={!show}
-    >
+    <div data-sticky-cta className="sticky-cta" data-show={show ? "" : undefined} aria-hidden={!show} inert={!show}>
       <CtaLink intent={intent} source={`${source}_sticky`} label={label} className="w-full" />
     </div>
   );

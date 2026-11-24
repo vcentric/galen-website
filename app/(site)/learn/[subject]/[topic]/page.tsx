@@ -55,7 +55,7 @@ export default async function LessonPage({ params }: Params) {
   const related = siblings.length > 1 ? Array.from({ length: Math.min(6, siblings.length - 1) }, (_, i) => siblings[(at + 1 + i) % siblings.length]) : [];
 
   return (
-    <div className="v2 lesson">
+    <div className="v2 lesson exam lesson-page">
       <JsonLd data={breadcrumbLd(trail)} />
       <JsonLd
         data={learningResourceLd({
@@ -73,10 +73,10 @@ export default async function LessonPage({ params }: Params) {
         })}
       />
 
-      <header className="wrap pt-24 pb-8 md:pt-28">
+      <header className="wrap exam-head">
         <Breadcrumbs trail={trail} />
         {!m.isPublished && (
-          <p className="lesson-draft" role="note">
+          <p className="exam-status !mt-0 mb-6" role="note">
             <b>Draft preview.</b> Generated from the GalenAI textbook library and waiting for faculty review. Not
             indexed by search engines.
           </p>
@@ -116,7 +116,8 @@ export default async function LessonPage({ params }: Params) {
         </p>
       </header>
 
-      <div className="wrap lesson-grid pb-20">
+      <div className="exam-band">
+      <div className="wrap lesson-grid lesson-read">
         <LessonEnhancer>
           <article className="lesson-body" dangerouslySetInnerHTML={{ __html: lesson.html }} />
         </LessonEnhancer>
@@ -124,9 +125,9 @@ export default async function LessonPage({ params }: Params) {
         <aside className="lesson-side">
           <div className="lesson-side-inner">
             {lesson.toc.length > 0 && (
-              <nav className="lesson-toc" aria-label="On this page">
-                <p className="lesson-toc-h">On this page</p>
-                <ol>
+              <nav aria-label="On this page">
+                <p className="exam-nav-h">On this page</p>
+                <ol className="legal-toc">
                   {lesson.toc.map((t) => (
                     <li key={t.id}>
                       <a href={`#${t.id}`}>{t.text}</a>
@@ -153,9 +154,10 @@ export default async function LessonPage({ params }: Params) {
           </div>
         </aside>
       </div>
+      </div>
 
       {related.length > 0 && (
-        <section className="wrap pb-16" aria-labelledby="more-lessons">
+        <section className="wrap pt-14 pb-16" aria-labelledby="more-lessons">
           <div className="flex items-end justify-between gap-4 mb-6">
             <h2 id="more-lessons" className="h2 !text-[clamp(1.5rem,3vw,2.1rem)]">
               More {subjectName(subject).toLowerCase()} <span className="acc">lessons.</span>

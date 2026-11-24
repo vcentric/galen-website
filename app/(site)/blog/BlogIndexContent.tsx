@@ -73,92 +73,53 @@ export default function BlogIndexContent({
   };
 
   return (
-    <div className="v2 min-h-screen">
-      {/* Hero Section */}
-      <div className="pt-40 pb-8 px-8 text-center border-b border-black/5 relative md:pt-44">
-        <div className="max-w-[800px] mx-auto relative z-10 flex flex-col items-center">
-          <p className="kick mb-5">Articles</p>
-          <h1 className="h1 !text-[clamp(2.4rem,6vw,4rem)] mb-6">
-            {selectedCategory !== "All" ? (
-              <>
-                Category: <span className="acc">{selectedCategory}</span>
-              </>
-            ) : (
-              <>
-                Blogs &amp; <span className="acc">Resources</span>
-              </>
-            )}
-          </h1>
+    <div className="v2 lesson">
+      <header className="wrap exam-head !pb-8">
+        <p className="kick">Articles</p>
+        <h1 className="h1 mt-5">
+          {selectedCategory !== "All" ? (
+            <span className="acc">{selectedCategory}.</span>
+          ) : (
+            <>
+              Articles<span className="acc">.</span>
+            </>
+          )}
+        </h1>
+        <p className="lead mt-6">Clinical reasoning, study systems, CBME insights, and medical learning science.</p>
+      </header>
 
-          <p className="lead mx-auto mb-10 max-w-[600px]">
-            Clinical reasoning, study systems, CBME insights, and medical
-            learning science.
-          </p>
-          <div className="w-full max-w-[500px]">
-            <SearchBar onSearch={handleSearch} />
-          </div>
+      <div className="wrap">
+        <div className="post-bar">
+          <SearchBar onSearch={handleSearch} />
+          <FilterBar selectedCategory={selectedCategory} onCategoryChange={handleCategoryChange} sortOrder={sortOrder} onSortChange={handleSortChange} />
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-[1240px] mx-auto px-[clamp(1.5rem,5vw,3rem)] pt-6 pb-32">
-
-        {/* Editor's Choice strip (up to 2) */}
+      <div className="wrap post-main">
+        {/* Editor's Choice (up to 2) */}
         {editorsChoice.length > 0 && !searchQuery && selectedCategory === "All" && (
-          <div
-            className={
-              editorsChoice.length > 1
-                ? "grid grid-cols-1 lg:grid-cols-2 gap-6"
-                : ""
-            }
-          >
+          <div className="post-leads">
             {editorsChoice.map((post) => (
               <FeaturedPost key={post.slug} post={post} />
             ))}
           </div>
         )}
 
-        {/* Filter Bar */}
-        <FilterBar
-          selectedCategory={selectedCategory}
-          onCategoryChange={handleCategoryChange}
-          sortOrder={sortOrder}
-          onSortChange={handleSortChange}
-        />
-
-        {/* Blog Grid */}
         {paginatedData.posts.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="post-grid">
               {paginatedData.posts.map((post) => (
                 <BlogCard key={post.slug} post={post} />
               ))}
             </div>
 
-            <Pagination
-              currentPage={paginatedData.currentPage}
-              totalPages={paginatedData.totalPages}
-              onPageChange={handlePageChange}
-            />
+            <Pagination currentPage={paginatedData.currentPage} totalPages={paginatedData.totalPages} onPageChange={handlePageChange} />
           </>
         ) : (
-          <div className="text-center py-24 bg-white/50 rounded-3xl border border-black/5 backdrop-blur-sm">
-            <svg
-              className="w-20 h-20 text-text-muted/20 mx-auto mb-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.35-4.35" />
-            </svg>
-            <h3 className="font-primary text-2xl font-bold text-dark mb-3">
-              No articles found
-            </h3>
-            <p className="font-secondary text-base text-text-muted">
-              Try adjusting your search or filter to find what you&apos;re
-              looking for.
+          <div className="lidx-empty">
+            <p className="h3">No articles found.</p>
+            <p className="mt-2" style={{ color: "var(--body)" }}>
+              Try adjusting your search or filter to find what you&apos;re looking for.
             </p>
           </div>
         )}
@@ -166,4 +127,3 @@ export default function BlogIndexContent({
     </div>
   );
 }
-

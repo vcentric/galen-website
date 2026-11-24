@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import CtaLink from "./CtaLink";
 import { LINKS } from "@/lib/site";
+import { isCollegePath } from "@/lib/audience";
 import { trackCTAClick } from "@/lib/analytics";
 
 type NavLink = { label: string; href: string; menu?: { label: string; href: string; note?: string }[] };
@@ -48,10 +49,6 @@ const isActive = (pathname: string, l: NavLink) =>
   (l.href !== "/" && pathname.startsWith(`${l.href}/`)) ||
   !!l.menu?.some((m) => pathname === m.href) ||
   (l.label === "Exams" && pathname.startsWith("/exams"));
-
-/** Pages that belong to the college side of the site (toggle shows "Colleges"). */
-const isCollegePath = (p: string) =>
-  p.startsWith("/institutions") || p.startsWith("/how-to-use/faculty") || p.startsWith("/how-to-use/administration");
 
 /**
  * Students / Colleges switch. Plain links (prefetched, instant client navigation),

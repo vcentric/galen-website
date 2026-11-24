@@ -76,10 +76,6 @@ export default function ContactPage() {
 
       <div className="tone-dark contact-foot">
         <div className="wrap contact-address">
-          <address>
-            <span className="vs-label">Registered office</span>
-            <span>{CONTACT.address}</span>
-          </address>
           <p>
             <span className="vs-label">Looking for help with the app?</span>
             <Link href="/how-to-use" className="vs-link">
