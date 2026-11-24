@@ -6,7 +6,7 @@ import JsonLd from "./JsonLd";
 import CtaLink from "./CtaLink";
 import StickyMobileCta from "./StickyMobileCta";
 import { Blueprint, Breadcrumbs, FaqBlock, Headline, Kicker, Section } from "./ui";
-import { resolveSection } from "./sections";
+import { byPage, resolveSection } from "./sections";
 
 /**
  * Renders any PageSpec. The frame (breadcrumbs, H1, answer-first paragraph, CTAs,
@@ -28,6 +28,10 @@ export default function SpecPage({
     ld.push(softwareAppLd({ name: `GalenAI ${spec.kicker}`, description: spec.description, path: spec.path }));
   }
   const src = spec.path.replace(/\//g, "_").slice(1);
+  // The shared closing band moves to the end; a page's own bespoke "cta" section stays where the page put it.
+  const isClosing = (s: PageSpec["sections"][number]) => s.kind === "cta" && !byPage[`${spec.path}#${s.id}`];
+  const body = spec.sections.filter((s) => !isClosing(s));
+  const closing = spec.sections.filter(isClosing);
 
   return (
     <div className="v2">
@@ -50,10 +54,10 @@ export default function SpecPage({
       </header>
 
       {/* Tighter than the home page sections, and every other one sits on a lighter band so the page has a rhythm. */}
-      {spec.sections.map((s, i) => {
+      {body.map((s, i) => {
         const Cmp = resolveSection(spec, s);
         return (
-          <section key={s.id} id={s.id} className={`spec-sec ${i % 2 === 1 && s.kind !== "cta" ? "bg-white/60" : ""}`}>
+          <section key={s.id} id={s.id} className={`spec-sec ${i % 2 === 1 ? "spec-band" : ""}`}>
             <div className="wrap">
               {Cmp ? (
                 <Cmp spec={spec} section={s} />
@@ -81,13 +85,13 @@ export default function SpecPage({
 
       {spec.related?.length ? (
         <section id="related" className="spec-sec !pt-0">
-          <div className="wrap">
-            <h2 className="h3">Keep exploring</h2>
-            <ul className="mt-4 flex flex-wrap gap-3">
+          <div className="wrap spec-related">
+            <h2 className="exam-nav-h !mb-0">Keep exploring</h2>
+            <ul>
               {spec.related.map((p) => (
                 <li key={p}>
-                  <Link href={p} className="btn btn-ghost !min-h-10 !text-sm !whitespace-normal text-center">
-                    {pageLabel(p)}
+                  <Link href={p} className="vs-link">
+                    {pageLabel(p)} <span aria-hidden>→</span>
                   </Link>
                 </li>
               ))}
@@ -95,6 +99,18 @@ export default function SpecPage({
           </div>
         </section>
       ) : null}
+
+      {/* The closing call to action is the last thing on the page: full width and dark, like the home pages. */}
+      {closing.map((s) => {
+        const Cmp = resolveSection(spec, s)!;
+        return (
+          <section key={s.id} id={s.id} className="tone-dark spec-sec spec-closing-sec">
+            <div className="wrap">
+              <Cmp spec={spec} section={s} />
+            </div>
+          </section>
+        );
+      })}
 
       {spec.status === "skeleton" && spec.flags?.length ? (
         <Section id="flags">

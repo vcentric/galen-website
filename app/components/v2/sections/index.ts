@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import type { PageSpec, SectionSpec } from "@/content/site/types";
-import { DemoContactSection, DemoFormSection, DemoTrySection, DemoWhySection } from "./bookDemo";
+import { DashboardSection, GuidedLessonScreens, IntegrationsFlowSection, StudentPhones, VivaPreviewSection } from "./drawn";
+import { DemoFormSection, DemoTrySection, DemoWhySection } from "./bookDemo";
 import { FacultyOutputsSection, FacultyScreenSection, FacultyStepsSection, FacultyWorkspaceSection } from "./faculty";
 import {
   FlashDeckSection,
@@ -50,11 +51,15 @@ export const byPage: Record<string, ComponentType<SectionProps>> = {
   "/institutions/book-demo#form": DemoFormSection,
   "/institutions/book-demo#why": DemoWhySection,
   "/institutions/book-demo#try": DemoTrySection,
-  "/institutions/book-demo#contact": DemoContactSection,
   "/institutions/faculty#workspace": FacultyWorkspaceSection,
   "/institutions/faculty#steps": FacultyStepsSection,
   "/institutions/faculty#outputs": FacultyOutputsSection,
   "/institutions/faculty#lessons": FacultyScreenSection,
+  "/features/guided-lessons#screens": GuidedLessonScreens,
+  "/features/dashboard#what": DashboardSection,
+  "/features/voice-viva#preview": VivaPreviewSection,
+  "/institutions/students#phones": StudentPhones,
+  "/institutions/integrations#how": IntegrationsFlowSection,
   "/features/ai-quiz-generator#students": QuizStudentsSection,
   "/features/ai-quiz-generator#faculty": QuizFacultySection,
   "/features/ai-flashcard-generator#students": FlashStudentsSection,

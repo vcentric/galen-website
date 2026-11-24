@@ -25,7 +25,7 @@ export default function McqDemo({ source }: { source: string }) {
   const done = pick !== null;
 
   return (
-    <div className="card mx-auto max-w-2xl p-6 md:p-8">
+    <div className="mcq-demo mx-auto max-w-2xl p-6 md:p-8">
       <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#c94d20]">{Q.code} · Heart sounds</p>
       <p className="h3 mt-3 !text-xl">{Q.stem}</p>
       <ul className="mt-5 space-y-2.5" role="radiogroup" aria-label="Answer options">
@@ -45,7 +45,7 @@ export default function McqDemo({ source }: { source: string }) {
                 }}
                 className={`flex w-full items-center gap-3 rounded-xl border-2 px-4 py-3 text-left font-semibold transition-colors ${
                   state === "idle"
-                    ? "border-[#2e2e2e]/15 hover:border-[#eb602d]"
+                    ? "border-[#2e2e2e]/15 bg-[#fffaf5] hover:border-[#eb602d]"
                     : state === "correct"
                       ? "border-[#2f7a4f] bg-[#e3f4ea]"
                       : state === "wrong"

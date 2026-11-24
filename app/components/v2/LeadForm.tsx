@@ -38,7 +38,10 @@ export default function LeadForm({ source }: { source: string }) {
 
   if (state === "done") {
     return (
-      <div className="card p-8" role="status">
+      <div className="lead-form lead-done" role="status">
+        <span aria-hidden className="lead-tick">
+          ✓
+        </span>
         <p className="h2 !text-[2rem]">
           Thank <span className="acc">you.</span>
         </p>
@@ -47,24 +50,21 @@ export default function LeadForm({ source }: { source: string }) {
     );
   }
 
-  const field = "mt-1.5 w-full rounded-xl border-2 border-[#2e2e2e]/15 bg-white px-4 py-3 font-medium outline-none focus:border-[#eb602d]";
-  const label = "block text-sm font-bold";
-
   return (
-    <form name="demo-request" onSubmit={submit} className="card grid gap-5 p-6 md:grid-cols-2 md:p-8">
+    <form name="demo-request" onSubmit={submit} className="lead-form">
       <input type="hidden" name="form-name" value="demo-request" />
       <p className="hidden" aria-hidden>
         <label>
           Leave this empty <input name="company_website" tabIndex={-1} autoComplete="off" />
         </label>
       </p>
-      <label className={label}>
-        Your name
-        <input name="name" required autoComplete="name" className={field} />
+      <label>
+        <span>Your name</span>
+        <input name="name" required autoComplete="name" />
       </label>
-      <label className={label}>
-        Role
-        <select name="role" required className={field} defaultValue="">
+      <label>
+        <span>Role</span>
+        <select name="role" required defaultValue="">
           <option value="" disabled>
             Choose one
           </option>
@@ -73,34 +73,40 @@ export default function LeadForm({ source }: { source: string }) {
           ))}
         </select>
       </label>
-      <label className={label}>
-        College
-        <input name="college" required autoComplete="organization" className={field} />
+      <label>
+        <span>College</span>
+        <input name="college" required autoComplete="organization" />
       </label>
-      <label className={label}>
-        City
-        <input name="city" autoComplete="address-level2" className={field} />
+      <label>
+        <span>
+          City <i>optional</i>
+        </span>
+        <input name="city" autoComplete="address-level2" />
       </label>
-      <label className={label}>
-        Phone
-        <input name="phone" type="tel" required autoComplete="tel" inputMode="tel" className={field} />
+      <label>
+        <span>Phone</span>
+        <input name="phone" type="tel" required autoComplete="tel" inputMode="tel" />
       </label>
-      <label className={label}>
-        Email
-        <input name="email" type="email" required autoComplete="email" className={field} />
+      <label>
+        <span>Email</span>
+        <input name="email" type="email" required autoComplete="email" />
       </label>
-      <label className={`${label} md:col-span-2`}>
-        Anything we should know? <span className="font-medium opacity-60">(optional)</span>
-        <textarea name="message" rows={3} className={field} />
+      <label className="lead-wide">
+        <span>
+          Anything we should know? <i>optional</i>
+        </span>
+        <textarea name="message" rows={3} />
       </label>
-      <div className="flex flex-wrap items-center gap-4 md:col-span-2">
-        <button type="submit" disabled={state === "sending"} className="btn btn-primary disabled:opacity-60">
+      <div className="lead-wide lead-foot">
+        <button type="submit" disabled={state === "sending"} className="btn btn-primary !min-h-14 !px-8 !text-lg disabled:opacity-60">
           {state === "sending" ? "Sending…" : "Request a demo"}
         </button>
-        {state === "error" && (
-          <p className="text-sm font-semibold text-[#c94d20]" role="alert">
+        {state === "error" ? (
+          <p className="lead-error" role="alert">
             That didn&apos;t go through. Email us at {CONTACT.corporate}.
           </p>
+        ) : (
+          <p className="lead-note">We will get back to you within two working days.</p>
         )}
       </div>
     </form>

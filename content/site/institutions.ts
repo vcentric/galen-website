@@ -125,8 +125,8 @@ export const institutionPages: PageSpec[] = [
         content: {
           intro: "Cohort analytics by competency, results by assessment, and an overview of the whole institute.",
           screens: [
-            { src: "/how-to-use/img/a_cohort.webp", alt: "Cohort analytics by competency", frame: "desk", caption: "Cohort analytics" },
-            { src: "/how-to-use/img/a_results.webp", alt: "Assessment results", frame: "desk", caption: "Results" },
+            { src: "/brand/ui/desktop_admin_cohort.webp", alt: "Cohort analytics: class average, topics to revisit and students who need attention", frame: "desk", caption: "Cohort analytics" },
+            { src: "/brand/ui/desktop_admin_results.webp", alt: "Assessment results: scores by student, score distribution and weakest competencies", frame: "desk", caption: "Results" },
           ],
         },
       },
@@ -380,7 +380,6 @@ export const institutionPages: PageSpec[] = [
       { id: "form", kind: "form", heading: "Request a demo", notes: "LeadForm (bespoke section)." },
       { id: "why", kind: "steps", heading: "Why colleges choose GalenAI", notes: "Bespoke section." },
       { id: "try", kind: "cta", heading: "Or try it right now", notes: "Bespoke section." },
-      { id: "contact", kind: "explain", heading: "Contact", notes: "Bespoke section." },
     ],
     related: ["/institutions"],
   },

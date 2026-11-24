@@ -8,6 +8,7 @@ import PhoneFrame from "../PhoneFrame";
 import AppScreen, { type AppScreenName } from "../AppScreen";
 import TutorDemo from "../TutorDemo";
 import { Headline } from "../ui";
+import { WindowFrame } from "./faculty";
 import type { SectionProps } from "./index";
 
 /**
@@ -30,6 +31,14 @@ function Head({ section }: SectionProps) {
 function ScreenView({ s, width = 240 }: { s: Screen; width?: number }) {
   if (s.frame === "app") return <AppScreen name={s.src as AppScreenName} alt={s.alt} width={width} />;
   if (s.frame === "phone") return <PhoneFrame src={s.src} alt={s.alt} width={width} />;
+  // Captures from the current institution design have no browser bar of their own, so they get the site's window frame.
+  if (s.frame === "desk" && s.src.startsWith("/brand/ui/")) {
+    return (
+      <WindowFrame>
+        <Image src={s.src} alt={s.alt} width={1800} height={1125} sizes="(min-width: 1024px) 900px, 92vw" className="h-auto w-full" />
+      </WindowFrame>
+    );
+  }
   return (
     <Image
       src={s.src}
@@ -37,32 +46,24 @@ function ScreenView({ s, width = 240 }: { s: Screen; width?: number }) {
       width={1800}
       height={1125}
       sizes="(min-width: 1024px) 900px, 92vw"
-      className={`h-auto w-full ${s.frame === "desk" ? "rounded-[22px] shadow-[0_30px_80px_rgba(46,46,46,0.22)] outline outline-2 outline-black/5" : ""}`}
+      className={`h-auto w-full ${s.frame === "desk" ? "rounded-[14px] shadow-[0_0_0_1px_rgba(46,46,46,0.12),0_30px_70px_rgba(46,46,46,0.2)]" : ""}`}
     />
   );
 }
 
 export function StepsSection(props: SectionProps) {
   const items = props.section.content?.items ?? [];
-  // Steps run as one row across the page: four in a row, otherwise threes (or a pair).
-  const cols = items.length === 2 ? "sm:grid-cols-2" : items.length === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-2 lg:grid-cols-3";
+  // One ruled strip: up to four steps in a row, five or six as two rows of three.
+  const cols = items.length <= 4 ? items.length : 3;
   return (
     <>
       <Head {...props} />
-      <ol className={`mt-10 grid gap-x-8 gap-y-10 ${cols}`}>
+      <ol className="strip" data-cols={cols}>
         {items.map((it, i) => (
-          <li key={it.t} className="flex gap-5 border-t-[3px] pt-5 sm:block" style={{ borderColor: "var(--rule)" }}>
-            <span className="block w-14 shrink-0 font-[family-name:var(--font-space-var)] text-[2.25rem] font-bold leading-none tracking-[-0.04em] text-[#eb602d] sm:w-auto sm:text-[2.75rem]">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div>
-              <h3 className="h3 !text-[1.35rem] sm:mt-4">{it.t}</h3>
-              {it.b && (
-                <p className="mt-2 leading-relaxed" style={{ color: "var(--body)" }}>
-                  {it.b}
-                </p>
-              )}
-            </div>
+          <li key={it.t}>
+            <span className="happening-n">{String(i + 1).padStart(2, "0")}</span>
+            <h3 className="strip-t">{it.t}</h3>
+            {it.b && <p className="strip-b">{it.b}</p>}
           </li>
         ))}
       </ol>
@@ -74,34 +75,41 @@ export function FeaturesSection(props: SectionProps) {
   const c = props.section.content!;
   const screen = c.screens?.[0];
   const side = screen?.frame === "phone" || screen?.frame === "app";
+  const items = c.items ?? [];
   return (
     <div className={side ? "grid items-center gap-10 lg:grid-cols-[1fr_auto] lg:gap-16" : ""}>
       <div>
         <Head {...props} />
-        {/* With a phone beside it the list is one column; on its own it runs in two so it fills the row. */}
-        <ul className={`mt-8 ${side ? "space-y-5" : "grid gap-x-12 gap-y-6 md:grid-cols-2"}`}>
-          {(c.items ?? []).map((it) => (
-            <li key={it.t} className="flex gap-4">
-              <span aria-hidden className="mt-2 h-3 w-3 shrink-0 rounded-full bg-[#eb602d]" />
-              <div>
-                <h3 className="h3 !text-lg">
-                  {it.href ? (
-                    <Link href={it.href} className="underline decoration-[#eb602d] decoration-2 underline-offset-4">
-                      {it.t}
-                    </Link>
-                  ) : (
-                    it.t
-                  )}
-                </h3>
-                {it.b && (
-                  <p className="mt-1" style={{ color: "var(--body)" }}>
-                    {it.b}
-                  </p>
+        {/* A numbered ruled list. Beside a phone it is one column; on its own it runs in two. */}
+        <ol className={`fout-list ${side || items.length < 4 ? "" : "fout-list-2"}`}>
+          {items.map((it, i) => {
+            const inner = (
+              <>
+                <span className="fout-n">{String(i + 1).padStart(2, "0")}</span>
+                <span>
+                  <span className="fout-t">{it.t}</span>
+                  {it.b && <span className="fout-b">{it.b}</span>}
+                </span>
+                {it.href && (
+                  <span aria-hidden className="fout-go">
+                    →
+                  </span>
                 )}
-              </div>
-            </li>
-          ))}
-        </ul>
+              </>
+            );
+            return (
+              <li key={it.t}>
+                {it.href ? (
+                  <Link href={it.href} className="fout-row">
+                    {inner}
+                  </Link>
+                ) : (
+                  <div className="fout-row">{inner}</div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
       </div>
       {screen && (
         <div className={side ? "flex justify-center" : "mt-10"}>
@@ -157,49 +165,53 @@ export function ScreensSection(props: SectionProps) {
 
 export function CompareSection(props: SectionProps) {
   const t = props.section.content!.table!;
+  const ours = (h: string) =>
+    h === "GalenAI" ? <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} className="h-auto w-[92px]" /> : h;
   return (
     <>
       <Head {...props} />
-      {/* Phone: one card per row so the GalenAI column is never off-screen. */}
-      <ul className="mt-8 space-y-3 md:hidden">
+      {/* Phones: one block per row, so the GalenAI answer is never off-screen. */}
+      <ul className="vs-cards vs-light md:hidden">
         {t.rows.map(([a, b, c]) => (
-          <li key={a} className="card p-5">
-            {a && <p className="h3 !text-lg">{a}</p>}
-            <p className="mt-3 text-xs font-bold uppercase tracking-wider opacity-60">{t.head[1]}</p>
+          <li key={a}>
+            {a && <p className="vs-area">{a}</p>}
+            <p className="vs-label">{t.head[1]}</p>
             <p className="mt-1" style={{ color: "var(--body)" }}>
               {b}
             </p>
-            <p className="mt-3 text-xs font-bold uppercase tracking-wider text-[#c94d20]">{t.head[2]}</p>
-            <p className="mt-1 font-semibold">{c}</p>
+            <div className="vs-ours">
+              <p className="vs-label vs-label-ours">{t.head[2]}</p>
+              <p className="vs-ours-text">{c}</p>
+            </div>
           </li>
         ))}
       </ul>
-      <div className="mt-8 hidden md:block">
-        <table className="w-full border-collapse text-left">
+      {/* Tablet and up: the ledger. The other side is small and quiet, ours is set larger, one orange rule between. */}
+      <div className="mt-10 hidden md:block">
+        <table className={`vs-table vs-light ${t.rows.length > 7 ? "vs-dense" : ""}`}>
           <thead>
-            <tr className="text-sm uppercase tracking-wider">
-              <th className="py-3 pr-6 font-semibold opacity-70">{t.head[0]}</th>
-              <th className="py-3 pr-6 font-semibold opacity-70">{t.head[1]}</th>
-              <th className="py-3 font-semibold text-[#c94d20]">{t.head[2]}</th>
+            <tr>
+              <th scope="col">{t.head[0] ? t.head[0] : <span className="sr-only">Area</span>}</th>
+              <th scope="col">{t.head[1]}</th>
+              <th scope="col">{ours(t.head[2])}</th>
             </tr>
           </thead>
           <tbody>
-            {t.rows.map(([a, b, c]) => (
-              <tr key={a} className="border-t border-black/10 align-top">
-                <th scope="row" className="py-5 pr-6 font-bold">
+            {t.rows.map(([a, b, c], i) => (
+              <tr key={a}>
+                <th scope="row">
+                  <span>{String(i + 1).padStart(2, "0")}</span>
                   {a}
                 </th>
-                <td className="py-5 pr-6" style={{ color: "var(--body)" }}>
-                  {b}
-                </td>
-                <td className="py-5 font-semibold">{c}</td>
+                <td>{b}</td>
+                <td>{c}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       {t.note && (
-        <p className="mt-4 text-sm" style={{ color: "var(--body)" }}>
+        <p className="mt-5 text-sm" style={{ color: "var(--body)" }}>
           {t.note}
         </p>
       )}
@@ -222,12 +234,12 @@ export function ExplainSection(props: SectionProps) {
           ))}
         </div>
         {c.items && (
-          <ul className="mt-6 flex flex-wrap gap-3">
+          <ul className="mt-7 flex flex-wrap gap-x-8 gap-y-3">
             {c.items.map((it) =>
               it.href ? (
                 <li key={it.t}>
-                  <Link href={it.href} className="btn btn-ghost !min-h-10 !text-sm">
-                    {it.t}
+                  <Link href={it.href} className="vs-link">
+                    {it.t} <span aria-hidden>→</span>
                   </Link>
                 </li>
               ) : null,
@@ -244,16 +256,18 @@ export function LinksSection(props: SectionProps) {
   return (
     <>
       <Head {...props} />
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="lidx-list mt-8">
         {items.map((it) => (
           <li key={it.t}>
-            <Link href={it.href ?? "#"} className="card block h-full p-6">
-              <h3 className="h3">{it.t}</h3>
-              {it.b && (
-                <p className="mt-2 text-sm" style={{ color: "var(--body)" }}>
-                  {it.b}
-                </p>
-              )}
+            <Link href={it.href ?? "#"} className="lidx-row">
+              <span className="lidx-main">
+                <span className="lidx-title">{it.t}</span>
+                {it.b && <span className="lidx-sub">{it.b}</span>}
+              </span>
+              <span />
+              <span aria-hidden className="lidx-go">
+                →
+              </span>
             </Link>
           </li>
         ))}
@@ -287,15 +301,20 @@ export function DemoSection(props: SectionProps) {
   return <ScreensSection {...props} />;
 }
 
-/** Closing band: dark, the section heading, the page's own CTAs. Needs no content. */
+/**
+ * Closing section: the page's own heading and CTAs, full width and dark, as the last thing before the footer
+ * (SpecPage places it after the FAQ and related links). Needs no content.
+ */
 export function CtaBandSection({ spec, section }: SectionProps) {
   return (
-    <div className="tone-dark rounded-[28px] px-6 py-12 md:px-12">
-      <Headline as="h2" text={section.heading} />
-      {section.content?.intro && <p className="lead mt-4">{section.content.intro}</p>}
-      <div className="mt-8 flex flex-wrap gap-3">
-        <CtaLink intent={spec.primaryCta} source={`${src(spec.path)}_final`} />
-        {spec.secondaryCta && <CtaLink intent={spec.secondaryCta} source={`${src(spec.path)}_final`} variant="ghost" />}
+    <div className="spec-closing">
+      <div>
+        <Headline as="h2" text={section.heading} />
+        {section.content?.intro && <p className="lead mt-4">{section.content.intro}</p>}
+      </div>
+      <div className="flex flex-wrap gap-3">
+        <CtaLink intent={spec.primaryCta} source={`${src(spec.path)}_final`} className="!min-h-14 !px-8 !text-lg" />
+        {spec.secondaryCta && <CtaLink intent={spec.secondaryCta} source={`${src(spec.path)}_final`} variant="ghost" className="!min-h-14 !px-8 !text-lg" />}
       </div>
     </div>
   );
