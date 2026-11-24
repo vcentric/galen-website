@@ -151,47 +151,65 @@ export default function InstitutionsPage() {
         </div>
       </section>
 
-      {/* 2. Where we are: the demo video beside the approved proof points (before everything else, Varun Nov 2026) */}
-      <Section id="outcomes">
-        <Kicker>Where we are</Kicker>
-        <div className="mt-9 grid items-start gap-12 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-14">
-          <div id="video" className="scroll-mt-24">
-            <VideoLite youtubeId={VIDEO.youtubeId} title={VIDEO.name} />
-            <p className="mt-5 max-w-2xl text-[0.98rem]" style={{ color: "var(--body)" }}>
-              In under two minutes: {VIDEO.description.charAt(0).toLowerCase() + VIDEO.description.slice(1)}
-            </p>
+      {/* 2. Where we are: the approved proof points (Varun Nov 2026), on a raised panel that sits across the
+          bottom edge of the dark hero, so the facts are the first thing met after the headline. */}
+      <section id="outcomes" className="proof-sec">
+        <div className="wrap">
+          <div className="proof-panel">
+            <Kicker>Where we are</Kicker>
+            <ul className="proof">
+              <li>
+                <p className="proof-n">2,000+</p>
+                <p className="proof-t">students signed up at launch.</p>
+              </li>
+              <li>
+                {/* TODO(varun): swap for the logo file Varun sends, if different */}
+                <Image
+                  src="/stjohns.webp"
+                  alt="St. John's National Academy of Health Sciences"
+                  width={1252}
+                  height={210}
+                  sizes="300px"
+                  className="proof-logo"
+                />
+                <p className="proof-t">
+                  <span className="text-[#c94d20]">MoU signed</span> with St. John&apos;s Medical College, Bengaluru.
+                </p>
+              </li>
+              <li>
+                <div className="proof-faces" aria-hidden>
+                  <span>
+                    <Image src="/Dr. Arun Biju.webp" alt="" fill sizes="56px" className="object-cover object-top" />
+                  </span>
+                  <span>
+                    <Image src="/Varun.webp" alt="" fill sizes="56px" className="object-cover object-top" />
+                  </span>
+                </div>
+                <div>
+                  <p className="proof-b">
+                    Founded by Dr. Arun Biju Oommen (MD Medicine; faculty at St. John&apos;s Medical College Hospital, Bengaluru)
+                    and Varun Jagannathan, supported by senior faculty, CBME experts and medical students.
+                  </p>
+                  <Link href="/team" className="proof-link">
+                    Meet the team <span aria-hidden>→</span>
+                  </Link>
+                </div>
+              </li>
+            </ul>
           </div>
-          <ul className="proof">
-            <li>
-              <p className="h1 !text-[clamp(3.2rem,6vw,4.4rem)] text-[#eb602d]">2,000+</p>
-              <p className="mt-2 font-semibold">students signed up at launch.</p>
-            </li>
-            <li>
-              {/* TODO(varun): swap for the logo file Varun sends, if different */}
-              <Image
-                src="/stjohns.webp"
-                alt="St. John's National Academy of Health Sciences"
-                width={1252}
-                height={210}
-                sizes="300px"
-                className="h-auto w-full max-w-[300px]"
-              />
-              <p className="mt-4 font-semibold">
-                <span className="text-[#c94d20]">MoU signed</span> with St. John&apos;s Medical College, Bengaluru.
-              </p>
-            </li>
-            <li>
-              <p className="text-[0.98rem]" style={{ color: "var(--body)" }}>
-                Founded by Dr. Arun Biju Oommen (MD Medicine; faculty at St. John&apos;s Medical College Hospital, Bengaluru)
-                and Varun Jagannathan, supported by senior faculty, CBME experts and medical students.
-              </p>
-              <Link href="/team" className="proof-link">
-                Meet the team <span aria-hidden>→</span>
-              </Link>
-            </li>
-          </ul>
         </div>
-      </Section>
+      </section>
+
+      {/* 2b. The demo video, as its own block: what it shows on the left, the video on the right. */}
+      <section id="video" className="sec spec-band scroll-mt-16">
+        <div className="wrap demo-video">
+          <div>
+            <Kicker>In under two minutes</Kicker>
+            <p className="demo-video-t">{VIDEO.description}</p>
+          </div>
+          <VideoLite youtubeId={VIDEO.youtubeId} title={VIDEO.name} />
+        </div>
+      </section>
 
       {/* 3. What is happening: two things true today, then the change they lead to (which the next section answers) */}
       <Section id="overview">
