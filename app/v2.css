@@ -1452,3 +1452,6 @@ main > .v2 { min-height: 100vh; }
 .sticky-cta > a { pointer-events: auto; box-shadow: 0 0 0 1px rgba(255, 240, 228, 0.35), 0 12px 28px rgba(0, 0, 0, 0.32); }
 @media (min-width: 768px) { .sticky-cta { display: none; } }
 @media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }
+
+/* The side phones of the Ask / Practise / Revise stage may reach past the content width; clip them at the section, not the page */
+.v2 #features { overflow-x: clip; }

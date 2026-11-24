@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SiInstagram, SiLinkedin } from "react-icons/si";
-import { isCollegePath } from "@/lib/audience";
+import { useIsCollege } from "./useAudience";
 import { findClosingCta } from "@/lib/closing";
 import { CONTACT, LINKS, SITE } from "@/lib/site";
 import StoreBadges from "./StoreBadges";
@@ -88,7 +88,7 @@ const COLUMNS: Col[] = [
  */
 export default function Footer() {
   const pathname = usePathname() ?? "/";
-  const inst = isCollegePath(pathname);
+  const inst = useIsCollege(pathname);
   const [open, setOpen] = useState<Record<string, boolean>>({});
   // When the page already ends in a dark closing section with its own button, the footer does not repeat it on phones.
   const [closing, setClosing] = useState(false);
@@ -112,7 +112,7 @@ export default function Footer() {
             <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} />
             <p className="foot-line">{inst ? SITE.subTagline : `${SITE.studentLine} All in one app.`}</p>
           </div>
-          <div className={closing ? "foot-act max-md:!hidden" : "foot-act"}>
+          <div className={closing ? "foot-act max-[899px]:!hidden" : "foot-act"}>
             {inst ? (
               <>
                 <CtaLink intent="demo" source="footer" className="!min-h-11 !px-5 !text-sm" />

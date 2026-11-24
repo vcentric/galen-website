@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import CtaLink from "./CtaLink";
 import { LINKS } from "@/lib/site";
-import { isCollegePath } from "@/lib/audience";
+import { useIsCollege } from "./useAudience";
 import { trackCTAClick } from "@/lib/analytics";
 
 type NavLink = { label: string; href: string; menu?: { label: string; href: string; note?: string }[] };
@@ -91,7 +91,7 @@ export default function Navbar() {
   // Read from the page: is the hero under the bar dark, and what is the page's own background.
   const [page, setPage] = useState<{ dark: boolean; bg: string }>({ dark: false, bg: "" });
   const open = openOn === pathname;
-  const inst = isCollegePath(pathname);
+  const inst = useIsCollege(pathname);
   const links = inst ? INSTITUTION_LINKS : STUDENT_LINKS;
 
   useEffect(() => {
