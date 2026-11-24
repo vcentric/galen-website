@@ -40,6 +40,7 @@ const INSTITUTION_LINKS: NavLink[] = [
   { label: "Administration", href: "/institutions/administration" },
   { label: "vs LMS", href: "/institutions/vs-lms" },
   { label: "How to use", href: "/how-to-use/faculty" },
+  { label: "Team", href: "/team" },
 ];
 
 const isActive = (pathname: string, l: NavLink) =>
@@ -262,12 +263,15 @@ export default function Navbar() {
                 )}
               </li>
             ))}
-            <li>
-              <Link href="/team" className="nav-sheet-link">
-                Team
-                <span aria-hidden>→</span>
-              </Link>
-            </li>
+            {/* The college links already include Team. */}
+            {!inst && (
+              <li>
+                <Link href="/team" className="nav-sheet-link">
+                  Team
+                  <span aria-hidden>→</span>
+                </Link>
+              </li>
+            )}
             <li>
               <a href={LINKS.house} rel="noopener" onClick={houseClick} className="nav-sheet-link">
                 <span className="flex items-center gap-2">

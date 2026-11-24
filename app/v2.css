@@ -1189,3 +1189,109 @@
 }
 @keyframes xferFlow { from { transform: translateX(-14px); } to { transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .v2 .xfer-line::before { animation: none; } }
+
+/* Team page: founders and advisors share one two-up layout. Photos in full colour, one fixed frame. */
+.v2 .team-photo { position: relative; overflow: hidden; background: rgba(46, 46, 46, 0.08); }
+.v2 .team-photo img { transition: transform 0.6s ease; }
+.v2 .founder:hover .team-photo img { transform: scale(1.04); }
+.v2 .team-founders { padding-bottom: clamp(3rem, 7vw, 5.5rem); }
+.v2 .team-advisors { padding-block: clamp(3rem, 7vw, 5.5rem); }
+.v2 .team-pair { display: grid; margin-top: 1rem; border-top: 2px solid var(--color-dark); }
+.v2 .team-advisors .team-pair { margin-top: 2.5rem; }
+.v2 .founder { display: grid; gap: 1.75rem; padding: 2.5rem 0; border-top: 1px solid var(--rule); }
+.v2 .founder:first-child { border-top: 0; }
+.v2 .founder-photo { width: min(15rem, 62vw); aspect-ratio: 3 / 4; border-radius: 20px; }
+.v2 .founder-quote { margin-top: 1.1rem; font: 700 clamp(1.5rem, 2.5vw, 2rem) / 1.14 var(--font-space-var), sans-serif; letter-spacing: -0.03em; text-wrap: balance; }
+.v2 .founder-name { margin-top: 1.75rem; font: 700 1.3rem / 1.2 var(--font-space-var), sans-serif; letter-spacing: -0.02em; }
+.v2 .founder-title { margin-top: 0.3rem; font-weight: 700; color: #c94d20; }
+.v2 .founder-creds { display: grid; gap: 0.2rem; margin-top: 0.75rem; font-size: 0.92rem; line-height: 1.45; color: var(--body); }
+.v2 .team-in { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; font-size: 0.9rem; font-weight: 700; text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.v2 .team-in:hover { color: #c94d20; }
+/* advisors: same frame, a step smaller, the name leads */
+.v2 .advisor .founder-photo { width: min(11rem, 50vw); border-radius: 18px; }
+.v2 .advisor-name { font: 700 clamp(1.5rem, 2.3vw, 1.85rem) / 1.1 var(--font-space-var), sans-serif; letter-spacing: -0.03em; }
+.v2 .advisor .founder-title { margin-top: 0.5rem; }
+.v2 .advisor-creds { gap: 0.55rem; margin-top: 1.1rem; font-size: 0.95rem; }
+/* timeline */
+.v2 .team-line { display: grid; margin-top: 3.5rem; border-left: 2px solid rgba(255, 240, 228, 0.2); }
+.v2 .team-line > li { position: relative; padding: 0 0 2.25rem 1.75rem; }
+.v2 .team-line > li:last-child { padding-bottom: 0; }
+.v2 .team-line > li::before { content: ""; position: absolute; left: -7px; top: 0.1rem; width: 12px; height: 12px; border-radius: 999px; background: var(--color-orange); box-shadow: 0 0 0 5px #2e2e2e; }
+.v2 .team-line-date { font: 700 0.72rem / 1 var(--font-space-var), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-orange); }
+.v2 .team-line-t { margin-top: 0.8rem; font: 700 1.3rem / 1.2 var(--font-space-var), sans-serif; letter-spacing: -0.02em; }
+.v2 .team-line-b { margin-top: 0.6rem; font-size: 0.95rem; line-height: 1.55; color: var(--body); }
+@media (min-width: 768px) {
+  .v2 .team-pair { grid-template-columns: 1fr 1fr; }
+  .v2 .founder { align-content: start; padding: 2.5rem 2.5rem 0.5rem; border-top: 0; border-left: 1px solid var(--rule); }
+  .v2 .founder:first-child { padding-left: 0; border-left: 0; }
+  .v2 .founder:last-child { padding-right: 0; }
+}
+@media (min-width: 1100px) {
+  .v2 .founder { grid-template-columns: 13rem 1fr; gap: 2rem; }
+  .v2 .advisor { grid-template-columns: 11rem 1fr; }
+  .v2 .founder-photo, .v2 .advisor .founder-photo { width: 100%; }
+}
+@media (min-width: 900px) {
+  .v2 .team-line { grid-template-columns: repeat(4, minmax(0, 1fr)); border-left: 0; border-top: 2px solid rgba(255, 240, 228, 0.2); }
+  .v2 .team-line > li { padding: 2rem 2rem 0 0; }
+  .v2 .team-line > li::before { left: 0; top: -7px; }
+}
+@media (prefers-reduced-motion: reduce) { .v2 .team-photo img { transition: none; } }
+/* Founders on desktop: the photo keeps its 3:4 shape with the quote centred beside it; the name and
+   credentials run underneath both, so nothing is left empty under the photo and no face is cropped. */
+@media (min-width: 1100px) {
+  .v2 .founder:not(.advisor) { grid-template-columns: 15rem minmax(0, 1fr); column-gap: 2.25rem; row-gap: 1.75rem; align-items: start; padding-bottom: 2.5rem; }
+  .v2 .founder:not(.advisor) > div:last-child { display: contents; }
+  .v2 .founder-q { grid-column: 2; grid-row: 1; padding-top: 0.35rem; }
+  .v2 .founder-who { grid-column: 1 / -1; grid-row: 2; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+  .v2 .founder-who .founder-name { margin-top: 0; }
+  .v2 .founder:not(.advisor) .founder-quote { font-size: clamp(1.45rem, 2.1vw, 1.85rem); }
+  .v2 .team-founders { padding-bottom: clamp(2rem, 5vw, 3.5rem); }
+}
+
+/* Contact */
+.v2 .contact-wrap { padding-bottom: clamp(3rem, 7vw, 5.5rem); }
+.v2 .contact { display: grid; border-top: 2px solid var(--color-dark); }
+.v2 .contact-col { padding: 2.5rem 0; border-top: 1px solid var(--rule); }
+.v2 .contact-col:first-child { border-top: 0; }
+.v2 .contact-col .lidx-name { font-size: clamp(1.9rem, 3.2vw, 2.5rem); }
+.v2 .contact-ways { margin-top: 1.75rem; border-top: 1px solid rgba(46, 46, 46, 0.2); }
+.v2 .contact-ways a { display: grid; grid-template-columns: 6rem minmax(0, 1fr) auto; align-items: baseline; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); transition: padding 0.2s ease, background-color 0.2s ease; }
+.v2 .contact-label { font: 700 0.68rem / 1 var(--font-space-var), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(46, 46, 46, 0.7); }
+.v2 .contact-value { overflow-wrap: anywhere; font: 700 clamp(1.05rem, 1.6vw, 1.3rem) / 1.25 var(--font-space-var), sans-serif; letter-spacing: -0.02em; }
+.v2 .contact-ways a:hover { padding-left: 0.75rem; padding-right: 0.5rem; background: rgba(46, 46, 46, 0.04); }
+.v2 .contact-ways a:hover .contact-value { color: #c94d20; }
+.v2 .contact-ways a:hover .fout-go { transform: translateX(4px); }
+.v2 .contact-address { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.75rem 4rem; padding-block: 2.75rem; font: 600 1.1rem / 1.4 var(--font-space-var), sans-serif; }
+.v2 .contact-address address, .v2 .contact-address p { display: grid; gap: 0.7rem; font-style: normal; }
+/* A page shorter than the screen fills it, so no blank band shows above the footer. On contact the dark strip sits at the bottom. */
+main > .v2 { min-height: 100vh; }
+.v2.contact-page { display: flex; flex-direction: column; }
+.v2 .contact-wrap { flex: 1; }
+.v2.contact-page .exam-head { padding-bottom: 3rem; }
+@media (max-width: 480px) { .v2 .contact-ways a { grid-template-columns: minmax(0, 1fr) auto; } .v2 .contact-label { grid-column: 1 / -1; } }
+@media (min-width: 900px) {
+  .v2 .contact { grid-template-columns: 1fr 1fr; }
+  .v2 .contact-col { padding: 3rem 3rem 1rem; border-top: 0; border-left: 1px solid var(--rule); }
+  .v2 .contact-col:first-child { padding-left: 0; border-left: 0; }
+  .v2 .contact-col:last-child { padding-right: 0; }
+}
+/* Legal pages */
+.v2 .legal-toc { border-left: 1px solid rgba(46, 46, 46, 0.16); }
+.v2 .legal-toc a { display: block; margin-left: -1px; padding: 0.38rem 0 0.38rem 0.9rem; border-left: 2px solid transparent; font-size: 0.88rem; font-weight: 600; line-height: 1.35; color: rgba(46, 46, 46, 0.75); transition: color 0.2s ease, border-color 0.2s ease; }
+.v2 .legal-toc a:hover { border-left-color: var(--color-orange); color: var(--color-dark); }
+.v2 .legal-other { display: grid; gap: 0.5rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(46, 46, 46, 0.16); }
+.v2 .exam-fold .legal-toc { margin-top: 1.1rem; }
+.v2 .legal-body h2 { padding-top: 1.75rem; border-top: 1px solid rgba(46, 46, 46, 0.16); }
+.v2 .legal-body > h2:first-of-type { margin-top: 2.5rem; }
+.v2 .exam-main > p.exam-source a { color: var(--orange-dark); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+/* Campaign pages (/go) */
+.v2 .go-hero { padding-top: clamp(2rem, 6vw, 4.5rem); padding-bottom: clamp(2.5rem, 6vw, 4.5rem); }
+.v2 .go-proof { display: grid; gap: 1.5rem; max-width: 52rem; }
+.v2 .go-proof-n { font: 700 clamp(3rem, 8vw, 5rem) / 0.95 var(--font-space-var), sans-serif; letter-spacing: -0.05em; color: var(--color-orange); }
+.v2 .go-proof-n span { display: block; margin-top: 0.6rem; font-size: clamp(1.1rem, 2vw, 1.4rem); line-height: 1.2; letter-spacing: -0.02em; color: var(--color-dark); }
+.v2 .go-proof blockquote { padding-left: 1.5rem; border-left: 3px solid var(--color-orange); font: 600 clamp(1.2rem, 2.2vw, 1.6rem) / 1.3 var(--font-space-var), sans-serif; letter-spacing: -0.02em; }
+.v2 .go-proof figcaption { display: grid; gap: 0.2rem; font-size: 0.9rem; color: var(--body); }
+.v2 .go-proof figcaption b { color: var(--color-dark); }
+.v2 .go-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; padding-block: 2rem 6rem; font-size: 0.85rem; color: var(--body); }
+.v2 .go-foot a { text-decoration: underline; text-underline-offset: 3px; }

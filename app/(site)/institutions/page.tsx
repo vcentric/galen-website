@@ -6,6 +6,7 @@ import JsonLd from "@/app/components/v2/JsonLd";
 import CtaLink from "@/app/components/v2/CtaLink";
 import FacultySteps from "@/app/components/v2/FacultySteps";
 import { FACULTY_STEPS } from "@/content/site/faculty-steps";
+import { INSTITUTION_PARTS, INSTITUTION_VIDEO } from "@/content/site/institution-parts";
 import VideoLite from "@/app/components/v2/VideoLite";
 import AppScreen from "@/app/components/v2/AppScreen";
 import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
@@ -16,14 +17,7 @@ import { FaqBlock, Kicker, Section } from "@/app/components/v2/ui";
  * Wording: BMC briefing note, vs-LMS comparison, brochure, deck slides 2, 3, 6.
  */
 
-const VIDEO = {
-  youtubeId: "3GjvIeQn9Yw",
-  name: "How GalenAI Brings AI to Medical Colleges (CBME Ready)",
-  description:
-    "A CBME timetable uploaded and validated, competency-mapped lessons and assessments drafted with AI from faculty references, published to the class, and results by competency.",
-  uploadDate: "2026-11-09",
-  durationIso: "PT1M56S",
-};
+const VIDEO = INSTITUTION_VIDEO;
 
 const HAPPENING = [
   {
@@ -40,29 +34,7 @@ const HAPPENING = [
   },
 ];
 
-const PARTS = [
-  {
-    who: "Students",
-    title: "An AI tutor on approved content.",
-    body: "The tutor answers from the college's approved references and shows its source. Question banks, clinical cases and flashcards are mapped to NMC competencies, and each student sees their own progress.",
-    line: SITE.studentLine,
-    href: "/institutions/students",
-  },
-  {
-    who: "Faculty",
-    title: "An AI workspace for teaching.",
-    body: "Faculty upload their own references and generate lessons, slides, assessments and case discussions in minutes. Nothing reaches a student until faculty review, edit and publish it.",
-    line: SITE.facultyLine,
-    href: "/institutions/faculty",
-  },
-  {
-    who: "College and administration",
-    title: "One connected view of CBME reports.",
-    body: "Published content reaches the class directly. Results and cohort analytics by student, by competency and by department show where each batch stands, ready for CBME reporting.",
-    line: SITE.lmsLine,
-    href: "/institutions/administration",
-  },
-];
+const PARTS = INSTITUTION_PARTS;
 
 const LMS_ROWS = [
   ["Lessons", "Faculty prepare every lesson and its assessments outside the LMS, then upload the files.", "GalenAI drafts the lesson, slides, assessments, SGD cases, mind maps and flashcards from faculty references. Faculty review, edit and publish."],
