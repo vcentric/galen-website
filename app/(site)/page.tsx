@@ -143,18 +143,22 @@ export default function Home() {
         <h2 className="h2 mt-5">
           Built for every stage of medical <span className="acc">school.</span>
         </h2>
-        {/* Index cards: the stage on a file tab, a brand icon, and the hard offset shadow from the print pieces (styles: .paper in v2.css). */}
-        <ul className="paper-row mt-16 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Index cards: the stage on a file tab, a brand icon, and the hard offset shadow from the print pieces (styles: .paper in v2.css).
+            Two by two on phones and tablets, four across on desktop. */}
+        <ul className="paper-row mt-14 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 sm:gap-y-14 lg:grid-cols-4">
           {STAGES.map((st) => (
             <li key={st.who}>
               <Link href={st.href} className="paper group">
                 <span className="paper-tab">{st.tag}</span>
-                <Image src={`/brand/icons/${st.icon}.svg`} alt="" width={56} height={56} className="h-14 w-14 self-end" />
-                <h3 className="h3 mt-3 !text-[1.4rem]">{st.who}</h3>
-                <p className="mt-4 flex-1 border-t-2 border-[#eb602d] pt-4" style={{ color: "var(--body)" }}>
+                {/* Title and icon share one row, so no space is left empty above the title. */}
+                <span className="paper-head">
+                  <h3 className="paper-title">{st.who}</h3>
+                  <Image src={`/brand/icons/${st.icon}.svg`} alt="" width={56} height={56} className="paper-icon" />
+                </span>
+                <p className="paper-body" style={{ color: "var(--body)" }}>
                   {st.body}
                 </p>
-                <span className="mt-5 font-[family-name:var(--font-space-var)] font-bold">
+                <span className="paper-link">
                   {st.link}{" "}
                   <span aria-hidden className="inline-block text-[#eb602d] transition-transform duration-200 group-hover:translate-x-1">
                     →
