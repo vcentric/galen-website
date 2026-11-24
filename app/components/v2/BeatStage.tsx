@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -22,6 +23,7 @@ export default function BeatStage({ beats }: { beats: Beat[] }) {
   const [auto, setAuto] = useState(true);
   const n = beats.length;
   const choose = (i: number) => {
+    trackEvent("ui_select", { component: "ask_practise_revise", choice: beats[i].word.replace(/[^a-z]/gi, "").toLowerCase() });
     setAuto(false);
     setActive(i);
   };

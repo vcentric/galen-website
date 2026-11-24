@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CtaLink from "@/app/components/v2/CtaLink";
+import { NotFoundPing } from "@/app/components/v2/Analytics";
 
 export const metadata = { title: "Page not found | GalenAI", robots: { index: false, follow: true } };
 
@@ -16,6 +17,7 @@ const LINKS = [
 export default function NotFound() {
   return (
     <div className="v2">
+      <NotFoundPing />
       <section className="wrap nf">
         <div>
           <p className="nf-code" aria-hidden>

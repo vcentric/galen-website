@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { FacultyStep } from "@/content/site/faculty-steps";
@@ -45,6 +46,7 @@ export default function FacultySteps({ steps }: { steps: FacultyStep[] }) {
   }, [active, auto, steps.length]);
 
   const pick = (i: number) => {
+    trackEvent("ui_select", { component: "faculty_steps", choice: steps[i].title });
     setAuto("done");
     setActive(i);
   };

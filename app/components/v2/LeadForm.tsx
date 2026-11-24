@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { getUtmParams } from "@/lib/utm";
 import { CONTACT } from "@/lib/site";
@@ -15,6 +15,7 @@ const ROLES = ["Dean or Principal", "Medical Education Unit", "Head of Departmen
  */
 export default function LeadForm({ source }: { source: string }) {
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const started = useRef(false);
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,6 +33,7 @@ export default function LeadForm({ source }: { source: string }) {
       trackEvent("generate_lead", { source, role: String(data.get("role") ?? "") });
       setState("done");
     } catch {
+      trackEvent("form_error", { form: "demo_request", source });
       setState("error");
     }
   }
@@ -51,7 +53,16 @@ export default function LeadForm({ source }: { source: string }) {
   }
 
   return (
-    <form name="demo-request" onSubmit={submit} className="lead-form">
+    <form
+      name="demo-request"
+      onSubmit={submit}
+      className="lead-form"
+      onFocus={() => {
+        if (started.current) return;
+        started.current = true;
+        trackEvent("form_start", { form: "demo_request", source });
+      }}
+    >
       <input type="hidden" name="form-name" value="demo-request" />
       <p className="hidden" aria-hidden>
         <label>

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 export type IndexLesson = { path: string; title: string; subtitle: string; code?: string; draft?: boolean };
 export type IndexSubject = { id: string; name: string; blurb: string; lessons: IndexLesson[] };
@@ -20,6 +21,13 @@ export default function LessonIndex({ subjects }: { subjects: IndexSubject[] }) 
   };
   const total = subjects.reduce((n, s) => n + s.lessons.length, 0);
   const shown = words.length ? subjects.reduce((n, s) => n + s.lessons.filter(match).length, 0) : total;
+  // Report a search once typing pauses, not on every keystroke.
+  useEffect(() => {
+    const term = q.trim();
+    if (term.length < 2) return;
+    const id = window.setTimeout(() => trackEvent("site_search", { where: "learn", search_term: term.slice(0, 80), results: shown }), 1200);
+    return () => window.clearTimeout(id);
+  }, [q, shown]);
 
   return (
     <>

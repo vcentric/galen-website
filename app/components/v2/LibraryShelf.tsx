@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
 
@@ -36,7 +37,10 @@ export default function LibraryShelf({ books, children }: { books: ShelfBook[]; 
               id={`shelf-tab-${b.key}`}
               aria-selected={i === open}
               aria-controls={`shelf-panel-${b.key}`}
-              onClick={() => setOpen(i)}
+              onClick={() => {
+                trackEvent("ui_select", { component: "library_shelf", choice: b.key });
+                setOpen(i);
+              }}
               className={`spine ${b.kind === "exams" ? "spine-exams" : ""} ${i === open ? "spine-open" : ""}`}
               style={{ flexGrow: b.count ?? 8 }}
             >

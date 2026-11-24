@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import CtaLink from "./CtaLink";
 import { LINKS } from "@/lib/site";
 import { useIsCollege } from "./useAudience";
-import { trackCTAClick } from "@/lib/analytics";
+import { trackCTAClick, trackEvent } from "@/lib/analytics";
 
 type NavLink = { label: string; href: string; menu?: { label: string; href: string; note?: string }[] };
 
@@ -58,10 +58,10 @@ function AudienceToggle({ inst }: { inst: boolean }) {
   return (
     <nav aria-label="Choose audience" className="nav-aud" data-side={inst ? "colleges" : "students"}>
       <span aria-hidden className="nav-aud-thumb" />
-      <Link href="/" aria-current={!inst ? "page" : undefined}>
+      <Link href="/" aria-current={!inst ? "page" : undefined} onClick={() => inst && trackEvent("audience_switch", { from: "college", to: "student" })}>
         Students
       </Link>
-      <Link href="/institutions" aria-current={inst ? "page" : undefined}>
+      <Link href="/institutions" aria-current={inst ? "page" : undefined} onClick={() => !inst && trackEvent("audience_switch", { from: "student", to: "college" })}>
         Colleges
       </Link>
     </nav>

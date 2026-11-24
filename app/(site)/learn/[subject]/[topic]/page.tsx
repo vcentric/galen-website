@@ -1,5 +1,6 @@
 import CtaLink from "@/app/components/v2/CtaLink";
 import Link from "next/link";
+import TrackedLink from "@/app/components/v2/TrackedLink";
 import { notFound } from "next/navigation";
 import { getAllLessons, getLesson, subjectName } from "@/lib/learn";
 import { buildMetadata, breadcrumbLd, learningResourceLd } from "@/lib/seo";
@@ -144,9 +145,9 @@ export default async function LessonPage({ params }: Params) {
                 GalenAI explains {m.title.toLowerCase()} step by step, then tests you on it.
               </p>
               {m.appPracticeUrl ? (
-                <a className="btn btn-primary mt-5 w-full" href={m.appPracticeUrl} rel="noopener">
+                <TrackedLink href={m.appPracticeUrl} source={`learn_${subject}_${topic}_sidebar`} label={`Practise ${m.cbmeCodes[0] ?? "this topic"}`} className="btn btn-primary mt-5 w-full">
                   Practise {m.cbmeCodes[0] ?? "this topic"}
-                </a>
+                </TrackedLink>
               ) : (
                 <CtaLink intent="download" source={`learn_${subject}_${topic}_sidebar`} label="Get the app" className="mt-5 w-full" />
               )}

@@ -29,10 +29,10 @@ export default function BlogPostClient({
 
   // Fire once per article load — "how many people viewed this blog + which one".
   useEffect(() => {
-    trackEvent("article_view", {
-      slug: post.slug,
-      title: post.title,
-      category: post.category,
+    trackEvent("content_view", {
+      content_type: "article",
+      content_id: post.slug,
+      content_group: post.category,
     });
   }, [post.slug, post.title, post.category]);
 
@@ -62,6 +62,7 @@ export default function BlogPostClient({
   }, [contentHtml]);
 
   const handleShare = (platform: string) => {
+    trackEvent("share", { method: platform, content_type: "article", content_id: post.slug });
     const url = typeof window !== "undefined" ? window.location.href : "";
     const title = post.title;
 
@@ -96,6 +97,7 @@ export default function BlogPostClient({
   const toc = generateTOC();
 
   const handlePrint = () => {
+    trackEvent("pdf_download", { content_type: "article", content_id: post.slug });
     if (typeof window !== "undefined") window.print();
   };
 

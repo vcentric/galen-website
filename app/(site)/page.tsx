@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import TrackedLink from "@/app/components/v2/TrackedLink";
 import { buildMetadata, faqLd, softwareAppLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import { studentFaqs } from "@/content/site/demos";
@@ -303,9 +304,9 @@ export default function Home() {
               When a college uses GalenAI, lessons your faculty publish appear on your calendar, and the tutor answers
               from your college&apos;s approved content.
             </p>
-            <Link href="/institutions" className="btn btn-primary mt-7">
+            <TrackedLink href="/institutions" source="home_college" label="Show your college" className="btn btn-primary mt-7">
               Show your college
-            </Link>
+            </TrackedLink>
           </div>
           {/* The hand-off, drawn in the site's own UI (no screenshots): a lecture in the faculty workspace, its Publish
               button, and the same lecture arriving on the student's calendar. One picture for screen readers. */}

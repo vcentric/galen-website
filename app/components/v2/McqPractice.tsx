@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { AppLink } from "./CtaLink";
+import { trackEvent } from "@/lib/analytics";
 import type { PracticeMcq } from "@/lib/learn";
 
 type Subject = { key: string; name: string };
@@ -46,6 +47,7 @@ export default function McqPractice({ mcqs, subjects }: { mcqs: PracticeMcq[]; s
   const finished = !!q && picked !== null && i + 1 >= deck.length;
 
   const reset = (sub: string) => {
+    if (sub !== subject) trackEvent("content_filter", { where: "mcq_practice", choice: sub });
     setSubject(sub);
     setI(0);
     setPicked(null);
@@ -55,6 +57,8 @@ export default function McqPractice({ mcqs, subjects }: { mcqs: PracticeMcq[]; s
   const pick = (l: string) => {
     if (picked !== null || !q || !l) return;
     setPicked(l);
+    trackEvent("mcq_answer", { where: "mcq_practice", correct: l === q.answer, content_group: q.subject, question: i + 1 });
+    if (i + 1 >= deck.length) trackEvent("quiz_complete", { where: "mcq_practice", score: score.right + (l === q.answer ? 1 : 0), total: deck.length, content_group: subject });
     setScore((s) => ({ right: s.right + (l === q.answer ? 1 : 0), done: s.done + 1 }));
   };
   const next = () => {

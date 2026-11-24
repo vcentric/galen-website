@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import TrackedLink from "@/app/components/v2/TrackedLink";
 import { SiLinkedin } from "react-icons/si";
 import { founders, advisors, timelineItems } from "@/app/data/team";
 import { breadcrumbLd } from "@/lib/seo";
@@ -118,9 +119,9 @@ export default function TeamPage() {
           ))}
         </ol>
         <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <Link href="/contact" className="btn btn-primary">
+          <TrackedLink href="/contact" source="team_story" label="Talk to us" className="btn btn-primary">
             Talk to us
-          </Link>
+          </TrackedLink>
           <Link href="/institutions" className="vs-link">
             GalenAI for medical colleges <span aria-hidden>→</span>
           </Link>

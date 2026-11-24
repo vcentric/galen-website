@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Raleway, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Analytics from "@/app/components/v2/Analytics";
 import JsonLd from "./components/v2/JsonLd";
 import { SITE, IDS } from "@/lib/site";
 import { organizationLd, websiteLd } from "@/lib/seo";
@@ -67,7 +67,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${space.variable} ${raleway.variable} ${hanken.variable} antialiased overflow-x-hidden bg-white`}>
         <JsonLd data={[organizationLd(), websiteLd()]} />
-        <GoogleAnalytics gaId={IDS.ga4} />
+        <Analytics />
         {children}
       </body>
     </html>

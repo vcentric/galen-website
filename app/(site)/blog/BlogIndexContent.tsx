@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import FeaturedPost from "@/app/components/blog/FeaturedPost";
 import BlogCard from "@/app/components/blog/BlogCard";
 import FilterBar from "@/app/components/blog/FilterBar";
@@ -25,12 +25,6 @@ export default function BlogIndexContent({
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Fire once per blog-page load — "number of visits to the blog page".
-  // Covers /blog (category "All") and /blog/category/* (the category name).
-  useEffect(() => {
-    trackEvent("blog_index_view", { category: initialCategory });
-  }, [initialCategory]);
-
   const getFilteredPosts = useCallback(() => {
     let result = searchQuery
       ? searchPosts(posts, searchQuery)
@@ -49,6 +43,7 @@ export default function BlogIndexContent({
   const paginatedData = paginatePosts(filteredPosts, currentPage, 12);
 
   const handleCategoryChange = (category: string) => {
+    trackEvent("content_filter", { where: "articles", choice: category });
     setSelectedCategory(category);
     setCurrentPage(1);
     setSearchQuery("");
@@ -60,12 +55,14 @@ export default function BlogIndexContent({
   };
 
   const handleSearch = useCallback((query: string) => {
+    const term = query.trim();
+    if (term.length >= 2) trackEvent("site_search", { where: "articles", search_term: term.slice(0, 80), results: searchPosts(posts, term).length });
     setSearchQuery(query);
     setCurrentPage(1);
     if (query) {
       setSelectedCategory("All");
     }
-  }, []);
+  }, [posts]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

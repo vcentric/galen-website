@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 export type HelpGuide = { href: string; title: string; description: string; text: string };
 export type HelpRole = { id: string; label: string; blurb: string; where: string; whereHref: string; guides: HelpGuide[] };
@@ -20,6 +21,13 @@ export default function HowToIndex({ roles }: { roles: HelpRole[] }) {
   };
   const total = roles.reduce((n, r) => n + r.guides.length, 0);
   const shown = words.length ? roles.reduce((n, r) => n + r.guides.filter(match).length, 0) : total;
+  // Report a search once typing pauses, not on every keystroke.
+  useEffect(() => {
+    const term = q.trim();
+    if (term.length < 2) return;
+    const id = window.setTimeout(() => trackEvent("site_search", { where: "how_to", search_term: term.slice(0, 80), results: shown }), 1200);
+    return () => window.clearTimeout(id);
+  }, [q, shown]);
 
   return (
     <>

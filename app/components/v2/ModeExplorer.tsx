@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
 import Image from "next/image";
 import { useState } from "react";
 import { tutorModes } from "@/content/site/demos";
@@ -28,7 +29,10 @@ export default function ModeExplorer() {
             id={`mode-tab-${m.id}`}
             aria-selected={i === active}
             aria-controls={`mode-panel-${m.id}`}
-            onClick={() => setActive(i)}
+            onClick={() => {
+              trackEvent("ui_select", { component: "tutor_modes", choice: m.id });
+              setActive(i);
+            }}
             className={`mode-tab ${i === active ? "mode-tab-on" : ""}`}
           >
             <span aria-hidden className="mode-tab-n">

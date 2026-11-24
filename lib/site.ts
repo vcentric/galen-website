@@ -37,7 +37,8 @@ export const LINKS = {
 export const IDS = {
   appStoreId: "6755653561",
   playPackage: "com.galenai.galenai",
-  ga4: "G-K3TH8HMZP6",
+  // Website-only GA4 property ("Landing page" stream). The apps report to a different property.
+  ga4: "G-TSKV0W5C91",
   // Optional. Only needed if Search Console / Bing are verified by HTML tag instead of DNS.
   googleSiteVerification: "",
   bingSiteVerification: "",

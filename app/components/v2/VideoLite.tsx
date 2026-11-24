@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * Lite YouTube embed: shows a poster and loads the player only on click.
@@ -42,7 +43,10 @@ export default function VideoLite({
       ) : (
         <button
           type="button"
-          onClick={() => setPlay(true)}
+          onClick={() => {
+            trackEvent("video_start", { video_title: title.slice(0, 100), video_id: youtubeId });
+            setPlay(true);
+          }}
           aria-label={`Play video: ${title}`}
           className="absolute inset-0 h-full w-full"
         >

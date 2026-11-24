@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import TrackedLink from "@/app/components/v2/TrackedLink";
 import { faqLd, videoLd } from "@/lib/seo";
 import { CONTACT, LINKS, SITE } from "@/lib/site";
 import JsonLd from "@/app/components/v2/JsonLd";
@@ -355,9 +356,9 @@ export default function InstitutionsPage() {
           </table>
         </div>
         <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <Link href="/institutions/vs-lms" className="btn btn-primary">
+          <TrackedLink href="/institutions/vs-lms" source="inst_vs_lms" label="See the full comparison" className="btn btn-primary">
             See the full comparison
-          </Link>
+          </TrackedLink>
           <Link href="/institutions/integrations" className="vs-link">
             Your existing LMS content stays valuable <span aria-hidden>→</span>
           </Link>
