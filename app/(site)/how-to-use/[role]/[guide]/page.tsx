@@ -59,22 +59,24 @@ export default async function HowToGuidePage({ params }: Props) {
       toc={section.toc}
       trail={trail}
       footer={
-        <div className="mt-14 border-t border-[#e7dfd6] pt-8">
-          <nav className="flex flex-wrap justify-between gap-4" aria-label="More guides">
-            {prev ? (
-              <Link className="btn btn-ghost" href={`/how-to-use/${role}/${prev.slug}`}>
-                ← {prev.title}
+        <div className="mt-14">
+          <nav className="exam-pager !max-w-none" aria-label="More guides">
+            <Link className="exam-pager-a" href={prev ? `/how-to-use/${role}/${prev.slug}` : `/how-to-use/${role}`}>
+              <span>
+                <span aria-hidden>←</span> Previous
+              </span>
+              <b>{prev ? prev.title : "Start here"}</b>
+            </Link>
+            {next ? (
+              <Link className="exam-pager-a exam-pager-next" href={`/how-to-use/${role}/${next.slug}`}>
+                <span>
+                  Next <span aria-hidden>→</span>
+                </span>
+                <b>{next.title}</b>
               </Link>
             ) : (
-              <Link className="btn btn-ghost" href={`/how-to-use/${role}`}>
-                ← Start here
-              </Link>
+              <span />
             )}
-            {next ? (
-              <Link className="btn btn-ghost" href={`/how-to-use/${role}/${next.slug}`}>
-                {next.title} →
-              </Link>
-            ) : null}
           </nav>
           <p className="mt-8">
             <CtaLink

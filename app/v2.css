@@ -935,3 +935,66 @@
 .v2.exam .lmcq li.right { border-color: #2f8f55; background: #e8f5ec; outline: 0; }
 .v2.exam .lmcq li.wrong { border-color: #c0392b; background: #fdecea; outline: 0; }
 .v2.exam .lmcq-reveal { margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid rgba(46, 46, 46, 0.14); }
+
+/* /how-to-use hub: the search is the hero; guides follow as ruled lists per role on the paper tone */
+.v2 .help-count { padding-bottom: 2.5rem; }
+.v2 .help-band { padding-bottom: clamp(2rem, 5vw, 4rem); }
+.v2 .help-sec { padding-top: clamp(2.75rem, 5vw, 4rem); padding-bottom: 1rem; scroll-margin-top: 1rem; }
+.v2 .help-where { margin-top: 1rem; font: 700 0.68rem / 1.4 var(--font-space-var), sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(46, 46, 46, 0.7); }
+.v2 .help-where a { color: #b3411a; text-decoration: underline; text-underline-offset: 3px; }
+.v2 .help-contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem; padding-top: 3rem; padding-bottom: clamp(3.5rem, 7vw, 5.5rem); }
+@media (min-width: 1024px) { .v2 .help-sec.lidx-grid { grid-template-columns: 18.5rem minmax(0, 1fr); gap: 3rem; } }
+.v2 .help-sec .lidx-name { font-size: clamp(2rem, 3.2vw, 2.5rem); }
+
+/* /how-to-use inner pages: cream page like the rest of the site. The generated guide content (app/how-to.css)
+   is rethemed through its own tokens: lighter paper cards on cream, warm rules, no pure white. */
+.v2.howto-page .htu { --paper: #fff0e4; --card: #fffaf5; --line: #ead9ca; --muted: #5f574f; --soft: #fbdfcc; --soft-line: #f1c4a5; --shadow: 0 1px 2px rgba(46, 46, 46, 0.05), 0 14px 30px -14px rgba(46, 46, 46, 0.22); }
+.v2 .howto-roles { display: flex; gap: 0.25rem 1.75rem; overflow-x: auto; border-bottom: 1px solid rgba(46, 46, 46, 0.18); }
+.v2 .howto-roles a { flex-shrink: 0; margin-bottom: -1px; padding: 0.8rem 0; border-bottom: 2px solid transparent; font: 700 1rem / 1 var(--font-space-var), sans-serif; letter-spacing: -0.01em; color: rgba(46, 46, 46, 0.7); transition: color 0.2s ease, border-color 0.2s ease; }
+.v2 .howto-roles a:hover { color: var(--color-dark); }
+.v2 .howto-roles a[aria-current] { border-bottom-color: var(--color-orange); color: var(--color-dark); }
+.v2 .howto-rail { position: sticky; top: 5.5rem; max-height: calc(100vh - 7rem); overflow-y: auto; padding-right: 0.5rem; }
+.v2 .howto-rail > ol { border-left: 1px solid rgba(46, 46, 46, 0.16); }
+.v2 .howto-rail-a { display: block; margin-left: -1px; padding: 0.42rem 0 0.42rem 0.95rem; border-left: 2px solid transparent; font: 600 0.92rem / 1.3 var(--font-space-var), sans-serif; letter-spacing: -0.01em; color: rgba(46, 46, 46, 0.75); transition: color 0.2s ease; }
+.v2 .howto-rail-a:hover { color: var(--color-dark); }
+.v2 .howto-rail-a[aria-current] { border-left-color: var(--color-orange); font-weight: 700; color: var(--color-dark); }
+.v2 .howto-rail .exam-nav-secs { margin: 0.1rem 0 0.5rem 0.95rem; }
+.v2 .howto-help { display: grid; gap: 0.35rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(46, 46, 46, 0.16); font-size: 0.9rem; font-weight: 600; }
+.v2 .howto-help a { width: fit-content; text-decoration: underline; text-decoration-color: var(--color-orange); text-underline-offset: 4px; }
+.v2 .howto-fold { margin-bottom: 1.5rem; padding: 1rem 1.1rem; border: 1px solid #ead9ca; border-radius: 16px; background: #fffaf5; }
+/* Guide steps: one ruled list with a marker on the selected step (same pattern as the faculty step-through),
+   in place of a floating shadowed card with numbered circles. */
+.v2.howto-page .htu .steps { gap: 0; border-left: 2px solid rgba(46, 46, 46, 0.12); }
+.v2.howto-page .htu .steps li { margin-left: -2px; padding: 0.95rem 0.75rem 0.95rem 3.4rem; border: 0; border-left: 2px solid transparent; border-radius: 0 12px 12px 0; box-shadow: none; transition: background-color 0.2s ease, border-color 0.2s ease; }
+.v2.howto-page .htu .steps li::before { content: counter(s, decimal-leading-zero); left: 1.2rem; top: 1.15rem; width: auto; height: auto; border: 0; border-radius: 0; background: none; font: 700 0.78rem / 1 var(--font-space-var), sans-serif; letter-spacing: 0.12em; color: rgba(46, 46, 46, 0.6); }
+.v2.howto-page .htu .steps li b { font-size: 1.1rem; margin-bottom: 0.25rem; color: rgba(46, 46, 46, 0.78); transition: color 0.2s ease; }
+.v2.howto-page .htu .steps li p { font-size: 0.95rem; line-height: 1.55; }
+.v2.howto-page .htu .steps li:hover { background: rgba(46, 46, 46, 0.04); box-shadow: none; }
+.v2.howto-page .htu .steps li.on { border-left-color: var(--color-orange); background: #fffaf5; box-shadow: none; }
+.v2.howto-page .htu .steps li.on b { color: var(--color-dark); }
+.v2.howto-page .htu .steps li.on::before { background: none; color: #b3411a; }
+/* Names of on-screen buttons inside the text: bold with a quiet underline, not little boxes */
+.v2.howto-page .htu .ui { padding: 0; border: 0; border-radius: 0; background: none; font-family: var(--font-raleway-var), sans-serif; font-size: 1em; font-weight: 700; color: var(--color-dark); white-space: nowrap; box-shadow: inset 0 -0.42em 0 #f8d2ba; }
+/* Role landing "Start here" path: one ruled strip of numbered steps in a single row, not a wrap of boxes.
+   Each step has a short orange tick on the top rule that fills its column on hover. */
+.v2.howto-page .htu .flow { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; margin: 2rem 0 1rem; border-top: 2px solid var(--color-dark); }
+.v2.howto-page .htu .flow a { gap: 0.6rem; padding: 1.5rem 1.25rem 1.4rem; border: 0; border-left: 1px solid #ead9ca; border-radius: 0; background: none; transition: background-color 0.2s ease; }
+.v2.howto-page .htu .flow a:first-child { padding-left: 0; border-left: 0; }
+.v2.howto-page .htu .flow a::before { content: counter(f, decimal-leading-zero); display: block; width: auto; height: auto; margin-bottom: 0.5rem; border-radius: 0; background: none; color: #b3411a; font: 700 0.8rem / 1 var(--font-space-var), sans-serif; letter-spacing: 0.14em; }
+.v2.howto-page .htu .flow a::after { content: ""; position: absolute; top: -2px; left: 1.25rem; width: 2.25rem; height: 2px; background: var(--color-orange); transition: width 0.3s ease; }
+.v2.howto-page .htu .flow a:first-child::after { left: 0; }
+.v2.howto-page .htu .flow b { font: 700 1.15rem / 1.2 var(--font-space-var), sans-serif; letter-spacing: -0.02em; transition: color 0.2s ease; }
+.v2.howto-page .htu .flow span { font: 500 0.92rem / 1.5 var(--font-raleway-var), sans-serif; color: #5f574f; }
+.v2.howto-page .htu .flow a:hover { transform: none; border-color: #ead9ca; }
+.v2.howto-page .htu .flow a:hover b { color: #c94d20; }
+.v2.howto-page .htu .flow a:hover::after { width: calc(100% - 1.25rem); }
+.v2.howto-page .htu .flow a:first-child:hover::after { width: 100%; }
+.v2.howto-page .htu .flow-note { font: 500 0.85rem / 1.5 var(--font-raleway-var), sans-serif; }
+@media (max-width: 899px) {
+  .v2.howto-page .htu .flow { grid-auto-flow: row; border-top: 0; }
+  .v2.howto-page .htu .flow a, .v2.howto-page .htu .flow a:first-child { grid-template-columns: 2.5rem 1fr; column-gap: 0.5rem; padding: 1.1rem 0; border-left: 0; border-top: 1px solid #ead9ca; }
+  .v2.howto-page .htu .flow a:first-child { border-top: 2px solid var(--color-dark); }
+  .v2.howto-page .htu .flow a::before { grid-row: 1 / span 2; margin: 0.25rem 0 0; }
+  .v2.howto-page .htu .flow a::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .v2.howto-page .htu .flow a::after { transition: none; } }

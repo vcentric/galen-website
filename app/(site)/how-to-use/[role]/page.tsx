@@ -41,14 +41,18 @@ export default async function HowToRolePage({ params }: Props) {
           <h2 className="h2">
             All {r.label.toLowerCase()} <span className="acc">guides.</span>
           </h2>
-          <ol className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <ol className="lidx-list mt-8">
             {r.guides.map((g) => (
               <li key={g.slug}>
-                <Link href={`/how-to-use/${role}/${g.slug}`} className="card block h-full p-6">
-                  <h3 className="h3">{g.title}</h3>
-                  <p className="mt-2 text-sm" style={{ color: "var(--body)" }}>
-                    {g.description}
-                  </p>
+                <Link href={`/how-to-use/${role}/${g.slug}`} className="lidx-row">
+                  <span className="lidx-main">
+                    <span className="lidx-title">{g.title}</span>
+                    <span className="lidx-sub">{g.description}</span>
+                  </span>
+                  <span />
+                  <span aria-hidden className="lidx-go">
+                    →
+                  </span>
                 </Link>
               </li>
             ))}

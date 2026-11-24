@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { howToRoles, howToRoleKeys, HOW_TO_LIVE } from "@/content/site";
 import { searchIndex } from "@/content/howto";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import HowToSearch from "@/app/components/v2/HowToSearch";
-import { Headline, Kicker, Section } from "@/app/components/v2/ui";
+import HowToIndex from "@/app/components/v2/HowToIndex";
+import { Headline, Kicker } from "@/app/components/v2/ui";
+import { CONTACT, LINKS } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "How to Use GalenAI: Student and Faculty Guides",
@@ -20,49 +20,44 @@ const BLURB: Record<string, string> = {
   administration: "Roles, courses and batches, people, the CBME timetable and institute analytics.",
 };
 
-/** Help centre hub: search plus a card per role. */
+/** Help centre hub: a search that filters every guide, then each role's guides as a ruled list. */
 export default function HowToHub() {
+  const index = searchIndex();
+  const textOf = (href: string) => index.find((r) => r.href === href)?.text ?? "";
   return (
-    <div className="v2" data-tone="neutral">
+    <div className="v2 lesson">
       <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: "How to use", path: "/how-to-use" }])} />
-      <header className="wrap pt-24 pb-6 md:pt-32">
+      <header className="wrap exam-head !pb-8">
         <Kicker>Help centre</Kicker>
         <div className="mt-5">
           <Headline text="How to use" accent="GalenAI." />
         </div>
         <p className="lead mt-6">Pick your role. Every guide is a short list of steps with a screenshot for each one.</p>
-        <div className="mt-8">
-          <HowToSearch index={searchIndex()} />
-        </div>
       </header>
-      <Section>
-        <div className="grid gap-4 lg:grid-cols-3">
-          {howToRoleKeys.map((role) => (
-            <div key={role} className="card flex flex-col p-7">
-              <h2 className="h2 !text-[2rem]">
-                <Link href={`/how-to-use/${role}`}>
-                  For <span className="acc">{howToRoles[role].label.toLowerCase()}</span>
-                </Link>
-              </h2>
-              <p className="mt-3" style={{ color: "var(--body)" }}>
-                {BLURB[role]}
-              </p>
-              <ul className="mt-5 flex-1 space-y-2">
-                {howToRoles[role].guides.slice(0, 6).map((g) => (
-                  <li key={g.slug}>
-                    <Link href={`/how-to-use/${role}/${g.slug}`} className="underline decoration-[#eb602d]/40 underline-offset-4 hover:decoration-[#eb602d]">
-                      {g.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <Link href={`/how-to-use/${role}`} className="btn btn-ghost mt-6 self-start">
-                All {howToRoles[role].guides.length} guides
-              </Link>
-            </div>
-          ))}
+      <HowToIndex
+        roles={howToRoleKeys.map((role) => ({
+          id: role,
+          label: howToRoles[role].label,
+          blurb: BLURB[role],
+          where: howToRoles[role].appUrl.replace("https://", ""),
+          whereHref: howToRoles[role].appUrl,
+          guides: howToRoles[role].guides.map((g) => {
+            const href = `/how-to-use/${role}/${g.slug}`;
+            return { href, title: g.title, description: g.description, text: textOf(href) };
+          }),
+        }))}
+      />
+      <section className="wrap help-contact">
+        <h2 className="h3 !text-[1.6rem]">Need help?</h2>
+        <div className="flex flex-wrap gap-3">
+          <a href={`mailto:${CONTACT.support}`} className="btn btn-ghost">
+            {CONTACT.support}
+          </a>
+          <a href={LINKS.whatsapp} rel="noopener" className="btn btn-ghost">
+            WhatsApp us
+          </a>
         </div>
-      </Section>
+      </section>
     </div>
   );
 }
