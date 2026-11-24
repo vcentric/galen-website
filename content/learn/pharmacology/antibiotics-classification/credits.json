@@ -1,0 +1,41 @@
+[
+  {
+    "file": "images/bacterial-targets.webp",
+    "slot": "bacterial-targets",
+    "source": "https://commons.wikimedia.org/wiki/File:How_do_different_antibiotics_work%3F.png",
+    "title": "File:How do different antibiotics work?.png",
+    "author": "Our World in Data, Saloni Dattani; Adapted from Sanseverino et al. (2018) and Hutchings, Truman, and Wilkinson (2019).; icons from NIH BioArt",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Our World in Data, Saloni Dattani; Adapted from Sanseverino et al. (2018) and Hutchings, T, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/beta-lactam-structure.webp",
+    "slot": "beta-lactam-structure",
+    "source": "https://commons.wikimedia.org/wiki/File:Beta-lactam_core_structures.svg",
+    "title": "File:Beta-lactam core structures.svg",
+    "author": "Fvasconcellos",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/resistance-mechanisms.webp",
+    "slot": "resistance-mechanisms",
+    "source": "https://commons.wikimedia.org/wiki/File:Antibiotic_resistance_mechanisms.jpg",
+    "title": "File:Antibiotic resistance mechanisms.jpg",
+    "author": "Gerard D Wright",
+    "license": "CC BY 2.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Gerard D Wright, CC BY 2.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

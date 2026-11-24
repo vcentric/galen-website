@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/cerebellum-lobes-fissures.webp",
+    "slot": "cerebellum-lobes-fissures",
+    "source": "https://commons.wikimedia.org/wiki/File:1613_Major_Regions_of_the_Cerebellum-02.svg",
+    "title": "File:1613 Major Regions of the Cerebellum-02.svg",
+    "author": "Original file created by OpenStax College.",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Original file created by OpenStax College, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/cerebellar-cortex-layers.webp",
+    "slot": "cerebellar-cortex-layers",
+    "source": "https://commons.wikimedia.org/wiki/File:Cerebellar_Circuit.svg",
+    "title": "File:Cerebellar Circuit.svg",
+    "author": "Tom282f3",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Tom282f3, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

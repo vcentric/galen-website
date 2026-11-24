@@ -1,0 +1,54 @@
+[
+  {
+    "file": "images/interdigital-apoptosis-limb-bud.webp",
+    "slot": "interdigital-apoptosis-limb-bud",
+    "source": "https://commons.wikimedia.org/wiki/File:Duplication_of_digit_4_is_preceded_by_reduced_apoptosis_and_expanded_chondrogenesis_in_the_posterior_limb_mesenchyme.png",
+    "title": "File:Duplication of digit 4 is preceded by reduced apoptosis and expanded chondrogenesis in the posterior limb mesenchyme.png",
+    "author": "Farin HF, L\u00fcdtke TH-W, Schmidt MK, Placzko S, Schuster-Gossler K, Petry M, et al.",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Farin HF, L\u00fcdtke TH-W, Schmidt MK, Placzko S, Schuster-Gossler K, Petry M, et al, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/apoptosis-vs-necrosis-diagram.webp",
+    "slot": "apoptosis-vs-necrosis-diagram",
+    "source": "https://commons.wikimedia.org/wiki/File:Structural_changes_of_cells_undergoing_necrosis_or_apoptosis.png",
+    "title": "File:Structural changes of cells undergoing necrosis or apoptosis.png",
+    "author": "National institute on alcohol abuse and alcoholism (NIAAA)",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/intrinsic-extrinsic-pathways.webp",
+    "slot": "intrinsic-extrinsic-pathways",
+    "source": "https://commons.wikimedia.org/wiki/File:Apop1.png",
+    "title": "File:Apop1.png",
+    "author": "Tsgupta",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Tsgupta, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/phosphatidylserine-flip-efferocytosis.webp",
+    "slot": "phosphatidylserine-flip-efferocytosis",
+    "source": "https://commons.wikimedia.org/wiki/File:Phagoptosis.png",
+    "title": "File:Phagoptosis.png",
+    "author": "ProMoDoc",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "ProMoDoc, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  }
+]

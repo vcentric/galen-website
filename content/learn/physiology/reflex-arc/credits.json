@@ -1,0 +1,41 @@
+[
+  {
+    "file": "images/reflex-arc-components.webp",
+    "slot": "reflex-arc-components",
+    "source": "https://commons.wikimedia.org/wiki/File:Imgnotra%C3%A7at_arc_reflex_eng.svg",
+    "title": "File:Imgnotra\u00e7at arc reflex eng.svg",
+    "author": "MartaAguayo",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "MartaAguayo, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/stretch-reflex-circuit.webp",
+    "slot": "stretch-reflex-circuit",
+    "source": "https://commons.wikimedia.org/wiki/File:Patellar_tendon_reflex_arc.png",
+    "title": "File:Patellar tendon reflex arc.png",
+    "author": "Amiya Sarkar",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Amiya Sarkar, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/muscle-spindle-structure.webp",
+    "slot": "muscle-spindle-structure",
+    "source": "https://commons.wikimedia.org/wiki/File:Muscle_spindle_antioxidants-09-00212-g001.png",
+    "title": "File:Muscle spindle antioxidants-09-00212-g001.png",
+    "author": "Balazs Sonkodi, Istvan Berkes, Erika Koltai",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Balazs Sonkodi, Istvan Berkes, Erika Koltai, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/brainstem-anterior-view.webp",
+    "slot": "brainstem-anterior-view",
+    "source": "https://commons.wikimedia.org/wiki/File:Blausen_0114_BrainstemAnatomy.png",
+    "title": "File:Blausen 0114 BrainstemAnatomy.png",
+    "author": "BruceBlaus. When using this image in external sources it can be cited as: Blausen.com staff (2014). \"Medical gallery of Blausen Medical 2014\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.010. ISSN 2002-4436.",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "BruceBlaus, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/cranial-nerve-nuclei.webp",
+    "slot": "cranial-nerve-nuclei",
+    "source": "https://commons.wikimedia.org/wiki/File:Representative_illustration_of_the_brainstem_demonstrating_the_normal_configuration_of_the_cranial_nerves_and_their_associated_nuclei._The_vagus_nerve_originates_from_the_nucleus_ambiguus_of_the_medulla.webp",
+    "title": "File:Representative illustration of the brainstem demonstrating the normal configuration of the cranial nerves and their associated nuclei. The vagus nerve originates from the nucleus ambiguus of the medulla.webp",
+    "author": "Nadezdha D. Kiriyak",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Nadezdha D. Kiriyak, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

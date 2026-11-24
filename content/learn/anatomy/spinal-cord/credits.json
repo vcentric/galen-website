@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/spinal-meninges.webp",
+    "slot": "spinal-meninges",
+    "source": "https://commons.wikimedia.org/wiki/File:Gray770-en.svg",
+    "title": "File:Gray770-en.svg",
+    "author": "Mysid",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/spinal-tracts.webp",
+    "slot": "spinal-tracts",
+    "source": "https://commons.wikimedia.org/wiki/File:Spinal_cord_tracts_-_English.svg",
+    "title": "File:Spinal cord tracts - English.svg",
+    "author": "Polarlys and Mikael H\u00e4ggstr\u00f6m",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Polarlys and Mikael H\u00e4ggstr\u00f6m, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

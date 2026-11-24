@@ -1,0 +1,41 @@
+[
+  {
+    "file": "images/nmj-structure.webp",
+    "slot": "nmj-structure",
+    "source": "https://commons.wikimedia.org/wiki/File:1009_Motor_End_Plate_and_Innervation.jpg",
+    "title": "File:1009 Motor End Plate and Innervation.jpg",
+    "author": "OpenStax",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "OpenStax, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/acetylcholine-release.webp",
+    "slot": "acetylcholine-release",
+    "source": "https://commons.wikimedia.org/wiki/File:Muscle_Contraction_Process.svg",
+    "title": "File:Muscle Contraction Process.svg",
+    "author": "Elliejellybelly13",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Elliejellybelly13, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/nicotinic-ach-receptor.webp",
+    "slot": "nicotinic-ach-receptor",
+    "source": "https://commons.wikimedia.org/wiki/File:NAChR.png",
+    "title": "File:NAChR.png",
+    "author": "Ataly",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Ataly, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  }
+]

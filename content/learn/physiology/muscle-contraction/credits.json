@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/sarcomere-sliding-filament.webp",
+    "slot": "sarcomere-sliding-filament",
+    "source": "https://commons.wikimedia.org/wiki/File:Sarcomere.svg",
+    "title": "File:Sarcomere.svg",
+    "author": "David Richfield (User:Slashme) When using this image in external works, it may be cited as follows: Richfield, David (2014). \"Medical gallery of David Richfield\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.009. ISSN 2002-4436.",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "David Richfield, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/troponin-tropomyosin-calcium.webp",
+    "slot": "troponin-tropomyosin-calcium",
+    "source": "https://commons.wikimedia.org/wiki/File:Actin-tropomyosin-troponin.png",
+    "title": "File:Actin-tropomyosin-troponin.png",
+    "author": "Daniel Walsh and Alan Sved",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Daniel Walsh and Alan Sved, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  }
+]

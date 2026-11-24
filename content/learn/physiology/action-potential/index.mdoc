@@ -1,0 +1,375 @@
+---
+title: Action Potential
+subtitle: Resting potential, threshold, depolarization and repolarization, sodium and potassium channels, all-or-none law, refractory periods, conduction, drugs and the cardiac plateau.
+excerpt: "Action potential for MBBS: resting potential, threshold, sodium and potassium channel gating, all-or-none law, refractory periods, saltatory conduction, toxins and the cardiac plateau, with MCQs, viva questions and flashcards."
+collection: learn
+subject: physiology
+topic: action-potential
+phase: Phase 1
+region: Nerve and muscle
+cbme_codes:
+  - PY1.7
+primary_keyword: action potential
+secondary_keywords:
+  - action potential physiology
+  - phases of action potential
+  - depolarization and repolarization
+  - refractory period
+  - saltatory conduction
+author_name: Team GalenAI
+author_type: galenai_team
+publish_date: 2026-11-13
+reviewed_by: ""
+reviewed_on: ""
+is_published: true
+generated_with: "GalenAI textbook library (RAG), 2026-11-13"
+sources:
+  - Standard physiology, pharmacology, neuroanatomy and clinical neurophysiology references (retrieved from the GalenAI library; passage list in _rag/ for the reviewer)
+meta_title: "Action Potential for MBBS: Phases, Channels | GalenAI"
+meta_description: "Action potential for MBBS in one page: resting potential, threshold, sodium and potassium channels, all-or-none law, MCQs and viva questions."
+---
+{% callout type="summary" %}
+**Quick answer:** An action potential is a brief, self-propagating reversal of membrane polarity in an excitable cell. When depolarization reaches threshold, voltage-gated sodium channels open and sodium rushes in, taking the inside from about -70 mV to about +20 mV. Sodium channels then inactivate and potassium channels let potassium out, restoring the resting potential. It is all-or-none.
+{% /callout %}
+
+{% cbmeTags codes="PY1.7" phase="Phase 1" /%}
+
+{% figure src="/learn-images/physiology/action-potential/action-potential-waveform-overview.webp" alt="Labelled graph of a neuronal action potential showing resting potential, threshold, depolarization, repolarization and hyperpolarization." caption="A nerve action potential rises rapidly from rest through threshold to a positive peak, then falls back and dips briefly below the resting level." credit="Artwork by Synaptidude at en.wikipedia, CC BY-SA 3.0, via Wikimedia Commons" license="CC BY-SA 3.0" source="https://commons.wikimedia.org/wiki/File:Action_potential_vert.png" width="795" height="1130" /%}
+
+## What is an action potential?
+
+An **action potential** is how nerve and muscle fibres send signals. It is a rapid change in the membrane potential that spreads along the fibre membrane. Each action potential starts with a sudden change from the negative resting potential to a positive potential, and ends with an almost equally rapid return to negative.
+
+Some terms to define first:
+
+- **Membrane potential:** the voltage across the cell membrane, measured inside relative to outside.
+- **Depolarization:** the membrane potential becomes less negative.
+- **Repolarization:** the membrane potential returns towards the resting negative value.
+- **Hyperpolarization:** the membrane potential becomes more negative than at rest.
+- **Conduction:** the passage of an electrical impulse along an axon or muscle fibre.
+
+Where do action potentials arise? Dendrites and the neuronal cell body depend mainly on neurotransmitter action and show **graded potentials**. Axons have voltage-gated channels that give rise to action potentials. The integrated input to the cell body is converted to an output at the junction of the axon with the cell body, the axon hillock. Voltage-sensitive channels are concentrated at this **trigger zone**, the axon initial segment. When it is sufficiently depolarized, an action potential is generated and conducted along the axon.
+
+## Resting membrane potential: the starting point
+
+At rest the inside of a typical mammalian axon is about 70 mV negative to the outside. For neural membranes the resting potential averages -60 to -70 mV.
+
+{% figure src="/learn-images/physiology/action-potential/resting-potential-ion-gradients-pump.webp" alt="Diagram of a cell membrane showing sodium and potassium concentrations, a leak channel and the sodium potassium pump." caption="Potassium leaks out down its gradient while the sodium potassium pump keeps sodium low and potassium high inside the cell." credit="BruceBlaus, CC BY 3.0, via Wikimedia Commons" license="CC BY 3.0" source="https://commons.wikimedia.org/wiki/File:Sodium-potassium_pump_and_diffusion.png" width="960" height="576" /%}
+
+- **Potassium** is the main contributor. Potassium is about 10 times more concentrated inside the cell. A pump moves potassium into the cell and sodium out. At rest most sodium channels have their gates closed, while more potassium channels are open. So resting neurons have a greater conductance to potassium.
+- **Potassium alone would give about -90 mV.** In spinal motor neurons the potassium equilibrium potential (E K) is -90 mV, while the sodium equilibrium potential (E Na) is +60 mV. The real resting potential is -70 mV because leak currents of sodium, chloride and other ions also affect it.
+- **The Na, K ATPase** keeps the gradients from running down. Neither E K nor E Na equals the resting potential, so without the pump the cell would slowly gain sodium and lose potassium. The pump actively moves sodium out and potassium in, against their electrochemical gradients.
+
+## Stages of the action potential
+
+{% table %}
+- **Stage**
+- **What happens**
+- **Ion movement**
+---
+- **Resting**
+- The membrane is "polarized" at about -70 mV
+- Most sodium channels closed; potassium channels more open
+---
+- **Threshold**
+- A depolarizing stimulus brings the membrane to the threshold potential
+- Some voltage-gated sodium channels open
+---
+- **Depolarization (upstroke)**
+- Rapid rise of membrane potential, then overshoot to about +20 mV in large fibres
+- Sodium enters through voltage-gated sodium channels
+---
+- **Repolarization**
+- Return towards the resting negative value
+- Sodium channels inactivate; potassium channels open and potassium leaves
+---
+- **After-hyperpolarization**
+- The potential dips below the resting level before recovering
+- Potassium channels remain open for a while
+{% /table %}
+
+Time course in a neurone: the rapid reversal is completed in about 0.5 msec. A slower recovery phase of up to 5 msec follows, during which the resting potential is even hyperpolarized.
+
+Not every fibre overshoots. In large nerve fibres the membrane potential goes beyond zero and becomes positive. In some smaller fibres, and in many central nervous system neurons, it only approaches zero.
+
+The amplitude of an axon action potential recorded inside the cell is fixed at around 100 mV.
+
+## The voltage-gated sodium channel
+
+Depolarization and repolarization both depend on the **voltage-gated sodium channel**. It has two gates:
+
+{% figure src="/learn-images/physiology/action-potential/sodium-channel-gating-states.webp" alt="Diagram of a voltage-gated sodium channel in resting, open and inactivated states with its two gates labelled." caption="The activation gate opens on depolarization and the inactivation gate then closes, so sodium entry is brief." credit="Tlunchman, CC BY-SA 4.0, via Wikimedia Commons" license="CC BY-SA 4.0" source="https://commons.wikimedia.org/wiki/File:Ball_and_Chain_Voltage-gated_Ion_Channel.png" width="960" height="203" /%}
+
+- The **activation gate**, near the outside of the channel. It is closed at rest, so no sodium enters.
+- The **inactivation gate**, near the inside of the channel. It is open at rest.
+
+The channel passes through three states:
+
+1. **Resting:** activation gate closed.
+2. **Activated:** when the membrane potential rises from -70 mV to about -55 mV, the activation gate flips open. Sodium pours in, and sodium permeability rises 500 to 5000-fold.
+3. **Inactivated:** the same rise in voltage that opens the activation gate also closes the inactivation gate. The channel stays in this inactivated state for a few milliseconds before returning to the resting state, when it can be activated again.
+
+A **voltage-gated potassium channel** also opens on depolarization, but later than the sodium channel. It speeds up repolarization. The sodium peak never reaches E Na (+60 mV), mainly because the sodium conductance is short-lived. In addition, the electrical gradient for sodium reverses during the overshoot, which limits further sodium entry.
+
+## Threshold and the positive feedback cycle
+
+An action potential does not start until **threshold** is reached. In a large nerve fibre a sudden rise of 15 to 30 mV is usually needed. A rise from -70 mV to about -55 mV usually causes the explosive development of an action potential, so -55 mV is the threshold for stimulation.
+
+{% figure src="/learn-images/physiology/action-potential/threshold-subthreshold-stimuli.webp" alt="Graph comparing subthreshold depolarizations with a suprathreshold stimulus that fires a full action potential." caption="Only a depolarization that reaches threshold fires an action potential, and its size does not depend on stimulus strength." credit="Blacktc, CC BY 4.0, via Wikimedia Commons" license="CC BY 4.0" source="https://commons.wikimedia.org/wiki/File:All-or-none_law_en.svg" width="960" height="892" /%}
+
+How does it start? If anything raises the membrane potential from -70 mV towards zero, some voltage-gated sodium channels begin to open. Sodium enters and raises the potential further, which opens more sodium channels. This is a **positive feedback cycle**. It continues until all the voltage-gated sodium channels have been activated. Within a fraction of a millisecond the sodium channels close and potassium channels open, and the action potential ends.
+
+**Subthreshold stimuli** do not produce an action potential, but they do disturb the membrane locally. These local changes are called electrotonic potentials. They rise sharply, decay with time, and shrink rapidly with distance from the stimulating electrode. A cathodal (negative) stimulus depolarizes the membrane. An anodal (positive) stimulus hyperpolarizes it, which lowers excitability.
+
+Other terms linked to threshold:
+
+- **Threshold intensity:** the minimal intensity of stimulating current that, acting for a given duration, just produces an action potential.
+- **Strength-duration curve:** the relation between strength and duration of a threshold stimulus. Weak stimuli need a long duration and strong stimuli a short one.
+- **Adaptation:** slowly rising currents fail to fire the nerve because the nerve adapts to the applied stimulus.
+
+## All-or-none law and safety factor
+
+Once threshold is reached, a full action potential is produced. A stronger stimulus does not make it bigger. A subthreshold stimulus gives no action potential at all. The size and duration of the action potential are the same for a particular neurone, whatever the strength of the stimulus above threshold. This is the **all-or-none** principle, and it applies to all normal excitable tissues.
+
+For the impulse to keep travelling, the ratio of action potential strength to threshold for excitation must always be greater than 1. This is the **safety factor**. If the action potential at some point does not generate enough voltage to excite the next area, spread stops.
+
+{% callout type="tip" %}
+**Strength is coded by frequency, not size.** Because each action potential is all-or-none, a fibre cannot make bigger spikes. The refractory period sets the maximum rate at which it can fire.
+{% /callout %}
+
+## Refractory periods
+
+- **Absolute refractory period:** from the time the firing level is reached until repolarization is about one-third complete. No stimulus, however strong, can excite the nerve. This is because the sodium channels are inactivated.
+- **Relative refractory period:** from that point until the start of after-depolarization. A stronger than normal stimulus can excite the nerve.
+
+The length of the refractory period sets the maximum frequency at which action potentials can be conducted along a fibre. In large myelinated fibres the absolute refractory period is about 1/2500 second, so such a fibre can carry a maximum of about 2500 impulses per second.
+
+## Propagation along the axon
+
+An action potential at one point excites the neighbouring membrane.
+
+{% figure src="/learn-images/physiology/action-potential/local-circuit-propagation-unmyelinated.webp" alt="Diagram of an action potential travelling along an unmyelinated axon with local current loops ahead of the active region." caption="Current flowing from the active patch of membrane depolarizes the next patch to threshold, like a flame moving along a fuse." credit="Qniemiec, CC BY-SA 4.0, via Wikimedia Commons" license="CC BY-SA 4.0" source="https://commons.wikimedia.org/wiki/File:Propagation_of_action_potential_along_a_giant_axon_en.png" width="960" height="1200" /%}
+
+1. Sodium entering at the active site carries positive charge into the axon.
+2. This charge spreads as **local circuit currents** to the adjacent resting membrane, in both directions along the axon.
+3. In the neighbouring membrane, the voltage rises above threshold. Its sodium channels open, and the action potential spreads.
+
+In a large myelinated fibre the charge raises the voltage above threshold over 1 to 3 mm. In an unmyelinated axon, conduction is like a flame moving along a fuse. Each segment is ignited by its upstream neighbour.
+
+An excitable membrane has no single direction of propagation. The impulse travels in all directions away from the stimulus. In the body, conduction along the axon is normally from the cell body to the terminals. This is called **orthodromic** conduction. Conduction in the opposite direction is **antidromic**. An antidromic impulse dies out at the first synapse it meets, because synapses allow conduction in one direction only.
+
+When the action potential reaches the axon terminals, it depolarizes the presynaptic membrane. Neurotransmitter is released to act on the next neurone, muscle fibre or gland cell.
+
+Each action potential slightly reduces the sodium and potassium concentration differences across the membrane. The Na, K pump restores them. Its activity rises steeply with internal sodium: when internal sodium rises from 10 to 20 mEq/L, pump activity increases about eightfold.
+
+## Saltatory conduction in myelinated fibres
+
+Myelinated fibres are insulated by myelin along most of their length, except at the **nodes of Ranvier**. Voltage-gated sodium channels are clustered at the nodes. The nodal membrane is the only place where a high density of inward sodium current can be generated.
+
+{% figure src="/learn-images/physiology/action-potential/saltatory-conduction-nodes-of-ranvier.webp" alt="Diagram of a myelinated axon showing the action potential jumping between nodes of Ranvier." caption="Myelin insulates the axon, so the action potential is regenerated only at the nodes and appears to jump along the fibre." credit="Helixitta, CC BY-SA 4.0, via Wikimedia Commons" license="CC BY-SA 4.0" source="https://commons.wikimedia.org/wiki/File:Propagation_of_action_potential_along_myelinated_nerve_fiber_en.svg" width="960" height="552" /%}
+
+When one node reaches threshold, its sodium channels open. The high resistance and low capacitance of myelin direct the current to the next node, which is excited to threshold. The action potential therefore jumps from node to node. This is **saltatory conduction**, and it greatly increases conduction velocity. The distance between nodes (internodal distance) is related to axon diameter and varies from 0.2 to 2.0 mm.
+
+## Conduction velocity and nerve fibre types
+
+Conduction velocity depends mainly on fibre diameter and myelination. The larger the axon, and the greater the distance between nodes of Ranvier, the faster it conducts. Overall, action potentials spread at a constant velocity within the range of 4 to 120 m/s. Nerve fibres range from 0.5 to 20 micrometres in diameter, and the larger the diameter, the greater the conducting velocity.
+
+{% table %}
+- **Fibre type**
+- **Diameter (micrometres)**
+- **Myelin**
+- **Velocity (m/s)**
+- **Function**
+---
+- **A-alpha and A-beta**
+- 6 to 22
+- Present
+- 30 to 120
+- Motor and proprioception
+---
+- **A-gamma**
+- 3 to 6
+- Present
+- 15 to 35
+- Efferent to muscle spindle, muscle tone
+---
+- **A-delta**
+- 1 to 4
+- Present
+- 5 to 25
+- Sensory: pain, touch, temperature
+---
+- **B**
+- Less than 3
+- Present
+- 3 to 15
+- Preganglionic sympathetic, autonomic function
+---
+- **C**
+- 0.3 to 1.3
+- Absent
+- 0.7 to 1.3
+- Postganglionic sympathetic; pain and temperature afferents
+{% /table %}
+
+The large axons mainly carry proprioception, somatic motor function, conscious touch and pressure. The smaller axons carry pain, temperature and autonomic function.
+
+**Measuring it:** conduction velocity is the distance between the stimulating and recording points divided by the time taken, in m/s. Normal recorded velocities are about 50 to 60 m/s in the upper limb and 40 to 50 m/s in the lower limb. A fall in velocity points to nerve injury or some defect in the nerve. Only the large, fast, myelinated fibres give signals big enough to record with surface electrodes.
+
+## Drugs, toxins and ions that change the action potential
+
+{% table %}
+- **Agent**
+- **Target**
+- **Effect**
+---
+- **Tetrodotoxin and saxitoxin**
+- Outer mouth of the sodium channel pore
+- Block the pore, so the action potential is blocked
+---
+- **Local anaesthetics (procaine, tetracaine)**
+- Activation gates of sodium channels
+- Make the gates harder to open and reduce excitability. When the safety factor falls below 1.0, impulses fail to pass the anaesthetized nerve
+---
+- **Tetraethylammonium and 4-aminopyridine**
+- Voltage-gated potassium channels
+- Block potassium channels
+---
+- **Veratridine and batrachotoxin**
+- Sodium channels
+- Cause persistent activation
+---
+- **Scorpion toxins**
+- Sodium channels
+- Prevent inactivation
+{% /table %}
+
+Tetrodotoxin and saxitoxin act in nanomolar concentrations. Tetrodotoxin is found in some fish, including the puffer fish (fugu), and in some newts and frogs. Saxitoxin comes from dinoflagellates that shellfish feed on. During a red tide the shellfish become toxic and can cause paralytic shellfish poisoning. Veratridine, batrachotoxin and scorpion toxins increase neuronal excitability.
+
+**Ions:**
+
+- A high extracellular calcium concentration reduces membrane permeability to sodium and reduces excitability. Calcium is called a **stabilizer**.
+- **Hyperkalaemia** moves the resting potential closer to threshold, so the neurone becomes more excitable.
+- **Hypokalaemia** hyperpolarizes the membrane.
+
+## The cardiac action potential: the plateau
+
+In ventricular muscle the intracellular potential rises from about -85 mV between beats to about +20 mV during a beat, a change of about 105 mV. After the initial spike, the membrane stays depolarized for about 0.2 second. This is the **plateau**, and it ends with abrupt repolarization. In heart muscle the plateau lasts as long as 0.2 to 0.3 second, and it makes ventricular contraction last much longer than in skeletal muscle.
+
+Why is the heart different? In skeletal muscle the action potential is caused almost entirely by fast sodium channels. These stay open for only a few thousandths of a second, and then close abruptly. In cardiac muscle, two types of channel open:
+
+1. The same voltage-activated **fast sodium channels** as in skeletal muscle.
+2. **L-type calcium channels** (slow calcium channels, also called calcium-sodium channels). They are slower to open and remain open for a long time, which keeps the membrane depolarized.
+
+Calcium entering through these channels is also a stimulus for events inside the cell. Calcium influx is also important in the release of transmitter at nerve terminals.
+
+## Clinical links
+
+- **Demyelination.** In multiple sclerosis there is primary demyelination, loss of the myelin sheath with the axon preserved. It causes **conduction block**, because the newly exposed membrane between former nodes has few voltage-sensitive sodium channels. Remyelinated axons can conduct at near-normal speeds because the safety factor is still greater than 1.
+- **Long QT syndrome.** This is a prolonged QT interval on the ECG. It can cause irregular heartbeats, fainting, seizure, cardiac arrest or death. About 90% of mutation-based cases involve voltage-gated potassium channel genes. Mutations in sodium or calcium channel genes can also cause it. Patients should avoid drugs that prolong the QT interval or lower serum potassium or magnesium, and any deficiency should be corrected.
+- **Local anaesthesia and poisoning.** Local anaesthetics and the puffer fish and shellfish toxins all work by blocking the action potential, which stops conduction.
+
+## Mnemonics
+
+{% callout type="tip" %}
+**One-line summary:** "Sodium in, potassium out." Sodium entry depolarizes the membrane and potassium exit repolarizes it. The Na, K pump restores the gradients afterwards.
+{% /callout %}
+
+## Practice MCQs
+
+{% mcq answer="C" explanation="Threshold is about -55 mV in a large nerve fibre. At this voltage the activation gates of the voltage-gated sodium channels open and start the positive feedback cycle." %}
+In a large nerve fibre with a resting potential of -70 mV, the threshold for stimulation is about:
+- A. -90 mV
+- B. -70 mV
+- C. -55 mV
+- D. +20 mV
+{% /mcq %}
+
+{% mcq answer="B" explanation="The same rise in voltage that opens the activation gate also closes the inactivation gate. The channel stays inactivated for a few milliseconds before returning to the resting state, and this is why sodium entry stops." %}
+Sodium entry stops during the action potential mainly because:
+- A. The Na, K pump removes all the sodium
+- B. The inactivation gate of the sodium channel closes
+- C. The membrane reaches the sodium equilibrium potential
+- D. The activation gate becomes more permeable
+{% /mcq %}
+
+{% mcq answer="D" explanation="Once threshold is reached, the action potential occurs with constant amplitude and form whatever the stimulus strength. This is the all-or-none law." %}
+A nerve is stimulated with a current twice the threshold strength. Compared with a threshold stimulus, the action potential will be:
+- A. Twice as large
+- B. Longer in duration only
+- C. Smaller, because of adaptation
+- D. The same size and form
+{% /mcq %}
+
+{% mcq answer="A" explanation="In the absolute refractory period the sodium channels are inactivated, and no stimulus, however strong, can excite the nerve. In the relative refractory period, a stronger than normal stimulus can excite it." %}
+During the absolute refractory period of a nerve:
+- A. No stimulus, however strong, can produce another action potential
+- B. A stronger than normal stimulus can produce an action potential
+- C. The membrane is hyperpolarized
+- D. Only potassium channels are inactivated
+{% /mcq %}
+
+{% mcq answer="B" explanation="Tetrodotoxin and saxitoxin block the outer mouth of the sodium channel pore, so the action potential is blocked. Tetraethylammonium and 4-aminopyridine act on potassium channels instead." %}
+Tetrodotoxin blocks the action potential by:
+- A. Blocking voltage-gated potassium channels
+- B. Blocking the outer mouth of the sodium channel pore
+- C. Preventing inactivation of sodium channels
+- D. Inhibiting the Na, K ATPase
+{% /mcq %}
+
+{% mcq answer="C" explanation="Myelin directs current to the next node, where sodium channels are clustered. The impulse jumps from node to node, which greatly increases conduction velocity." %}
+Conduction is faster in myelinated than in unmyelinated fibres because:
+- A. Myelin increases the number of sodium channels along the whole axon
+- B. Myelin shortens the refractory period at every point
+- C. The action potential jumps from node to node
+- D. Potassium channels are absent in myelinated fibres
+{% /mcq %}
+
+## Viva questions
+
+{% viva question="Define action potential." %}
+A brief, self-propagating reversal of membrane polarity. It depends on an initial influx of sodium, which reverses the polarity to about +20 mV, followed by a rapid return towards resting as potassium flows out.
+{% /viva %}
+
+{% viva question="What is the resting membrane potential of a neurone and what maintains it?" %}
+About -60 to -70 mV. It is maintained mainly by the potassium gradient, with the Na, K ATPase keeping the gradients. Leak currents of sodium and chloride also contribute. Potassium alone would give about -90 mV.
+{% /viva %}
+
+{% viva question="Explain the positive feedback cycle at threshold." %}
+Depolarization opens some voltage-gated sodium channels. Sodium enters and depolarizes the membrane further. This opens more sodium channels, until all are activated. Then the sodium channels close and the potassium channels open.
+{% /viva %}
+
+{% viva question="Describe the two gates of the voltage-gated sodium channel." %}
+The activation gate is near the outside and is closed at rest. It opens at about -55 mV. The inactivation gate is near the inside and closes with the same voltage change, a little later, which ends sodium entry.
+{% /viva %}
+
+{% viva question="State the all-or-none law and the safety factor." %}
+Once threshold is reached the action potential has a constant size and form whatever the stimulus strength. Below threshold there is none. The safety factor is the ratio of action potential strength to the threshold for excitation, and it must be greater than 1 for propagation to continue.
+{% /viva %}
+
+{% viva question="Distinguish absolute and relative refractory periods." %}
+In the absolute period, no stimulus can excite the nerve. It lasts from the firing level until repolarization is about one-third complete. In the relative period, a stronger than normal stimulus can excite it. The refractory period limits the maximum firing frequency.
+{% /viva %}
+
+{% viva question="Why does the cardiac action potential have a plateau?" %}
+Cardiac muscle has both fast sodium channels and L-type calcium channels. The calcium channels open slowly and stay open long, keeping the membrane depolarized for about 0.2 to 0.3 second.
+{% /viva %}
+
+## Flashcards
+
+{% flashcard front="Resting potential of a typical mammalian axon" back="About -70 mV (inside negative)" /%}
+{% flashcard front="Threshold in a large nerve fibre" back="About -55 mV (a rise of 15 to 30 mV from rest)" /%}
+{% flashcard front="Cause of the upstroke" back="Sodium entry through voltage-gated sodium channels" /%}
+{% flashcard front="Cause of repolarization" back="Sodium channel inactivation and potassium efflux through potassium channels" /%}
+{% flashcard front="Peak of the neuronal action potential" back="About +20 mV (overshoot in large fibres)" /%}
+{% flashcard front="Two gates of the sodium channel" back="Activation gate (outside, closed at rest) and inactivation gate (inside, open at rest)" /%}
+{% flashcard front="All-or-none law" back="Above threshold the action potential has constant size and form, whatever the stimulus strength" /%}
+{% flashcard front="Absolute refractory period" back="No stimulus, however strong, can excite the nerve (sodium channels inactivated)" /%}
+{% flashcard front="Saltatory conduction" back="Action potential jumps from node to node of Ranvier, greatly increasing velocity" /%}
+{% flashcard front="Cause of the cardiac plateau" back="Slow L-type calcium channels that stay open, along with fast sodium channels" /%}
+
+{% related links="/learn/physiology/resting-membrane-potential, /learn/physiology/nerve-fibre-types, /learn/physiology/cardiac-action-potential, /learn/physiology" /%}
+
+{% cta %}
+**Still stuck on refractory periods or sodium channel gating?** [Ask the GalenAI tutor](https://app.galenai.io/download?utm_source=website&utm_medium=learn_physiology_action_potential_inline&utm_campaign=galenweb) and practise action potential MCQs.
+{% /cta %}

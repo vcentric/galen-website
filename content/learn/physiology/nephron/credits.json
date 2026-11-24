@@ -1,0 +1,67 @@
+[
+  {
+    "file": "images/nephron-overview-segments.webp",
+    "slot": "nephron-overview-segments",
+    "source": "https://commons.wikimedia.org/wiki/File:Nephron_Anatomy.png",
+    "title": "File:Nephron Anatomy.png",
+    "author": "BruceBlaus",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "BruceBlaus, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/cortical-vs-juxtamedullary-nephron.webp",
+    "slot": "cortical-vs-juxtamedullary-nephron",
+    "source": "https://commons.wikimedia.org/wiki/File:EXRETION_Type_of_nephron.jpg",
+    "title": "File:EXRETION Type of nephron.jpg",
+    "author": "Amit1856",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Amit1856, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/renal-microvasculature.webp",
+    "slot": "renal-microvasculature",
+    "source": "https://commons.wikimedia.org/wiki/File:Juxtamed-nephron.jpg",
+    "title": "File:Juxtamed-nephron.jpg",
+    "author": "Aceofhearts1968",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Aceofhearts1968, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/glomerular-filtration-barrier.webp",
+    "slot": "glomerular-filtration-barrier",
+    "source": "https://commons.wikimedia.org/wiki/File:GFP_and_FP.jpg",
+    "title": "File:GFP and FP.jpg",
+    "author": "Kerstin Ebefors, Emelie Lass\u00e9n, Nanditha Anandakrishnan, Evren U Azeloglu, Ilse S Daehn",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Kerstin Ebefors, Emelie Lass\u00e9n, Nanditha Anandakrishnan, Evren U Azeloglu, Ilse S Daehn, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/proximal-tubule-cell-transport.webp",
+    "slot": "proximal-tubule-cell-transport",
+    "source": "https://commons.wikimedia.org/wiki/File:Proximal_convoluted_tubule.jpg",
+    "title": "File:Proximal convoluted tubule.jpg",
+    "author": "M. Koeppen",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "M. Koeppen, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

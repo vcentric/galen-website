@@ -1,0 +1,67 @@
+[
+  {
+    "file": "images/hip-joint-coronal-section-overview.webp",
+    "slot": "hip-joint-coronal-section-overview",
+    "source": "https://commons.wikimedia.org/wiki/File:Grierson_5_Cadera.JPG",
+    "title": "File:Grierson 5 Cadera.JPG",
+    "author": "Cecilia Grierson",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/femur-neck-shaft-angle-coxa-vara-valga.webp",
+    "slot": "femur-neck-shaft-angle-coxa-vara-valga",
+    "source": "https://commons.wikimedia.org/wiki/File:FemurAngles.jpg",
+    "title": "File:FemurAngles.jpg",
+    "author": "Behrang Amini, MD/PhD, Zyryab",
+    "license": "CC BY 2.5",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Behrang Amini, MD/PhD, Zyryab, CC BY 2.5, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/acetabulum-labrum-lateral-view.webp",
+    "slot": "acetabulum-labrum-lateral-view",
+    "source": "https://commons.wikimedia.org/wiki/File:Lunate_Surface_Of_Acetabulum_04_lateral_view_(Right_hip_bone).png",
+    "title": "File:Lunate Surface Of Acetabulum 04 lateral view (Right hip bone).png",
+    "author": "BodyParts3D is made by DBCLS",
+    "license": "CC BY-SA 2.1 jp",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "BodyParts3D is made by DBCLS, CC BY-SA 2.1 jp, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/hip-ligaments-anterior-posterior.webp",
+    "slot": "hip-ligaments-anterior-posterior",
+    "source": "https://commons.wikimedia.org/wiki/File:Sobo_1909_208.png",
+    "title": "File:Sobo 1909 208.png",
+    "author": "Dr. Johannes Sobotta",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/single-leg-stance-abductor-mechanism.webp",
+    "slot": "single-leg-stance-abductor-mechanism",
+    "source": "https://commons.wikimedia.org/wiki/File:Figure_89_applied_anatomy_and_kinesiology_1917.jpg",
+    "title": "File:Figure 89 applied anatomy and kinesiology 1917.jpg",
+    "author": "Wilbur Pardon Bowen",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

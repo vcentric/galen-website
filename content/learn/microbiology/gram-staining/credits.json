@@ -1,0 +1,93 @@
+[
+  {
+    "file": "images/gram-stain-purple-red-overview.webp",
+    "slot": "gram-stain-purple-red-overview",
+    "source": "https://commons.wikimedia.org/wiki/File:Gram_stain_01.jpg",
+    "title": "File:Gram stain 01.jpg",
+    "author": "Y tambe",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Y tambe, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/gram-stain-procedure-steps.webp",
+    "slot": "gram-stain-procedure-steps",
+    "source": "https://commons.wikimedia.org/wiki/File:Gram_Stain.png",
+    "title": "File:Gram Stain.png",
+    "author": "Paityn Donaldson",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Paityn Donaldson, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/gram-positive-negative-cell-wall.webp",
+    "slot": "gram-positive-negative-cell-wall",
+    "source": "https://commons.wikimedia.org/wiki/File:Cell_wall_composition_of_Gram-positive_and_Gram-negative_bacteria.jpg",
+    "title": "File:Cell wall composition of Gram-positive and Gram-negative bacteria.jpg",
+    "author": "Malihe Mehdizadeh Allaf and Hassan Peerhossaini",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Malihe Mehdizadeh Allaf and Hassan Peerhossaini, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/bacterial-shapes-arrangements.webp",
+    "slot": "bacterial-shapes-arrangements",
+    "source": "https://commons.wikimedia.org/wiki/File:XBio_illustration_%E2%80%93_Prokaryotes_(Bacteria_and_Archaea).png",
+    "title": "File:XBio illustration \u2013 Prokaryotes (Bacteria and Archaea).png",
+    "author": "explorebiology",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "explorebiology, CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/sputum-gram-pneumococcus.webp",
+    "slot": "sputum-gram-pneumococcus",
+    "source": "https://commons.wikimedia.org/wiki/File:Bacteria_and_pus_cells_in_a_Gram_stained_smear_of_sputum.jpg",
+    "title": "File:Bacteria and pus cells in a Gram stained smear of sputum.jpg",
+    "author": "Ajay Kumar Chaurasiya",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Ajay Kumar Chaurasiya, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/gram-negative-diplococci-pus-cells.webp",
+    "slot": "gram-negative-diplococci-pus-cells",
+    "source": "https://commons.wikimedia.org/wiki/File:Neisseria_gonorrhoeae_and_pus_cells.jpg",
+    "title": "File:Neisseria gonorrhoeae and pus cells.jpg",
+    "author": "Dr Graham Beards",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Dr Graham Beards, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/ziehl-neelsen-acid-fast-bacilli.webp",
+    "slot": "ziehl-neelsen-acid-fast-bacilli",
+    "source": "https://commons.wikimedia.org/wiki/File:Acid_fast_bacilli_of_Mycobacterium_tuberculosis.jpg",
+    "title": "File:Acid fast bacilli of Mycobacterium tuberculosis.jpg",
+    "author": "Ajay Kumar Chaurasiya",
+    "license": "CC0",
+    "license_class": "CC0",
+    "license_url": null,
+    "credit": "CC0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  }
+]

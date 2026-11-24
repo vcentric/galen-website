@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/chemical-synapse-structure.webp",
+    "slot": "chemical-synapse-structure",
+    "source": "https://commons.wikimedia.org/wiki/File:1225_Chemical_Synapse.jpg",
+    "title": "File:1225 Chemical Synapse.jpg",
+    "author": "Young, KA., Wise, JA., DeSaix, P., Kruse, DH., Poe, B., Johnson, E., Johnson, JE., Korol, O., Betts, JG., & Womble, M.",
+    "license": "CC BY 4.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "Young, KA., Wise, JA., DeSaix, P., Kruse, DH., Poe, B., Johnson, E., Johnson, JE., Korol, , CC BY 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/synaptic-transmission-steps.webp",
+    "slot": "synaptic-transmission-steps",
+    "source": "https://commons.wikimedia.org/wiki/File:Reuptake_both.png",
+    "title": "File:Reuptake both.png",
+    "author": "Sabar",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-16",
+    "modification": "resized and converted to WebP"
+  }
+]

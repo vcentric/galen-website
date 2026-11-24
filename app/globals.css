@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./v2.css";
+@import "./how-to.css";
 
 /* ═══════════════════════════════════════════
    DESIGN SYSTEM TOKENS
@@ -50,14 +52,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Notebook paper background — applied globally */
-  background:
-    repeating-linear-gradient(
-      transparent, transparent 31px,
-      rgba(173, 216, 230, 0.25) 31px,
-      rgba(173, 216, 230, 0.25) 32px
-    ),
-    #ffffff !important;
+  background: #ffffff;
 }
 
 body {
@@ -65,17 +60,6 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: var(--font-raleway-var), sans-serif;
-  background: transparent !important;
-}
-
-/* ── Global Page Container ── */
-.page-container {
-  width: 100%;
-  max-width: var(--page-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--page-margin);
-  padding-right: var(--page-margin);
 }
 
 *,
@@ -84,8 +68,12 @@ body {
   box-sizing: border-box;
 }
 
-a {
-  color: inherit;
+/* In the base layer so Tailwind colour utilities on links (text-*) can override it.
+   Unlayered, it beat every utility and made the active audience toggle unreadable. */
+@layer base {
+  a {
+    color: inherit;
+  }
 }
 
 /* ── Global Typography Hierarchy ── */
@@ -113,186 +101,9 @@ nav, nav a, nav button {
 }
 
 /* Offset scroll targets so fixed navbar doesn't cover them */
-#features, #faq, #contact, #testimonials, #comparison {
+#features, #faq, #contact {
   scroll-margin-top: 80px;
 }
-/* Keyframes used by components */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes writeInFadeOut {
-  0% { opacity: 0; clip-path: inset(0 100% 0 0); filter: blur(1px); }
-  8% { filter: blur(0.3px); }
-  15% { opacity: 0.4; clip-path: inset(0 0 0 0); filter: blur(0); }
-  85% { opacity: 0.4; }
-  100% { opacity: 0; }
-}
-
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* TrustedBy infinite marquee — track is absolute, two copies, so -50% = one copy */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* ── TrustedBy Marquee ── */
-:root {
-  --mq-h: 3rem;
-}
-@media (min-width: 640px)  { :root { --mq-h: 3.75rem; } }
-@media (min-width: 1024px) { :root { --mq-h: 4.5rem;  } }
-
-.trusted-marquee {
-  position: relative;
-  width: 100%;
-  height: var(--mq-h);
-  overflow: hidden;
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%, black 12%, black 88%, transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%, black 12%, black 88%, transparent 100%
-  );
-}
-
-.trusted-track {
-  position: absolute;
-  top: 0;
-  left: 0;
-  white-space: nowrap;
-  height: var(--mq-h);
-  will-change: transform;
-  animation: marquee 20s linear infinite;
-}
-
-.trusted-track:hover {
-  animation-play-state: paused;
-}
-
-.trusted-item {
-  display: inline-flex;
-  align-items: center;
-  height: var(--mq-h);
-  padding-right: clamp(1.25rem, 3vw, 2rem);
-}
-
-.trusted-item img {
-  height: var(--mq-h) !important;
-  width: auto !important;
-  max-width: none !important;
-  object-fit: contain;
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
-}
-
-.trusted-item:hover img {
-  filter: grayscale(0%);
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes breathe {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.08); opacity: 1; }
-}
-
-@keyframes subtle-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-}
-
-@keyframes contentSwapIn {
-  from { opacity: 0; transform: translateY(10px); filter: blur(3px); }
-  to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-
-@keyframes ribbonFloat {
-  from { transform: translateY(-50%) rotate(-12deg) translateX(0); }
-  to { transform: translateY(-50%) rotate(-12deg) translateX(-100px); }
-}
-
-@keyframes phoneBob {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-6px) scale(1); }
-  100% { transform: translateY(0) scale(1); }
-}
-
-@keyframes heartbeat {
-  0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(249,115,22,0.7); }
-  70% { transform: translateX(-50%) scale(1.1); box-shadow: 0 0 0 10px rgba(249,115,22,0); }
-  100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(249,115,22,0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Metrics title underline */
-.metrics-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 5px;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='4' viewBox='0 0 100 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 2 Q 25 1, 50 2 T 100 2' stroke='%23eb602d' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  opacity: 0.9;
-}
-
-/* Metric highlight underline */
-.metric-highlight::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: -2px;
-  right: -2px;
-  height: 4px;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='3' viewBox='0 0 100 3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 1.5 Q 25 0.5, 50 1.5 T 100 1.5' stroke='%23eb602d' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  opacity: 0.8;
-}
-
-/* Phone notch */
-.phone-notch::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90px;
-  height: 22px;
-  background: #1d1d1f;
-  border-radius: 0 0 18px 18px;
-  z-index: 10;
-}
-
-/* Testimonials scrollbar */
-.testimonials-grid::-webkit-scrollbar { height: 6px; }
-.testimonials-grid::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 3px; }
-.testimonials-grid::-webkit-scrollbar-thumb { background: rgba(235,96,45,0.3); border-radius: 3px; }
-.testimonials-grid::-webkit-scrollbar-thumb:hover { background: rgba(235,96,45,0.5); }
-
-/* FAQ answer animation */
-.faq-item.active .faq-answer-wrapper { max-height: 500px; }
-.faq-item.active .faq-icon { transform: rotate(180deg); }
-.faq-answer { animation: fadeIn 0.4s ease; }
-
 /* Blog content styles */
 .blog-content h2 { 
   font-family: var(--font-space-var); 
@@ -555,101 +366,6 @@ nav, nav a, nav button {
   .blog-content .cta-box p { color: var(--color-dark) !important; }
   .blog-content thead { background: var(--color-beige) !important; }
   .blog-content th { color: var(--color-dark) !important; }
-}
-
-
-/* ── Custom Navbar Liquid Glass ── */
-.nav-glass-container {
-  position: relative;
-}
-
-/* Background wrapper so we can fade it in cleanly */
-.nav-glass-wrapper {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-  /* Base background color and highlight for the glass */
-  --bg-color: rgba(255, 255, 255, 0.45);
-  --highlight: rgba(255, 255, 255, 0.9);
-}
-
-.nav-glass-container.is-scrolled .nav-glass-wrapper {
-  opacity: 1;
-}
-
-.nav-glass-filter,
-.nav-glass-overlay,
-.nav-glass-specular {
-  position: absolute;
-  pointer-events: none;
-}
-
-/* 
-  Negative inset on filter and overlay ensures the turbulence 
-  distortion doesn't pull the edges inward and tear the bounding box.
-*/
-.nav-glass-filter,
-.nav-glass-overlay {
-  inset: -20px; 
-}
-
-.nav-glass-specular {
-  inset: 0; /* Keep highlight exactly on the edge border */
-  border-radius: inherit;
-}
-
-.nav-glass-filter {
-  z-index: 1;
-  backdrop-filter: blur(12px);
-  /* Use the ID defined in Navbar.tsx */
-  filter: url(#nav-glass-distortion) saturate(120%) brightness(1.15);
-}
-
-.nav-glass-distortion-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 0%, transparent 80%),
-              radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 80%);
-  background-size: 300% 300%;
-  animation: navFloatDistort 10s infinite ease-in-out;
-  mix-blend-mode: overlay;
-  z-index: 2;
-  pointer-events: none;
-}
-
-@keyframes navFloatDistort {
-  0% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
-  100% { background-position: 0% 0%; }
-}
-
-.nav-glass-overlay {
-  z-index: 3;
-  background: var(--bg-color);
-}
-
-.nav-glass-specular {
-  z-index: 4;
-  box-shadow: inset 1px 1px 2px var(--highlight);
-  border-radius: inherit;
-}
-
-/* ── Testimonial Highlighting ── */
-.highlight-text {
-  font-weight: 700;
-  font-size: 1em !important;
-  color: #000;
-  display: inline;
-}
-
-/* ── Lightbox Immersive Mode ── */
-body.video-lightbox-open .site-navbar,
-body.video-lightbox-open .nmc-banner-wrapper {
-  display: none !important;
 }
 
 /* ── NEW badge shimmer ── */

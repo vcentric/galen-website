@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/beta-pleated-sheet-fibril.webp",
+    "slot": "beta-pleated-sheet-fibril",
+    "source": "https://commons.wikimedia.org/wiki/File:Mechanisms_of_amyloid_fibril_formation.jpg",
+    "title": "File:Mechanisms of amyloid fibril formation.jpg",
+    "author": "Pierre Hugots",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Pierre Hugots, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/congo-red-apple-green.webp",
+    "slot": "congo-red-apple-green",
+    "source": "https://commons.wikimedia.org/wiki/File:Amyloid_Liver_Congo_Red_Bar%3D100um.jpg",
+    "title": "File:Amyloid Liver Congo Red Bar=100um.jpg",
+    "author": "Tulemo",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Tulemo, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/dose-response-log.webp",
+    "slot": "dose-response-log",
+    "source": "https://commons.wikimedia.org/wiki/File:Dose_response_curve_stimulation.jpg",
+    "title": "File:Dose response curve stimulation.jpg",
+    "author": "Jamgoodman",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Jamgoodman, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/agonist-antagonist-curves.webp",
+    "slot": "agonist-antagonist-curves",
+    "source": "https://commons.wikimedia.org/wiki/File:Dose_Response_Curve_of_Opioid_Antagonists_Compared_to_Opioid_Agonists.png",
+    "title": "File:Dose Response Curve of Opioid Antagonists Compared to Opioid Agonists.png",
+    "author": "Xx684xx",
+    "license": "CC0",
+    "license_class": "CC0",
+    "license_url": null,
+    "credit": "CC0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

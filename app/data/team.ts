@@ -1,3 +1,7 @@
+/**
+ * Team page data. Photos live in public/ and are shown as 3:4 portraits (about 200 px wide,
+ * so a 900 x 1200 WebP is plenty). To change a photo, replace the file and keep its name.
+ */
 export const founders = [
   {
     name: "Dr. Arun Biju Oommen",
@@ -5,6 +9,7 @@ export const founders = [
     subTitle: "MD (Medicine) | MPMCX (IIM Ahmedabad) Faculty - St. John’s Medical College",
     quote: '"Medical students deserve more than static lectures. Learning should feel like guidance."',
     linkedin: "https://www.linkedin.com/in/dr-arun-biju-oommen-774584114/",
+    photo: "/Dr. Arun Biju.webp",
   },
   {
     name: "Varun Jagannathan",
@@ -12,6 +17,7 @@ export const founders = [
     subTitle: "Product Marketing, Business & GTM Ex. Myelin Foundry | Ex. Enertics Inc",
     quote: '"Building the systems, structure, and execution that make good ideas real."',
     linkedin: "https://www.linkedin.com/in/varun-j97/",
+    photo: "/Varun.webp",
   },
 ];
 
@@ -21,12 +27,15 @@ export const advisors = [
     title: "Advisor, Finance & Investments",
     bio: "Ex-Investec, Ex-BNP Paribas, Ex-Myelin Foundry | 30+ years across banking, deep tech, capital and regulatory strategy across emerging markets.",
     linkedin: "https://www.linkedin.com/in/sridhar-vaidyanathan-0288352/",
+    photo: "/Sridhar.webp",
   },
   {
-    name: "Dr. Sivaramakrishnan R Guruvayur",
-    title: "Advisor - AI & Innovation",
-    bio: "Global AI Policy Leader| Chief AI Scientist - Aaquarians.AI| Senior Research Fellow - CeRAI, IITM| Expert Group Member GPAI/OECD  & UNESCO for Artificial Intelligence|  Head & Professor of Practice - AI Safety Research Lab, Amritapuri Vishwa Vidyapeetham|  Non-resident Research Fellow  for AI Safety - MBRSG, Dubai  & University of Graneda, Spain| Adjunct Research Professor - Africa AI Research Institute.",
-    linkedin: "https://www.linkedin.com/in/sivaramakrishnan-r-guruvayur/",
+    // From the 2026 pitch deck team slide.
+    name: "Kavitha Vchalam",
+    title: "Executive Advisor, CEO Entomo",
+    bio: "Ex-HCL Technologies, Ex-Accenture | 30+ years in HR transformation, startup leadership and digital healthcare.",
+    linkedin: "https://www.linkedin.com/in/kavithavchalam/",
+    photo: "/Kavitha.webp",
   },
 ];
 
@@ -35,32 +44,20 @@ export const timelineItems = [
     title: 'The "Aha" Moment',
     date: "Mid 2025",
     description: "While preparing for his MD Medicine exams, Dr. Arun realized that if AI was used correctly with the right workflow, it could fundamentally improve how medicine is learned. He shared this idea with Varun, and that’s where GalenAI began.",
-    side: "right" as const,
-    accent: "orange",
-    icon: "M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z",
   },
   {
     title: "Building the Prototype",
     date: "Late 2025",
     description: "Built the first AI Tutor. When it diagnosed a complex case simulation, the team knew they had something special.",
-    side: "left" as const,
-    accent: "dark",
-    icon: "M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z",
   },
   {
     title: "The Team Grows",
     date: "Late 2025",
     description: "Talented engineers and medical students came together to build GalenAI - A medical-first company at its core.",
-    side: "right" as const,
-    accent: "orange",
-    icon: "M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z",
   },
   {
     title: "The Mission",
     date: "Today & Beyond",
     description: "Working to ensure every student gets personalized mentorship. Already used by a growing cohort of students from top medical colleges.",
-    side: "left" as const,
-    accent: "dark",
-    icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.29 16.29L5.7 12.7c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L10 14.17l6.88-6.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-7.59 7.59c-.38.39-1.02.39-1.41 0z",
   },
 ];

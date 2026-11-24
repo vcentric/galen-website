@@ -1,0 +1,41 @@
+[
+  {
+    "file": "images/ankle-bones-mortise.webp",
+    "slot": "ankle-bones-mortise",
+    "source": "https://commons.wikimedia.org/wiki/File:919_Ankle_Feet_Joints.jpg",
+    "title": "File:919 Ankle Feet Joints.jpg",
+    "author": "OpenStax College",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "OpenStax College, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/ankle-lateral-ligaments.webp",
+    "slot": "ankle-lateral-ligaments",
+    "source": "https://commons.wikimedia.org/wiki/File:Lateral_collateral_ligament_of_ankle_joint.png",
+    "title": "File:Lateral collateral ligament of ankle joint.png",
+    "author": "Laboratoires Servier",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Laboratoires Servier, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/ankle-tendons-retinacula.webp",
+    "slot": "ankle-tendons-retinacula",
+    "source": "https://commons.wikimedia.org/wiki/File:Gray441.png",
+    "title": "File:Gray441.png",
+    "author": "Henry Vandyke Carter",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "file": "images/wiggers-diagram-overview.webp",
+    "slot": "wiggers-diagram-overview",
+    "source": "https://commons.wikimedia.org/wiki/File:Wiggers_Diagram.svg",
+    "title": "File:Wiggers Diagram.svg",
+    "author": "DanielChangMD revised original work of DestinyQx; Redrawn as SVG by xavax",
+    "license": "CC BY-SA 2.5",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "DanielChangMD revised original work of DestinyQx; Redrawn as SVG by xavax, CC BY-SA 2.5, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/cardiac-conduction-system.webp",
+    "slot": "cardiac-conduction-system",
+    "source": "https://commons.wikimedia.org/wiki/File:2018_Conduction_System_of_Heart.jpg",
+    "title": "File:2018 Conduction System of Heart.jpg",
+    "author": "OpenStax College",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "OpenStax College, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/normal-ecg-waves-intervals.webp",
+    "slot": "normal-ecg-waves-intervals",
+    "source": "https://commons.wikimedia.org/wiki/File:SinusRhythm_withoutLabels.svg",
+    "title": "File:SinusRhythm withoutLabels.svg",
+    "author": "File:SinusRhythmLabels.svg: Created by Agateller (Anthony Atkielski), converted to svg by atom. derivative work geraldbaeck",
+    "license": "CC0",
+    "license_class": "CC0",
+    "license_url": null,
+    "credit": "CC0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/cardiac-cycle-phases-valves.webp",
+    "slot": "cardiac-cycle-phases-valves",
+    "source": "https://commons.wikimedia.org/wiki/File:2027_Phases_of_the_Cardiac_Cycle.jpg",
+    "title": "File:2027 Phases of the Cardiac Cycle.jpg",
+    "author": "OpenStax College",
+    "license": "CC BY 3.0",
+    "license_class": "CC BY",
+    "license_url": null,
+    "credit": "OpenStax College, CC BY 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/jugular-venous-pulse-waves.webp",
+    "slot": "jugular-venous-pulse-waves",
+    "source": "https://commons.wikimedia.org/wiki/File:Wiggers_diagram_with_jugular_venous_waveform.png",
+    "title": "File:Wiggers diagram with jugular venous waveform.png",
+    "author": "Nootherone321",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Nootherone321, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/left-ventricle-pressure-volume-loop.webp",
+    "slot": "left-ventricle-pressure-volume-loop",
+    "source": "https://commons.wikimedia.org/wiki/File:Cardiac_cycle_(pressure_volume_loop).svg",
+    "title": "File:Cardiac cycle (pressure volume loop).svg",
+    "author": "Zachary P. Christensen",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Zachary P. Christensen, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  }
+]

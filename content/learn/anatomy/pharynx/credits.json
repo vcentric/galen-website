@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/pharynx-sagittal-parts.webp",
+    "slot": "pharynx-sagittal-parts",
+    "source": "https://commons.wikimedia.org/wiki/File:Larynx_and_Pharynx_Anatomical_Relationship.png",
+    "title": "File:Larynx and Pharynx Anatomical Relationship.png",
+    "author": "\u05e1\u05ea\u05d5 \u05db\u05e1\u05dc\u05d5",
+    "license": "CC BY-SA 4.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "\u05e1\u05ea\u05d5 \u05db\u05e1\u05dc\u05d5, CC BY-SA 4.0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/pharyngeal-muscles-posterior.webp",
+    "slot": "pharyngeal-muscles-posterior",
+    "source": "https://commons.wikimedia.org/wiki/File:Sobo_1906_366.png",
+    "title": "File:Sobo 1906 366.png",
+    "author": "Dr. Johannes Sobotta",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]

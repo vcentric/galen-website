@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/cubital-fossa-overview-labelled.webp",
+    "slot": "cubital-fossa-overview-labelled",
+    "source": "https://commons.wikimedia.org/wiki/File:Cubital_Fossa2.png",
+    "title": "File:Cubital Fossa2.png",
+    "author": "Maen K. Househ",
+    "license": "CC BY-SA 3.0",
+    "license_class": "CC BY-SA",
+    "license_url": null,
+    "credit": "Maen K. Househ, CC BY-SA 3.0, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/bicipital-aponeurosis-roof-floor.webp",
+    "slot": "bicipital-aponeurosis-roof-floor",
+    "source": "https://commons.wikimedia.org/wiki/File:Sobo_1909_274.png",
+    "title": "File:Sobo 1909 274.png",
+    "author": "Dr. Johannes Sobotta",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-13",
+    "modification": "resized and converted to WebP"
+  }
+]

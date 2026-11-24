@@ -1,0 +1,28 @@
+[
+  {
+    "file": "images/ketogenesis-pathway.webp",
+    "slot": "ketogenesis-pathway",
+    "source": "https://commons.wikimedia.org/wiki/File:Ketogenesis.svg",
+    "title": "File:Ketogenesis.svg",
+    "author": "Sav vas",
+    "license": "CC0",
+    "license_class": "CC0",
+    "license_url": null,
+    "credit": "CC0, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  },
+  {
+    "file": "images/ketone-body-structures.webp",
+    "slot": "ketone-body-structures",
+    "source": "https://commons.wikimedia.org/wiki/File:Ketone_bodies.png",
+    "title": "File:Ketone bodies.png",
+    "author": "Edgar181",
+    "license": "Public domain",
+    "license_class": "PD",
+    "license_url": null,
+    "credit": "Public domain, via Wikimedia Commons",
+    "retrieved": "2026-11-15",
+    "modification": "resized and converted to WebP"
+  }
+]
