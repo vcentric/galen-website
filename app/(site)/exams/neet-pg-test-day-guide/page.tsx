@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import { Breadcrumbs } from "@/app/components/v2/ui";
-import { ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
+import { ExamBody, ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
 import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-test-day-guide";
@@ -17,19 +16,29 @@ export const metadata = buildMetadata({
 export default function Page() {
   const trail = [{ name: "Home", path: "/" }, { name: "NEET PG guide", path: "/exams/neet-pg" }, { name: "Test day guide", path }];
   return (
-    <div className="v2 lesson">
+    <div className="v2 lesson exam">
       <JsonLd data={breadcrumbLd(trail)} />
       <ExamHeader
+        trail={trail}
         kick="NEET PG"
         title={<>NEET PG test day, <span className="acc">step by step.</span></>}
         lead="The rules that catch candidates out are about documents, reporting time and what you cannot carry. They come from the official bulletin. The last section covers how to spend your time inside the exam."
       >
-        <div className="mt-6"><Breadcrumbs trail={trail} /></div>
         <StatusBanner checked={NEET_PG_LAST_CHECKED} />
       </ExamHeader>
 
-      <div className="wrap pb-16">
-        <article className="lesson-body" style={{ maxWidth: "46rem" }}>
+      <ExamBody
+        path={path}
+        source={
+          <VerifiedBox
+            source="NEET PG 2026 information bulletin, NBEMS"
+            href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
+            pages="Scheme of NEET-PG 2026, pages 32 to 34; admit card and test day procedures, pages 36 to 50; challenge window, page 90"
+            verified={NEET_PG_LAST_CHECKED}
+            note="This is the 2026 bulletin. Timings and rules can change, so read the admit card and the bulletin for the cycle you are in."
+          />
+        }
+      >
           <h2>The day, by the clock (2026 schedule)</h2>
           <FactTable
             rows={[
@@ -89,18 +98,7 @@ export default function Page() {
             Practise under these conditions with the <Link href="/exams/neet-pg-mcq-practice">practice questions</Link>, and read the{" "}
             <Link href="/exams/neet-pg-preparation-guide">preparation guide</Link> for a plan.
           </p>
-        </article>
-      </div>
-
-      <section className="wrap pb-20">
-        <VerifiedBox
-          source="NEET PG 2026 information bulletin, NBEMS"
-          href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
-          pages="Scheme of NEET-PG 2026, pages 32 to 34; admit card and test day procedures, pages 36 to 50; challenge window, page 90"
-          verified={NEET_PG_LAST_CHECKED}
-          note="This is the 2026 bulletin. Timings and rules can change, so read the admit card and the bulletin for the cycle you are in."
-        />
-      </section>
+      </ExamBody>
     </div>
   );
 }

@@ -30,7 +30,7 @@ const EXAM_MENU = [
 const STUDENT_LINKS: NavLink[] = [
   { label: "Features", href: "/features" },
   ...(LEARN_NAV_LIVE ? [{ label: "Learn", href: "/learn" }] : []),
-  { label: "Exams", href: EXAM_PAGES_LIVE ? "/exams/neet-pg" : "/for/neet-pg", menu: EXAM_MENU },
+  { label: "Exams", href: EXAM_PAGES_LIVE ? "/exams" : "/for/neet-pg", menu: EXAM_MENU },
   { label: "How to use", href: "/how-to-use" },
   { label: "Articles", href: "/blog" },
 ];

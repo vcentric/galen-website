@@ -2,8 +2,7 @@ import { AppLink } from "@/app/components/v2/CtaLink";
 import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import { Breadcrumbs } from "@/app/components/v2/ui";
-import { ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
+import { ExamBody, ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
 import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-exam-pattern-and-syllabus";
@@ -27,19 +26,29 @@ const SUBJECTS: [string, string][] = [
 export default function Page() {
   const trail = [{ name: "Home", path: "/" }, { name: "NEET PG guide", path: "/exams/neet-pg" }, { name: "NEET PG exam pattern and syllabus", path }];
   return (
-    <div className="v2 lesson">
+    <div className="v2 lesson exam">
       <JsonLd data={breadcrumbLd(trail)} />
       <ExamHeader
+        trail={trail}
         kick="NEET PG"
         title={<>NEET PG 2026 exam pattern <span className="acc">and syllabus.</span></>}
         lead="Everything on this page is taken from the official NBEMS information bulletin for NEET PG 2026. Where the bulletin does not say something, this page does not either."
       >
-        <div className="mt-6"><Breadcrumbs trail={trail} /></div>
         <StatusBanner checked={NEET_PG_LAST_CHECKED} />
       </ExamHeader>
 
-      <div className="wrap pb-16">
-        <article className="lesson-body" style={{ maxWidth: "46rem" }}>
+      <ExamBody
+        path={path}
+        source={
+          <VerifiedBox
+            source="NEET PG 2026 information bulletin, NBEMS"
+            href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
+            pages="section 5, Scheme of NEET-PG 2026, bulletin pages 32 and 33; tie-breaker criteria, pages 92 and 93"
+            verified={NEET_PG_LAST_CHECKED}
+            note="This is the bulletin for the 30 August 2026 exam. When NBEMS publishes the next bulletin, check it before relying on these numbers."
+          />
+        }
+      >
           <h2>Exam pattern at a glance</h2>
           <FactTable
             rows={[
@@ -100,18 +109,7 @@ export default function Page() {
             Want to test yourself? <Link href="/exams/neet-pg-mcq-practice">Try the practice questions</Link> or{" "}
             <AppLink intent="download" source="exam_neet_pg_exam_pattern_and_syllabus_inline">get the app</AppLink>.
           </p>
-        </article>
-      </div>
-
-      <section className="wrap pb-20">
-        <VerifiedBox
-          source="NEET PG 2026 information bulletin, NBEMS"
-          href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
-          pages="section 5, Scheme of NEET-PG 2026, bulletin pages 32 and 33; tie-breaker criteria, pages 92 and 93"
-          verified={NEET_PG_LAST_CHECKED}
-          note="This is the bulletin for the 30 August 2026 exam. When NBEMS publishes the next bulletin, check it before relying on these numbers."
-        />
-      </section>
+      </ExamBody>
     </div>
   );
 }

@@ -2,8 +2,7 @@ import { AppLink } from "@/app/components/v2/CtaLink";
 import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import { Breadcrumbs } from "@/app/components/v2/ui";
-import { ExamHeader, FactTable, VerifiedBox } from "@/app/components/v2/ExamFacts";
+import { ExamBody, ExamHeader, FactTable, VerifiedBox } from "@/app/components/v2/ExamFacts";
 import { EXAM_PAGES_LIVE } from "@/lib/exams";
 
 const path = "/exams/fmge-syllabus-and-pattern";
@@ -28,18 +27,28 @@ const CLIN: [string, string, number][] = [
 export default function Page() {
   const trail = [{ name: "Home", path: "/" }, { name: "FMGE", path: "/for/fmge" }, { name: "FMGE syllabus and pattern", path }];
   return (
-    <div className="v2 lesson">
+    <div className="v2 lesson exam">
       <JsonLd data={breadcrumbLd(trail)} />
       <ExamHeader
+        trail={trail}
         kick="FMGE"
         title={<>FMGE syllabus, marks <span className="acc">and pattern.</span></>}
         lead="The FMGE bulletin publishes a subject-wise marks blueprint, so this page can show real numbers. Everything below is from the official NBEMS bulletin."
       >
-        <div className="mt-6"><Breadcrumbs trail={trail} /></div>
       </ExamHeader>
 
-      <div className="wrap pb-16">
-        <article className="lesson-body" style={{ maxWidth: "46rem" }}>
+      <ExamBody
+        path={path}
+        source={
+          <VerifiedBox
+            source="FMGE June 2026 information bulletin, NBEMS"
+            href="https://natboard.edu.in/viewnbeexam?exam=fmge"
+            pages="section 5, Scheme of FMG Examination, bulletin pages 36 to 38; section 12, Syllabus and Exam Blue Print, page 98"
+            verified="15 November 2026"
+            note="This is the bulletin for the June 2026 session (exam on 28 June 2026). Timings and details can change between sessions, so read the bulletin for the session you are applying to."
+          />
+        }
+      >
           <h2>Exam pattern at a glance</h2>
           <FactTable
             rows={[
@@ -96,18 +105,7 @@ export default function Page() {
           <p>
             Test yourself with the <Link href="/exams/neet-pg-mcq-practice">practice questions</Link>, or <AppLink intent="download" source="exam_fmge_syllabus_and_pattern_inline">get the app</AppLink>.
           </p>
-        </article>
-      </div>
-
-      <section className="wrap pb-20">
-        <VerifiedBox
-          source="FMGE June 2026 information bulletin, NBEMS"
-          href="https://natboard.edu.in/viewnbeexam?exam=fmge"
-          pages="section 5, Scheme of FMG Examination, bulletin pages 36 to 38; section 12, Syllabus and Exam Blue Print, page 98"
-          verified="15 November 2026"
-          note="This is the bulletin for the June 2026 session (exam on 28 June 2026). Timings and details can change between sessions, so read the bulletin for the session you are applying to."
-        />
-      </section>
+      </ExamBody>
     </div>
   );
 }

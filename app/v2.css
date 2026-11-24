@@ -839,3 +839,99 @@
   .v2 .lidx-head { position: sticky; top: 5.5rem; }
 }
 @media (prefers-reduced-motion: reduce) { .v2 .lidx-row, .v2 .lidx-go { transition: none; } }
+
+/* /exams guides: a reading layout. Guide menu beside the article, ruled tables, a quiet status note, next/previous links. */
+.v2 .exam-head { padding-top: 6.5rem; padding-bottom: 3rem; }
+@media (min-width: 768px) { .v2 .exam-head { padding-top: 8rem; } }
+.v2 .exam-status { max-width: 46rem; margin-top: 2rem; padding: 0.9rem 1.1rem; border-left: 3px solid var(--color-orange); border-radius: 0 12px 12px 0; background: rgba(255, 255, 255, 0.55); font-size: 0.9rem; line-height: 1.5; color: rgba(46, 46, 46, 0.86); }
+.v2 .exam-status b { display: block; margin-bottom: 0.3rem; font: 700 0.68rem / 1 var(--font-space-var), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #b3411a; }
+/* The reading area sits on a lighter paper tone than the cream header: easier on the eyes over a long page. */
+.v2 .exam-band { background: #fffaf5; border-top: 1px solid rgba(46, 46, 46, 0.14); }
+.v2 .exam-grid { display: grid; gap: 1.5rem; padding-top: 1.5rem; padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+.v2 .exam-side { display: none; }
+.v2 .exam-main { min-width: 0; }
+.v2 .exam-body { max-width: 46rem; font-weight: 500; color: rgba(46, 46, 46, 0.9); }
+.v2 .exam-body h3 { margin-top: 2.25rem; }
+.v2 .exam-body li + li { margin-top: 0.55rem; }
+.v2 .exam-body > :first-child { margin-top: 0; padding-top: 0; }
+.v2 .exam-body h2 { margin-top: 3.25rem; scroll-margin-top: 5.5rem; }
+/* tables: rules, no white box */
+.v2.exam .ltable { border-radius: 0; outline: 0; background: transparent; border-top: 2px solid var(--color-dark); border-bottom: 1px solid rgba(46, 46, 46, 0.22); }
+.v2.exam .ltable th, .v2.exam .ltable td { padding: 0.85rem 1rem 0.85rem 0; border-bottom-color: rgba(46, 46, 46, 0.12); }
+.v2.exam .ltable tr:last-child th, .v2.exam .ltable tr:last-child td { border-bottom: 0; }
+.v2.exam .ltable thead th, .v2.exam .ltable tr:first-child th { background: transparent; }
+.v2.exam .ltable thead th { font: 700 0.68rem / 1.2 var(--font-space-var), sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(46, 46, 46, 0.7); border-bottom-color: rgba(46, 46, 46, 0.22); }
+.v2.exam .ltable th[scope="row"] { width: 34%; font: 700 0.95rem / 1.35 var(--font-space-var), sans-serif; letter-spacing: -0.01em; color: var(--color-dark); }
+.v2.exam .ltable td { font-weight: 500; color: rgba(46, 46, 46, 0.9); }
+.v2.exam .ltable tbody td:first-child { font-weight: 700; color: var(--color-dark); }
+.v2 .exam-source { max-width: 46rem; margin-top: 3.5rem; padding: 1.25rem 0 0; border-top: 1px solid rgba(46, 46, 46, 0.22); font-size: 0.875rem; line-height: 1.5; color: var(--body); }
+.v2 .exam-source-h { margin-bottom: 0.7rem; font: 700 0.68rem / 1 var(--font-space-var), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(46, 46, 46, 0.7); }
+.v2 .exam-source ul { display: grid; gap: 0.3rem; }
+.v2 .exam-source a { color: var(--orange-dark); text-decoration: underline; text-underline-offset: 3px; }
+/* guide menu */
+.v2 .exam-nav { display: grid; gap: 1.75rem; }
+.v2 .exam-nav-h { margin-bottom: 0.6rem; font: 700 0.68rem / 1 var(--font-space-var), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(46, 46, 46, 0.7); }
+.v2 .exam-nav-a { display: flex; align-items: baseline; gap: 0.7rem; padding: 0.45rem 0; font: 600 0.95rem / 1.3 var(--font-space-var), sans-serif; letter-spacing: -0.01em; color: rgba(46, 46, 46, 0.78); transition: color 0.2s ease; }
+.v2 .exam-nav-a span { font-size: 0.68rem; letter-spacing: 0.1em; color: rgba(46, 46, 46, 0.6); }
+.v2 .exam-nav-a:hover { color: var(--color-dark); }
+.v2 .exam-nav-a[aria-current] { font-weight: 700; color: var(--color-dark); }
+.v2 .exam-nav-a[aria-current] span { color: var(--color-orange); }
+.v2 .exam-nav-secs { margin: 0.2rem 0 0.6rem 1.55rem; border-left: 1px solid rgba(46, 46, 46, 0.16); }
+.v2 .exam-nav-secs a { display: block; margin-left: -1px; padding: 0.32rem 0 0.32rem 0.85rem; border-left: 2px solid transparent; font-size: 0.85rem; line-height: 1.35; color: rgba(46, 46, 46, 0.72); transition: color 0.2s ease, border-color 0.2s ease; }
+.v2 .exam-nav-secs a:hover { color: var(--color-dark); }
+.v2 .exam-nav-secs a[data-here] { border-left-color: var(--color-orange); font-weight: 600; color: var(--color-dark); }
+.v2 .exam-fold { border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+.v2 .exam-fold summary { display: flex; align-items: center; justify-content: space-between; cursor: pointer; list-style: none; font: 700 1rem / 1 var(--font-space-var), sans-serif; }
+.v2 .exam-fold summary::-webkit-details-marker { display: none; }
+.v2 .exam-fold .exam-nav { margin-top: 1.25rem; }
+.v2 .exam-fold .exam-nav-secs { display: none; }
+@media (min-width: 1024px) {
+  .v2 .exam-grid { grid-template-columns: 15.5rem minmax(0, 1fr); gap: 4.5rem; padding-top: 3rem; align-items: start; }
+  .v2 .exam-side { display: block; position: sticky; top: 5.5rem; max-height: calc(100vh - 7rem); overflow-y: auto; }
+  .v2 .exam-fold { display: none; }
+}
+/* next / previous */
+.v2 .exam-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 46rem; margin-top: 3rem; }
+.v2 .exam-pager-a { display: grid; gap: 0.5rem; padding: 1.1rem 1.25rem; border: 1px solid rgba(46, 46, 46, 0.2); border-radius: 14px; transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
+.v2 .exam-pager-a > span { font: 700 0.68rem / 1 var(--font-space-var), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(46, 46, 46, 0.7); transition: color 0.25s ease; }
+.v2 .exam-pager-a b { font: 700 1.1rem / 1.2 var(--font-space-var), sans-serif; letter-spacing: -0.02em; }
+.v2 .exam-pager-next { text-align: right; }
+.v2 .exam-pager-a:hover { border-color: var(--color-dark); background: var(--color-dark); color: var(--color-light); }
+.v2 .exam-pager-a:hover > span { color: var(--color-orange); }
+/* hub */
+.v2 .exam-hub { display: grid; gap: 1.75rem; padding-top: 2.5rem; padding-bottom: 1rem; }
+.v2 .exam-hub + .exam-hub::before { content: ""; grid-column: 1 / -1; height: 1px; margin-bottom: 0.75rem; background: rgba(46, 46, 46, 0.18); }
+.v2 .exam-hub:first-child { padding-top: 3.5rem; }
+.v2 .exam-hub-last { padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+.v2 .exam-hub-facts { display: grid; gap: 1rem; margin-top: 1.75rem; }
+.v2 .exam-hub-facts dt { font: 700 2rem / 1 var(--font-space-var), sans-serif; letter-spacing: -0.04em; color: var(--color-orange); }
+.v2 .exam-hub-facts dd { margin-top: 0.3rem; font-size: 0.9rem; font-weight: 600; color: var(--body); }
+.v2 .exam-hub-note { margin-top: 1.25rem; font-size: 0.8rem; color: rgba(46, 46, 46, 0.7); }
+.v2 .exam-hub-list { border-top: 1px solid rgba(46, 46, 46, 0.22); align-self: start; }
+.v2 .exam-hub-row { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 1.1rem; padding: 1.15rem 0; border-bottom: 1px solid var(--rule); transition: padding 0.2s ease, background-color 0.2s ease; }
+.v2 .exam-hub-row-plain { grid-template-columns: 1fr auto; }
+.v2 .exam-hub-row:hover { padding-left: 0.75rem; padding-right: 0.5rem; background: rgba(46, 46, 46, 0.04); }
+.v2 .exam-hub-row:hover .fout-t { color: var(--orange-dark); }
+.v2 .exam-hub-row:hover .fout-go { transform: translateX(4px); }
+@media (min-width: 1024px) {
+  .v2 .exam-hub { grid-template-columns: 19rem minmax(0, 1fr); column-gap: 4.5rem; align-items: start; }
+  .v2 .exam-hub-head { position: sticky; top: 5.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .v2 .exam-hub-row, .v2 .exam-pager-a, .v2 .exam-nav-a { transition: none; } }
+
+/* MCQ practice inside the exam layout: text tabs for subjects, a cream question panel on the paper, ruled options */
+.v2.exam .lesson-chips { gap: 0.25rem 1.5rem; border-bottom: 1px solid rgba(46, 46, 46, 0.16); }
+.v2.exam .lesson-chip { min-height: 0; padding: 0.7rem 0; border-radius: 0; background: none; outline: 0; margin-bottom: -1px; border-bottom: 2px solid transparent; font: 700 0.95rem / 1 var(--font-space-var), sans-serif; letter-spacing: -0.01em; color: rgba(46, 46, 46, 0.7); cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease; }
+.v2.exam .lesson-chip:hover { color: var(--color-dark); }
+.v2.exam .lesson-chip.lesson-chip-code { border-bottom-color: var(--color-orange); background: none; color: var(--color-dark); }
+.v2.exam .lesson-chip:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 4px; }
+.v2.exam .lesson-byline { font: 700 0.68rem / 1 var(--font-space-var), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(46, 46, 46, 0.7); }
+.v2.exam .lmcq { padding: 1.75rem; border-radius: 20px; outline: 0; background: var(--color-light); }
+.v2.exam .lmcq-stem { font: 600 1.25rem / 1.35 var(--font-space-var), sans-serif; letter-spacing: -0.02em; color: var(--color-dark); }
+.v2.exam .lmcq-stem strong { display: block; margin-bottom: 0.7rem; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: #b3411a; }
+.v2.exam .lmcq ul { margin-top: 1.25rem; gap: 0.55rem; }
+.v2.exam .lmcq li { padding: 0.85rem 1rem; border-radius: 12px; outline: 0; border: 1.5px solid rgba(46, 46, 46, 0.16); background: #fffaf5; font-weight: 600; }
+.v2.exam .lmcq:not(.done) li:hover { border-color: var(--color-orange); }
+.v2.exam .lmcq li.right { border-color: #2f8f55; background: #e8f5ec; outline: 0; }
+.v2.exam .lmcq li.wrong { border-color: #c0392b; background: #fdecea; outline: 0; }
+.v2.exam .lmcq-reveal { margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid rgba(46, 46, 46, 0.14); }

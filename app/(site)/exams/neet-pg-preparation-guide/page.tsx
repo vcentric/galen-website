@@ -2,8 +2,7 @@ import { AppLink } from "@/app/components/v2/CtaLink";
 import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import { Breadcrumbs } from "@/app/components/v2/ui";
-import { ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
+import { ExamBody, ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
 import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-preparation-guide";
@@ -18,19 +17,29 @@ export const metadata = buildMetadata({
 export default function Page() {
   const trail = [{ name: "Home", path: "/" }, { name: "NEET PG guide", path: "/exams/neet-pg" }, { name: "Preparation guide", path }];
   return (
-    <div className="v2 lesson">
+    <div className="v2 lesson exam">
       <JsonLd data={breadcrumbLd(trail)} />
       <ExamHeader
+        trail={trail}
         kick="NEET PG"
         title={<>How to start NEET PG <span className="acc">preparation.</span></>}
         lead="A practical plan for where to begin, what to do at each stage, and how to study each topic. The exam facts come from the NBEMS bulletin. The study advice is general guidance, not an official recommendation."
       >
-        <div className="mt-6"><Breadcrumbs trail={trail} /></div>
         <StatusBanner checked={NEET_PG_LAST_CHECKED} />
       </ExamHeader>
 
-      <div className="wrap pb-16">
-        <article className="lesson-body" style={{ maxWidth: "46rem" }}>
+      <ExamBody
+        path={path}
+        source={
+          <VerifiedBox
+            source="NEET PG 2026 information bulletin, NBEMS"
+            href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
+            pages="exam pattern facts in Step 0 are from the Scheme of NEET-PG 2026, pages 32 and 33"
+            verified={NEET_PG_LAST_CHECKED}
+            note="The study plan itself is general guidance written by GalenAI, not an NBEMS recommendation."
+          />
+        }
+      >
           <h2>Step 0: set up around the real exam</h2>
           <p>Plan your preparation around what the exam actually is. The 2026 bulletin sets these rules:</p>
           <FactTable
@@ -144,18 +153,7 @@ export default function Page() {
             <li>Choose your first subject and do one lesson from <Link href="/learn">the lesson hub</Link> with the loop above.</li>
             <li>Start your error log. A simple note on your phone is enough.</li>
           </ol>
-        </article>
-      </div>
-
-      <section className="wrap pb-20">
-        <VerifiedBox
-          source="NEET PG 2026 information bulletin, NBEMS"
-          href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
-          pages="exam pattern facts in Step 0 are from the Scheme of NEET-PG 2026, pages 32 and 33"
-          verified={NEET_PG_LAST_CHECKED}
-          note="The study plan itself is general guidance written by GalenAI, not an NBEMS recommendation."
-        />
-      </section>
+      </ExamBody>
     </div>
   );
 }

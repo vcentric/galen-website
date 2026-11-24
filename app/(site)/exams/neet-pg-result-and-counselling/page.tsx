@@ -1,7 +1,6 @@
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import { Breadcrumbs } from "@/app/components/v2/ui";
-import { ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
+import { ExamBody, ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
 import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-result-and-counselling";
@@ -16,19 +15,29 @@ export const metadata = buildMetadata({
 export default function Page() {
   const trail = [{ name: "Home", path: "/" }, { name: "NEET PG guide", path: "/exams/neet-pg" }, { name: "Result and counselling", path }];
   return (
-    <div className="v2 lesson">
+    <div className="v2 lesson exam">
       <JsonLd data={breadcrumbLd(trail)} />
       <ExamHeader
+        trail={trail}
         kick="NEET PG"
         title={<>NEET PG result, percentile <span className="acc">and counselling.</span></>}
         lead="Your score becomes a rank and a percentile. Then a different body takes over. This page explains both, using only what the NBEMS bulletin says."
       >
-        <div className="mt-6"><Breadcrumbs trail={trail} /></div>
         <StatusBanner checked={NEET_PG_LAST_CHECKED} />
       </ExamHeader>
 
-      <div className="wrap pb-16">
-        <article className="lesson-body" style={{ maxWidth: "46rem" }}>
+      <ExamBody
+        path={path}
+        source={
+          <VerifiedBox
+            source="NEET PG 2026 information bulletin, NBEMS"
+            href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
+            pages="Introduction, pages 5 to 8; Result, pages 89 to 98; Counseling and reservation, pages 99 to 105"
+            verified={NEET_PG_LAST_CHECKED}
+            note="This is the 2026 bulletin. Cut-offs and policies can change; the 2027 bulletin and the MCC bulletin govern the next cycle."
+          />
+        }
+      >
           <h2>What you get after the exam</h2>
           <ul>
             <li>A score card, which you can download from your login for six months after the result.</li>
@@ -97,18 +106,7 @@ export default function Page() {
             <li>The full All India Quota reservation policy is in the MCC bulletin, not the NBEMS one.</li>
             <li>The bulletin does not give a seat matrix. Look for it on the MCC and state websites.</li>
           </ul>
-        </article>
-      </div>
-
-      <section className="wrap pb-20">
-        <VerifiedBox
-          source="NEET PG 2026 information bulletin, NBEMS"
-          href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
-          pages="Introduction, pages 5 to 8; Result, pages 89 to 98; Counseling and reservation, pages 99 to 105"
-          verified={NEET_PG_LAST_CHECKED}
-          note="This is the 2026 bulletin. Cut-offs and policies can change; the 2027 bulletin and the MCC bulletin govern the next cycle."
-        />
-      </section>
+      </ExamBody>
     </div>
   );
 }

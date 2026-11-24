@@ -1,8 +1,7 @@
 import { getAllMcqs, getAllLessons, subjectName } from "@/lib/learn";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import { Breadcrumbs } from "@/app/components/v2/ui";
-import { ExamHeader } from "@/app/components/v2/ExamFacts";
+import { ExamBody, ExamHeader } from "@/app/components/v2/ExamFacts";
 import { mcqPageIndexable } from "@/lib/exams";
 import McqPractice from "@/app/components/v2/McqPractice";
 
@@ -25,23 +24,23 @@ export default function Page() {
   const trail = [{ name: "Home", path: "/" }, { name: "NEET PG guide", path: "/exams/neet-pg" }, { name: "MCQ practice", path }];
   const subjects = [...new Set(mcqs.map((q) => q.subject))].map((key) => ({ key, name: subjectName(key) }));
   return (
-    <div className="v2 lesson">
+    <div className="v2 lesson exam">
       <JsonLd data={breadcrumbLd(trail)} />
       <ExamHeader
+        trail={trail}
         kick="Practice"
         title={<>Free MCQ practice, <span className="acc">with explanations.</span></>}
         lead="Questions come from GalenAI lessons on basic medical subjects. Pick a subject, answer, and read why. Every question links back to its lesson."
       >
-        <div className="mt-6"><Breadcrumbs trail={trail} /></div>
         {!indexable && (
-          <p className="lesson-draft" role="note">
+          <p className="exam-status" role="note">
             <b>Preview.</b> This page is not indexed by search engines yet.
           </p>
         )}
       </ExamHeader>
-      <div className="wrap pb-20">
+      <ExamBody path={path} plain>
         <McqPractice mcqs={mcqs} subjects={subjects} />
-      </div>
+      </ExamBody>
     </div>
   );
 }

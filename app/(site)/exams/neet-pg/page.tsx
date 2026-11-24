@@ -2,8 +2,7 @@ import { AppLink } from "@/app/components/v2/CtaLink";
 import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import { Breadcrumbs } from "@/app/components/v2/ui";
-import { ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
+import { ExamBody, ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
 import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg";
@@ -27,19 +26,29 @@ const STEPS: [string, string, string][] = [
 export default function Page() {
   const trail = [{ name: "Home", path: "/" }, { name: "NEET PG guide", path }];
   return (
-    <div className="v2 lesson">
+    <div className="v2 lesson exam">
       <JsonLd data={breadcrumbLd(trail)} />
       <ExamHeader
+        trail={trail}
         kick="NEET PG guide"
         title={<>NEET PG, <span className="acc">start to finish.</span></>}
         lead="One exam decides most MD, MS and PG Diploma seats in India. This guide covers what it is, how a cycle runs, and how to start preparing, with every exam fact taken from the official NBEMS bulletin."
       >
-        <div className="mt-6"><Breadcrumbs trail={trail} /></div>
         <StatusBanner checked={NEET_PG_LAST_CHECKED} />
       </ExamHeader>
 
-      <div className="wrap pb-16">
-        <article className="lesson-body" style={{ maxWidth: "46rem" }}>
+      <ExamBody
+        path={path}
+        source={
+          <VerifiedBox
+            source="NEET PG 2026 information bulletin, NBEMS"
+            href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
+            pages="Important Dates, page 2; Introduction, pages 5 to 8"
+            verified={NEET_PG_LAST_CHECKED}
+            note="This is the bulletin for the 30 August 2026 exam. When NBEMS publishes the 2027 bulletin, these dates and numbers will change."
+          />
+        }
+      >
           <h2>What NEET PG is</h2>
           <p>
             NEET PG is the National Eligibility cum Entrance Test for postgraduate medical courses. According to the 2026 bulletin it is a single
@@ -84,18 +93,7 @@ export default function Page() {
             <li><Link href="/exams/neet-pg-mcq-practice">Free practice questions</Link> with an explanation for every answer.</li>
             <li><AppLink intent="download" source="exam_neet_pg_inline">The GalenAI app</AppLink> for the full question bank and the AI tutor.</li>
           </ul>
-        </article>
-      </div>
-
-      <section className="wrap pb-20">
-        <VerifiedBox
-          source="NEET PG 2026 information bulletin, NBEMS"
-          href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
-          pages="Important Dates, page 2; Introduction, pages 5 to 8"
-          verified={NEET_PG_LAST_CHECKED}
-          note="This is the bulletin for the 30 August 2026 exam. When NBEMS publishes the 2027 bulletin, these dates and numbers will change."
-        />
-      </section>
+      </ExamBody>
     </div>
   );
 }

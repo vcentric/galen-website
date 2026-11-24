@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { buildMetadata, breadcrumbLd } from "@/lib/seo";
 import JsonLd from "@/app/components/v2/JsonLd";
-import { Breadcrumbs } from "@/app/components/v2/ui";
-import { ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
+import { ExamBody, ExamHeader, FactTable, VerifiedBox, StatusBanner } from "@/app/components/v2/ExamFacts";
 import { EXAM_PAGES_LIVE, NEET_PG_LAST_CHECKED } from "@/lib/exams";
 
 const path = "/exams/neet-pg-eligibility-and-application";
@@ -17,19 +16,29 @@ export const metadata = buildMetadata({
 export default function Page() {
   const trail = [{ name: "Home", path: "/" }, { name: "NEET PG guide", path: "/exams/neet-pg" }, { name: "Eligibility and application", path }];
   return (
-    <div className="v2 lesson">
+    <div className="v2 lesson exam">
       <JsonLd data={breadcrumbLd(trail)} />
       <ExamHeader
+        trail={trail}
         kick="NEET PG"
         title={<>NEET PG eligibility, fee <span className="acc">and how to apply.</span></>}
         lead="Who can apply, what it costs, and the steps of the online form, from the official NBEMS bulletin. Most mistakes happen in the form, so read the rules below before you start."
       >
-        <div className="mt-6"><Breadcrumbs trail={trail} /></div>
         <StatusBanner checked={NEET_PG_LAST_CHECKED} />
       </ExamHeader>
 
-      <div className="wrap pb-16">
-        <article className="lesson-body" style={{ maxWidth: "46rem" }}>
+      <ExamBody
+        path={path}
+        source={
+          <VerifiedBox
+            source="NEET PG 2026 information bulletin, NBEMS"
+            href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
+            pages="Eligibility, pages 27 to 31; Fee, pages 24 to 25; Application instructions, pages 51 to 79 and 110 to 119"
+            verified={NEET_PG_LAST_CHECKED}
+            note="This is the bulletin for the 2026 exam. Eligibility, fees and dates can change in the 2027 bulletin."
+          />
+        }
+      >
           <h2>Who can apply</h2>
           <h3>Indian MBBS graduates</h3>
           <ul>
@@ -100,18 +109,7 @@ export default function Page() {
             Next: <Link href="/exams/neet-pg-exam-pattern-and-syllabus">exam pattern and syllabus</Link> and the{" "}
             <Link href="/exams/neet-pg-preparation-guide">preparation guide</Link>.
           </p>
-        </article>
-      </div>
-
-      <section className="wrap pb-20">
-        <VerifiedBox
-          source="NEET PG 2026 information bulletin, NBEMS"
-          href="https://natboard.edu.in/viewnbeexam?exam=neetpg"
-          pages="Eligibility, pages 27 to 31; Fee, pages 24 to 25; Application instructions, pages 51 to 79 and 110 to 119"
-          verified={NEET_PG_LAST_CHECKED}
-          note="This is the bulletin for the 2026 exam. Eligibility, fees and dates can change in the 2027 bulletin."
-        />
-      </section>
+      </ExamBody>
     </div>
   );
 }
