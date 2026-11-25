@@ -6,6 +6,7 @@ import { getAllPostsMeta, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import type { PostMeta } from "@/lib/blogFilters";
 import BlogPostClient from "./BlogPostClient";
 import { buildMetadata } from "@/lib/seo";
+import { publicImageSize } from "@/lib/imageSize";
 
 const BASE_URL = "https://www.galenai.io";
 
@@ -115,6 +116,7 @@ export default async function BlogPostPage({
       />
       <BlogPostClient
         post={post.meta}
+        coverSize={publicImageSize(post.meta.coverImage)}
         contentHtml={post.html}
         relatedPosts={relatedPosts}
       />

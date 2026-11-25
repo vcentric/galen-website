@@ -78,7 +78,7 @@ export default function HowToIndex({ roles }: { roles: HelpRole[] }) {
                   Start here
                 </Link>
               </header>
-              <ol className="lidx-list">
+              <ol className="lidx-list" data-typed={q ? "" : undefined}>
                 {r.guides.map((g) => (
                   <li key={g.href} hidden={!match(g)}>
                     <Link href={g.href} className="lidx-row">

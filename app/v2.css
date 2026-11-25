@@ -37,6 +37,16 @@
 .route-progress { position: fixed; top: 0; left: 0; z-index: 200; width: 100%; height: 3px; background: var(--color-orange); transform: scaleX(0); transform-origin: left; opacity: 0; pointer-events: none; }
 .route-progress[data-state="loading"] { opacity: 1; transform: scaleX(0.85); transition: transform 8s cubic-bezier(0.1, 0.7, 0.1, 1), opacity 0.15s ease; }
 .route-progress[data-state="done"] { opacity: 0; transform: scaleX(1); transition: transform 0.2s ease-out, opacity 0.25s ease 0.12s; }
+/* Things that used to appear in one frame now ease in: search results, article tabs, fold-outs, the demo form's thank-you, the video player. */
+.v2 .lidx-list[data-typed] > li:not([hidden]), .v2 .post-grid[data-swap], .v2 .exam-fold[open] > :not(summary), .v2 .howto-fold[open] > :not(summary), .v2 .lead-done { animation: fadeUp 0.22s ease-out; }
+.v2 .video-frame { opacity: 0; transition: opacity 0.3s ease; }
+.v2 .video-frame[data-ready] { opacity: 1; }
+.v2 [data-loading] > span { animation: videoWait 1s ease-in-out infinite alternate; }
+@keyframes videoWait { to { opacity: 0.45; } }
+@media (prefers-reduced-motion: reduce) {
+  .v2 .lidx-list[data-typed] > li:not([hidden]), .v2 .post-grid[data-swap], .v2 .exam-fold[open] > :not(summary), .v2 .howto-fold[open] > :not(summary), .v2 .lead-done, .v2 [data-loading] > span { animation: none; }
+  .v2 .video-frame { transition: none; }
+}
 html[data-nav] .page-in { animation: pageIn 0.22s ease-out; }
 @keyframes pageIn { from { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
@@ -566,6 +576,8 @@ html[data-nav] .page-in { animation: pageIn 0.22s ease-out; }
 @media (min-width: 1024px) { .v2 .nav-burger { display: none; } }
 
 .v2 .nav-sheet { max-height: calc(100dvh - 3.75rem); padding: 0.5rem 0 1.25rem; overflow-y: auto; border-top: 1px solid rgba(46, 46, 46, 0.1); animation: navSheet 0.22s ease both; }
+.v2 .nav-sheet[data-closing] { animation: navSheetOut 0.16s ease-in both; pointer-events: none; }
+@keyframes navSheetOut { to { opacity: 0; transform: translateY(-6px); } }
 @keyframes navSheet { from { opacity: 0; transform: translateY(-6px); } }
 .v2 .nav-sheet-link { display: flex; align-items: center; justify-content: space-between; padding: 0.95rem 0; border-bottom: 1px solid rgba(46, 46, 46, 0.1); font: 700 1.25rem / 1.1 var(--font-space-var), sans-serif; letter-spacing: -0.02em; }
 .v2 .nav-sheet-link > span[aria-hidden] { color: var(--color-orange); font-size: 1.1rem; }

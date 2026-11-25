@@ -42,7 +42,11 @@ export default function BlogIndexContent({
   const filteredPosts = getFilteredPosts();
   const paginatedData = paginatePosts(filteredPosts, currentPage, 12);
 
+  // True once the reader has filtered, searched, sorted or paged: from then on the grid eases in on each change.
+  const [moved, setMoved] = useState(false);
+
   const handleCategoryChange = (category: string) => {
+    setMoved(true);
     trackEvent("content_filter", { where: "articles", choice: category });
     setSelectedCategory(category);
     setCurrentPage(1);
@@ -50,6 +54,7 @@ export default function BlogIndexContent({
   };
 
   const handleSortChange = (order: string) => {
+    setMoved(true);
     setSortOrder(order);
     setCurrentPage(1);
   };
@@ -57,6 +62,7 @@ export default function BlogIndexContent({
   const handleSearch = useCallback((query: string) => {
     const term = query.trim();
     if (term.length >= 2) trackEvent("site_search", { where: "articles", search_term: term.slice(0, 80), results: searchPosts(posts, term).length });
+    if (query) setMoved(true);
     setSearchQuery(query);
     setCurrentPage(1);
     if (query) {
@@ -65,6 +71,7 @@ export default function BlogIndexContent({
   }, [posts]);
 
   const handlePageChange = (page: number) => {
+    setMoved(true);
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -104,7 +111,7 @@ export default function BlogIndexContent({
 
         {paginatedData.posts.length > 0 ? (
           <>
-            <div className="post-grid">
+            <div className="post-grid" data-swap={moved ? "" : undefined} key={`${selectedCategory}|${searchQuery}|${sortOrder}|${currentPage}`}>
               {paginatedData.posts.map((post) => (
                 <BlogCard key={post.slug} post={post} />
               ))}

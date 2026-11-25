@@ -100,6 +100,23 @@ export default function Navbar() {
   const [page, setPage] = useState<{ dark: boolean; bg: string }>({ dark: false, bg: "" });
   const [tapped, setTapped] = useState<{ on: string; href: string } | null>(null);
   const open = openOn === pathname;
+  // The phone menu eases out before it is removed.
+  const [closing, setClosing] = useState(false);
+  const closeMenu = () => {
+    setClosing(true);
+    window.setTimeout(() => {
+      setOpenOn(null);
+      setClosing(false);
+    }, 160);
+  };
+  // The page behind the open menu stays put.
+  useEffect(() => {
+    if (!open) return;
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
+  }, [open]);
   // True while a finger or mouse button is down on the bar, and for a moment after it lifts.
   const held = useRef(false);
   const release = useRef<number | undefined>(undefined);
@@ -166,7 +183,7 @@ export default function Navbar() {
     "aria-busy": going === href ? true : undefined,
     onClick: () => {
       if (href === pathname) {
-        setOpenOn(null);
+        closeMenu();
         window.scrollTo({ top: 0 });
         return;
       }
@@ -275,7 +292,7 @@ export default function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpenOn(open ? null : pathname)}
+            onClick={() => (open ? closeMenu() : setOpenOn(pathname))}
           >
             <span aria-hidden />
             <span aria-hidden />
@@ -284,7 +301,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="nav-sheet">
+        <div id="mobile-menu" className="nav-sheet" data-closing={closing ? "" : undefined}>
           <div className="wrap">
           <CtaLink intent={inst ? "demo" : "download"} source="nav_menu" label={inst ? "Book a demo" : "Get the app"} className="mb-2 w-full sm:!hidden" />
           <ul>

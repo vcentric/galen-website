@@ -32,36 +32,39 @@ export default function VideoLite({
   }
   return (
     <div className="relative aspect-video overflow-hidden rounded-[22px] bg-[#2e2e2e]">
-      {play ? (
+      {play && (
         <iframe
-          className="absolute inset-0 h-full w-full"
+          className="video-frame absolute inset-0 z-[1] h-full w-full"
           src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`}
           title={title}
           allow="accelerometer; autoplay; encrypted-media; picture-in-picture"
           allowFullScreen
+          onLoad={(e) => e.currentTarget.setAttribute("data-ready", "")}
         />
-      ) : (
-        <button
-          type="button"
-          onClick={() => {
-            trackEvent("video_start", { video_title: title.slice(0, 100), video_id: youtubeId });
-            setPlay(true);
-          }}
-          aria-label={`Play video: ${title}`}
-          className="absolute inset-0 h-full w-full"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={poster ?? `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`}
-            alt=""
-            loading="lazy"
-            className="h-full w-full object-cover"
-          />
-          <span className="absolute left-1/2 top-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[#eb602d] text-3xl text-white">
-            ▶
-          </span>
-        </button>
       )}
+      {/* The poster stays underneath until the player has loaded, so there is no black frame in between. */}
+      <button
+        type="button"
+        onClick={() => {
+          trackEvent("video_start", { video_title: title.slice(0, 100), video_id: youtubeId });
+          setPlay(true);
+        }}
+        aria-label={`Play video: ${title}`}
+        data-loading={play ? "" : undefined}
+        disabled={play}
+        className="absolute inset-0 h-full w-full"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={poster ?? `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover"
+        />
+        <span className="absolute left-1/2 top-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[#eb602d] text-3xl text-white">
+          ▶
+        </span>
+      </button>
     </div>
   );
 }
