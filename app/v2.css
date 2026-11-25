@@ -33,6 +33,27 @@
   --rule: rgba(255, 240, 228, 0.16);
 }
 
+/* Page changes: a thin progress line while the next page loads, and the new page fades in. */
+.route-progress { position: fixed; top: 0; left: 0; z-index: 200; width: 100%; height: 3px; background: var(--color-orange); transform: scaleX(0); transform-origin: left; opacity: 0; pointer-events: none; }
+.route-progress[data-state="loading"] { opacity: 1; transform: scaleX(0.85); transition: transform 8s cubic-bezier(0.1, 0.7, 0.1, 1), opacity 0.15s ease; }
+.route-progress[data-state="done"] { opacity: 0; transform: scaleX(1); transition: transform 0.2s ease-out, opacity 0.25s ease 0.12s; }
+/* Things that used to appear in one frame now ease in: search results, article tabs, fold-outs, the demo form's thank-you, the video player. */
+.v2 .lidx-list[data-typed] > li:not([hidden]), .v2 .post-grid[data-swap], .v2 .exam-fold[open] > :not(summary), .v2 .howto-fold[open] > :not(summary), .v2 .lead-done { animation: fadeUp 0.22s ease-out; }
+.v2 .video-frame { opacity: 0; transition: opacity 0.3s ease; }
+.v2 .video-frame[data-ready] { opacity: 1; }
+.v2 [data-loading] > span { animation: videoWait 1s ease-in-out infinite alternate; }
+@keyframes videoWait { to { opacity: 0.45; } }
+@media (prefers-reduced-motion: reduce) {
+  .v2 .lidx-list[data-typed] > li:not([hidden]), .v2 .post-grid[data-swap], .v2 .exam-fold[open] > :not(summary), .v2 .howto-fold[open] > :not(summary), .v2 .lead-done, .v2 [data-loading] > span { animation: none; }
+  .v2 .video-frame { transition: none; }
+}
+html[data-nav] .page-in { animation: pageIn 0.22s ease-out; }
+@keyframes pageIn { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  html[data-nav] .page-in { animation: none; }
+  .route-progress[data-state="loading"] { transition: opacity 0.15s ease; transform: scaleX(1); }
+}
+
 .v2 .wrap { width: 100%; max-width: 1180px; margin-inline: auto; padding-inline: clamp(1rem, 5vw, 2.5rem); }
 .v2 .sec { padding-block: clamp(2.75rem, 6.5vw, 4.75rem); }
 /* Spec pages (SpecPage.tsx): shorter sections than the home page, so a few lines of content do not float in space. */
@@ -555,6 +576,8 @@
 @media (min-width: 1024px) { .v2 .nav-burger { display: none; } }
 
 .v2 .nav-sheet { max-height: calc(100dvh - 3.75rem); padding: 0.5rem 0 1.25rem; overflow-y: auto; border-top: 1px solid rgba(46, 46, 46, 0.1); animation: navSheet 0.22s ease both; }
+.v2 .nav-sheet[data-closing] { animation: navSheetOut 0.16s ease-in both; pointer-events: none; }
+@keyframes navSheetOut { to { opacity: 0; transform: translateY(-6px); } }
 @keyframes navSheet { from { opacity: 0; transform: translateY(-6px); } }
 .v2 .nav-sheet-link { display: flex; align-items: center; justify-content: space-between; padding: 0.95rem 0; border-bottom: 1px solid rgba(46, 46, 46, 0.1); font: 700 1.25rem / 1.1 var(--font-space-var), sans-serif; letter-spacing: -0.02em; }
 .v2 .nav-sheet-link > span[aria-hidden] { color: var(--color-orange); font-size: 1.1rem; }
@@ -1281,7 +1304,7 @@
 .v2 .contact-address { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.75rem 4rem; padding-block: 2.75rem; font: 600 1.1rem / 1.4 var(--font-space-var), sans-serif; }
 .v2 .contact-address address, .v2 .contact-address p { display: grid; gap: 0.7rem; font-style: normal; }
 /* A page shorter than the screen fills it, so no blank band shows above the footer. On contact the dark strip sits at the bottom. */
-main > .v2 { min-height: 100vh; }
+main > .v2, main > .page-in > .v2 { min-height: 100vh; }
 .v2.contact-page { display: flex; flex-direction: column; }
 .v2 .contact-wrap { flex: 1; }
 .v2.contact-page .exam-head { padding-bottom: 3rem; }
@@ -1494,3 +1517,35 @@ main > .v2 { min-height: 100vh; }
 .v2 .demo-video { display: grid; gap: 2rem; align-items: center; }
 .v2 .demo-video-t { margin-top: 1.25rem; font: 600 clamp(1.15rem, 1.7vw, 1.4rem) / 1.35 var(--font-space-var), sans-serif; letter-spacing: -0.02em; text-wrap: pretty; }
 @media (min-width: 1024px) { .v2 .demo-video { grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr); gap: 4rem; } }
+
+/* Navbar on touch screens: every control is at least 44px tall to the finger, taps respond at once,
+   and there is no delay waiting for a possible double-tap. */
+.v2.nav a, .v2.nav button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.v2 .nav-aud-thumb { pointer-events: none; }
+.v2 .nav-home { position: relative; display: block; }
+/* invisible padding around the small controls: the hit area grows, the look does not */
+.v2 .nav-home::after { content: ""; position: absolute; inset: -0.75rem -0.5rem; }
+.v2 .nav-aud a::after { content: ""; position: absolute; inset: -0.6rem 0; }
+.v2 .nav-aud a:active { color: rgb(var(--ink)); }
+.v2 .nav-aud a[aria-current]:active { color: rgb(var(--inv)); }
+.v2 .nav-burger { width: 2.75rem; height: 2.75rem; border-radius: 999px; transition: background-color 0.15s ease; }
+.v2 .nav-burger:active { background: rgb(var(--ink) / 0.1); }
+.v2 .nav-sheet-link { transition: background-color 0.15s ease; }
+/* Pressed: the row answers the finger straight away. */
+.v2 .nav-sheet-link, .v2 .nav-sheet-sub a { margin-inline: -0.6rem; padding-inline: 0.6rem; border-radius: 12px; }
+.v2 .nav-sheet-link > span[aria-hidden] { transition: transform 0.15s ease; }
+.v2 .nav-sheet-link:active, .v2 .nav-sheet-sub a:active { background: rgba(235, 96, 45, 0.12); color: #c94d20; }
+.v2 .nav-sheet-link:active > span[aria-hidden] { transform: translateX(4px); }
+/* Going: the tapped row stays marked, with a small turning ring, until its page has arrived. */
+.v2 .nav-sheet-link[data-going], .v2 .nav-sheet-sub a[data-going] { background: rgba(235, 96, 45, 0.12); color: #c94d20; }
+.v2 .nav-sheet-link[data-going] > span[aria-hidden], .v2 .nav-sheet-sub a[data-going]::after { content: ""; flex-shrink: 0; width: 1.05rem; height: 1.05rem; border: 2px solid currentColor; border-top-color: transparent; border-radius: 999px; font-size: 0; animation: navGoing 0.7s linear infinite; }
+.v2 .nav-sheet-sub a[data-going] { justify-content: space-between; }
+@keyframes navGoing { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .v2 .nav-sheet-link[data-going] > span[aria-hidden], .v2 .nav-sheet-sub a[data-going]::after { animation: none; border-top-color: currentColor; opacity: 0.5; } }
+.v2 .nav-home:active { opacity: 0.6; }
+.v2 .nav-sheet-sub a { display: flex; align-items: center; min-height: 2.75rem; padding-block: 0; }
+@media (max-width: 1023px) {
+  .v2 .nav-aud { font-size: 0.8rem; }
+  .v2 .nav-aud a { padding: 0.5rem 0.8rem; }
+}
+@media (max-width: 380px) { .v2 .nav-aud { font-size: 0.74rem; } .v2 .nav-aud a { padding: 0.5rem 0.55rem; } }

@@ -70,7 +70,7 @@ export default function LessonIndex({ subjects }: { subjects: IndexSubject[] }) 
                   All {s.name.toLowerCase()} <span aria-hidden>→</span>
                 </Link>
               </header>
-              <ul className="lidx-list">
+              <ul className="lidx-list" data-typed={q ? "" : undefined}>
                 {s.lessons.map((l) => (
                   <li key={l.path} hidden={!match(l)}>
                     <Link href={l.path} className="lidx-row">

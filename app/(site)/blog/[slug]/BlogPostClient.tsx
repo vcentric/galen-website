@@ -16,12 +16,15 @@ interface TOCItem {
 
 interface BlogPostClientProps {
   post: PostMeta;
+  /** The cover image's own size, so its space is held before it loads. */
+  coverSize?: { width: number; height: number } | null;
   contentHtml: string;
   relatedPosts: PostMeta[];
 }
 
 export default function BlogPostClient({
   post,
+  coverSize,
   contentHtml,
   relatedPosts,
 }: BlogPostClientProps) {
@@ -172,7 +175,7 @@ export default function BlogPostClient({
             <figure className="mb-16">
               <div className="rounded-[20px] overflow-hidden shadow-[0_0_0_1px_rgba(46,46,46,0.1),0_24px_50px_-20px_rgba(46,46,46,0.3)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={post.coverImage} alt={post.title} className="w-full h-auto block" fetchPriority="high" decoding="async" />
+                <img src={post.coverImage} alt={post.title} width={coverSize?.width} height={coverSize?.height} className="w-full h-auto block" fetchPriority="high" decoding="async" />
               </div>
               {(post.heroCaption || post.heroSource) && (
                 <figcaption className="mt-4 px-2 font-secondary text-[0.85rem] text-text-muted leading-relaxed">
