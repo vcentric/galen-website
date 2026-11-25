@@ -33,6 +33,17 @@
   --rule: rgba(255, 240, 228, 0.16);
 }
 
+/* Page changes: a thin progress line while the next page loads, and the new page fades in. */
+.route-progress { position: fixed; top: 0; left: 0; z-index: 200; width: 100%; height: 3px; background: var(--color-orange); transform: scaleX(0); transform-origin: left; opacity: 0; pointer-events: none; }
+.route-progress[data-state="loading"] { opacity: 1; transform: scaleX(0.85); transition: transform 8s cubic-bezier(0.1, 0.7, 0.1, 1), opacity 0.15s ease; }
+.route-progress[data-state="done"] { opacity: 0; transform: scaleX(1); transition: transform 0.2s ease-out, opacity 0.25s ease 0.12s; }
+html[data-nav] .page-in { animation: pageIn 0.22s ease-out; }
+@keyframes pageIn { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  html[data-nav] .page-in { animation: none; }
+  .route-progress[data-state="loading"] { transition: opacity 0.15s ease; transform: scaleX(1); }
+}
+
 .v2 .wrap { width: 100%; max-width: 1180px; margin-inline: auto; padding-inline: clamp(1rem, 5vw, 2.5rem); }
 .v2 .sec { padding-block: clamp(2.75rem, 6.5vw, 4.75rem); }
 /* Spec pages (SpecPage.tsx): shorter sections than the home page, so a few lines of content do not float in space. */
@@ -1281,7 +1292,7 @@
 .v2 .contact-address { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.75rem 4rem; padding-block: 2.75rem; font: 600 1.1rem / 1.4 var(--font-space-var), sans-serif; }
 .v2 .contact-address address, .v2 .contact-address p { display: grid; gap: 0.7rem; font-style: normal; }
 /* A page shorter than the screen fills it, so no blank band shows above the footer. On contact the dark strip sits at the bottom. */
-main > .v2 { min-height: 100vh; }
+main > .v2, main > .page-in > .v2 { min-height: 100vh; }
 .v2.contact-page { display: flex; flex-direction: column; }
 .v2 .contact-wrap { flex: 1; }
 .v2.contact-page .exam-head { padding-bottom: 3rem; }

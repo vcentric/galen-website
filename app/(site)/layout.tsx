@@ -6,7 +6,10 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   return (
     <>
       <Navbar />
-      <main className="relative w-full min-h-screen">{children}</main>
+      <main className="relative w-full min-h-screen">
+        {/* Each new page fades in here in place of a hard cut (RouteProgress replays the animation). */}
+        <div className="page-in">{children}</div>
+      </main>
       <Footer />
     </>
   );
