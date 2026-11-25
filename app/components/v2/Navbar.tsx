@@ -4,7 +4,7 @@ import Image from "next/image";
 import { EXAM_PAGES_LIVE, LEARN_NAV_LIVE } from "@/lib/exams";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CtaLink from "./CtaLink";
 import { LINKS } from "@/lib/site";
 import { useIsCollege } from "./useAudience";
@@ -55,13 +55,21 @@ const isActive = (pathname: string, l: NavLink) =>
  * styled as a segmented control whose thumb slides between the two audiences.
  */
 function AudienceToggle({ inst }: { inst: boolean }) {
+  // The thumb moves the moment a side is tapped, without waiting for the next page to load.
+  // A tap is remembered against the side it was made on, so it lapses by itself once the page has changed.
+  const [tapped, setTapped] = useState<{ on: boolean; to: boolean } | null>(null);
+  const side = tapped && tapped.on === inst ? tapped.to : inst;
+  const go = (to: boolean) => () => {
+    setTapped({ on: inst, to });
+    if (to !== inst) trackEvent("audience_switch", { from: inst ? "college" : "student", to: to ? "college" : "student" });
+  };
   return (
-    <nav aria-label="Choose audience" className="nav-aud" data-side={inst ? "colleges" : "students"}>
+    <nav aria-label="Choose audience" className="nav-aud" data-side={side ? "colleges" : "students"}>
       <span aria-hidden className="nav-aud-thumb" />
-      <Link href="/" aria-current={!inst ? "page" : undefined} onClick={() => inst && trackEvent("audience_switch", { from: "college", to: "student" })}>
+      <Link href="/" aria-current={!side ? "page" : undefined} onClick={go(false)}>
         Students
       </Link>
-      <Link href="/institutions" aria-current={inst ? "page" : undefined} onClick={() => !inst && trackEvent("audience_switch", { from: "student", to: "college" })}>
+      <Link href="/institutions" aria-current={side ? "page" : undefined} onClick={go(true)}>
         Colleges
       </Link>
     </nav>
@@ -90,7 +98,15 @@ export default function Navbar() {
   const [state, setState] = useState<"top" | "hidden" | "pinned">("top");
   // Read from the page: is the hero under the bar dark, and what is the page's own background.
   const [page, setPage] = useState<{ dark: boolean; bg: string }>({ dark: false, bg: "" });
+  const [tapped, setTapped] = useState<{ on: string; href: string } | null>(null);
   const open = openOn === pathname;
+  // True while a finger or mouse button is down on the bar, and for a moment after it lifts.
+  const held = useRef(false);
+  const release = useRef<number | undefined>(undefined);
+  const letGo = () => {
+    window.clearTimeout(release.current);
+    release.current = window.setTimeout(() => (held.current = false), 400);
+  };
   const inst = useIsCollege(pathname);
   const links = inst ? INSTITUTION_LINKS : STUDENT_LINKS;
 
@@ -106,6 +122,11 @@ export default function Navbar() {
     };
     // Distance travelled in the current direction. Trackpads scroll a pixel or two per event,
     // so the direction is judged on the running total, never on a single event.
+    // A thumb on a phone drifts while it taps and flicks, so touch screens need a longer, deliberate
+    // scroll before the bar gets out of the way. It never hides while a finger is on it.
+    const touch = window.matchMedia("(pointer: coarse)").matches;
+    const HIDE = touch ? 56 : 6;
+    const SHOW = touch ? 10 : 6;
     let last = window.scrollY;
     let run = 0;
     const onScroll = () => {
@@ -116,8 +137,9 @@ export default function Navbar() {
       if (y <= 8) {
         setState("top");
         readPage();
-      } else if (y > 72 && run > 6) setState("hidden");
-      else if (run < -6) setState("pinned");
+      } else if (y > 72 && run > HIDE) {
+        if (!held.current) setState("hidden");
+      } else if (run < -SHOW) setState("pinned");
       // Past the hero's top edge the bar is never left transparent over content.
       else if (y > 72) setState((s) => (s === "top" ? "hidden" : s));
     };
@@ -136,18 +158,41 @@ export default function Navbar() {
 
   if (pathname.startsWith("/keystatic")) return null;
 
+  // A tapped menu row is marked at once and stays marked until its page has arrived, so the tap is never
+  // left unanswered while the next page loads. Tapping the page you are on closes the menu and goes to the top.
+  const going = tapped && tapped.on === pathname ? tapped.href : null;
+  const row = (href: string) => ({
+    "data-going": going === href ? "" : undefined,
+    "aria-busy": going === href ? true : undefined,
+    onClick: () => {
+      if (href === pathname) {
+        setOpenOn(null);
+        window.scrollTo({ top: 0 });
+        return;
+      }
+      setTapped({ on: pathname, href });
+    },
+  });
+
   const houseClick = () => trackCTAClick("house_md", { source: "nav", button_type: "link", button_text: "Think Like HouseMD" });
 
   return (
     <header
       className="v2 nav"
+      onPointerDown={() => {
+        window.clearTimeout(release.current);
+        held.current = true;
+      }}
+      onPointerUp={letGo}
+      onPointerCancel={letGo}
+      onPointerLeave={letGo}
       data-state={open ? "pinned" : state}
       data-ink={page.dark && state === "top" && !open ? "light" : undefined}
       style={page.bg ? ({ "--nav-bg": page.bg } as React.CSSProperties) : undefined}
     >
       <nav className="wrap nav-bar" aria-label="Main">
         <div className="flex shrink-0 items-center gap-2 sm:gap-3 lg:gap-4">
-          <Link href={inst ? "/institutions" : "/"} aria-label="GalenAI home" className="shrink-0">
+          <Link href={inst ? "/institutions" : "/"} aria-label="GalenAI home" className="nav-home shrink-0">
             <Image src="/brand/lockup.svg" alt="GalenAI" width={127} height={28} priority className="nav-logo h-auto w-[98px] sm:w-[116px]" />
           </Link>
           <AudienceToggle inst={inst} />
@@ -245,7 +290,7 @@ export default function Navbar() {
           <ul>
             {links.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="nav-sheet-link" data-active={isActive(pathname, l) ? "" : undefined}>
+                <Link href={l.href} className="nav-sheet-link" data-active={isActive(pathname, l) ? "" : undefined} {...row(l.href)}>
                   {l.label}
                   <span aria-hidden>→</span>
                 </Link>
@@ -253,7 +298,9 @@ export default function Navbar() {
                   <ul className="nav-sheet-sub">
                     {l.menu.map((m) => (
                       <li key={m.href}>
-                        <Link href={m.href}>{m.label}</Link>
+                        <Link href={m.href} {...row(m.href)}>
+                          {m.label}
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -263,7 +310,7 @@ export default function Navbar() {
             {/* The college links already include Team. */}
             {!inst && (
               <li>
-                <Link href="/team" className="nav-sheet-link">
+                <Link href="/team" className="nav-sheet-link" {...row("/team")}>
                   Team
                   <span aria-hidden>→</span>
                 </Link>
